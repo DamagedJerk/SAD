@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -17,11 +17,13 @@
          <children>
             <Pane prefHeight="70.0" prefWidth="408.0">
                <children>
-                  <Label layoutX="157.0" layoutY="13.0" text="Log In" textFill="#f5f4f4">
+                  <Label layoutX="125.0" layoutY="16.0" text="Cellections" textFill="#f5f4f4">
                      <font>
                         <Font size="30.0" />
                      </font>
                   </Label>
+                  <JFXButton layoutX="14.0" layoutY="13.0" style="-fx-background-color: #FF5D00;" text="X" textFill="#e1dfdf" />
+                  <JFXButton layoutX="51.0" layoutY="13.0" prefHeight="25.0" prefWidth="23.0" style="-fx-background-color: #FFA800;" text="_" textFill="#f8eeee" />
                </children>
             </Pane>
          </children>
@@ -34,8 +36,8 @@
             <Separator layoutX="28.0" layoutY="229.0" prefHeight="11.0" prefWidth="364.0" />
             <ButtonBar layoutX="28.0" layoutY="248.0" prefHeight="40.0" prefWidth="364.0">
               <buttons>
-                <Button mnemonicParsing="false" text="Log-In" />
-                  <Button mnemonicParsing="false" text="Cancel" />
+                  <JFXButton style="-fx-background-color: #FF5D00;" text="Log-In" textFill="#e1dfdf" />
+                  <JFXButton prefHeight="25.0" prefWidth="23.0" style="-fx-background-color: #FFA800;" text="Cancel" textFill="#f8eeee" />
               </buttons>
             </ButtonBar>
          </children>
