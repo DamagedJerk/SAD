@@ -33,7 +33,7 @@
                   <Image url="@../resources/document-error-flat.png" />
                </image>
                <HBox.margin>
-                  <Insets left="10.0" />
+                  <Insets left="10.0" top="5.0" />
                </HBox.margin>
             </ImageView>
             <Label contentDisplay="RIGHT" prefHeight="57.0" prefWidth="354.0" text="   Label" textFill="#363434">
