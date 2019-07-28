@@ -17,11 +17,11 @@
          <children>
             <Pane prefHeight="70.0" prefWidth="408.0">
                <children>
-                  <JFXButton fx:id="btn_close" layoutX="14.0" layoutY="13.0" onAction="#close" style="-fx-background-color: #FF5D00;" text="X" textFill="#e1dfdf" >
+                  <JFXButton fx:id="btnClose" layoutX="14.0" layoutY="13.0" onAction="#close" style="-fx-background-color: #FF5D00;" text="X" textFill="#e1dfdf">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></JFXButton>
-                  <JFXButton layoutX="51.0" layoutY="13.0" prefHeight="25.0" prefWidth="23.0" style="-fx-background-color: #FFA800;" text="_" textFill="#f8eeee" />
+                  <JFXButton fx:id="minmize" layoutX="51.0" layoutY="13.0" onAction="#minimize" prefHeight="25.0" prefWidth="23.0" style="-fx-background-color: #FFA800;" text="_" textFill="#f8eeee" />
                   <Label layoutX="82.0" text="Cellections" textFill="#fffdfd">
                      <font>
                         <Font name="System Bold Italic" size="48.0" />
@@ -39,8 +39,8 @@
             <Separator layoutX="28.0" layoutY="229.0" prefHeight="11.0" prefWidth="364.0" />
             <ButtonBar layoutX="28.0" layoutY="248.0" prefHeight="40.0" prefWidth="364.0">
               <buttons>
-                  <JFXButton style="-fx-background-color: #FF5D00;" text="Log-In" textFill="#e1dfdf" />
-                  <JFXButton prefHeight="25.0" prefWidth="23.0" style="-fx-background-color: #FFA800;" text="Cancel" textFill="#f8eeee" />
+                  <JFXButton fx:id="btnLogIn" onAction="#login" style="-fx-background-color: #FF5D00;" text="Log-In" textFill="#e1dfdf" />
+                  <JFXButton fx:id="btnSignUp" prefHeight="25.0" prefWidth="23.0" style="-fx-background-color: #FFA800;" text="Cancel" textFill="#f8eeee" />
               </buttons>
             </ButtonBar>
             <Label layoutX="280.0" layoutY="208.0" text="register here. . ." textFill="#fff6f6" />
