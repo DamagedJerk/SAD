@@ -16,7 +16,11 @@ public class Controller {
 
     public Stage stage;
     @FXML
-    private JFXButton minmize,btnSignUp,btnLogIn,btnClose;
+    private JFXButton minmize,btnClose;
+    @FXML
+    private JFXButton btnLogin;
+    @FXML
+    private JFXButton btnSignup;
 
     @FXML
     private TextField txtUsername;
