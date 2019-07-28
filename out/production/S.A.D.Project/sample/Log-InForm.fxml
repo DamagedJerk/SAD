@@ -11,27 +11,30 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="386.0" maxWidth="415.0" minHeight="386.0" minWidth="415.0" prefHeight="386.0" prefWidth="415.0" style="-fx-background-color: #2a0033;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="386.0" maxWidth="415.0" minHeight="386.0" minWidth="415.0" prefHeight="386.0" prefWidth="415.0" style="-fx-background-color: #4600DB;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox layoutX="4.0" layoutY="8.0" prefHeight="70.0" prefWidth="415.0">
          <children>
             <Pane prefHeight="70.0" prefWidth="408.0">
                <children>
-                  <Label layoutX="125.0" layoutY="16.0" text="Cellections" textFill="#f5f4f4">
+                  <JFXButton layoutX="14.0" layoutY="13.0" style="-fx-background-color: #FF5D00;" text="X" textFill="#e1dfdf">
                      <font>
-                        <Font size="30.0" />
+                        <Font name="System Bold" size="12.0" />
+                     </font></JFXButton>
+                  <JFXButton layoutX="51.0" layoutY="13.0" prefHeight="25.0" prefWidth="23.0" style="-fx-background-color: #FFA800;" text="_" textFill="#f8eeee" />
+                  <Label layoutX="82.0" text="Cellections" textFill="#fffdfd">
+                     <font>
+                        <Font name="System Bold Italic" size="48.0" />
                      </font>
                   </Label>
-                  <JFXButton layoutX="14.0" layoutY="13.0" style="-fx-background-color: #FF5D00;" text="X" textFill="#e1dfdf" />
-                  <JFXButton layoutX="51.0" layoutY="13.0" prefHeight="25.0" prefWidth="23.0" style="-fx-background-color: #FFA800;" text="_" textFill="#f8eeee" />
                </children>
             </Pane>
          </children>
       </HBox>
       <Pane layoutY="73.0" prefHeight="313.0" prefWidth="415.0">
          <children>
-            <PasswordField layoutX="27.0" layoutY="149.0" prefHeight="54.0" prefWidth="364.0" promptText="Password" style="-fx-border-color: #9643a9; -fx-background-color: #2a0033; -fx-background-insets: 0; -fx-border-radius: 20;" />
-            <TextField layoutX="28.0" layoutY="64.0" prefHeight="46.0" prefWidth="364.0" promptText="Log-In" style="-fx-border-color: #9643a9; -fx-background-color: #2a0033; -fx-background-insets: 0; -fx-border-radius: 20;" />
+            <PasswordField layoutX="27.0" layoutY="149.0" prefHeight="54.0" prefWidth="364.0" promptText="Password" style="-fx-border-color: #f8eeee; -fx-background-color: #4600DB; -fx-background-insets: 0; -fx-border-radius: 20;" />
+            <TextField layoutX="28.0" layoutY="64.0" prefHeight="46.0" prefWidth="364.0" promptText="Log-In" style="-fx-border-color: #f8eeee; -fx-background-color: #4600DB; -fx-background-insets: 0; -fx-border-radius: 20;" />
             <Separator layoutX="23.0" layoutY="23.0" prefHeight="2.0" prefWidth="364.0" />
             <Separator layoutX="28.0" layoutY="229.0" prefHeight="11.0" prefWidth="364.0" />
             <ButtonBar layoutX="28.0" layoutY="248.0" prefHeight="40.0" prefWidth="364.0">
@@ -40,6 +43,7 @@
                   <JFXButton prefHeight="25.0" prefWidth="23.0" style="-fx-background-color: #FFA800;" text="Cancel" textFill="#f8eeee" />
               </buttons>
             </ButtonBar>
+            <Label layoutX="280.0" layoutY="208.0" text="register here. . ." textFill="#fff6f6" />
          </children>
       </Pane>
    </children>
