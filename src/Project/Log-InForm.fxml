@@ -32,10 +32,13 @@
       </HBox>
       <Pane layoutY="73.0" prefHeight="382.0" prefWidth="558.0">
          <children>
-            <PasswordField fx:id="txtPassword" layoutX="27.0" layoutY="149.0" prefHeight="54.0" prefWidth="511.0" promptText="Password" style="-fx-border-color: gray; -fx-background-color: #F8F8F8; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@../css/style.css" />
+            <PasswordField fx:id="txtPassword" layoutX="27.0" layoutY="149.0" prefHeight="54.0" prefWidth="511.0" promptText="Password" style="-fx-border-color: gray; -fx-background-color: #F8F8F8; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@../css/style.css">
+               <font>
+                  <Font size="22.0" />
+               </font></PasswordField>
             <TextField fx:id="txtUsername" layoutX="28.0" layoutY="64.0" prefHeight="46.0" prefWidth="511.0" promptText="Log-In" style="-fx-border-color: gray; -fx-background-color: #F8F8F8; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@../css/style.css">
                <font>
-                  <Font size="16.0" />
+                  <Font size="22.0" />
                </font></TextField>
             <Separator layoutX="23.0" layoutY="23.0" prefHeight="3.0" prefWidth="511.0" style="-fx-background-color: gray;" />
             <Separator layoutX="28.0" layoutY="229.0" prefHeight="3.0" prefWidth="511.0" style="-fx-background-color: gray;" />
