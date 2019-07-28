@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -12,8 +17,8 @@
 
 <GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="341.0" prefWidth="413.0" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="70.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="366.0" minWidth="10.0" prefWidth="333.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="133.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="366.0" minWidth="10.0" prefWidth="270.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="102.0" minHeight="0.0" prefHeight="53.0" vgrow="SOMETIMES" />
@@ -28,12 +33,26 @@
                   <Image url="@../resources/document-error-flat.png" />
                </image>
             </ImageView>
-            <Label contentDisplay="RIGHT" prefHeight="57.0" prefWidth="354.0" text="   Label">
+            <Label contentDisplay="RIGHT" prefHeight="57.0" prefWidth="354.0" text="   Label" textFill="#363434">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
          </children>
       </HBox>
+      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" prefHeight="25.0" prefWidth="128.0" text="Close" textAlignment="CENTER" textFill="#f25c5c" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+              </items>
+            </ContextMenu>
+         </contextMenu>
+      </JFXButton>
+      <JFXListView prefHeight="225.0" prefWidth="388.0" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+         <GridPane.margin>
+            <Insets left="15.0" right="15.0" />
+         </GridPane.margin>
+      </JFXListView>
    </children>
 </GridPane>
