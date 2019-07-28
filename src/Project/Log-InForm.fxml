@@ -33,14 +33,14 @@
       </HBox>
       <Pane layoutY="73.0" prefHeight="313.0" prefWidth="415.0">
          <children>
-            <PasswordField layoutX="27.0" layoutY="149.0" prefHeight="54.0" prefWidth="364.0" promptText="Password" style="-fx-border-color: #f8eeee; -fx-background-color: #4600DB; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@../css/style.css" />
-            <TextField layoutX="28.0" layoutY="64.0" prefHeight="46.0" prefWidth="364.0" promptText="Log-In" style="-fx-border-color: #f8eeee; -fx-background-color: #4600DB; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@../css/style.css" />
+            <PasswordField fx:id="txtPassword" layoutX="27.0" layoutY="149.0" prefHeight="54.0" prefWidth="364.0" promptText="Password" style="-fx-border-color: #f8eeee; -fx-background-color: #4600DB; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@../css/style.css" />
+            <TextField fx:id="txtUsername" layoutX="28.0" layoutY="64.0" prefHeight="46.0" prefWidth="364.0" promptText="Log-In" style="-fx-border-color: #f8eeee; -fx-background-color: #4600DB; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@../css/style.css" />
             <Separator layoutX="23.0" layoutY="23.0" prefHeight="2.0" prefWidth="364.0" />
             <Separator layoutX="28.0" layoutY="229.0" prefHeight="11.0" prefWidth="364.0" />
             <ButtonBar layoutX="28.0" layoutY="248.0" prefHeight="40.0" prefWidth="364.0">
               <buttons>
                   <JFXButton fx:id="btnLogIn" onAction="#login" style="-fx-background-color: #FF5D00;" text="Log-In" textFill="#e1dfdf" />
-                  <JFXButton fx:id="btnSignUp" prefHeight="25.0" prefWidth="23.0" style="-fx-background-color: #FFA800;" text="Cancel" textFill="#f8eeee" />
+                  <JFXButton fx:id="btnSignUp" onAction="#Signup" prefHeight="25.0" prefWidth="23.0" style="-fx-background-color: #FFA800;" text="Sign-up" textFill="#f8eeee" />
               </buttons>
             </ButtonBar>
             <Label layoutX="280.0" layoutY="208.0" text="register here. . ." textFill="#fff6f6" />

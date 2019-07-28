@@ -1,9 +1,14 @@
 package Project;
 
 
+
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import javax.swing.*;
 
 
 public class Controller {
@@ -11,13 +16,14 @@ public class Controller {
 
     public Stage stage;
     @FXML
-    private JFXButton minmize;
+    private JFXButton minmize,btnSignUp,btnLogIn,btnClose;
+
     @FXML
-    private JFXButton btnSignUp;
+    private TextField txtUsername;
     @FXML
-    private JFXButton btnLogIn;
-    @FXML
-    private JFXButton btnClose;
+    private PasswordField txtPassword;
+
+
     @FXML
     private void close(){
         Stage stage = (Stage) btnClose.getScene().getWindow();
@@ -31,8 +37,26 @@ public class Controller {
     }
     @FXML
     private void login(){
-        Stage stage = (Stage) btnLogIn.getScene().getWindow();
-        stage.setIconified(true);
+
+        if(txtUsername.getText().contains("admin") && txtPassword.getText().contains("admin")){
+            JOptionPane.showMessageDialog(null,"Success Welcome "+txtUsername.getText());
+        }else{
+            JOptionPane.showMessageDialog(null,"Wrong Credentials","Error",JOptionPane.ERROR_MESSAGE);
+                txtUsername.setText("");
+                txtPassword.setText("");
+        }
+
+
+
+    }
+    @FXML
+    private void Signup(){
+        JOptionPane.showMessageDialog(null,"SignUp now BITCH");
+    }
+
+    @FXML
+    private void initialize(){
+
     }
     public Controller(){
 
