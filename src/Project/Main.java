@@ -11,8 +11,8 @@ import javafx.stage.StageStyle;
 
 public class Main extends Application {
 
-    private Stage stage;
-    private JFXButton btnClose= new JFXButton();
+    public static Stage stage;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         stage = primaryStage;
@@ -24,12 +24,8 @@ public class Main extends Application {
 
 
     }
-    @FXML
-    private void close(){
-        stage = (Stage) btnClose.getScene().getWindow();
-        stage.close();
-        System.exit(1);
-    }
+
+
 
     public static void main(String[] args) {
         launch(args);
