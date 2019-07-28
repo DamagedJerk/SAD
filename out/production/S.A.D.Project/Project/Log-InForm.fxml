@@ -17,7 +17,7 @@
          <children>
             <Pane prefHeight="70.0" prefWidth="408.0">
                <children>
-                  <JFXButton layoutX="14.0" layoutY="13.0" style="-fx-background-color: #FF5D00;" text="X" textFill="#e1dfdf">
+                  <JFXButton fx:id="btn_close" layoutX="14.0" layoutY="13.0" style="-fx-background-color: #FF5D00;" text="X" textFill="#e1dfdf">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></JFXButton>
