@@ -4,5 +4,8 @@
 }
 .fx-backback{
 	-fx-background-image : url("../resources/bgg.jpg");
-	
+	-fx-background-repeat: stretch;
+	-fx-background-position: center center;
+
+
 }

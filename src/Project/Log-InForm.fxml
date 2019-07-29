@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="448.0" maxWidth="558.0" minHeight="380.0" minWidth="558.0" prefHeight="433.0" prefWidth="558.0" style="-fx-background-color: #F8F8F8;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controller" />
+<AnchorPane maxHeight="448.0" maxWidth="558.0" minHeight="380.0" minWidth="558.0" prefHeight="433.0" prefWidth="558.0" styleClass="fx-backback" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controller">
+   <children>
+      <ImageView fitHeight="130.0" fitWidth="155.0" layoutX="197.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../resources/5.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="14.0" layoutY="14.0" style="-fx-background-color: #FF2900;" text="X" textFill="#f2eded">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="76.0" layoutY="14.0" style="-fx-background-color: #FFA800;" text="_" textFill="#f2ecec">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
