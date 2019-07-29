@@ -2,3 +2,7 @@
 {
 	-fx-text-fill : gray;
 }
+.fx-backback{
+	-fx-background-image : url("../resources/bgg.jpg");
+	
+}
