@@ -17,7 +17,7 @@
             <Image url="@../resources/5.png" />
          </image>
       </ImageView>
-      <JFXButton layoutX="14.0" layoutY="14.0" style="-fx-background-color: #FF2900;" text="X" textFill="#f2eded">
+      <JFXButton fx:id="btnClose" layoutX="14.0" layoutY="14.0" onAction="#close" prefHeight="48.0" prefWidth="27.0" style="-fx-background-color: #FF2900;" text="X" textFill="#f2eded">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
@@ -29,20 +29,20 @@
       </JFXButton>
       <Pane layoutX="73.0" layoutY="152.0" prefHeight="365.0" prefWidth="479.0" style="-fx-background-color: #C7D4D8;">
          <children>
-            <PasswordField blendMode="DARKEN" layoutX="42.0" layoutY="136.0" prefHeight="48.0" prefWidth="397.0" promptText="Password" style="-fx-border-color: BLACK; -fx-background-color: #C7D4D8; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@../css/style.css">
+            <PasswordField fx:id="txtPassword" blendMode="DARKEN" layoutX="42.0" layoutY="136.0" prefHeight="48.0" prefWidth="397.0" promptText="Password" style="-fx-border-color: BLACK; -fx-background-color: #C7D4D8; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@../css/style.css">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font></PasswordField>
-            <TextField blendMode="DARKEN" layoutX="42.0" layoutY="55.0" prefHeight="48.0" prefWidth="397.0" promptText="Username" style="-fx-border-color: black; -fx-background-color: #C7D4D8; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@../css/style.css">
+            <TextField fx:id="txtUsername" blendMode="DARKEN" layoutX="42.0" layoutY="55.0" prefHeight="48.0" prefWidth="397.0" promptText="Username" style="-fx-border-color: black; -fx-background-color: #C7D4D8; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@../css/style.css">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font></TextField>
-            <JFXButton layoutX="281.0" layoutY="213.0" prefHeight="39.0" prefWidth="158.0" style="-fx-background-color: #16FE95;" text="Log-In" textFill="#221b1b">
+            <JFXButton fx:id="btnLogin" layoutX="281.0" layoutY="213.0" onAction="#login" prefHeight="39.0" prefWidth="158.0" style="-fx-background-color: #16FE95;" text="Log-In" textFill="#221b1b">
                <font>
                   <Font size="17.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="42.0" layoutY="213.0" prefHeight="39.0" prefWidth="158.0" style="-fx-background-color: #FF2900;" text="Cancel" textFill="#fff8f8">
+            <JFXButton layoutX="42.0" layoutY="213.0" onAction="#close" prefHeight="39.0" prefWidth="158.0" style="-fx-background-color: #FF2900;" text="Cancel" textFill="#fff8f8">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
@@ -52,7 +52,7 @@
                   <Font size="17.0" />
                </font>
             </Label>
-            <JFXButton layoutX="43.0" layoutY="297.0" prefHeight="39.0" prefWidth="397.0" style="-fx-background-color: white; -fx-border-color: BLACK;" text="Register" textFill="#251c1c">
+            <JFXButton fx:id="btnSignup" layoutX="43.0" layoutY="297.0" onAction="#Signup" prefHeight="39.0" prefWidth="397.0" style="-fx-background-color: #FFA800;" text="Register" textFill="#251c1c">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>

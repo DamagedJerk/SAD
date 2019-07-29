@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="1040.0" styleClass="fx-backback" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox layoutX="5.0" layoutY="6.0" prefHeight="100.0" prefWidth="1036.0">
+         <children>
+            <Pane prefHeight="100.0" prefWidth="1046.0">
+               <children>
+                  <ImageView fitHeight="94.0" fitWidth="134.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/adminn.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="108.0" layoutY="52.0" prefHeight="32.0" prefWidth="205.0" text="Welcome $FIRSTname" textAlignment="CENTER">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="150.0" fitWidth="144.0" layoutX="423.0" layoutY="-23.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/5.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER_RIGHT" layoutX="873.0" layoutY="17.0" prefHeight="32.0" prefWidth="144.0" text="Date : DD/MM/YY">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" layoutX="873.0" layoutY="52.0" prefHeight="32.0" prefWidth="144.0" text="Time : HH/MM/SS">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+      <JFXTabPane layoutY="106.0" prefHeight="62.0" prefWidth="1040.0" />
+   </children>
+</AnchorPane>
