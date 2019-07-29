@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -11,7 +12,7 @@
 
 <AnchorPane maxHeight="561.0" maxWidth="632.0" minHeight="380.0" minWidth="558.0" prefHeight="561.0" prefWidth="632.0" styleClass="fx-backback" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.Controller">
    <children>
-      <ImageView fitHeight="130.0" fitWidth="155.0" layoutX="238.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="-3.0">
+      <ImageView fitHeight="165.0" fitWidth="158.0" layoutX="222.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="-3.0">
          <image>
             <Image url="@../resources/5.png" />
          </image>
@@ -28,11 +29,11 @@
       </JFXButton>
       <Pane layoutX="73.0" layoutY="152.0" prefHeight="365.0" prefWidth="479.0" style="-fx-background-color: #C7D4D8;">
          <children>
-            <PasswordField layoutX="42.0" layoutY="136.0" prefHeight="48.0" prefWidth="397.0" promptText="Password" style="-fx-border-color: BLACK; -fx-background-color: #C7D4D8; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@../css/style.css">
+            <PasswordField blendMode="DARKEN" layoutX="42.0" layoutY="136.0" prefHeight="48.0" prefWidth="397.0" promptText="Password" style="-fx-border-color: BLACK; -fx-background-color: #C7D4D8; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@../css/style.css">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font></PasswordField>
-            <TextField layoutX="42.0" layoutY="55.0" prefHeight="48.0" prefWidth="397.0" promptText="Username" style="-fx-border-color: black; -fx-background-color: #C7D4D8; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@../css/style.css">
+            <TextField blendMode="DARKEN" layoutX="42.0" layoutY="55.0" prefHeight="48.0" prefWidth="397.0" promptText="Username" style="-fx-border-color: black; -fx-background-color: #C7D4D8; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@../css/style.css">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font></TextField>
@@ -42,6 +43,16 @@
                </font>
             </JFXButton>
             <JFXButton layoutX="42.0" layoutY="213.0" prefHeight="39.0" prefWidth="158.0" style="-fx-background-color: #FF2900;" text="Cancel" textFill="#fff8f8">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </JFXButton>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="135.0" layoutY="271.0" prefHeight="17.0" prefWidth="209.0" text="Do you have an account?" textAlignment="CENTER">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <JFXButton layoutX="43.0" layoutY="297.0" prefHeight="39.0" prefWidth="397.0" style="-fx-background-color: white; -fx-border-color: BLACK;" text="Register" textFill="#251c1c">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
