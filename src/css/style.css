@@ -10,5 +10,9 @@
 .tab{
 
 	-fx-background-color: #9BB9D5;
+	-fx-pref-width:  198px;	
+}
+.tab-header-background{
+	-fx-background-color: #9BB9D5;
 }
 
