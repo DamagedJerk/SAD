@@ -6,6 +6,9 @@
 	-fx-background-image : url("../resources/bgg.jpg");
 	-fx-background-size: cover;
 	
-
-
 }
+.tab{
+
+	-fx-background-color: #9BB9D5;
+}
+
