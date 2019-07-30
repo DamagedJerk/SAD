@@ -52,7 +52,7 @@
                   <Font size="17.0" />
                </font>
             </Label>
-            <JFXButton fx:id="btnSignup" layoutX="43.0" layoutY="297.0" onAction="#Signup" prefHeight="39.0" prefWidth="397.0" style="-fx-background-color: #FFA800;" text="Register" textFill="#251c1c">
+            <JFXButton fx:id="btnSignup" layoutX="43.0" layoutY="297.0" onAction="#Signup" prefHeight="39.0" prefWidth="397.0" style="-fx-background-color: #FFA800;" text="Register" textFill="#f2e4e4">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
