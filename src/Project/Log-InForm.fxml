@@ -27,13 +27,13 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </JFXButton>
-      <Pane layoutX="73.0" layoutY="152.0" prefHeight="365.0" prefWidth="479.0" style="-fx-background-color: #C7D4D8;">
+      <Pane layoutX="73.0" layoutY="152.0" prefHeight="365.0" prefWidth="479.0" style="-fx-border-color: #47D5DA; -fx-border-width: 4;">
          <children>
-            <PasswordField fx:id="txtPassword" blendMode="DARKEN" layoutX="42.0" layoutY="136.0" prefHeight="48.0" prefWidth="397.0" promptText="Password" style="-fx-border-color: BLACK; -fx-background-color: #C7D4D8; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@../css/style.css">
+            <PasswordField fx:id="txtPassword" blendMode="DARKEN" layoutX="42.0" layoutY="136.0" prefHeight="48.0" prefWidth="397.0" promptText="Password" style="-fx-border-color: #47D5DA; -fx-background-color: white; -fx-background-insets: 0; -fx-border-radius: 20; -fx-border-width: 4;" styleClass="text-input" stylesheets="@../css/style.css">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font></PasswordField>
-            <TextField fx:id="txtUsername" blendMode="DARKEN" layoutX="42.0" layoutY="55.0" prefHeight="48.0" prefWidth="397.0" promptText="Username" style="-fx-border-color: black; -fx-background-color: #C7D4D8; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@../css/style.css">
+            <TextField fx:id="txtUsername" blendMode="DARKEN" layoutX="42.0" layoutY="55.0" prefHeight="48.0" prefWidth="397.0" promptText="Username" style="-fx-border-color: #47D5DA; -fx-background-color: white; -fx-background-insets: 0; -fx-border-radius: 20; -fx-border-width: 4;" styleClass="text-input" stylesheets="@../css/style.css">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font></TextField>

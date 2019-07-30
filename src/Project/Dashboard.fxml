@@ -45,11 +45,14 @@
             </Pane>
          </children>
       </HBox>
-      <JFXTabPane blendMode="OVERLAY" layoutX="14.0" layoutY="124.0" prefHeight="513.0" prefWidth="1008.0">
+      <JFXTabPane blendMode="DIFFERENCE" layoutX="14.0" layoutY="124.0" prefHeight="513.0" prefWidth="1008.0">
          <tabs>
-            <Tab style="-fx-background-color: #9BB9D5;" text="Sales">
+            <Tab text="Sales">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="476.0" prefWidth="935.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="476.0" prefWidth="935.0">
+                     <children>
+                        <AnchorPane layoutX="23.0" layoutY="26.0" prefHeight="335.0" prefWidth="435.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;" />
+                     </children></AnchorPane>
               </content>
             </Tab>
             <Tab text="Inventory">
