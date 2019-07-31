@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.image.Image?>
@@ -10,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="1210.0" styleClass="fx-backback" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="756.0" prefWidth="1198.0" styleClass="fx-backback" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox layoutX="5.0" layoutY="6.0" prefHeight="100.0" prefWidth="1177.0">
          <children>
@@ -45,14 +47,41 @@
             </Pane>
          </children>
       </HBox>
-      <JFXTabPane blendMode="DIFFERENCE" layoutX="14.0" layoutY="124.0" prefHeight="554.0" prefWidth="1167.0">
+      <JFXTabPane blendMode="DIFFERENCE" layoutX="14.0" layoutY="124.0" prefHeight="618.0" prefWidth="1167.0">
          <tabs>
             <Tab text="Sales">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="476.0" prefWidth="1192.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="556.0" prefWidth="1167.0">
                      <children>
-                        <AnchorPane layoutY="21.0" prefHeight="335.0" prefWidth="435.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;" />
-                        <AnchorPane layoutX="475.0" layoutY="19.0" prefHeight="339.0" prefWidth="692.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;" />
+                        <AnchorPane layoutX="314.0" layoutY="12.0" prefHeight="285.0" prefWidth="853.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
+                           <children>
+                              <JFXTreeTableView fx:id="treeview" blendMode="BLUE" layoutX="14.0" layoutY="59.0" prefHeight="217.0" prefWidth="825.0" />
+                              <JFXTextField layoutX="29.0" layoutY="14.0" prefHeight="25.0" prefWidth="234.0" promptText="Search">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </JFXTextField>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="6.0" layoutY="10.0" prefHeight="567.0" prefWidth="293.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
+                           <children>
+                              <ImageView fitHeight="61.0" fitWidth="56.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/pos.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="314.0" layoutY="306.0" prefHeight="270.0" prefWidth="851.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
+                           <children>
+                              <JFXTreeTableView fx:id="treeview1" blendMode="BLUE" layoutX="13.0" layoutY="41.0" prefHeight="220.0" prefWidth="824.0" />
+                              <ImageView fitHeight="39.0" fitWidth="78.0" layoutX="35.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/cart.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
                      </children></AnchorPane>
               </content>
             </Tab>

@@ -3,15 +3,20 @@ package Project;
 
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.JFXTreeTableView;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
-public class Controller {
+public class Controller implements Initializable {
 
 
     public Stage stage;
@@ -26,6 +31,12 @@ public class Controller {
     private TextField txtUsername;
     @FXML
     private PasswordField txtPassword;
+    @FXML
+    private JFXTreeTableView<?> treeview;
+
+
+
+
 
 
     @FXML
@@ -64,5 +75,10 @@ public class Controller {
     }
     public Controller(){
 
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        JFXTreeTableColumn
     }
 }
