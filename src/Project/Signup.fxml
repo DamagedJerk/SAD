@@ -115,7 +115,7 @@
                               <Font name="System Bold" size="22.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton layoutX="478.0" layoutY="6.0" style="-fx-background-color: #FFA800;" text="_" textFill="#f8f0f0">
+                        <JFXButton layoutX="473.0" layoutY="6.0" prefHeight="48.0" prefWidth="45.0" style="-fx-background-color: #FFA800;" text="_" textFill="#f8f0f0">
                            <font>
                               <Font name="System Bold" size="22.0" />
                            </font>

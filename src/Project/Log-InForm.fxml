@@ -17,12 +17,12 @@
             <Image url="@../resources/5.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="btnClose" layoutX="14.0" layoutY="14.0" onAction="#close" prefHeight="48.0" prefWidth="27.0" style="-fx-background-color: #FF2900;" text="X" textFill="#f2eded" viewOrder="6.0">
+      <JFXButton fx:id="btnClose" layoutX="14.0" layoutY="14.0" onAction="#close" prefHeight="48.0" prefWidth="29.0" style="-fx-background-color: #FF2900;" text="X" textFill="#f2eded" viewOrder="6.0">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="76.0" layoutY="14.0" style="-fx-background-color: #FFA800;" text="_" textFill="#f2ecec" viewOrder="5.0">
+      <JFXButton layoutX="76.0" layoutY="14.0" prefHeight="48.0" prefWidth="45.0" style="-fx-background-color: #FFA800;" text="_" textFill="#f2ecec" viewOrder="5.0">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
