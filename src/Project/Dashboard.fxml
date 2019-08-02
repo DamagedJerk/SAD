@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
@@ -340,6 +341,9 @@
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </Label>
+                              <JFXDatePicker layoutX="14.0" layoutY="58.0" prefHeight="28.0" prefWidth="242.0" promptText="Date" />
+                              <JFXComboBox layoutX="329.0" layoutY="60.0" prefHeight="25.0" prefWidth="226.0" promptText="Kind of Graph" />
+                              <JFXTreeTableView blendMode="BLUE" layoutX="12.0" layoutY="95.0" prefHeight="429.0" prefWidth="552.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="584.0" layoutY="9.0" prefHeight="560.0" prefWidth="581.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
@@ -349,6 +353,9 @@
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </Label>
+                              <JFXComboBox layoutX="16.0" layoutY="62.0" prefHeight="25.0" prefWidth="240.0" promptText="Month" />
+                              <JFXComboBox layoutX="341.0" layoutY="62.0" prefHeight="25.0" prefWidth="226.0" promptText="Kind of Graph" />
+                              <JFXTreeTableView blendMode="BLUE" layoutX="15.0" layoutY="95.0" prefHeight="429.0" prefWidth="552.0" />
                            </children>
                         </AnchorPane>
                      </children></AnchorPane>
