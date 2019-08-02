@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class Controller implements Initializable {
+public class Controller  {
 
 
     public Stage stage;
@@ -28,11 +28,10 @@ public class Controller implements Initializable {
     private JFXButton btnSignup;
 
     @FXML
-    private TextField txtUsername;
+    public TextField txtUsername;
     @FXML
-    private PasswordField txtPassword;
-    @FXML
-    private JFXTreeTableView<?> treeview;
+    public PasswordField txtPassword;
+
 
 
 
@@ -77,8 +76,5 @@ public class Controller implements Initializable {
 
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        JFXTreeTableColumn
-    }
+
 }

@@ -54,7 +54,7 @@
                   <Font name="System Bold" size="22.0" />
                </font>
             </JFXTextField>
-            <JFXPasswordField blendMode="DARKEN" focusColor="#16fe95" layoutX="42.0" layoutY="129.0" prefHeight="48.0" prefWidth="397.0" promptText="Password" viewOrder="1.0">
+            <JFXPasswordField fx:id="txtPassword" blendMode="DARKEN" focusColor="#16fe95" layoutX="42.0" layoutY="129.0" prefHeight="48.0" prefWidth="397.0" promptText="Password" viewOrder="1.0">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
