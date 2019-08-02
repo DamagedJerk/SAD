@@ -40,16 +40,26 @@
                         <Image url="@../resources/5.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER_RIGHT" layoutX="1026.0" layoutY="20.0" prefHeight="32.0" prefWidth="144.0" text="Date : DD/MM/YY">
+                  <Label alignment="CENTER_RIGHT" layoutX="876.0" layoutY="68.0" prefHeight="32.0" prefWidth="144.0" text="Date : DD/MM/YY">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" layoutX="1026.0" layoutY="52.0" prefHeight="32.0" prefWidth="144.0" text="Time : HH/MM/SS">
+                  <Label alignment="CENTER_RIGHT" layoutX="1026.0" layoutY="68.0" prefHeight="32.0" prefWidth="144.0" text="Time : HH/MM/SS">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Label>
+                  <JFXButton layoutX="1053.0" layoutY="14.0" prefHeight="48.0" prefWidth="45.0" style="-fx-background-color: #FFA800;" text="_" textFill="#f2ecec" viewOrder="5.0">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton layoutX="1112.0" layoutY="14.0" prefHeight="48.0" prefWidth="45.0" style="-fx-background-color: #FF2900;" text="X" textFill="#f2ecec" viewOrder="5.0">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </Pane>
          </children>
@@ -378,7 +388,7 @@
                               <JFXComboBox layoutX="461.0" layoutY="58.0" prefHeight="25.0" prefWidth="192.0" promptText="Date" />
                            </children>
                         </AnchorPane>
-                        <JFXTreeTableView blendMode="BLUE" layoutX="25.0" layoutY="105.0" prefHeight="446.0" prefWidth="1123.0" />
+                        <JFXTreeTableView blendMode="BLUE" layoutX="25.0" layoutY="105.0" prefHeight="446.0" prefWidth="552.0" />
                      </children></AnchorPane>
               </content>
             </Tab>
