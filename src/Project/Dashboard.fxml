@@ -123,7 +123,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane layoutX="17.0" layoutY="15.0" prefHeight="561.0" prefWidth="351.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
+                        <AnchorPane layoutX="3.0" layoutY="15.0" prefHeight="572.0" prefWidth="367.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
                            <children>
                               <GridPane layoutX="6.0" layoutY="5.0" prefHeight="559.0" prefWidth="339.0">
                                 <columnConstraints>
@@ -242,7 +242,7 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="594.0" layoutY="13.0" prefHeight="567.0" prefWidth="572.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
+                        <AnchorPane layoutX="594.0" layoutY="12.0" prefHeight="568.0" prefWidth="572.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
                            <children>
                               <JFXTreeTableView blendMode="BLUE" layoutX="13.0" layoutY="64.0" prefHeight="491.0" prefWidth="545.0" />
                               <Label layoutX="233.0" layoutY="14.0" prefHeight="32.0" prefWidth="106.0" text="Stocks List">
@@ -331,7 +331,27 @@
             </Tab>
             <Tab text="Report">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="4.0" layoutY="10.0" prefHeight="560.0" prefWidth="575.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
+                           <children>
+                              <Label layoutX="232.0" layoutY="14.0" text="Daily Sales">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="584.0" layoutY="9.0" prefHeight="560.0" prefWidth="581.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
+                           <children>
+                              <Label layoutX="248.0" layoutY="14.0" text="Monthly Sales">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children></AnchorPane>
               </content>
             </Tab>
             <Tab text="Activity Log">
