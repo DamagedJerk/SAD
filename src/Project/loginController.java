@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 
 import javax.swing.*;
-
+import java.sql.Connection;
 
 
 public class loginController {
@@ -50,6 +50,14 @@ public class loginController {
     }
     @FXML
     private void login(){
+
+        try{
+            dbconn connection = new dbconn();
+            Connection sqlconn=connection.conn();
+
+        }catch(Exception e){
+
+        }
 
 
 
