@@ -1,4 +1,18 @@
 .text-input
 {
-	-fx-text-fill : gray;
+	-fx-text-fill : BLACK;
 }
+.fx-backback{
+	-fx-background-image : url("../resources/bgg.jpg");
+	-fx-background-size: cover;
+	
+}
+.tab{
+
+	-fx-background-color: #47D5DA;
+	-fx-pref-width:  230px;	
+}
+.tab-header-background{
+	-fx-background-color: #47D5DA;
+}
+
