@@ -3,20 +3,18 @@ package Project;
 
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
+
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import javax.swing.*;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 
-public class Controller  {
+
+public class loginController {
 
 
     public Stage stage;
@@ -51,8 +49,7 @@ public class Controller  {
     }
     @FXML
     private void login(){
-
-        if(txtUsername.getText().contains("admin") && txtPassword.getText().contains("admin")){
+        if(txtUsername.getText().contentEquals("admin") && txtPassword.getText().contentEquals("admin")){
             JOptionPane.showMessageDialog(null,"Success Welcome "+txtUsername.getText());
         }else{
             JOptionPane.showMessageDialog(null,"Wrong Credentials","Error",JOptionPane.ERROR_MESSAGE);
@@ -68,11 +65,8 @@ public class Controller  {
         JOptionPane.showMessageDialog(null,"SignUp now BITCH");
     }
 
-    @FXML
-    private void initialize(){
-
-    }
-    public Controller(){
+    
+    public loginController(){
 
     }
 

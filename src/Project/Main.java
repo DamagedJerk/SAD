@@ -10,7 +10,7 @@ import javafx.stage.StageStyle;
 
 public class Main extends Application {
 
-    Controller con = new Controller();
+    loginController con = new loginController();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
