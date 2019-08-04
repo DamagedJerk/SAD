@@ -59,7 +59,7 @@ public class loginController {
             Statement statement=sqlconn.createStatement();
             String sql = "Select * from tbl_employee";
             ResultSet resultSet=statement.executeQuery(sql);
-            int x=0;
+            int x=1;
             while(resultSet.next()){
 
                 JOptionPane.showMessageDialog(null,""+resultSet.getString(x));
@@ -67,7 +67,7 @@ public class loginController {
             }
 
         }catch(Exception e){
-
+            e.printStackTrace();
         }
 
 
