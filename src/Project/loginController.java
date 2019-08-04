@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 
 public class loginController {
@@ -54,6 +56,15 @@ public class loginController {
         try{
             dbconn connection = new dbconn();
             Connection sqlconn=connection.conn();
+            Statement statement=sqlconn.createStatement();
+            String sql = "Select * from tbl_employee";
+            ResultSet resultSet=statement.executeQuery(sql);
+            int x=0;
+            while(resultSet.next()){
+
+                JOptionPane.showMessageDialog(null,""+resultSet.getString(x));
+                x++;
+            }
 
         }catch(Exception e){
 

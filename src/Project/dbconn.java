@@ -15,12 +15,10 @@ public class dbconn {
          try{
              Class.forName("com.mysql.jdbc.Driver");
 
-             Connection connect= DriverManager.getConnection("jdbc:mysql://localhost/"+dbname+user+pass);
+             Connection connect= DriverManager.getConnection("jdbc:mysql://localhost/"+dbname+"/"+user+"/"+pass);
          }catch(Exception e){
              e.printStackTrace();
          }
-
-
 
          return null;
     }
