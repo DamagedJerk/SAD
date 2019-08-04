@@ -10,6 +10,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+
 import javax.swing.*;
 
 
@@ -49,13 +50,7 @@ public class loginController {
     }
     @FXML
     private void login(){
-        if(txtUsername.getText().contentEquals("admin") && txtPassword.getText().contentEquals("admin")){
-            JOptionPane.showMessageDialog(null,"Success Welcome "+txtUsername.getText());
-        }else{
-            JOptionPane.showMessageDialog(null,"Wrong Credentials","Error",JOptionPane.ERROR_MESSAGE);
-                txtUsername.setText("");
-                txtPassword.setText("");
-        }
+
 
 
 
@@ -65,7 +60,7 @@ public class loginController {
         JOptionPane.showMessageDialog(null,"SignUp now BITCH");
     }
 
-    
+
     public loginController(){
 
     }
