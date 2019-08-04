@@ -388,7 +388,7 @@
                               <JFXComboBox layoutX="461.0" layoutY="58.0" prefHeight="25.0" prefWidth="192.0" promptText="Date" />
                            </children>
                         </AnchorPane>
-                        <JFXTreeTableView blendMode="BLUE" layoutX="25.0" layoutY="105.0" prefHeight="446.0" prefWidth="552.0" />
+                        <JFXTreeTableView blendMode="BLUE" layoutX="25.0" layoutY="105.0" prefHeight="457.0" prefWidth="1119.0" />
                      </children></AnchorPane>
               </content>
             </Tab>
