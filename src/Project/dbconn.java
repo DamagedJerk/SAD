@@ -16,7 +16,7 @@ public class dbconn {
          try{
              Class.forName("com.mysql.jdbc.Driver");
 
-             connect= DriverManager.getConnection("jdbc:mysql://localhost/"+dbname,user,pass);
+             connect= DriverManager.getConnection("jdbc:mysql://localhost/"+dbname,pass,user);
          }catch(Exception e){
              e.printStackTrace();
          }
