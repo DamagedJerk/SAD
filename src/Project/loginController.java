@@ -6,18 +6,25 @@ import com.jfoenix.controls.JFXButton;
 
 import javafx.fxml.FXML;
 
+import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
 import javax.swing.*;
+import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
+
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
-public class loginController {
+public class loginController implements Initializable {
 
 
     public Stage stage;
@@ -34,7 +41,9 @@ public class loginController {
     public PasswordField txtPassword;
 
 
-
+    Connection con= null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
 
 
 
@@ -52,23 +61,24 @@ public class loginController {
     }
     @FXML
     private void login(){
+            String username = txtUsername.getText();
+            String pass = txtPassword.getText();
 
-        try{
-            dbconn connection = new dbconn();
-            Connection sqlconn=connection.conn();
-            Statement statement=sqlconn.createStatement();
-            String sql = "Select * from tbl_employee";
-            ResultSet resultSet=statement.executeQuery(sql);
-            int x=1;
-            while(resultSet.next()){
+            String sql="SELECT * from tbl_employee where user=? and pass=?";
 
-                JOptionPane.showMessageDialog(null,""+resultSet.getString(x));
-                x++;
+            try{
+                preparedStatement = con.prepareStatement(sql);
+                preparedStatement.setString(1,username);
+                preparedStatement.setString(2,pass);
+                resultSet = preparedStatement.executeQuery();
+
+                if(!resultSet.next()){
+                    JOptionPane.showMessageDialog(null,"mali","Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }catch (Exception e){
+                Logger.getLogger(loginController.class.getName()).log(Level.SEVERE,null,e);
             }
 
-        }catch(Exception e){
-            e.printStackTrace();
-        }
 
 
 
@@ -85,4 +95,8 @@ public class loginController {
     }
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 }
