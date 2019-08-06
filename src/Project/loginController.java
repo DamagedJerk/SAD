@@ -52,8 +52,7 @@ public class loginController implements Initializable {
     @FXML
     private void close(){
         Stage stage = (Stage) btnClose.getScene().getWindow();
-        stage.close();
-        //System.exit(1);
+        stage.close();     //System.exit(1);
     }
     @FXML
     private void minimize(){
@@ -65,10 +64,12 @@ public class loginController implements Initializable {
             String username = txtUsername.getText();
             String pass = txtPassword.getText();
 
-            String sql="SELECT * from tbl_employee where  user= \'"+username+"\' and pass=\'"+pass+"\'";
-            JOptionPane.showMessageDialog(null,"SQL "+sql);
+            String sql="SELECT * from tbl_employee where  user= ? and pass= ?";
+            //JOptionPane.showMessageDialog(null,"SQL "+sql);
             try{
                 preparedStatement = conn.prepareStatement(sql);
+
+
                 preparedStatement.setString(1,username);
                 preparedStatement.setString(2,pass);
                 resultSet = preparedStatement.executeQuery();
@@ -76,7 +77,7 @@ public class loginController implements Initializable {
                 if(!resultSet.next()){
                     JOptionPane.showMessageDialog(null,"mali","Error",JOptionPane.ERROR_MESSAGE);
                 }else{
-                    JOptionPane.showMessageDialog(null,"success");
+                    JOptionPane.showMessageDialog(null,"welcome");
                 }
             }catch (Exception e){
                 e.printStackTrace();
