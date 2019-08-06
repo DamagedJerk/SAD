@@ -6,8 +6,8 @@ import java.sql.DriverManager;
 
 public class dbconn {
 
-    public Connection connect;
-    public Connection conn(){
+    public  static Connection connect;
+    public static Connection conn(){
 
          String dbname = "cellections";
          String user = "root";

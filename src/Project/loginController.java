@@ -24,6 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+
 public class loginController implements Initializable {
 
 
@@ -41,7 +42,7 @@ public class loginController implements Initializable {
     public PasswordField txtPassword;
 
 
-    Connection con= null;
+    Connection conn = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
 
@@ -65,18 +66,20 @@ public class loginController implements Initializable {
             String pass = txtPassword.getText();
 
             String sql="SELECT * from tbl_employee where  user= \'"+username+"\' and pass=\'"+pass+"\'";
-
+            JOptionPane.showMessageDialog(null,"SQL "+sql);
             try{
-                preparedStatement = con.prepareStatement(sql);
+                preparedStatement = conn.prepareStatement(sql);
                 preparedStatement.setString(1,username);
                 preparedStatement.setString(2,pass);
                 resultSet = preparedStatement.executeQuery();
 
                 if(!resultSet.next()){
                     JOptionPane.showMessageDialog(null,"mali","Error",JOptionPane.ERROR_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(null,"success");
                 }
             }catch (Exception e){
-                Logger.getLogger(loginController.class.getName()).log(Level.SEVERE,null,e);
+                e.printStackTrace();
             }
 
 
