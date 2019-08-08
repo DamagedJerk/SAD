@@ -29,9 +29,12 @@ import java.util.logging.Logger;
 public class loginController implements Initializable {
 
 
+    @FXML
+    private JFXButton minimize;
+
     public Stage stage;
     @FXML
-    private JFXButton minmize,btnClose;
+    private JFXButton btnClose;
     @FXML
     private JFXButton btnLogin;
     @FXML
@@ -41,6 +44,9 @@ public class loginController implements Initializable {
     public TextField txtUsername;
     @FXML
     public PasswordField txtPassword;
+    @FXML
+    private Label lblerror;
+
 
 
     Connection conn = null;
@@ -62,7 +68,7 @@ public class loginController implements Initializable {
     }
     @FXML
     private void minimize(){
-        Stage stage = (Stage) minmize.getScene().getWindow();
+        Stage stage = (Stage) minimize.getScene().getWindow();
         stage.setIconified(true);
     }
     @FXML
@@ -82,7 +88,7 @@ public class loginController implements Initializable {
 
                 if(!resultSet.next()){
 
-                    JOptionPane.showMessageDialog(null,"mali","Error",JOptionPane.ERROR_MESSAGE);
+                    lblerror.setVisible(true);
                     txtUsername.setText("");
                     txtPassword.setText("");
                 }else{

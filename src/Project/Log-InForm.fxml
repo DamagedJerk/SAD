@@ -22,7 +22,7 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="76.0" layoutY="14.0" prefHeight="48.0" prefWidth="45.0" style="-fx-background-color: #FFA800;" text="_" textFill="#f2ecec" viewOrder="5.0">
+      <JFXButton fx:id="minimize" layoutX="76.0" layoutY="14.0" onAction="#minimize" prefHeight="48.0" prefWidth="45.0" style="-fx-background-color: #FFA800;" text="_" textFill="#f2ecec" viewOrder="5.0">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
@@ -59,6 +59,11 @@
                   <Font name="System Bold" size="22.0" />
                </font>
             </JFXPasswordField>
+            <Label fx:id="lblerror" alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="183.0" prefHeight="26.0" prefWidth="252.0" text="Username or Password Incorrect" textAlignment="CENTER" textFill="#d70808" visible="false">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>
