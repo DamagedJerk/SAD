@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 
 import javax.swing.*;
+import java.awt.*;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -46,7 +47,12 @@ public class loginController implements Initializable {
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
 
-
+    private static Connection getConnection() throws SQLException{
+        Connection conn;
+        dbconn.getInstance();
+        conn=dbconn.connect();
+        return conn;
+    }
 
 
     @FXML
@@ -64,20 +70,29 @@ public class loginController implements Initializable {
             String username = txtUsername.getText();
             String pass = txtPassword.getText();
 
-            String sql="SELECT * from tbl_employee where  user= ? and pass= ?";
+            String sql="SELECT * from tbl_employee where  user_name= ? and password= ?";
             //JOptionPane.showMessageDialog(null,"SQL "+sql);
             try{
-                preparedStatement = conn.prepareStatement(sql);
 
-
+                preparedStatement=getConnection().prepareStatement(sql);
                 preparedStatement.setString(1,username);
                 preparedStatement.setString(2,pass);
                 resultSet = preparedStatement.executeQuery();
 
+
                 if(!resultSet.next()){
+
                     JOptionPane.showMessageDialog(null,"mali","Error",JOptionPane.ERROR_MESSAGE);
+                    txtUsername.setText("");
+                    txtPassword.setText("");
                 }else{
-                    JOptionPane.showMessageDialog(null,"welcome");
+                    String role="";
+                    if(resultSet.getString("role").contentEquals("1")){
+                        role="admin";
+                    }else
+                        role="staff";
+                    JOptionPane.showMessageDialog(null,"welcome "+role);
+
                 }
             }catch (Exception e){
                 e.printStackTrace();

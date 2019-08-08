@@ -14,8 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="341.0" prefWidth="413.0" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="341.0" prefWidth="413.0" styleClass="fx-backback" stylesheets="@../css/style.css" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="133.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="366.0" minWidth="10.0" prefWidth="270.0" />
@@ -36,14 +35,14 @@
                   <Insets left="10.0" top="5.0" />
                </HBox.margin>
             </ImageView>
-            <Label contentDisplay="RIGHT" prefHeight="57.0" prefWidth="354.0" text="   Label" textFill="#363434">
+            <Label fx:id="alertlabel" contentDisplay="RIGHT" prefHeight="57.0" prefWidth="354.0" text="   Label" textFill="#363434">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
          </children>
       </HBox>
-      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" prefHeight="25.0" prefWidth="128.0" text="Close" textAlignment="CENTER" textFill="#f25c5c" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #FF2900;" text="Close" textAlignment="CENTER" textFill="#f2e4e4" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <contextMenu>
             <ContextMenu>
               <items>
@@ -52,7 +51,7 @@
             </ContextMenu>
          </contextMenu>
       </JFXButton>
-      <JFXListView prefHeight="225.0" prefWidth="388.0" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+      <JFXListView blendMode="BLUE" prefHeight="225.0" prefWidth="388.0" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
          <GridPane.margin>
             <Insets left="15.0" right="15.0" />
          </GridPane.margin>

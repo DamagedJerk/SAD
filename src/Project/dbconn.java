@@ -1,5 +1,6 @@
 package Project;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -7,7 +8,8 @@ import java.sql.DriverManager;
 public class dbconn {
 
     public  static Connection connect;
-    public static Connection conn(){
+    private static dbconn connectme=null;
+    public static Connection connect(){
 
          String dbname = "cellections";
          String user = "root";
@@ -16,11 +18,17 @@ public class dbconn {
          try{
              Class.forName("com.mysql.jdbc.Driver");
 
-             connect= DriverManager.getConnection("jdbc:mysql://localhost/"+dbname,pass,user);
+             connect= DriverManager.getConnection("jdbc:mysql://localhost/"+dbname,user,pass);
+             //JOptionPane.showMessageDialog(null,"Successfully Connected");
          }catch(Exception e){
              e.printStackTrace();
          }
 
          return connect;
+    }
+    public static dbconn getInstance()
+    {
+        if (connectme == null) { connectme = new dbconn(); }
+        return connectme;
     }
 }
