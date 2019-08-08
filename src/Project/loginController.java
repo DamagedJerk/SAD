@@ -6,7 +6,10 @@ import com.jfoenix.controls.JFXButton;
 
 import javafx.fxml.FXML;
 
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -64,7 +67,8 @@ public class loginController implements Initializable {
     @FXML
     private void close(){
         Stage stage = (Stage) btnClose.getScene().getWindow();
-        stage.close();     //System.exit(1);
+        stage.close();
+        System.exit(1);
     }
     @FXML
     private void minimize(){
@@ -72,7 +76,7 @@ public class loginController implements Initializable {
         stage.setIconified(true);
     }
     @FXML
-    private void login(){
+    private void login() throws  Exception{
             String username = txtUsername.getText();
             String pass = txtPassword.getText();
 
@@ -87,8 +91,8 @@ public class loginController implements Initializable {
 
 
                 if(!resultSet.next()){
-
-                    lblerror.setVisible(true);
+                    //lblerror.setText("Username or Password Incorrect");
+                    //lblerror.setVisible(true);
                     txtUsername.setText("");
                     txtPassword.setText("");
                 }else{
@@ -97,7 +101,16 @@ public class loginController implements Initializable {
                         role="admin";
                     }else
                         role="staff";
-                    JOptionPane.showMessageDialog(null,"welcome "+role);
+                    Stage stage = (Stage) btnClose.getScene().getWindow();
+                    stage.close();
+
+                    Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+
+
+
 
                 }
             }catch (Exception e){
