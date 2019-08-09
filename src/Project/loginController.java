@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
@@ -24,9 +25,11 @@ import java.sql.ResultSet;
 
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javafx.scene.paint.Color;
 
 
 public class loginController implements Initializable {
@@ -52,7 +55,7 @@ public class loginController implements Initializable {
 
 
 
-    Connection conn = null;
+    //Connection conn = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
 
@@ -80,7 +83,7 @@ public class loginController implements Initializable {
             String username = txtUsername.getText();
             String pass = txtPassword.getText();
 
-            String sql="SELECT * from tbl_employee where  user_name= ? and password= ?";
+            String sql="SELECT * from tbl_employee where  user_name=  ? and password= ?";
             //JOptionPane.showMessageDialog(null,"SQL "+sql);
             try{
 
@@ -91,8 +94,8 @@ public class loginController implements Initializable {
 
 
                 if(!resultSet.next()){
-                    //lblerror.setText("Username or Password Incorrect");
-                    //lblerror.setVisible(true);
+                    lblerror.setText("Username or Password Incorrect");
+                    lblerror.setVisible(true);
                     txtUsername.setText("");
                     txtPassword.setText("");
                 }else{
@@ -101,6 +104,9 @@ public class loginController implements Initializable {
                         role="admin";
                     }else
                         role="staff";
+                    lblerror.setText("logging in . . . .");
+                    lblerror.setVisible(true);
+                    lblerror.setTextFill(Color.web("#4386F8"));
                     Stage stage = (Stage) btnClose.getScene().getWindow();
                     stage.close();
 
