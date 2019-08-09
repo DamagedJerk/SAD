@@ -54,11 +54,16 @@ public class loginController implements Initializable {
     private Label lblerror;
 
 
-    public static String Name="";
+    public  String Name="";
     //Connection conn = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
-
+    public void setName(String Name){
+        this.Name = Name;
+    }
+    public String getName(){
+        return this.Name;
+    }
     private static Connection getConnection() throws SQLException{
         Connection conn;
         dbconn.getInstance();
