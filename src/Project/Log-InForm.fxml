@@ -59,9 +59,9 @@
                   <Font name="System Bold" size="22.0" />
                </font>
             </JFXPasswordField>
-            <Label fx:id="lblerror" alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="183.0" prefHeight="26.0" prefWidth="252.0" textAlignment="CENTER" textFill="#d70808" visible="false">
+            <Label fx:id="lblerror" alignment="TOP_LEFT" layoutX="43.0" layoutY="183.0" prefHeight="26.0" prefWidth="252.0" text="wrong username" textAlignment="CENTER" textFill="#d70808" visible="false">
                <font>
-                  <Font size="17.0" />
+                  <Font size="13.0" />
                </font>
             </Label>
          </children>

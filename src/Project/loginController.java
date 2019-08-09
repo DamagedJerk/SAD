@@ -54,7 +54,7 @@ public class loginController implements Initializable {
     private Label lblerror;
 
 
-
+    public static String Name="";
     //Connection conn = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
@@ -91,19 +91,20 @@ public class loginController implements Initializable {
                 preparedStatement.setString(1,username);
                 preparedStatement.setString(2,pass);
                 resultSet = preparedStatement.executeQuery();
-
-
-                if(!resultSet.next()){
+                if(txtUsername.getText().contentEquals("") || txtPassword.getText().contentEquals("")){
+                    lblerror.setText("Please fill in ");
+                    lblerror.setVisible(true);
+                } else if(!resultSet.next()){
                     lblerror.setText("Username or Password Incorrect");
                     lblerror.setVisible(true);
                     txtUsername.setText("");
                     txtPassword.setText("");
                 }else{
-                    String role="";
+
                     if(resultSet.getString("role").contentEquals("1")){
-                        role="admin";
+                        Name="admin";
                     }else
-                        role="staff";
+                        Name="staff";
                     lblerror.setText("logging in . . . .");
                     lblerror.setVisible(true);
                     lblerror.setTextFill(Color.web("#4386F8"));
@@ -129,8 +130,14 @@ public class loginController implements Initializable {
 
     }
     @FXML
-    private void Signup(){
-        JOptionPane.showMessageDialog(null,"SignUp now BITCH");
+    private void Signup() throws Exception{
+        Stage stage = (Stage) btnClose.getScene().getWindow();
+        stage.close();
+
+        Parent root = FXMLLoader.load(getClass().getResource("Signup.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 
