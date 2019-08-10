@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 
 import javax.swing.*;
-import java.awt.*;
+
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,9 +26,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+
+
 import javafx.scene.paint.Color;
 
 
@@ -54,16 +54,11 @@ public class loginController implements Initializable {
     private Label lblerror;
 
 
-    public  String Name="";
+
     //Connection conn = null;
-    PreparedStatement preparedStatement = null;
-    ResultSet resultSet = null;
-    public void setName(String Name){
-        this.Name = Name;
-    }
-    public String getName(){
-        return this.Name;
-    }
+    private PreparedStatement preparedStatement = null;
+    private ResultSet resultSet = null;
+
     private static Connection getConnection() throws SQLException{
         Connection conn;
         dbconn.getInstance();
@@ -89,7 +84,6 @@ public class loginController implements Initializable {
             String pass = txtPassword.getText();
 
             String sql="SELECT * from tbl_employee where  user_name=  ? and password= ?";
-            //JOptionPane.showMessageDialog(null,"SQL "+sql);
             try{
 
                 preparedStatement=getConnection().prepareStatement(sql);
@@ -106,10 +100,8 @@ public class loginController implements Initializable {
                     txtPassword.setText("");
                 }else{
 
-                    if(resultSet.getString("role").contentEquals("1")){
-                        Name="admin";
-                    }else
-                        Name="staff";
+
+                    //JOptionPane.showMessageDialog(null, String.format("Welcome %s", checkUser(resultSet.getString("role"))));
                     lblerror.setText("logging in . . . .");
                     lblerror.setVisible(true);
                     lblerror.setTextFill(Color.web("#4386F8"));
@@ -147,6 +139,16 @@ public class loginController implements Initializable {
 
 
     public loginController(){
+       /* try{
+            if(resultSet.getString("role").contentEquals("1")){
+                setName("Dummy Admin");
+            }else
+                setName("Dummy User1");
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }*/
+
 
     }
 
