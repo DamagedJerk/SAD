@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TreeItem;
 
 import javafx.scene.control.TreeTableColumn;
@@ -20,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 
+import javax.swing.*;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -46,6 +48,19 @@ public class DashboardController implements Initializable {
     private JFXTreeTableView<products> tableCart;
     @FXML
     private JFXButton btnVoid;
+
+    @FXML
+    private Tab tabInventory;
+
+    @FXML
+    private Tab tabStock;
+
+    @FXML
+    private Tab tabReport;
+
+    @FXML
+    private Tab tabLog;
+
 
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
@@ -82,7 +97,7 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //JOptionPane.showMessageDialog(null,String.format("Welcome %s",login.getName()));
-        lblName.setText(" Welcome ");
+
 
         int width=250;
         JFXTreeTableColumn<products,String> ProductName = new JFXTreeTableColumn<>("Name");
@@ -137,15 +152,14 @@ public class DashboardController implements Initializable {
 
     }
 
-    private void checkuser(){ //Mali pa TSk
-        String sql="SELECT * from tbl_employee where  user_name=  ? and password= ?";
-        try{
-            preparedStatement=getConnection().prepareStatement(sql);
-            //preparedStatement.setString(1,username);
-            //preparedStatement.setString(2,pass);
-            resultSet = preparedStatement.executeQuery();
-        }catch (Exception e){
-            e.printStackTrace();
+    public void checkUser(String Name,int Role){
+        lblName.setText(String.format("Welcome %s",Name));
+        if(Role==1){
+            tabInventory.setDisable(false);
+            tabStock.setDisable(false);
+            tabReport.setDisable(false);
+            tabLog.setDisable(false);
+
         }
 
     }

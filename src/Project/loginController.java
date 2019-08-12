@@ -22,7 +22,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+import javafx.fxml.FXMLLoader;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.scene.control.Label;
@@ -107,8 +107,16 @@ public class loginController implements Initializable {
                     lblerror.setTextFill(Color.web("#4386F8"));
                     Stage stage = (Stage) btnClose.getScene().getWindow();
                     stage.close();
+                    String Name=resultSet.getString("fullname");
+                    int role=Integer.parseInt(resultSet.getString("role"));
 
-                    Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
+
+
+                    FXMLLoader loader=new FXMLLoader(getClass().getResource("Dashboard.fxml"));
+                    Parent root = (Parent) loader.load();
+                    DashboardController dash=loader.getController();
+                    dash.checkUser(Name,role);
+
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
                     stage.show();
