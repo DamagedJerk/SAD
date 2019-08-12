@@ -69,6 +69,8 @@ public class DashboardController implements Initializable {
 
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
+    private Image userpic=new Image("/resources/user.png");
+
 
     private static Connection getConnection() throws SQLException {
         Connection conn;
@@ -102,8 +104,8 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //JOptionPane.showMessageDialog(null, String.format(" %s", img.getImage().getUrl()));
-        Image imahe=new Image("@../resources/user.png");
-        img.setImage(imahe);
+
+
 
 
 
@@ -169,6 +171,9 @@ public class DashboardController implements Initializable {
             tabReport.setDisable(false);
             tabLog.setDisable(false);
 
+
+        }else{
+            img.setImage(userpic);
         }
 
     }
