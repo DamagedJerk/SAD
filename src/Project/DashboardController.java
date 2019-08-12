@@ -17,11 +17,14 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TreeItem;
 
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
 
 import javax.swing.*;
+import java.awt.*;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -61,6 +64,8 @@ public class DashboardController implements Initializable {
     @FXML
     private Tab tabLog;
 
+    @FXML
+    private ImageView img;
 
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
@@ -96,7 +101,11 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //JOptionPane.showMessageDialog(null,String.format("Welcome %s",login.getName()));
+        //JOptionPane.showMessageDialog(null, String.format(" %s", img.getImage().getUrl()));
+        Image imahe=new Image("@../resources/user.png");
+        img.setImage(imahe);
+
+
 
 
         int width=250;
