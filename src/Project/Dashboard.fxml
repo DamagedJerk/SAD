@@ -72,7 +72,7 @@
                      <children>
                         <AnchorPane layoutX="314.0" layoutY="12.0" prefHeight="285.0" prefWidth="853.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
                            <children>
-                              <JFXTreeTableView fx:id="tableProduct" blendMode="DARKEN" layoutX="14.0" layoutY="59.0" prefHeight="217.0" prefWidth="825.0" stylesheets="@../css/style.css" />
+                              <JFXTreeTableView fx:id="tableProduct" blendMode="DARKEN" layoutX="14.0" layoutY="59.0" prefHeight="217.0" prefWidth="825.0" showRoot="false" stylesheets="@../css/style.css" />
                               <JFXTextField layoutX="29.0" layoutY="14.0" prefHeight="25.0" prefWidth="234.0" promptText="Search">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
@@ -89,13 +89,13 @@
                               </ImageView>
                               <JFXTextField editable="false" layoutX="21.0" layoutY="82.0" prefHeight="25.0" prefWidth="258.0" promptText="Id" />
                               <JFXTextField editable="false" layoutX="18.0" layoutY="138.0" prefHeight="25.0" prefWidth="258.0" promptText="Item name" />
-                              <JFXTextField editable="false" layoutX="21.0" layoutY="199.0" prefHeight="25.0" prefWidth="258.0" promptText="Description" />
+                              <JFXTextField editable="false" layoutX="21.0" layoutY="199.0" prefHeight="25.0" prefWidth="258.0" promptText="Category" />
                               <JFXTextField editable="false" layoutX="21.0" layoutY="245.0" prefHeight="25.0" prefWidth="258.0" promptText="Current Stock" />
                               <JFXTextField editable="false" layoutX="20.0" layoutY="297.0" prefHeight="25.0" prefWidth="258.0" promptText="Item price" />
                               <JFXTextField editable="false" layoutX="18.0" layoutY="353.0" prefHeight="25.0" prefWidth="258.0" promptText="Total Price" />
                               <JFXTextField layoutX="20.0" layoutY="407.0" prefHeight="25.0" prefWidth="122.0" promptText=" Cash Payment" />
                               <JFXTextField editable="false" layoutX="150.0" layoutY="407.0" prefHeight="25.0" prefWidth="130.0" promptText="Change" />
-                              <JFXButton layoutX="22.0" layoutY="469.0" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #16FE95;" text="Cash Out">
+                              <JFXButton alignment="CENTER" layoutX="22.0" layoutY="469.0" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #16FE95;" text="Cash Out">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
@@ -115,12 +115,12 @@
                                     <Image url="@../resources/cart.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="633.0" layoutY="14.0" prefHeight="26.0" prefWidth="100.0" text="Total Items:">
+                              <Label layoutX="733.0" layoutY="14.0" prefHeight="26.0" prefWidth="100.0" text="0">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="733.0" layoutY="14.0" prefHeight="26.0" prefWidth="100.0" text="0">
+                              <Label fx:id="lblCount" layoutX="633.0" layoutY="14.0" prefHeight="26.0" prefWidth="100.0" text="Total Items:">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
@@ -194,11 +194,6 @@
                                           </ImageView>
                                        </children>
                                     </HBox>
-                                    <JFXTextField prefHeight="42.0" prefWidth="302.0" promptText="Description" GridPane.rowIndex="5">
-                                       <padding>
-                                          <Insets left="15.0" right="15.0" />
-                                       </padding>
-                                    </JFXTextField>
                                     <JFXTextField prefHeight="42.0" prefWidth="302.0" promptText="Quantity:" GridPane.rowIndex="6">
                                        <padding>
                                           <Insets left="15.0" right="15.0" />

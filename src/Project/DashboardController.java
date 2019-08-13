@@ -10,6 +10,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -19,10 +21,12 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
 
+import javax.swing.*;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -64,6 +68,9 @@ public class DashboardController implements Initializable {
 
     @FXML
     private ImageView img;
+    @FXML
+    private Label lblCount;
+
 
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
@@ -101,16 +108,10 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //JOptionPane.showMessageDialog(null, String.format(" %s", img.getImage().getUrl()));
-
-
-
-
-
-
         int width=250;
         JFXTreeTableColumn<products,String> ProductName = new JFXTreeTableColumn<>("Name");
         ProductName.setPrefWidth(width);
+
         ProductName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<products, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<products, String> productsStringCellDataFeatures) {
@@ -133,18 +134,69 @@ public class DashboardController implements Initializable {
                 return productsStringCellDataFeatures.getValue().getValue().product_price;
             }
         });
-        ObservableList<products> products = FXCollections.observableArrayList();
-        products.add(new products("Spider-man Case","12","100.0"));
-        products.add(new products("Iron-man Case","12","100.0"));
-        products.add(new products("Phone Accessory","12","50.0"));
-        products.add(new products("Captain America Case","12","100.0"));
-        products.add(new products("Thor Case","12","100.0"));
+        ObservableList<products> productList = FXCollections.observableArrayList();
 
-        final TreeItem<products> root = new RecursiveTreeItem<products>(products,RecursiveTreeObject::getChildren);
+        try{
+            String sql = "Select * from tbl_products";
+            preparedStatement=getConnection().prepareStatement(sql);
+            resultSet=preparedStatement.executeQuery();
+            while(resultSet.next()){
+                //JOptionPane.showMessageDialog(null,resultSet.getString("prod_name"));
+                productList.add(new products(resultSet.getString("prod_name"),resultSet.getString("prod_quantity"),resultSet.getString("prod_price")));
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        final TreeItem<products> root = new RecursiveTreeItem<products>(productList,RecursiveTreeObject::getChildren);
         tableProduct.getColumns().setAll(ProductName,ProductQuantity,ProductPrice);
         tableProduct.setRoot(root);
         tableProduct.setShowRoot(false);
 
+        tableProduct.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Dragboard db=tableProduct.startDragAndDrop(TransferMode.ANY);
+
+                ClipboardContent content= new ClipboardContent();
+                content.putString(tableProduct.getAccessibleText());
+                db.setContent(content);
+            }
+        });
+        //tblCart
+
+        JFXTreeTableColumn<products,String> CartName = new JFXTreeTableColumn<>("Name");
+        CartName.setPrefWidth(width);
+        CartName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<products, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<products, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().product_name;
+            }
+        });
+        JFXTreeTableColumn<products,String> CartQuantity = new JFXTreeTableColumn<>("Quantity");
+        CartQuantity.setPrefWidth(width);
+        CartQuantity.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<products, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<products, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().product_quan;
+            }
+        });
+        JFXTreeTableColumn<products,String> CartPrice= new JFXTreeTableColumn<>("Price");
+        CartPrice.setPrefWidth(width);
+        CartPrice.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<products, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<products, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().product_price;
+            }
+        });
+
+        ObservableList<products> CartList = FXCollections.observableArrayList();
+
+        final TreeItem<products> cart = new RecursiveTreeItem<products>(CartList,RecursiveTreeObject::getChildren);
+        tableCart.getColumns().setAll(CartName,CartQuantity,CartPrice);
+        tableCart.setRoot(cart);
+        tableCart.setShowRoot(false);
     }
 
     class products extends RecursiveTreeObject<products>{
@@ -175,4 +227,7 @@ public class DashboardController implements Initializable {
         }
 
     }
+
+
+
 }
