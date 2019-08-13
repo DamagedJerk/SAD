@@ -107,7 +107,7 @@ public class loginController implements Initializable {
                     lblerror.setTextFill(Color.web("#4386F8"));
                     Stage stage = (Stage) btnClose.getScene().getWindow();
                     stage.close();
-                    String Name=resultSet.getString("fullname");
+                    String Name=resultSet.getString("firstname");
                     int role=Integer.parseInt(resultSet.getString("role"));
 
 

@@ -23,8 +23,6 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 
-import javax.swing.*;
-import java.awt.*;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
