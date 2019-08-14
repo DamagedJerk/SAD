@@ -70,61 +70,65 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="556.0" prefWidth="1167.0">
                      <children>
-                        <AnchorPane layoutX="314.0" layoutY="12.0" prefHeight="285.0" prefWidth="853.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
+                        <AnchorPane layoutX="6.0" layoutY="12.0" prefHeight="443.0" prefWidth="573.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
                            <children>
-                              <JFXTreeTableView fx:id="tableProduct" blendMode="DARKEN" layoutX="14.0" layoutY="59.0" onMouseClicked="#GetRow" prefHeight="217.0" prefWidth="825.0" showRoot="false" stylesheets="@../css/style.css" />
-                              <JFXTextField layoutX="29.0" layoutY="14.0" prefHeight="25.0" prefWidth="234.0" promptText="Search">
+                              <JFXTreeTableView fx:id="tableProduct" blendMode="DARKEN" layoutX="15.0" layoutY="49.0" onMouseClicked="#GetRow" prefHeight="379.0" prefWidth="544.0" showRoot="false" stylesheets="@../css/style.css" />
+                              <JFXTextField layoutX="14.0" layoutY="6.0" prefHeight="23.0" prefWidth="214.0" promptText="Search">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </JFXTextField>
                            </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="6.0" layoutY="10.0" prefHeight="567.0" prefWidth="293.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
+                        <AnchorPane layoutX="6.0" layoutY="466.0" prefHeight="113.0" prefWidth="1163.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
                            <children>
                               <ImageView fitHeight="61.0" fitWidth="56.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../resources/pos.png" />
                                  </image>
                               </ImageView>
-                              <JFXTextField editable="false" layoutX="21.0" layoutY="82.0" prefHeight="25.0" prefWidth="258.0" promptText="Id" />
-                              <JFXTextField editable="false" layoutX="18.0" layoutY="138.0" prefHeight="25.0" prefWidth="258.0" promptText="Item name" />
-                              <JFXTextField editable="false" layoutX="21.0" layoutY="199.0" prefHeight="25.0" prefWidth="258.0" promptText="Category" />
-                              <JFXTextField editable="false" layoutX="21.0" layoutY="245.0" prefHeight="25.0" prefWidth="258.0" promptText="Current Stock" />
-                              <JFXTextField editable="false" layoutX="20.0" layoutY="297.0" prefHeight="25.0" prefWidth="258.0" promptText="Item price" />
-                              <JFXTextField fx:id="SalesPrice" editable="false" layoutX="18.0" layoutY="353.0" prefHeight="25.0" prefWidth="258.0" promptText="Total Price" />
-                              <JFXTextField layoutX="20.0" layoutY="407.0" prefHeight="25.0" prefWidth="122.0" promptText=" Cash Payment" />
-                              <JFXTextField editable="false" layoutX="150.0" layoutY="407.0" prefHeight="25.0" prefWidth="130.0" promptText="Change" />
-                              <JFXButton alignment="CENTER" layoutX="22.0" layoutY="469.0" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #16FE95;" text="Cash Out">
+                              <JFXTextField fx:id="SalesPrice" editable="false" layoutX="107.0" layoutY="46.0" prefHeight="25.0" prefWidth="245.0" promptText="Total Price">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font></JFXTextField>
+                              <JFXTextField layoutX="368.0" layoutY="46.0" prefHeight="25.0" prefWidth="245.0" promptText=" Cash Payment">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font></JFXTextField>
+                              <JFXTextField editable="false" layoutX="631.0" layoutY="46.0" prefHeight="25.0" prefWidth="245.0" promptText="Change">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font></JFXTextField>
+                              <JFXButton alignment="CENTER" layoutX="924.0" layoutY="21.0" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #16FE95;" text="Cash Out">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="btnVoid" disable="true" layoutX="162.0" layoutY="469.0" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #FF2900;" text="Void" textFill="#e8e0e0">
+                              <JFXButton fx:id="btnVoid" disable="true" layoutX="924.0" layoutY="71.0" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #FF2900;" text="Void" textFill="#e8e0e0">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </JFXButton>
                            </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="314.0" layoutY="306.0" prefHeight="270.0" prefWidth="851.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
+                        <AnchorPane layoutX="581.0" layoutY="11.0" prefHeight="446.0" prefWidth="584.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
                            <children>
-                              <JFXTreeTableView fx:id="tableCart" blendMode="DARKEN" layoutX="13.0" layoutY="41.0" prefHeight="220.0" prefWidth="824.0" />
-                              <ImageView fitHeight="39.0" fitWidth="78.0" layoutX="35.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                              <Label fx:id="lblCount" layoutX="394.0" layoutY="7.0" prefHeight="26.0" prefWidth="100.0" text="Total Items:">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="525.0" layoutY="7.0" prefHeight="26.0" prefWidth="45.0" text="0">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="32.0" fitWidth="39.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../resources/cart.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="733.0" layoutY="14.0" prefHeight="26.0" prefWidth="100.0" text="0">
-                                 <font>
-                                    <Font name="System Bold" size="17.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lblCount" layoutX="633.0" layoutY="14.0" prefHeight="26.0" prefWidth="100.0" text="Total Items:">
-                                 <font>
-                                    <Font name="System Bold" size="17.0" />
-                                 </font>
-                              </Label>
+                              <JFXTreeTableView fx:id="tableCart" blendMode="DARKEN" layoutX="11.0" layoutY="48.0" prefHeight="386.0" prefWidth="565.0" />
                            </children>
                         </AnchorPane>
                      </children></AnchorPane>

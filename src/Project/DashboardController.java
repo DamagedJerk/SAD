@@ -10,7 +10,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TreeItem;
@@ -69,6 +72,7 @@ public class DashboardController implements Initializable {
     private Label lblCount;
     @FXML
     private JFXTextField SalesPrice;
+    public Stage stage;
 
 
 
@@ -110,7 +114,7 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        int width=250;
+        int width=140;
         JFXTreeTableColumn<products,String> ProductName = new JFXTreeTableColumn<>("Name");
         ProductName.setPrefWidth(width);
 
@@ -231,7 +235,7 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    void GetRow(MouseEvent e) {
+    void GetRow(MouseEvent e) throws Exception {
 
         if (e.getClickCount() == 2 && !e.isConsumed()) {
             e.consume();
@@ -239,6 +243,15 @@ public class DashboardController implements Initializable {
             String CartName=tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_name.getValue();
             String CartQuan=tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_quan.getValue();
             String CartPrice=tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_price.getValue();
+
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("Dashboard.fxml"));
+            Parent root = (Parent) loader.load();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+
 
             SelectToCart(CartName,CartQuan,CartPrice,CartList);
             final TreeItem<products> cart = new RecursiveTreeItem<products>(CartList,RecursiveTreeObject::getChildren);
@@ -253,7 +266,7 @@ public class DashboardController implements Initializable {
         double temp=Double.parseDouble(Price);
 
         totalprice+=temp;
-        JOptionPane.showMessageDialog(null,totalprice+"");
+
         SalesPrice.setText(totalprice.toString());
          list.add(new products(name,Quan,Price));
      }
