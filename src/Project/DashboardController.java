@@ -228,6 +228,12 @@ public class DashboardController implements Initializable {
 
     }
 
+    @FXML
+    void GetRow(MouseEvent event) {
+
+            //JOptionPane.showMessageDialog(null,tableProduct.getSelectionModel().getSelectedItems().get(0)+ " \nValue Sa str");
+    }
+
 
 
 }
