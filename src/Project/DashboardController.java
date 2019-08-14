@@ -1,9 +1,6 @@
 package Project;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.*;
 import javafx.beans.value.ObservableValue;
@@ -70,12 +67,15 @@ public class DashboardController implements Initializable {
     private ImageView img;
     @FXML
     private Label lblCount;
+    @FXML
+    private JFXTextField SalesPrice;
+
 
 
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     private Image userpic=new Image("/resources/user.png");
-
+    private ObservableList<products> CartList = FXCollections.observableArrayList();
 
     private static Connection getConnection() throws SQLException {
         Connection conn;
@@ -91,6 +91,7 @@ public class DashboardController implements Initializable {
         stage.close();
         System.exit(1);
     }
+
 
     @FXML
     void minimize(ActionEvent event) {
@@ -191,12 +192,12 @@ public class DashboardController implements Initializable {
             }
         });
 
-        ObservableList<products> CartList = FXCollections.observableArrayList();
 
-        final TreeItem<products> cart = new RecursiveTreeItem<products>(CartList,RecursiveTreeObject::getChildren);
+
+        //final TreeItem<products> cart = new RecursiveTreeItem<products>(CartList,RecursiveTreeObject::getChildren);
         tableCart.getColumns().setAll(CartName,CartQuantity,CartPrice);
-        tableCart.setRoot(cart);
-        tableCart.setShowRoot(false);
+       // tableCart.setRoot(cart);
+        //tableCart.setShowRoot(false);
     }
 
     class products extends RecursiveTreeObject<products>{
@@ -229,10 +230,31 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    void GetRow(MouseEvent event) {
+    void GetRow(MouseEvent e) {
 
-            //JOptionPane.showMessageDialog(null,tableProduct.getSelectionModel().getSelectedItems().get(0)+ " \nValue Sa str");
-    }
+        if (e.getClickCount() == 2 && !e.isConsumed()) {
+            e.consume();
+
+            String CartName=tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_name.getValue();
+            String CartQuan=tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_quan.getValue();
+            String CartPrice=tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_price.getValue();
+
+            SelectToCart(CartName,CartQuan,CartPrice,CartList);
+            final TreeItem<products> cart = new RecursiveTreeItem<products>(CartList,RecursiveTreeObject::getChildren);
+            tableCart.setRoot(cart);
+            tableCart.setShowRoot(false);
+
+
+        }
+     }
+
+     private void SelectToCart(String name,String Quan,String Price,ObservableList list){
+        double temp=Double.parseDouble(Price);
+
+         list.add(new products(name,Quan,Price));
+     }
+     
+
 
 
 
