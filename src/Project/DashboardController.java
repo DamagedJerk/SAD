@@ -244,13 +244,13 @@ public class DashboardController implements Initializable {
             String CartQuan=tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_quan.getValue();
             String CartPrice=tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_price.getValue();
 
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("Dashboard.fxml"));
+            /*FXMLLoader loader=new FXMLLoader(getClass().getResource("Add.fxml"));
             Parent root = (Parent) loader.load();
 
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-
+            */
 
 
             SelectToCart(CartName,CartQuan,CartPrice,CartList);
