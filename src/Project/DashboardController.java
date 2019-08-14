@@ -76,6 +76,7 @@ public class DashboardController implements Initializable {
     private ResultSet resultSet = null;
     private Image userpic=new Image("/resources/user.png");
     private ObservableList<products> CartList = FXCollections.observableArrayList();
+    public Double totalprice=0.0;
 
     private static Connection getConnection() throws SQLException {
         Connection conn;
@@ -251,9 +252,12 @@ public class DashboardController implements Initializable {
      private void SelectToCart(String name,String Quan,String Price,ObservableList list){
         double temp=Double.parseDouble(Price);
 
+        totalprice+=temp;
+        JOptionPane.showMessageDialog(null,totalprice+"");
+        SalesPrice.setText(totalprice.toString());
          list.add(new products(name,Quan,Price));
      }
-     
+
 
 
 

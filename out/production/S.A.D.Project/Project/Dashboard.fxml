@@ -92,7 +92,7 @@
                               <JFXTextField editable="false" layoutX="21.0" layoutY="199.0" prefHeight="25.0" prefWidth="258.0" promptText="Category" />
                               <JFXTextField editable="false" layoutX="21.0" layoutY="245.0" prefHeight="25.0" prefWidth="258.0" promptText="Current Stock" />
                               <JFXTextField editable="false" layoutX="20.0" layoutY="297.0" prefHeight="25.0" prefWidth="258.0" promptText="Item price" />
-                              <JFXTextField editable="false" layoutX="18.0" layoutY="353.0" prefHeight="25.0" prefWidth="258.0" promptText="Total Price" />
+                              <JFXTextField fx:id="SalesPrice" editable="false" layoutX="18.0" layoutY="353.0" prefHeight="25.0" prefWidth="258.0" promptText="Total Price" />
                               <JFXTextField layoutX="20.0" layoutY="407.0" prefHeight="25.0" prefWidth="122.0" promptText=" Cash Payment" />
                               <JFXTextField editable="false" layoutX="150.0" layoutY="407.0" prefHeight="25.0" prefWidth="130.0" promptText="Change" />
                               <JFXButton alignment="CENTER" layoutX="22.0" layoutY="469.0" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #16FE95;" text="Cash Out">
