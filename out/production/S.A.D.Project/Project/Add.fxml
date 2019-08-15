@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="259.0" prefWidth="413.0" styleClass="fx-backback" stylesheets="@../css/style.css" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="259.0" prefWidth="413.0" styleClass="fx-backback" stylesheets="@../css/style.css" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.AddController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="197.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="366.0" minWidth="10.0" prefWidth="206.0" />
@@ -44,7 +44,7 @@
             </Label>
          </children>
       </HBox>
-      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #16FE95;" text="Add" textAlignment="CENTER" textFill="#282626" GridPane.rowIndex="2">
+      <JFXButton fx:id="PromptAdd" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#AddQuantity" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #16FE95;" text="Add" textAlignment="CENTER" textFill="#282626" GridPane.rowIndex="2">
          <contextMenu>
             <ContextMenu>
               <items>
@@ -61,7 +61,7 @@
             <Insets left="15.0" right="15.0" />
          </GridPane.margin>
       </JFXListView>
-      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #FFA800;" text="Cancel" textAlignment="CENTER" textFill="#282626" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <JFXButton fx:id="PromptCancel" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#close" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #FFA800;" text="Cancel" textAlignment="CENTER" textFill="#282626" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <contextMenu>
             <ContextMenu>
                <items>
@@ -84,11 +84,12 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <JFXTextField layoutX="14.0" layoutY="32.0" prefHeight="38.0" prefWidth="171.0">
+            <JFXTextField fx:id="PromptTextQuantity" layoutX="14.0" layoutY="32.0" prefHeight="38.0" prefWidth="171.0">
                <font>
                   <Font size="17.0" />
                </font>
             </JFXTextField>
+            <Label fx:id="PrompError" layoutX="14.0" layoutY="70.0" prefHeight="32.0" prefWidth="171.0" text="Please fill fields" textFill="#dd1e1e" visible="false" />
          </children>
       </AnchorPane>
    </children>

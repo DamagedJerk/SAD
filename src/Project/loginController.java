@@ -113,7 +113,7 @@ public class loginController implements Initializable {
 
 
                     FXMLLoader loader=new FXMLLoader(getClass().getResource("Dashboard.fxml"));
-                    Parent root = (Parent) loader.load();
+                    Parent root = loader.load();
                     DashboardController dash=loader.getController();
                     dash.checkUser(Name,role);
 
