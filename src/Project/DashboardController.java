@@ -485,10 +485,35 @@ public class DashboardController implements Initializable {
                 String name = InventoryName.getText();
                 String quan = InventoryQuantity.getText();
                 String itemprice = InventoryPrice.getText();
-                String category=InventoryCateg.getItems().get(0);
-                String supplier = InventorySupp.getValue();
+                int category = InventoryCateg.getSelectionModel().selectedIndexProperty().getValue();
+                int supplier = InventorySupp.getSelectionModel().selectedIndexProperty().getValue();
+                int status = 1;
+                String Date =dateTime.getText();
+                String sql ="Insert into tbl_products (prod_name,prod_quantity,prod_price,supplier_id,category_id,prod_status,prod_date) values(?,?,?,?,?,?,?)";
+                try{
+                    preparedStatement=getConnection().prepareStatement(sql);
+                    preparedStatement.setString(1,name);
+                    preparedStatement.setString(2,quan);
+                    preparedStatement.setString(3,itemprice);
+                    preparedStatement.setInt(4,supplier);
+                    preparedStatement.setInt(5,category);
+                    preparedStatement.setInt(6,status);
+                    preparedStatement.setString(7,Date);
+                    preparedStatement.executeUpdate();
 
-                JOptionPane.showMessageDialog(null,""+category);
+                    InventoryName.setText("");
+                    InventoryQuantity.setText("");
+                    InventoryPrice.setText("");
+                    InventoryCateg.setValue("");
+                    InventorySupp.setValue("");
+
+                    JOptionPane.showMessageDialog(null,"Successfully Added");
+
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
 
             }
 

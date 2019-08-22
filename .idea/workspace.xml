@@ -3,25 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cbddea0c-4283-4362-bc6d-1b06ad665c0e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/AddController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/AddController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$Inventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$Inventory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$products.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$products.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project/AddController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/AddController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Dashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Project/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/DashboardController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -39,8 +21,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="490" column="64" selection-start-line="490" selection-start-column="64" selection-end-line="490" selection-end-column="64" />
+            <state relative-caret-position="61">
+              <caret line="491" column="53" selection-start-line="491" selection-start-column="53" selection-end-line="491" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -51,8 +33,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Project/signupcontroller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="83" column="112" selection-start-line="83" selection-start-column="12" selection-end-line="83" selection-end-column="112" />
+            <state relative-caret-position="-238">
+              <caret line="83" column="38" selection-start-line="83" selection-start-column="38" selection-end-line="83" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -140,7 +122,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="84" />
+    <option name="x" value="728" />
     <option name="width" value="652" />
     <option name="height" value="768" />
   </component>
@@ -249,6 +231,10 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="&quot;Adding to Inventory&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Adding to Inventory&quot;" />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Project/Inventory.java" />
     <entry file="file://$PROJECT_DIR$/src/Project/AddController.java">
@@ -274,15 +260,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/signupcontroller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="83" column="112" selection-start-line="83" selection-start-column="12" selection-end-line="83" selection-end-column="112" />
+        <state relative-caret-position="-238">
+          <caret line="83" column="38" selection-start-line="83" selection-start-column="38" selection-end-line="83" selection-end-column="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="490" column="64" selection-start-line="490" selection-start-column="64" selection-end-line="490" selection-end-column="64" />
+        <state relative-caret-position="61">
+          <caret line="491" column="53" selection-start-line="491" selection-start-column="53" selection-end-line="491" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
