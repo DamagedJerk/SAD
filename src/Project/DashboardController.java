@@ -109,10 +109,10 @@ public class DashboardController implements Initializable {
     private JFXTextField InventoryID;
 
     @FXML
-    private JFXComboBox<?> InventorySupp;
+    private JFXComboBox<String> InventorySupp;
 
     @FXML
-    private JFXComboBox<?> InventoryCateg;
+    private JFXComboBox<String> InventoryCateg;
 
     @FXML
     private JFXTextField InventoryQuantity;
@@ -192,6 +192,10 @@ public class DashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         initClock();
+
+        //initialize
+        setComboBOx(InventorySupp,"Select * from tbl_supplier","company_name");
+        setComboBOx(InventoryCateg,"Select * from tbl_category","cat_description");
 
         int width = 140;
         JFXTreeTableColumn<products, String> ProductName = new JFXTreeTableColumn<>("Name");
@@ -275,7 +279,9 @@ public class DashboardController implements Initializable {
         //tabInventory
         int widthInventory=130;
         tabInventory.setOnSelectionChanged(event -> {
-            if (tabInventory.isSelected()) {
+
+
+            if (tabInventory.isSelected() && tbl_inventory.getCurrentItemsCount()==0 ) {
                 JFXTreeTableColumn<Inventory, String> InventoryId = new JFXTreeTableColumn<>("ID");
                 InventoryId.setPrefWidth(widthInventory);
 
@@ -330,7 +336,7 @@ public class DashboardController implements Initializable {
                     preparedStatement = getConnection().prepareStatement(sql);
                     resultSet = preparedStatement.executeQuery();
                     while (resultSet.next()) {
-                        JOptionPane.showMessageDialog(null,resultSet.getString("prod_name"));
+                        //JOptionPane.showMessageDialog(null,resultSet.getString("prod_name"));
                         InventoryList.add(new Inventory(resultSet.getString("prod_id"), resultSet.getString("prod_name"), resultSet.getString("prod_quantity"),resultSet.getString("prod_price"), resultSet.getString("cat_description"), resultSet.getString("company_name")));
                     }
 
@@ -342,10 +348,28 @@ public class DashboardController implements Initializable {
                 tbl_inventory.setRoot(inventoryList);
                 tbl_inventory.setShowRoot(false);
             }
+
+
         });
 
 
     }
+    private void setComboBOx(JFXComboBox comboBOx,String query,String columnname){
+        try {
+
+            preparedStatement = getConnection().prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                //JOptionPane.showMessageDialog(null,resultSet.getString("prod_name"));
+                comboBOx.getItems().add(resultSet.getString(columnname));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 
     class products extends RecursiveTreeObject<products> {
@@ -403,28 +427,71 @@ public class DashboardController implements Initializable {
         @FXML
         void GetRow(MouseEvent e) throws Exception {
 
+
             if (e.getClickCount() == 2 && !e.isConsumed()) {
                 e.consume();
 
-                String CartName = tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_name.getValue();
-                String CartQuan = tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_quan.getValue();
-                String CartPrice = tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_price.getValue();
-                //JOptionPane.showMessageDialog(null, "getROW ni agi");
+                //TABLE PRODUCT
+                if(e.getSource()==tableProduct){
+                    String CartName = tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_name.getValue();
+                    String CartQuan = tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_quan.getValue();
+                    String CartPrice = tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_price.getValue();
 
-                //JOptionPane.showMessageDialog(null,stage.getScene().getProperties()+"");
+                    AddController addmodal = new AddController("Add.fxml");
+                    addmodal.getModal((JFXTreeTableView) e.getSource());
 
-                AddController addmodal = new AddController("Add.fxml");
-                addmodal.getModal((JFXTreeTableView) e.getSource());
-                //JOptionPane.showMessageDialog(null, addmodal.getQUan()+" DIRI TO");
+                    SelectToCart(CartName, CartQuan, CartPrice, CartList);
+                    final TreeItem<products> cart = new RecursiveTreeItem<products>(CartList, RecursiveTreeObject::getChildren);
+                    tableCart.setRoot(cart);
+                    tableCart.setShowRoot(false);
+                }
+                if(e.getSource()==tbl_inventory){
+                    //adding to FIELDS
+                    String id=tbl_inventory.getSelectionModel().getSelectedItems().get(0).getValue().product_id.getValue();
+                    String name=tbl_inventory.getSelectionModel().getSelectedItems().get(0).getValue().product_name.getValue();
+                    String quan=tbl_inventory.getSelectionModel().getSelectedItems().get(0).getValue().product_quan.getValue();
+                    String itemprice=tbl_inventory.getSelectionModel().getSelectedItems().get(0).getValue().product_price.getValue();
+                    String category=tbl_inventory.getSelectionModel().getSelectedItems().get(0).getValue().product_category.getValue();
+                    String supplier=tbl_inventory.getSelectionModel().getSelectedItems().get(0).getValue().product_supplier.getValue();
 
+                    InventorySupp.setValue(supplier);
+                    InventoryCateg.setValue(category);
+                    InventoryID.setText(id);
+                    InventoryName.setText(name);
+                    InventoryQuantity.setText(quan);
+                    InventoryPrice.setText(itemprice);
 
-                SelectToCart(CartName, CartQuan, CartPrice, CartList);
-                final TreeItem<products> cart = new RecursiveTreeItem<products>(CartList, RecursiveTreeObject::getChildren);
-                tableCart.setRoot(cart);
-                tableCart.setShowRoot(false);
+                    update_inventory.setDisable(false);
+
+                }
 
 
             }
+            //TABLE CART
+            if(e.getSource()==tableCart){
+                btnVoid.setDisable(false);
+            }
+
+
+        }
+        @FXML
+        private void AddtoInventory(){
+
+            if(InventoryName.getText().contentEquals("") || InventoryQuantity.getText().contentEquals("") || InventoryPrice.getText().contentEquals("") ){
+                JOptionPane.showMessageDialog(null,"Please input all fields","Warning",JOptionPane.WARNING_MESSAGE);
+                
+            }else {
+                String id = InventoryID.getText();
+                String name = InventoryName.getText();
+                String quan = InventoryQuantity.getText();
+                String itemprice = InventoryPrice.getText();
+                String category=InventoryCateg.getItems().get(0);
+                String supplier = InventorySupp.getValue();
+
+                JOptionPane.showMessageDialog(null,""+category);
+
+            }
+
 
         }
         private void initClock() {

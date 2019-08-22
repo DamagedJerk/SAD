@@ -80,7 +80,7 @@ public class AddController {
 
 
         Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initModality(Modality.WINDOW_MODAL);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.initOwner(view.getScene().getWindow());
         stage.setScene(new Scene(root));

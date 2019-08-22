@@ -94,7 +94,7 @@
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font></JFXTextField>
-                              <JFXButton alignment="CENTER" layoutX="924.0" layoutY="21.0" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #16FE95;" text="Cash Out">
+                              <JFXButton alignment="CENTER" disable="true" layoutX="924.0" layoutY="21.0" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #16FE95;" text="Cash Out">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
@@ -123,7 +123,7 @@
                                     <Image url="@../resources/cart.png" />
                                  </image>
                               </ImageView>
-                              <JFXTreeTableView fx:id="tableCart" blendMode="DARKEN" layoutX="11.0" layoutY="48.0" prefHeight="386.0" prefWidth="565.0" />
+                              <JFXTreeTableView fx:id="tableCart" blendMode="DARKEN" layoutX="11.0" layoutY="48.0" onMouseClicked="#GetRow" prefHeight="386.0" prefWidth="565.0" />
                            </children>
                         </AnchorPane>
                      </children></AnchorPane>
@@ -172,11 +172,11 @@
                                                 <Insets left="15.0" />
                                              </padding>
                                           </JFXComboBox>
-                                          <ImageView fitHeight="74.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/additional-icon-14.jpg" />
-                                             </image>
-                                          </ImageView>
+                                          <JFXButton prefHeight="42.0" prefWidth="40.0" text="+">
+                                             <font>
+                                                <Font name="System Bold" size="22.0" />
+                                             </font>
+                                          </JFXButton>
                                        </children>
                                     </HBox>
                                     <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
@@ -186,11 +186,11 @@
                                                 <Insets left="15.0" />
                                              </padding>
                                           </JFXComboBox>
-                                          <ImageView fitHeight="74.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/additional-icon-14.jpg" />
-                                             </image>
-                                          </ImageView>
+                                          <JFXButton prefHeight="43.0" prefWidth="39.0" text="+">
+                                             <font>
+                                                <Font name="System Bold" size="22.0" />
+                                             </font>
+                                          </JFXButton>
                                        </children>
                                     </HBox>
                                     <JFXTextField fx:id="InventoryQuantity" prefHeight="42.0" prefWidth="302.0" promptText="Quantity:" GridPane.rowIndex="6">
@@ -210,7 +210,7 @@
                                     </JFXTextField>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8">
                                        <children>
-                                          <JFXButton fx:id="add_inventory" layoutX="17.0" layoutY="14.0" prefHeight="32.0" prefWidth="122.0" style="-fx-background-color: #16FE95;" text="Add">
+                                          <JFXButton fx:id="add_inventory" layoutX="17.0" layoutY="14.0" onAction="#AddtoInventory" prefHeight="32.0" prefWidth="122.0" style="-fx-background-color: #16FE95;" text="Add">
                                              <font>
                                                 <Font name="System Bold" size="17.0" />
                                              </font>
@@ -228,7 +228,7 @@
                         </AnchorPane>
                         <AnchorPane layoutX="377.0" layoutY="15.0" prefHeight="561.0" prefWidth="788.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
                            <children>
-                              <JFXTreeTableView fx:id="tbl_inventory" blendMode="DARKEN" layoutX="11.0" layoutY="25.0" prefHeight="528.0" prefWidth="766.0" />
+                              <JFXTreeTableView fx:id="tbl_inventory" blendMode="DARKEN" layoutX="11.0" layoutY="25.0" onMouseClicked="#GetRow" prefHeight="528.0" prefWidth="766.0" />
                            </children></AnchorPane>
                      </children></AnchorPane>
               </content>
@@ -306,7 +306,7 @@
                                           <Insets left="15.0" right="53.0" />
                                        </padding>
                                     </JFXTextField>
-                                    <JFXButton prefHeight="34.0" prefWidth="233.0" style="-fx-background-color: #16FE95;" text="Stock-In" GridPane.rowIndex="6">
+                                    <JFXButton disable="true" prefHeight="34.0" prefWidth="233.0" style="-fx-background-color: #16FE95;" text="Stock-In" GridPane.rowIndex="6">
                                        <GridPane.margin>
                                           <Insets left="15.0" />
                                        </GridPane.margin>
@@ -314,7 +314,7 @@
                                           <Font name="System Bold" size="17.0" />
                                        </font>
                                     </JFXButton>
-                                    <JFXButton contentDisplay="RIGHT" prefHeight="38.0" prefWidth="278.0" style="-fx-background-color: #FFA800;" text="Stock-Out" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                    <JFXButton contentDisplay="RIGHT" disable="true" prefHeight="38.0" prefWidth="278.0" style="-fx-background-color: #FFA800;" text="Stock-Out" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                        <font>
                                           <Font name="System Bold" size="17.0" />
                                        </font>
