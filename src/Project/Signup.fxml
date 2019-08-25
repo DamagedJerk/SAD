@@ -115,7 +115,7 @@
                   </ImageView>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <JFXButton fx:id="btnClose" layoutX="526.0" layoutY="6.0" onAction="#close" style="-fx-background-color: #FF2900;" text="X" textFill="#f2ecec">
+                        <JFXButton fx:id="btnClose" layoutX="526.0" layoutY="6.0" onAction="#close" style="-fx-background-color: #FF2900;" text="&lt;" textFill="#f2ecec">
                            <font>
                               <Font name="System Bold" size="22.0" />
                            </font>

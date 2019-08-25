@@ -48,24 +48,19 @@ public class AddController {
 
             PromptTextQuantity.setText("");
         }else{
-            /*FXMLLoader loader=FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
-            DashboardController dash = loader.getController();
-            dash.getQuantity(PromptTextQuantity.getText());
+            //FXMLLoader loader=FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
+            /*DashboardController dash =
+            dash.setQuan(PromptTextQuantity.getText());
+            JOptionPane.showMessageDialog(null,""+dash.getQuantity());
+            */
 
-             */
-            setQuan(PromptTextQuantity.getText());
             close();
+
             //DashboardController dash=FXMLLoader.load(PromptAdd.get);
         }
 
     }
-    public String Quan="";
-    public void setQuan(String str){
-        this.Quan=str;
-    }
-    public String getQUan(){
-        return this.Quan;
-    }
+
 
     public AddController(){
     }
@@ -73,11 +68,11 @@ public class AddController {
         this.fxmlURL=fxmlURL;
     }
 
-    public <T>  T getModal(JFXTreeTableView view) throws  Exception{
+    public <T> T getModal(JFXTreeTableView view) throws  Exception{
         FXMLLoader loader= new FXMLLoader(getClass().getResource(fxmlURL));
         Parent root =loader.load();
         T controller=loader.getController();
-
+        JOptionPane.showMessageDialog(null,controller+"");
 
         Stage stage = new Stage();
         stage.initModality(Modality.WINDOW_MODAL);

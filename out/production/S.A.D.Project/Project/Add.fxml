@@ -84,7 +84,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <JFXTextField fx:id="PromptTextQuantity" layoutX="14.0" layoutY="32.0" prefHeight="38.0" prefWidth="171.0">
+            <JFXTextField fx:id="PromptTextQuantity" layoutX="14.0" layoutY="32.0" onAction="#AddQuantity" prefHeight="38.0" prefWidth="171.0">
                <font>
                   <Font size="17.0" />
                </font>

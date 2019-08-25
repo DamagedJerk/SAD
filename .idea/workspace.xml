@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cbddea0c-4283-4362-bc6d-1b06ad665c0e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Dashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$10.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$11.class" afterDir="false" />
@@ -19,8 +18,11 @@
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$Inventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$Inventory.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$products.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$products.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/Add.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Add.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/AddController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/AddController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Project/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Dashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Project/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/Signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Signup.fxml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,14 +39,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="339" column="46" lean-forward="true" selection-start-line="339" selection-start-column="46" selection-end-line="339" selection-end-column="46" />
+            <state relative-caret-position="136">
+              <caret line="448" column="65" selection-start-line="448" selection-start-column="65" selection-end-line="448" selection-end-column="65" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#17149#17150#0" expanded="true" />
-                <element signature="e#17194#17195#0" expanded="true" />
-                <element signature="e#23856#23857#0" expanded="true" />
-                <element signature="e#23899#23900#0" expanded="true" />
+                <element signature="e#25240#25241#0" expanded="true" />
+                <element signature="e#25283#25284#0" expanded="true" />
+                <element signature="e#26838#26839#0" expanded="true" />
+                <element signature="e#26874#26875#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -53,7 +55,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Project/signupcontroller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1173">
+            <state relative-caret-position="355">
               <caret line="83" column="38" selection-start-line="83" selection-start-column="38" selection-end-line="83" selection-end-column="38" />
             </state>
           </provider>
@@ -62,11 +64,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Project/AddController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1105">
-              <caret line="85" column="40" selection-start-line="85" selection-start-column="40" selection-end-line="85" selection-end-column="40" />
+            <state relative-caret-position="146">
+              <caret line="74" column="55" selection-start-line="74" selection-start-column="55" selection-end-line="74" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1685#1686#0" expanded="true" />
+                <element signature="e#1721#1722#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Project/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -74,7 +87,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Project/loginController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1530">
+            <state relative-caret-position="355">
               <caret line="117" column="20" selection-start-line="117" selection-start-column="20" selection-end-line="117" selection-end-column="46" />
             </state>
           </provider>
@@ -97,27 +110,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>close</find>
-      <find>Quan</find>
-      <find>tab</find>
-      <find>class</find>
-      <find>products</find>
-      <find>inventory</find>
-      <find>private ObservableList&lt;products&gt; CartList = FXCollections.observableArrayList();</find>
-      <find>private ObservableList&lt;products&gt;</find>
-      <find>Observa</find>
-      <find>new Recu</find>
-      <find>TreeItem</find>
-      <find>InventoryList</find>
-      <find>chec</find>
-      <find>check</find>
-      <find>Inventorylist</find>
-      <find>sql</find>
-      <find>tbl_in</find>
-      <find>tableP</find>
-      <find>InventorySupp</find>
-      <find>initia</find>
-      <find>jfxcombo</find>
       <find>intialize</find>
       <find>add</find>
       <find>sign</find>
@@ -126,7 +118,28 @@
       <find>initializa</find>
       <find>tabInven</find>
       <find>setId</find>
+      <find>setID</find>
+      <find>tableproduct</find>
+      <find>@fxml</find>
+      <find>initialize</find>
+      <find>refre</find>
       <find>tbl_inventory</find>
+      <find>Inventory</find>
+      <find>@FXML</find>
+      <find>Combobox</find>
+      <find>Update</find>
+      <find>tableProduct</find>
+      <find>refreshProdu</find>
+      <find>tbl_invent</find>
+      <find>setCombo</find>
+      <find>NEWFIE</find>
+      <find>modality</find>
+      <find>getRow</find>
+      <find>GetQuan</find>
+      <find>Quantity</find>
+      <find>getrow</find>
+      <find>getQuantity</find>
+      <find>getModal</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -143,7 +156,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="728" />
+    <option name="x" value="62" />
     <option name="width" value="652" />
     <option name="height" value="768" />
   </component>
@@ -151,7 +164,32 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="S.A.D.Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="S.A.D.Project" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="S.A.D.Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="S.A.D.Project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="S.A.D.Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="S.A.D.Project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Project" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -205,6 +243,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1320" height="784" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49656752" weight="0.26587301" />
       <window_info id="Structure" order="1" sideWeight="0.5034325" side_tool="true" weight="0.26190478" />
@@ -240,47 +279,70 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Project/Inventory.java" />
-    <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
+    <entry file="jar://$USER_HOME$/Downloads/Compressed/javafx-sdk-12.0.1/lib/javafx.base.jar!/javafx/event/EventHandler.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="339" column="46" lean-forward="true" selection-start-line="339" selection-start-column="46" selection-end-line="339" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#17149#17150#0" expanded="true" />
-            <element signature="e#17194#17195#0" expanded="true" />
-            <element signature="e#23856#23857#0" expanded="true" />
-            <element signature="e#23899#23900#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Project/signupcontroller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1173">
-          <caret line="83" column="38" selection-start-line="83" selection-start-column="38" selection-end-line="83" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Project/AddController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1105">
-          <caret line="85" column="40" selection-start-line="85" selection-start-column="40" selection-end-line="85" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Project/loginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1530">
-          <caret line="117" column="20" selection-start-line="117" selection-start-column="20" selection-end-line="117" selection-end-column="46" />
+        <state relative-caret-position="136">
+          <caret line="11" column="9" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/Dashboard.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://$USER_HOME$/Downloads/Compressed/javafx-sdk-12.0.1/lib/javafx.base.jar!/javafx/util/Callback.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Project/signupcontroller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="83" column="38" selection-start-line="83" selection-start-column="38" selection-end-line="83" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Project/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Project/loginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="117" column="20" selection-start-line="117" selection-start-column="20" selection-end-line="117" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Project/AddController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="74" column="55" selection-start-line="74" selection-start-column="55" selection-end-line="74" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1685#1686#0" expanded="true" />
+            <element signature="e#1721#1722#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="448" column="65" selection-start-line="448" selection-start-column="65" selection-end-line="448" selection-end-column="65" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#25240#25241#0" expanded="true" />
+            <element signature="e#25283#25284#0" expanded="true" />
+            <element signature="e#26838#26839#0" expanded="true" />
+            <element signature="e#26874#26875#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
   <component name="masterDetails">
