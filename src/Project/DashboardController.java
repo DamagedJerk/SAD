@@ -46,6 +46,8 @@ public class DashboardController implements Initializable {
 
     @FXML
     private Label dateTime;
+    @FXML
+    private Label Time;
 
 
     @FXML
@@ -349,7 +351,7 @@ public class DashboardController implements Initializable {
                 tbl_inventory.setShowRoot(false);
             }
 
-
+            InventoryID.setText(setID());
         });
 
 
@@ -462,6 +464,7 @@ public class DashboardController implements Initializable {
                     InventoryPrice.setText(itemprice);
 
                     update_inventory.setDisable(false);
+                    add_inventory.setDisable(true);
 
                 }
 
@@ -489,25 +492,37 @@ public class DashboardController implements Initializable {
                 int supplier = InventorySupp.getSelectionModel().selectedIndexProperty().getValue();
                 int status = 1;
                 String Date =dateTime.getText();
-                String sql ="Insert into tbl_products (prod_name,prod_quantity,prod_price,supplier_id,category_id,prod_status,prod_date) values(?,?,?,?,?,?,?)";
+                String sql ="Insert into tbl_products values(null,?,?,?,?,?,?,?)";
+                //JOptionPane.showMessageDialog(null,sql+"");
                 try{
+
+                    category++;
+                    supplier++;
                     preparedStatement=getConnection().prepareStatement(sql);
                     preparedStatement.setString(1,name);
-                    preparedStatement.setString(2,quan);
-                    preparedStatement.setString(3,itemprice);
-                    preparedStatement.setInt(4,supplier);
-                    preparedStatement.setInt(5,category);
+                    preparedStatement.setInt(2,supplier);
+                    preparedStatement.setString(3,quan);
+                    preparedStatement.setString(4,itemprice);
+                    preparedStatement.setString(5,Date);
                     preparedStatement.setInt(6,status);
-                    preparedStatement.setString(7,Date);
+                    preparedStatement.setInt(7,category);
+                    //JOptionPane.showMessageDialog(null,"");
                     preparedStatement.executeUpdate();
 
+                    //clear fields
+
+                    InventoryID.setText(setID());
                     InventoryName.setText("");
                     InventoryQuantity.setText("");
                     InventoryPrice.setText("");
                     InventoryCateg.setValue("");
                     InventorySupp.setValue("");
+                    //JOptionPane.showMessageDialog(null,tbl_inventory.getCurrentItemsCount()+"");
+                    refreshInventoryTable();
+                    //JOptionPane.showMessageDialog(null,tbl_inventory.getCurrentItemsCount()+"");
+                    //JOptionPane.showMessageDialog(null,"Successfully Added");
 
-                    JOptionPane.showMessageDialog(null,"Successfully Added");
+
 
 
                 }catch (Exception e){
@@ -518,12 +533,36 @@ public class DashboardController implements Initializable {
             }
 
 
+        }private String setID(){
+            int Temp=1;
+
+            for(int i=1;i<=tbl_inventory.getCurrentItemsCount()+1;i++){
+                Temp++;
+                }
+            return ""+Temp;
+
+        }
+        private void refreshInventoryTable(){
+            try {
+                String sql = "select p.prod_id,p.prod_name,p.prod_quantity,p.prod_price,c.cat_description,s.company_name FROM tbl_products p JOIN tbl_supplier s ON p.supplier_id = s.supplier_id JOIN tbl_category c ON p.category_id=c.category_id";
+                preparedStatement = getConnection().prepareStatement(sql);
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    //JOptionPane.showMessageDialog(null,resultSet.getString("prod_name"));
+                    InventoryList.add(new Inventory(resultSet.getString("prod_id"), resultSet.getString("prod_name"), resultSet.getString("prod_quantity"),resultSet.getString("prod_price"), resultSet.getString("cat_description"), resultSet.getString("company_name")));
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         private void initClock() {
 
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd ");
+            DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
             dateTime.setText(LocalDateTime.now().format(formatter));
+            Time.setText(LocalDateTime.now().format(time));
         }), new KeyFrame(Duration.seconds(1)));
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();

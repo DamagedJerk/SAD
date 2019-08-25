@@ -40,7 +40,7 @@
                         <Image url="@../resources/5.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="dateTime" alignment="CENTER_RIGHT" layoutX="976.0" layoutY="68.0" prefHeight="32.0" prefWidth="194.0" text="Time : HH/MM/SS">
+                  <Label fx:id="dateTime" alignment="CENTER_RIGHT" layoutX="976.0" layoutY="68.0" prefHeight="32.0" prefWidth="105.0" text="Time : HH/MM/SS">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -55,6 +55,11 @@
                         <Font name="System Bold" size="22.0" />
                      </font>
                   </JFXButton>
+                  <Label fx:id="Time" alignment="CENTER_RIGHT" layoutX="1103.0" layoutY="68.0" prefHeight="32.0" prefWidth="64.0" text="Time">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
          </children>
