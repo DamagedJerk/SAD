@@ -2,37 +2,33 @@ package Project;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXTreeTableView;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import javax.swing.*;
 
+
 public class AddController {
 
-    private String fxmlURL;
+    //private String fxmlURL;
 
     @FXML
     private Label alertlabel;
 
     @FXML
-    private JFXButton PromptAdd;
+    public JFXButton PromptAdd;
 
     @FXML
-    private JFXButton PromptCancel;
+    public JFXButton PromptCancel;
 
     @FXML
-    private JFXTextField PromptTextQuantity;
+    public JFXTextField PromptTextQuantity;
     @FXML
-    private Label PrompError;
+    public Label PrompError;
+
+    private String Quantity="";
 
     @FXML
     private void close() throws  Exception{
@@ -40,23 +36,23 @@ public class AddController {
         stage.close();
 
     }
+    public void setQuan(String  quantity){
+        this.Quantity=quantity;
+    }
+    public String getQuan(){
+        return this.Quantity;
+    }
     @FXML
-    void AddQuantity(ActionEvent event) throws  Exception  {
+    void AddQuantity() throws  Exception  {
         //JOptionPane.showMessageDialog(null,"addquantity ni agi");
         if(PromptTextQuantity.getText().contentEquals("")){
             PrompError.setVisible(true);
-
             PromptTextQuantity.setText("");
         }else{
-            //FXMLLoader loader=FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
-            /*DashboardController dash =
-            dash.setQuan(PromptTextQuantity.getText());
-            JOptionPane.showMessageDialog(null,""+dash.getQuantity());
-            */
-
+            setQuan(PromptTextQuantity.getText());
             close();
 
-            //DashboardController dash=FXMLLoader.load(PromptAdd.get);
+
         }
 
     }
@@ -64,11 +60,11 @@ public class AddController {
 
     public AddController(){
     }
-    public AddController(String fxmlURL){
-        this.fxmlURL=fxmlURL;
-    }
+    //public AddController(String fxmlURL){
+        //this.fxmlURL=fxmlURL;
+    //}
 
-    public <T> T getModal(JFXTreeTableView view) throws  Exception{
+    /*public <T> T getModal(JFXTreeTableView view) throws  Exception{
         FXMLLoader loader= new FXMLLoader(getClass().getResource(fxmlURL));
         Parent root =loader.load();
         T controller=loader.getController();
@@ -82,6 +78,6 @@ public class AddController {
         stage.showAndWait();
         //Platform .runLater(()->stage.showAndWait());
         return controller;
-    }
+    }*/
 
 }

@@ -99,7 +99,7 @@
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font></JFXTextField>
-                              <JFXButton alignment="CENTER" disable="true" layoutX="924.0" layoutY="21.0" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #16FE95;" text="Cash Out">
+                              <JFXButton fx:id="btnCashOut" alignment="CENTER" disable="true" layoutX="924.0" layoutY="21.0" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #16FE95;" text="Cash Out">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
@@ -118,7 +118,7 @@
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="525.0" layoutY="7.0" prefHeight="26.0" prefWidth="45.0" text="0">
+                              <Label fx:id="ItemCount" layoutX="525.0" layoutY="7.0" prefHeight="26.0" prefWidth="45.0" text="0">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>

@@ -10,6 +10,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
@@ -47,6 +48,8 @@ public class DashboardController implements Initializable {
     @FXML
     private Label dateTime;
     @FXML
+    private Label ItemCount;
+    @FXML
     private Label Time;
 
 
@@ -66,6 +69,8 @@ public class DashboardController implements Initializable {
     private JFXTreeTableView<products> tableCart;
     @FXML
     private JFXButton btnVoid;
+    @FXML
+    private JFXButton btnCashOut;
 
     @FXML
     private Tab tabSales;
@@ -168,26 +173,6 @@ public class DashboardController implements Initializable {
         stage.close();
         System.exit(1);
     }
-
-    @FXML
-    void AddQuantity(ActionEvent event) throws Exception {
-        JOptionPane.showMessageDialog(null, "addquantity ni agi");
-        if (PromptTextQuantity.getText().contentEquals("")) {
-            PrompError.setVisible(true);
-
-            PromptTextQuantity.setText("");
-        } else {
-            /*FXMLLoader loader=FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
-            DashboardController dash = loader.getController();
-            dash.getQuantity(PromptTextQuantity.getText());
-
-             */
-
-            //DashboardController dash=FXMLLoader.load(PromptAdd.get);
-        }
-
-    }
-
 
     @FXML
     void minimize(ActionEvent event) {
@@ -440,18 +425,43 @@ public class DashboardController implements Initializable {
 
                 //TABLE PRODUCT
                 if(e.getSource()==tableProduct){
+                    int Quantity=0;
                     String CartName = tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_name.getValue();
                     String CartQuan = tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_quan.getValue();
                     String CartPrice = tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_price.getValue();
 
-                    AddController addmodal = new AddController("Add.fxml");
-                    addmodal.getModal((JFXTreeTableView) e.getSource());
-                    JOptionPane.showMessageDialog(null,addmodal+"");
+                    //AddController addmodal = new AddController("Add.fxml");
+                    //addmodal.getModal((JFXTreeTableView) e.getSource());
 
-                    SelectToCart(CartName, CartQuan, CartPrice, CartList);
+                    FXMLLoader loader= new FXMLLoader(getClass().getResource("Add.fxml"));
+                    AddController controller=new AddController();
+                    loader.setController(controller);
+                    Parent root =loader.load();
+
+                    Stage stage = new Stage();
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.initOwner(tableProduct.getScene().getWindow());
+                    stage.setScene(new Scene(root));
+                    stage.showAndWait();
+                    stage.setOnShowing(windowEvent -> {
+                            PromptAdd.setOnAction(actionEvent -> {
+                                try{
+                                    controller.AddQuantity();
+                                }catch (Exception ex){
+                                    ex.printStackTrace();
+                                }
+
+                            });
+
+                    });
+                    //Quantity=Integer.parseInt(controller.getQuan());
+                    SelectToCart(CartName, controller.getQuan(), CartPrice, CartList);
                     final TreeItem<products> cart = new RecursiveTreeItem<products>(CartList, RecursiveTreeObject::getChildren);
                     tableCart.setRoot(cart);
                     tableCart.setShowRoot(false);
+                    total_items();
+                    btnCashOut.setDisable(false);
                 }
                 //InventoryTab Table
                 if(e.getSource()==tbl_inventory){
@@ -606,6 +616,9 @@ public class DashboardController implements Initializable {
             return ""+Temp;
 
         }
+        private void total_items(){
+                ItemCount.setText(tableCart.getCurrentItemsCount()+"");
+        }
         private void refreshInventoryTable(){
             try {
                 String status;
@@ -658,9 +671,9 @@ public class DashboardController implements Initializable {
     }
 
         private void SelectToCart(String name, String Quan, String Price, ObservableList list) {
-            double temp = Double.parseDouble(Price);
-
-            totalprice += temp;
+            double price= Double.parseDouble(Price);
+            double quantity=Double.parseDouble(Quan);
+            totalprice += price*quantity;
 
             SalesPrice.setText(totalprice.toString());
             list.add(new products(name, Quan, Price));
