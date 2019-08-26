@@ -96,6 +96,10 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXTextField SalesPrice;
     @FXML
+    private JFXTextField SalesPayment;
+    @FXML
+    private JFXTextField SalesChange;
+    @FXML
     private Label alertlabel;
 
     @FXML
@@ -349,7 +353,33 @@ public class DashboardController implements Initializable {
         CurrentID=Integer.parseInt(setID());
         InventoryID.setText(CurrentID+"");
 
+        SalesPayment.setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+
+                if(keyEvent.getCharacter().contains("") && SalesPayment.getLength()>1) {
+                    //JOptionPane.showMessageDialog(null, "KeyTyped 1");
+                    SalesChange.setText("");
+                    if(keyEvent.getCharacter().contains("1") || keyEvent.getCharacter().contains("2") || keyEvent.getCharacter().contains("3") || keyEvent.getCharacter().contains("4") || keyEvent.getCharacter().contains("5") || keyEvent.getCharacter().contains("6") || keyEvent.getCharacter().contains("7") || keyEvent.getCharacter().contains("8") || keyEvent.getCharacter().contains("9") || keyEvent.getCharacter().contains("0")){
+                        //JOptionPane.showMessageDialog(null, "KeyTyped 2");
+                        Double Sales=Double.parseDouble(SalesPrice.getText());
+                        Double payment=Double.parseDouble(SalesPayment.getText());
+                        if(payment>=Sales){
+                            Double Change=payment-Sales;
+                            SalesChange.setText(""+Change);
+                        }else{
+                            SalesChange.setText("");
+                        }
+                    }
+                }else{
+                    //JOptionPane.showMessageDialog(null, "KeyTyped 3");
+                    keyEvent.consume();
+                    //Wa pa sya pa nahuman . . . . Error Trapping in case Backspace or space ang ipindut dapat ma consume;
+                }
+            }
+        });
     }
+
     private void setComboBOx(JFXComboBox comboBOx,String query,String columnname){
         try {
 
@@ -427,7 +457,7 @@ public class DashboardController implements Initializable {
                 if(e.getSource()==tableProduct){
                     int Quantity=0;
                     String CartName = tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_name.getValue();
-                    String CartQuan = tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_quan.getValue();
+                    //String CartQuan = tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_quan.getValue();
                     String CartPrice = tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_price.getValue();
 
                     //AddController addmodal = new AddController("Add.fxml");
@@ -456,12 +486,15 @@ public class DashboardController implements Initializable {
 
                     });
                     //Quantity=Integer.parseInt(controller.getQuan());
-                    SelectToCart(CartName, controller.getQuan(), CartPrice, CartList);
-                    final TreeItem<products> cart = new RecursiveTreeItem<products>(CartList, RecursiveTreeObject::getChildren);
-                    tableCart.setRoot(cart);
-                    tableCart.setShowRoot(false);
-                    total_items();
-                    btnCashOut.setDisable(false);
+                    if(!controller.getQuan().contentEquals("")){
+
+                        SelectToCart(CartName, controller.getQuan(), CartPrice, CartList);
+                        final TreeItem<products> cart = new RecursiveTreeItem<products>(CartList, RecursiveTreeObject::getChildren);
+                        tableCart.setRoot(cart);
+                        tableCart.setShowRoot(false);
+                        total_items();
+                        btnCashOut.setDisable(false);
+                    }
                 }
                 //InventoryTab Table
                 if(e.getSource()==tbl_inventory){
@@ -496,8 +529,20 @@ public class DashboardController implements Initializable {
                 btnVoid.setDisable(false);
 
             }
-
-
+        }
+        @FXML
+        private void CashOut(){
+            if(SalesPrice.getText().contentEquals("") || SalesPrice.getText().contentEquals("") || SalesChange.getText().contentEquals("")){
+                JOptionPane.showMessageDialog(null,"Please input all fields","Warning",JOptionPane.WARNING_MESSAGE);
+            }else{
+                int total;  //kailangan mag butang ug ID sa tableProducts para ma track sya diri . . matug usa ko . .
+                int i=0;
+                //JOptionPane.showMessageDialog(null,tableCart.getCurrentItemsCount());
+                while(i<tableCart.getCurrentItemsCount()){
+                    tableCart.getSelectionModel().getModelItem(i).getValue().product_quan.getValue();
+                    i++;
+                }
+            }
         }
 
         @FXML

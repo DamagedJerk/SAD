@@ -91,15 +91,15 @@
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font></JFXTextField>
-                              <JFXTextField layoutX="368.0" layoutY="46.0" prefHeight="25.0" prefWidth="245.0" promptText=" Cash Payment">
+                              <JFXTextField fx:id="SalesPayment" layoutX="368.0" layoutY="46.0" prefHeight="25.0" prefWidth="245.0" promptText=" Cash Payment">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font></JFXTextField>
-                              <JFXTextField editable="false" layoutX="631.0" layoutY="46.0" prefHeight="25.0" prefWidth="245.0" promptText="Change">
+                              <JFXTextField fx:id="SalesChange" editable="false" layoutX="631.0" layoutY="46.0" prefHeight="25.0" prefWidth="245.0" promptText="Change">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font></JFXTextField>
-                              <JFXButton fx:id="btnCashOut" alignment="CENTER" disable="true" layoutX="924.0" layoutY="21.0" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #16FE95;" text="Cash Out">
+                              <JFXButton fx:id="btnCashOut" alignment="CENTER" disable="true" layoutX="924.0" layoutY="21.0" onAction="#CashOut" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #16FE95;" text="Cash Out">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
