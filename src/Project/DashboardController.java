@@ -206,6 +206,15 @@ public class DashboardController implements Initializable {
 
         //tbl_product
         int width = 140;
+        JFXTreeTableColumn<products, String> ProductId = new JFXTreeTableColumn<>("Id");
+        ProductId.setPrefWidth(width);
+        ProductId.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<products, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<products, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().product_id;
+            }
+        });
+
         JFXTreeTableColumn<products, String> ProductName = new JFXTreeTableColumn<>("Name");
         ProductName.setPrefWidth(width);
 
@@ -234,12 +243,19 @@ public class DashboardController implements Initializable {
 
         refreshProductMenu();
         final TreeItem<products> root = new RecursiveTreeItem<products>(productList, RecursiveTreeObject::getChildren);
-        tableProduct.getColumns().setAll(ProductName, ProductQuantity, ProductPrice);
+        tableProduct.getColumns().setAll(ProductId,ProductName, ProductQuantity, ProductPrice);
         tableProduct.setRoot(root);
         tableProduct.setShowRoot(false);
 
         //tblCart
-
+        JFXTreeTableColumn<products, String> CartItemId = new JFXTreeTableColumn<>("Id");
+        CartItemId.setPrefWidth(width);
+        CartItemId.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<products, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<products, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().product_id;
+            }
+        });
         JFXTreeTableColumn<products, String> CartName = new JFXTreeTableColumn<>("Name");
         CartName.setPrefWidth(width);
         CartName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<products, String>, ObservableValue<String>>() {
@@ -267,7 +283,7 @@ public class DashboardController implements Initializable {
 
 
         //final TreeItem<products> cart = new RecursiveTreeItem<products>(CartList,RecursiveTreeObject::getChildren);
-        tableCart.getColumns().setAll(CartName, CartQuantity, CartPrice);
+        tableCart.getColumns().setAll(CartItemId,CartName, CartQuantity, CartPrice);
         // tableCart.setRoot(cart);
         //tableCart.setShowRoot(false);
 
@@ -398,11 +414,13 @@ public class DashboardController implements Initializable {
 
 
     class products extends RecursiveTreeObject<products> {
+        StringProperty product_id;
         StringProperty product_name;
         StringProperty product_quan;
         StringProperty product_price;
 
-        public products(String prodname, String quan, String price) {
+        public products(String id ,String prodname, String quan, String price) {
+            this.product_id=new SimpleStringProperty(id);
             this.product_name = new SimpleStringProperty(prodname);
             this.product_quan = new SimpleStringProperty(quan);
             this.product_price = new SimpleStringProperty(price);
@@ -456,6 +474,7 @@ public class DashboardController implements Initializable {
                 //TABLE PRODUCT
                 if(e.getSource()==tableProduct){
                     int Quantity=0;
+                    String CartItemId=tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_id.getValue();
                     String CartName = tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_name.getValue();
                     //String CartQuan = tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_quan.getValue();
                     String CartPrice = tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_price.getValue();
@@ -488,7 +507,7 @@ public class DashboardController implements Initializable {
                     //Quantity=Integer.parseInt(controller.getQuan());
                     if(!controller.getQuan().contentEquals("")){
 
-                        SelectToCart(CartName, controller.getQuan(), CartPrice, CartList);
+                        SelectToCart(CartItemId,CartName, controller.getQuan(), CartPrice, CartList);
                         final TreeItem<products> cart = new RecursiveTreeItem<products>(CartList, RecursiveTreeObject::getChildren);
                         tableCart.setRoot(cart);
                         tableCart.setShowRoot(false);
@@ -532,18 +551,101 @@ public class DashboardController implements Initializable {
         }
         @FXML
         private void CashOut(){
+            System.out.print("here");
             if(SalesPrice.getText().contentEquals("") || SalesPrice.getText().contentEquals("") || SalesChange.getText().contentEquals("")){
                 JOptionPane.showMessageDialog(null,"Please input all fields","Warning",JOptionPane.WARNING_MESSAGE);
             }else{
-                int total;  //kailangan mag butang ug ID sa tableProducts para ma track sya diri . . matug usa ko . .
-                int i=0;
-                //JOptionPane.showMessageDialog(null,tableCart.getCurrentItemsCount());
-                while(i<tableCart.getCurrentItemsCount()){
-                    tableCart.getSelectionModel().getModelItem(i).getValue().product_quan.getValue();
-                    i++;
+                //JOptionPane.showMessageDialog(null,"hello");
+                //Cashing Out . . .. . Partial dapat pani
+                String totalPrice=SalesPrice.getText();
+                String totalPayment=SalesPayment.getText();
+                String totalChange=SalesChange.getText();
+                int totalitem=Integer.parseInt(ItemCount.getText());
+                //int id=Integer.parseInt(tableCart.getSelectionModel().getModelItem(0).getValue().product_id.getValue());
+                try{
+                    //
+
+                    String sql="Insert into tbl_Cart (Cart_id) values(null)";
+                    preparedStatement=getConnection().prepareStatement(sql);
+                    preparedStatement.executeUpdate();
+                    preparedStatement.close();
+                    resultSet.close();
+
+
+                    preparedStatement=getConnection().prepareStatement("Select max(Cart_id) from tbl_cart");
+                    resultSet=preparedStatement.executeQuery();
+                    String cartid="";
+                    if(resultSet.next()){
+                            cartid=resultSet.getString("max(Cart_id)");
+                            //JOptionPane.showMessageDialog(null,cartid+" CARTID");
+                        }
+
+                    //inserting to tbl_order or order line
+                    sql="Insert into tbl_order values(null,?,?,?,?)";
+                    for(int i=0;i<tableCart.getCurrentItemsCount();i++){
+                        int id=Integer.parseInt(tableCart.getSelectionModel().getModelItem(i).getValue().product_id.getValue());
+                        int quan=Integer.parseInt(tableCart.getSelectionModel().getModelItem(i).getValue().product_quan.getValue());
+
+                        preparedStatement=getConnection().prepareStatement(sql);
+                        preparedStatement.setInt(1,id);
+                        preparedStatement.setInt(2,quan);
+                        preparedStatement.setString(3,tableCart.getSelectionModel().getModelItem(i).getValue().product_price.getValue());
+                        preparedStatement.setString(4,cartid);
+                        preparedStatement.executeUpdate();
+
+
+                    }
+                    preparedStatement.close();
+                    resultSet.close();
+                    JOptionPane.showMessageDialog(null,"Succeess");
+                    // to report things
+
+                    sql="Update tbl_cart SET total_payment=?,total_price=?,total_change=?,total_item=? where Cart_id=?";
+                    preparedStatement=getConnection().prepareStatement(sql);
+                    preparedStatement.setString(1,totalPayment);
+                    preparedStatement.setString(2,totalPrice);
+                    preparedStatement.setString(3,totalChange);
+                    preparedStatement.setInt(4,totalitem);
+                    preparedStatement.setString(5,cartid);
+                    preparedStatement.executeUpdate();
+                    preparedStatement.close();
+
+                    //get employee_id
+                    String emp_id="";
+                    preparedStatement=getConnection().prepareStatement("Select user_id from tbl_employee");
+                    resultSet=preparedStatement.executeQuery();
+                    if(resultSet.next()){
+                        emp_id=resultSet.getString("user_id");
+
+                    }
+
+                    //insert int tbl_report
+                    sql="Insert into tbl_report values(null,?,NULL,?,?)";//balik diri
+                    preparedStatement=getConnection().prepareStatement(sql);
+                    preparedStatement.setString(1,cartid);
+                    preparedStatement.setString(2,emp_id);//employeeid
+                    preparedStatement.setString(3,dateTime.getText());//date
+                    preparedStatement.executeUpdate();
+
+                    SalesPrice.setText("");
+                    SalesChange.setText("");
+                    SalesPayment.setText("");
+                    btnCashOut.setDisable(true);
+                    CartList.clear();
+                    ItemCount.setText("0");
+                    refreshInventoryTable();
+                    refreshProductMenu();
+
+
+
+                }catch(Exception ex){
+                    ex.printStackTrace();
+                }
+
+
                 }
             }
-        }
+
 
         @FXML
         private void UpdateInventory(){
@@ -695,7 +797,7 @@ public class DashboardController implements Initializable {
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     //JOptionPane.showMessageDialog(null,resultSet.getString("prod_name"));
-                    productList.add(new products(resultSet.getString("prod_name"), resultSet.getString("prod_quantity"), resultSet.getString("prod_price")));
+                    productList.add(new products(resultSet.getString("prod_id"),resultSet.getString("prod_name"), resultSet.getString("prod_quantity"), resultSet.getString("prod_price")));
                 }
 
             } catch (Exception e) {
@@ -715,13 +817,13 @@ public class DashboardController implements Initializable {
         clock.play();
     }
 
-        private void SelectToCart(String name, String Quan, String Price, ObservableList list) {
+        private void SelectToCart(String id,String name, String Quan, String Price, ObservableList list) {
             double price= Double.parseDouble(Price);
             double quantity=Double.parseDouble(Quan);
             totalprice += price*quantity;
 
             SalesPrice.setText(totalprice.toString());
-            list.add(new products(name, Quan, Price));
+            list.add(new products(id,name, Quan, Price));
         }
 
 
