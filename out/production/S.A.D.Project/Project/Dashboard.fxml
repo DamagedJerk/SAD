@@ -254,8 +254,8 @@
                      <children>
                         <AnchorPane layoutX="3.0" layoutY="12.0" prefHeight="314.0" prefWidth="584.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
                            <children>
-                              <JFXTreeTableView blendMode="DARKEN" layoutX="16.0" layoutY="66.0" prefHeight="237.0" prefWidth="552.0" />
-                              <Label layoutX="461.0" layoutY="21.0" prefHeight="32.0" prefWidth="106.0" text="Supplier List">
+                              <JFXTreeTableView fx:id="StockInventoryTable" blendMode="DARKEN" layoutX="16.0" layoutY="66.0" prefHeight="237.0" prefWidth="552.0" />
+                              <Label layoutX="439.0" layoutY="21.0" prefHeight="32.0" prefWidth="128.0" text="Inventory List">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
@@ -264,7 +264,7 @@
                         </AnchorPane>
                         <AnchorPane layoutX="594.0" layoutY="12.0" prefHeight="568.0" prefWidth="572.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
                            <children>
-                              <JFXTreeTableView blendMode="DARKEN" layoutX="13.0" layoutY="64.0" prefHeight="491.0" prefWidth="545.0" />
+                              <JFXTreeTableView fx:id="StockInTable" blendMode="DARKEN" layoutX="13.0" layoutY="64.0" prefHeight="491.0" prefWidth="545.0" />
                               <Label layoutX="233.0" layoutY="14.0" prefHeight="32.0" prefWidth="106.0" text="Stocks List">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
@@ -293,7 +293,7 @@
                                        <children>
                                           <AnchorPane prefHeight="33.0" prefWidth="553.0">
                                              <children>
-                                                <Label layoutX="220.0" layoutY="1.0" prefHeight="32.0" prefWidth="106.0" text="Supplier List">
+                                                <Label layoutX="220.0" layoutY="1.0" prefHeight="32.0" prefWidth="106.0" text="Menu">
                                                    <font>
                                                       <Font name="System Bold" size="17.0" />
                                                    </font>
@@ -305,18 +305,18 @@
                                     <JFXTextField prefHeight="38.0" prefWidth="205.0" promptText="Item Price:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <JFXTextField prefHeight="36.0" prefWidth="275.0" promptText="Current Stock:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <JFXTextField prefHeight="38.0" prefWidth="205.0" promptText="Amount:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <JFXTextField prefHeight="37.0" prefWidth="210.0" promptText="Item id:" GridPane.rowIndex="3">
+                                    <JFXTextField fx:id="StockInITEMID" prefHeight="37.0" prefWidth="210.0" promptText="Item id:" GridPane.rowIndex="3">
                                        <padding>
                                           <Insets left="15.0" right="53.0" />
                                        </padding>
                                     </JFXTextField>
                                     <JFXTextField prefHeight="44.0" prefWidth="275.0" promptText="Total Price:" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <JFXComboBox prefHeight="52.0" prefWidth="200.0" promptText="Category:" GridPane.rowIndex="2">
+                                    <JFXComboBox fx:id="StockinCat" prefHeight="52.0" prefWidth="200.0" promptText="Category:" GridPane.rowIndex="2">
                                        <GridPane.margin>
                                           <Insets left="15.0" />
                                        </GridPane.margin>
                                     </JFXComboBox>
-                                    <JFXTextField prefHeight="38.0" prefWidth="205.0" promptText="Stock-in Id" GridPane.rowIndex="4">
+                                    <JFXTextField fx:id="StockInName" prefHeight="38.0" prefWidth="205.0" promptText="Item Name:" GridPane.rowIndex="4">
                                        <padding>
                                           <Insets left="15.0" right="53.0" />
                                        </padding>
@@ -339,9 +339,9 @@
                                     </JFXButton>
                                  </children>
                               </GridPane>
-                              <JFXTextField layoutX="30.0" layoutY="34.0" prefHeight="38.0" prefWidth="205.0" promptText="Stock-in Id" />
+                              <JFXTextField fx:id="StockinID" layoutX="30.0" layoutY="34.0" prefHeight="38.0" prefWidth="205.0" promptText="Stock-in Id" />
                            </children></AnchorPane>
-                        <JFXTextField layoutX="20.0" layoutY="24.0" prefHeight="38.0" prefWidth="205.0" promptText="Search">
+                        <JFXTextField fx:id="StockInSearch" layoutX="20.0" layoutY="24.0" prefHeight="38.0" prefWidth="205.0" promptText="Search">
                            <font>
                               <Font name="System Bold" size="17.0" />
                            </font>

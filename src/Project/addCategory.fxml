@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="331.0" prefWidth="494.0" styleClass="fx-backback" stylesheets="@../css/style.css" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="197.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="366.0" minWidth="10.0" prefWidth="206.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="102.0" minHeight="0.0" prefHeight="68.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="258.0" minHeight="10.0" prefHeight="258.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="37.0" minHeight="4.0" prefHeight="4.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <HBox prefHeight="60.0" prefWidth="380.0" GridPane.columnSpan="2">
+         <children>
+            <AnchorPane prefHeight="81.0" prefWidth="494.0">
+               <children>
+                  <ImageView fitHeight="60.0" fitWidth="82.0" layoutX="19.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/pip_resources_key_documents.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="alertlabel" contentDisplay="RIGHT" layoutX="98.0" layoutY="15.0" prefHeight="57.0" prefWidth="266.0" text="Category Information" textFill="#363434">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="btnClose" layoutX="423.0" layoutY="14.0" onAction="#close" prefHeight="48.0" prefWidth="45.0" style="-fx-background-color: #FF2900;" text="X" textFill="#f2ecec" viewOrder="5.0">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <JFXListView blendMode="BLUE" prefHeight="225.0" prefWidth="388.0" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+         <GridPane.margin>
+            <Insets left="15.0" right="15.0" />
+         </GridPane.margin>
+      </JFXListView>
+      <AnchorPane prefHeight="233.0" prefWidth="200.0" GridPane.rowIndex="1">
+         <children>
+            <Label layoutX="26.0" layoutY="14.0" prefHeight="32.0" prefWidth="171.0" text="     Category Name">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="PromptTextQuantity" layoutX="26.0" layoutY="51.0" onAction="#AddQuantity" prefHeight="38.0" prefWidth="158.0">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </JFXTextField>
+            <JFXButton fx:id="PromptCancel" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="36.0" layoutY="167.0" onAction="#close" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #FFA800;" text="Cancel" textAlignment="CENTER" textFill="#282626">
+               <contextMenu>
+                  <ContextMenu>
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                     </items>
+                  </ContextMenu>
+               </contextMenu>
+            </JFXButton>
+            <JFXButton fx:id="CategoryAdd" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="36.0" layoutY="113.0" onAction="#AddQuantity" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #16FE95;" text="Add" textAlignment="CENTER" textFill="#282626">
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <Label fx:id="PrompError" layoutX="14.0" layoutY="70.0" prefHeight="32.0" prefWidth="171.0" text="Please fill fields" textFill="#dd1e1e" visible="false" />
+            <JFXTreeTableView fx:id="CategoryTable" blendMode="DARKEN" layoutX="10.0" layoutY="20.0" prefHeight="185.0" prefWidth="252.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</GridPane>

@@ -68,6 +68,12 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXTreeTableView<products> tableCart;
     @FXML
+    private JFXTreeTableView<Inventory> StockInventoryTable;
+
+    @FXML
+    private JFXTreeTableView<Stocks> StockInTable;
+
+    @FXML
     private JFXButton btnVoid;
     @FXML
     private JFXButton btnCashOut;
@@ -153,13 +159,15 @@ public class DashboardController implements Initializable {
     //lists
     ObservableList<Inventory> InventoryList = FXCollections.observableArrayList();
     ObservableList<products> productList = FXCollections.observableArrayList();
-
+    private ObservableList<products> CartList = FXCollections.observableArrayList();
+    ObservableList<Inventory> StockinList = FXCollections.observableArrayList();
+    ObservableList<Stocks> StocksTableList = FXCollections.observableArrayList();
 
 
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     private Image userpic = new Image("/resources/user.png");
-    private ObservableList<products> CartList = FXCollections.observableArrayList();
+
     public Double totalprice = 0.0;
 
 
@@ -293,7 +301,7 @@ public class DashboardController implements Initializable {
             if(tabSales.isSelected()){
                 refreshProductMenu();
             }
-        });
+        });//
 
         //InventoryTable
         JFXTreeTableColumn<Inventory, String> InventoryId = new JFXTreeTableColumn<>("ID");
@@ -354,7 +362,7 @@ public class DashboardController implements Initializable {
             }
         });
 
-        refreshInventoryTable();
+        refreshInventoryTable(InventoryList);
         final TreeItem<Inventory> inventoryList = new RecursiveTreeItem<Inventory>(InventoryList, RecursiveTreeObject::getChildren);
 
         tbl_inventory.getColumns().setAll(InventoryId, InventoryName, InventoryQuantity, InventoryPrice, InventoryCategory, InventoryStatus,InventorySupplier);
@@ -394,6 +402,139 @@ public class DashboardController implements Initializable {
                 }
             }
         });
+        //TabStockIn
+        int stockincolumnwidth=80;
+        JFXTreeTableColumn<Inventory, String> StockinId = new JFXTreeTableColumn<>("ID");
+        StockinId.setPrefWidth(stockincolumnwidth);
+
+        StockinId.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Inventory, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Inventory, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().product_id;
+            }
+        });
+        JFXTreeTableColumn<Inventory, String> StockInName = new JFXTreeTableColumn<>("Name");
+        StockInName .setPrefWidth(stockincolumnwidth);
+        StockInName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Inventory, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Inventory, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().product_name;
+            }
+        });
+        JFXTreeTableColumn<Inventory, String> StockInQuantity= new JFXTreeTableColumn<>("Quantity");
+        StockInQuantity.setPrefWidth(stockincolumnwidth);
+        StockInQuantity.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Inventory, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Inventory, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().product_quan;
+            }
+        });
+        JFXTreeTableColumn<Inventory, String> StockInPrice= new JFXTreeTableColumn<>("Price");
+        StockInPrice.setPrefWidth(stockincolumnwidth);
+        StockInPrice.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Inventory, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Inventory, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().product_price;
+            }
+        });
+        JFXTreeTableColumn<Inventory, String> StockInCat= new JFXTreeTableColumn<>("Category");
+        StockInCat.setPrefWidth(stockincolumnwidth);
+        StockInCat.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Inventory, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Inventory, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().product_category;
+            }
+        });
+        JFXTreeTableColumn<Inventory, String> StockInSupp= new JFXTreeTableColumn<>("Supplier");
+        StockInSupp.setPrefWidth(stockincolumnwidth);
+        StockInSupp.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Inventory, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Inventory, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().product_supplier;
+            }
+        });
+        JFXTreeTableColumn<Inventory, String> StockInStatus= new JFXTreeTableColumn<>("Status");
+        StockInStatus.setPrefWidth(stockincolumnwidth);
+        StockInStatus.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Inventory, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Inventory, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().status;
+            }
+        });
+        refreshInventoryTable(StockinList);
+        final TreeItem<Inventory> stockinList = new RecursiveTreeItem<Inventory>(StockinList, RecursiveTreeObject::getChildren);
+
+        StockInventoryTable.getColumns().setAll(StockinId, StockInName, StockInQuantity, StockInPrice, StockInCat, StockInStatus,StockInSupp);
+        StockInventoryTable.setRoot(stockinList);
+        StockInventoryTable.setShowRoot(false);
+
+        //StockInTable
+
+        int stocktablewidth=80;
+        JFXTreeTableColumn<Stocks, String> StockId = new JFXTreeTableColumn<>("ID");
+        StockId.setPrefWidth(stocktablewidth);
+
+        StockId.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Stocks, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Stocks, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().product_id;
+            }
+        });
+        JFXTreeTableColumn<Stocks, String> StockName = new JFXTreeTableColumn<>("Name");
+        StockName .setPrefWidth(stocktablewidth);
+        StockName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Stocks, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Stocks, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().product_name;
+            }
+        });
+        JFXTreeTableColumn<Stocks, String> Stocks= new JFXTreeTableColumn<>("Current Stocks");
+        Stocks.setPrefWidth(stocktablewidth);
+        Stocks.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Stocks, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Stocks, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().current_stocks;
+            }
+        });
+        JFXTreeTableColumn<Stocks, String> Entry_type= new JFXTreeTableColumn<>("Entry Type");
+        Entry_type.setPrefWidth(stocktablewidth);
+        Entry_type.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Stocks, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Stocks, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().Entry_type;
+            }
+        });
+        JFXTreeTableColumn<Stocks, String> Last_entry= new JFXTreeTableColumn<>("Last Entry");
+        Last_entry.setPrefWidth(stocktablewidth);
+        Last_entry.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Stocks, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Stocks, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().Last_Entry;
+            }
+        });
+        JFXTreeTableColumn<Stocks, String> StockInDate= new JFXTreeTableColumn<>("Date of Entry");
+        StockInDate.setPrefWidth(stocktablewidth);
+        StockInDate.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Stocks, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Stocks, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().Date;
+            }
+        });
+        JFXTreeTableColumn<Stocks, String> StockInTime= new JFXTreeTableColumn<>("Time of Entry");
+        StockInTime.setPrefWidth(stocktablewidth);
+        StockInTime.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Stocks, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Stocks, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().Time;
+            }
+        });
+
+        final TreeItem<Stocks> StocksTablesList = new RecursiveTreeItem<Stocks>(StocksTableList, RecursiveTreeObject::getChildren);
+
+        StockInTable.getColumns().setAll(StockId, StockName,Stocks, Entry_type, Last_entry, StockInDate,StockInTime);//balik diri
+        StockInTable.setRoot(StocksTablesList );
+        StockInTable.setShowRoot(false);
+
     }
 
     private void setComboBOx(JFXComboBox comboBOx,String query,String columnname){
@@ -620,7 +761,7 @@ public class DashboardController implements Initializable {
                     }
 
                     //insert int tbl_report
-                    sql="Insert into tbl_report values(null,?,NULL,?,?)";//balik diri
+                    sql="Insert into tbl_report values(null,?,NULL,?,?)";
                     preparedStatement=getConnection().prepareStatement(sql);
                     preparedStatement.setString(1,cartid);
                     preparedStatement.setString(2,emp_id);//employeeid
@@ -633,10 +774,9 @@ public class DashboardController implements Initializable {
                     btnCashOut.setDisable(true);
                     CartList.clear();
                     ItemCount.setText("0");
-                    refreshInventoryTable();
                     refreshProductMenu();
 
-
+                    //kulang nalang mag print ug resibo
 
                 }catch(Exception ex){
                     ex.printStackTrace();
@@ -677,7 +817,7 @@ public class DashboardController implements Initializable {
 
 
                     preparedStatement.executeUpdate();
-                    refreshInventoryTable();
+                    refreshInventoryTable(InventoryList);
                     NewField();
                 }catch (Exception e){
                     e.printStackTrace();
@@ -719,7 +859,7 @@ public class DashboardController implements Initializable {
                     preparedStatement.setInt(8,category);
 
                     preparedStatement.executeUpdate();
-                    refreshInventoryTable();
+                    refreshInventoryTable(InventoryList);
                     CurrentID++;
                     NewField();
                 }catch (Exception e){
@@ -754,6 +894,7 @@ public class DashboardController implements Initializable {
 
 
         private String setID(){
+
             int Temp=1;
 
             for(int i=1;i<tbl_inventory.getCurrentItemsCount()+1;i++){
@@ -766,11 +907,12 @@ public class DashboardController implements Initializable {
         private void total_items(){
                 ItemCount.setText(tableCart.getCurrentItemsCount()+"");
         }
-        private void refreshInventoryTable(){
+
+        private void refreshInventoryTable(ObservableList list){
             try {
                 String status;
-                InventoryList.clear();
-                String sql = "select p.prod_id,p.prod_name,p.prod_quantity,p.prod_price,c.cat_description,s.company_name,p.prod_status FROM tbl_products p JOIN tbl_supplier s ON p.supplier_id = s.supplier_id JOIN tbl_category c ON p.category_id=c.category_id";
+                list.clear();
+                String sql = "select p.prod_id,p.prod_name,p.prod_quantity,p.prod_price,c.cat_description,s.company_name,p.prod_status FROM tbl_products p JOIN tbl_supplier s ON p.supplier_id = s.supplier_id JOIN tbl_category c ON p.category_id=c.category_id Group by p.prod_id";
                 preparedStatement = getConnection().prepareStatement(sql);
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
@@ -780,7 +922,7 @@ public class DashboardController implements Initializable {
                     }else{
                         status="ACTIVE";
                     }
-                    InventoryList.add(new Inventory(resultSet.getString("prod_id"), resultSet.getString("prod_name"), resultSet.getString("prod_quantity"),resultSet.getString("prod_price"), resultSet.getString("cat_description"), resultSet.getString("company_name"),status));
+                    list.add(new Inventory(resultSet.getString("prod_id"), resultSet.getString("prod_name"), resultSet.getString("prod_quantity"),resultSet.getString("prod_price"), resultSet.getString("cat_description"), resultSet.getString("company_name"),status));
                 }
 
             } catch (Exception e) {
