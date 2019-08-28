@@ -177,7 +177,7 @@
                                                 <Insets left="15.0" />
                                              </padding>
                                           </JFXComboBox>
-                                          <JFXButton prefHeight="42.0" prefWidth="40.0" text="+">
+                                          <JFXButton fx:id="btn_supplier" onAction="#addSupplier" prefHeight="42.0" prefWidth="40.0" text="+">
                                              <font>
                                                 <Font name="System Bold" size="22.0" />
                                              </font>
@@ -191,7 +191,7 @@
                                                 <Insets left="15.0" />
                                              </padding>
                                           </JFXComboBox>
-                                          <JFXButton prefHeight="43.0" prefWidth="39.0" text="+">
+                                          <JFXButton fx:id="btn_addcategory" prefHeight="43.0" prefWidth="39.0" text="+">
                                              <font>
                                                 <Font name="System Bold" size="22.0" />
                                              </font>

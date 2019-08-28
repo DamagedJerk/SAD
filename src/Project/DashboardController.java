@@ -51,8 +51,10 @@ public class DashboardController implements Initializable {
     private Label ItemCount;
     @FXML
     private Label Time;
-
-
+    @FXML
+    private JFXButton btn_supplier;
+    @FXML
+    private JFXButton btn_addcategory;
     @FXML
     private Label lblName;
 
@@ -691,6 +693,24 @@ public class DashboardController implements Initializable {
             }
         }
         @FXML
+        private void addcategory(){
+
+        }
+        @FXML
+        private void addSupplier() throws  Exception{
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("addSupplier.fxml"));
+            suppliercontroller controller=new suppliercontroller();
+            loader.setController(controller);
+            Parent root =loader.load();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.initOwner(btn_supplier.getScene().getWindow());
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        }
+        @FXML
         private void CashOut(){
             System.out.print("here");
             if(SalesPrice.getText().contentEquals("") || SalesPrice.getText().contentEquals("") || SalesChange.getText().contentEquals("")){
@@ -930,6 +950,16 @@ public class DashboardController implements Initializable {
             }
 
 
+        }
+        private void refreshStockList(){
+
+            try{
+                StocksTableList.clear();//balik diri
+                String sql="";
+
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         }
         private void refreshProductMenu(){
             try {
