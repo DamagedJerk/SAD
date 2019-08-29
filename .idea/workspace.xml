@@ -2,25 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbddea0c-4283-4362-bc6d-1b06ad665c0e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Project/Category.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Project/CategoryPanelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Stocks.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Stocks.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/addCategory.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/addCategory.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/addSupplier.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/addSupplier.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/suppliercontroller$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/suppliercontroller$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/suppliercontroller$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/suppliercontroller$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/suppliercontroller$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/suppliercontroller$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/suppliercontroller$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/suppliercontroller$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/suppliercontroller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/suppliercontroller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project/Stocks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Stocks.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project/addCategory.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/addCategory.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project/addSupplier.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/addSupplier.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project/suppliercontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/suppliercontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/CategoryPanelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/CategoryPanelController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -49,8 +31,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Project/CategoryPanelController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="163" column="37" lean-forward="true" selection-start-line="163" selection-start-column="37" selection-end-line="163" selection-end-column="37" />
+            <state relative-caret-position="202">
+              <caret line="172" column="83" selection-start-line="172" selection-start-column="83" selection-end-line="172" selection-end-column="83" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2336#2346#0" expanded="true" />
@@ -465,8 +447,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/CategoryPanelController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="163" column="37" lean-forward="true" selection-start-line="163" selection-start-column="37" selection-end-line="163" selection-end-column="37" />
+        <state relative-caret-position="202">
+          <caret line="172" column="83" selection-start-line="172" selection-start-column="83" selection-end-line="172" selection-end-column="83" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2336#2346#0" expanded="true" />

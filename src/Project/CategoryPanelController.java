@@ -43,6 +43,7 @@ public class CategoryPanelController implements Initializable {
     private JFXButton btnClose;
 
     ObservableList<Category> categories= FXCollections.observableArrayList();
+    String SelectedIndex="";
     private static Connection getConnection() throws SQLException {
         Connection conn;
         dbconn.getInstance();
@@ -107,13 +108,14 @@ public class CategoryPanelController implements Initializable {
     void GetRow(MouseEvent e){
         if (e.getClickCount() == 2 && !e.isConsumed()) {
             e.consume();
-
+            SelectedIndex=CategoryTable.getSelectionModel().getSelectedItems().get(0).getValue().category_id.getValue();
             String descriptionValue=CategoryTable.getSelectionModel().getSelectedItems().get(0).getValue().category_description.getValue();
 
             txtCategory.setText(descriptionValue);
             CategoryEdit.setDisable(false);
 
             CategoryNew.setVisible(true);
+            CategoryNew.setDisable(false);
             CategoryAdd.setVisible(false);
             CategoryAdd.setDisable(true);
 
@@ -168,10 +170,11 @@ public class CategoryPanelController implements Initializable {
 
     private void Edit(String Desc){
         try{
-            String sql="Update tbl_category SET cat_description=? WHERE cat_description=?";
+
+            String sql="Update tbl_category SET cat_description=? WHERE category_id=?";
             preparedStatement=getConnection().prepareStatement(sql);
             preparedStatement.setString(1,Desc);
-            preparedStatement.setString(2,Desc);
+            preparedStatement.setString(2,SelectedIndex);
             preparedStatement.executeUpdate();
             txtCategory.setText("");
         }catch(Exception ex){

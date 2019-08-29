@@ -704,6 +704,9 @@ public class DashboardController implements Initializable {
             stage.initOwner(btn_supplier.getScene().getWindow());
             stage.setScene(new Scene(root));
             stage.showAndWait();
+            setComboBOx(InventoryCateg,"Select * from tbl_category","cat_description");
+            refreshInventoryTable(InventoryList);
+            refreshInventoryTable(StockinList);
         }
         @FXML
         private void addSupplier() throws  Exception{
