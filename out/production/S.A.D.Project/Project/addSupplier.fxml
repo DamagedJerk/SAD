@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="448.0" prefWidth="629.0" styleClass="fx-backback" stylesheets="@../css/style.css" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="448.0" prefWidth="629.0" styleClass="fx-backback" stylesheets="@../css/style.css" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.suppliercontroller">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.0" minWidth="10.0" prefWidth="269.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="366.0" minWidth="10.0" prefWidth="297.0" />
@@ -63,7 +63,7 @@
                   <Font size="17.0" />
                </font>
             </JFXTextField>
-            <JFXButton fx:id="btnCancel" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="189.0" layoutY="252.0" onAction="#close" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #FFA800;" text="Cancel" textAlignment="CENTER" textFill="#282626">
+            <JFXButton fx:id="btnEdit" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" disable="true" layoutX="189.0" layoutY="252.0" onAction="#doEdit" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #FFA800;" text="Edit" textAlignment="CENTER" textFill="#282626">
                <contextMenu>
                   <ContextMenu>
                      <items>
@@ -72,7 +72,7 @@
                   </ContextMenu>
                </contextMenu>
             </JFXButton>
-            <JFXButton fx:id="btnAddsupplier" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="36.0" layoutY="252.0" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #16FE95;" text="Add" textAlignment="CENTER" textFill="#282626">
+            <JFXButton fx:id="btnAddsupplier" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="36.0" layoutY="252.0" onAction="#doAdd" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #16FE95;" text="Add" textAlignment="CENTER" textFill="#282626">
                <contextMenu>
                   <ContextMenu>
                     <items>
@@ -91,12 +91,22 @@
                   <Font size="17.0" />
                </font>
             </JFXTextField>
+            <JFXButton fx:id="btnAddnew" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" disable="true" layoutX="36.0" layoutY="252.0" onAction="#AddNew" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #16FE95;" text="New" textAlignment="CENTER" textFill="#282626" visible="false">
+               <contextMenu>
+                  <ContextMenu>
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                     </items>
+                  </ContextMenu>
+               </contextMenu>
+            </JFXButton>
+            <Label fx:id="LabelError" layoutX="36.0" layoutY="161.0" prefHeight="17.0" prefWidth="185.0" text="Please input missing fields" textFill="#f50a0a" visible="false" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
             <Label fx:id="PrompError" layoutX="14.0" layoutY="70.0" prefHeight="32.0" prefWidth="171.0" text="Please fill fields" textFill="#dd1e1e" visible="false" />
-            <JFXTreeTableView fx:id="Supplier" blendMode="DARKEN" layoutX="10.0" layoutY="20.0" prefHeight="255.0" prefWidth="286.0" />
+            <JFXTreeTableView fx:id="Supplier" blendMode="DARKEN" layoutX="10.0" layoutY="20.0" onMouseClicked="#GetRowtable" prefHeight="255.0" prefWidth="286.0" stylesheets="@../css/style.css" />
          </children>
       </AnchorPane>
    </children>

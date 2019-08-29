@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="331.0" prefWidth="494.0" styleClass="fx-backback" stylesheets="@../css/style.css" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="331.0" prefWidth="494.0" styleClass="fx-backback" stylesheets="@../css/style.css" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.CategoryPanelController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="197.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="366.0" minWidth="10.0" prefWidth="206.0" />
@@ -58,17 +58,17 @@
       </JFXListView>
       <AnchorPane prefHeight="233.0" prefWidth="200.0" GridPane.rowIndex="1">
          <children>
-            <Label layoutX="26.0" layoutY="14.0" prefHeight="32.0" prefWidth="171.0" text="     Category Name">
+            <Label layoutX="20.0" layoutY="14.0" prefHeight="32.0" prefWidth="171.0" text="Category Name">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="PromptTextQuantity" layoutX="26.0" layoutY="51.0" onAction="#AddQuantity" prefHeight="38.0" prefWidth="158.0">
+            <JFXTextField fx:id="txtCategory" layoutX="26.0" layoutY="51.0" prefHeight="38.0" prefWidth="158.0">
                <font>
                   <Font size="17.0" />
                </font>
             </JFXTextField>
-            <JFXButton fx:id="PromptCancel" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="36.0" layoutY="167.0" onAction="#close" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #FFA800;" text="Cancel" textAlignment="CENTER" textFill="#282626">
+            <JFXButton fx:id="CategoryEdit" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" disable="true" layoutX="36.0" layoutY="178.0" onAction="#doEdit" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #FFA800;" text="Edit" textAlignment="CENTER" textFill="#282626">
                <contextMenu>
                   <ContextMenu>
                      <items>
@@ -77,7 +77,7 @@
                   </ContextMenu>
                </contextMenu>
             </JFXButton>
-            <JFXButton fx:id="CategoryAdd" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="36.0" layoutY="113.0" onAction="#AddQuantity" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #16FE95;" text="Add" textAlignment="CENTER" textFill="#282626">
+            <JFXButton fx:id="CategoryAdd" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="36.0" layoutY="126.0" onAction="#doAdd" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #16FE95;" text="Add" textAlignment="CENTER" textFill="#282626">
                <contextMenu>
                   <ContextMenu>
                     <items>
@@ -86,12 +86,21 @@
                   </ContextMenu>
                </contextMenu>
             </JFXButton>
+            <JFXButton fx:id="CategoryNew" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" disable="true" layoutX="36.0" layoutY="126.0" onAction="#AddNew" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #16FE95;" text="New" textAlignment="CENTER" textFill="#282626" visible="false">
+               <contextMenu>
+                  <ContextMenu>
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                     </items>
+                  </ContextMenu>
+               </contextMenu>
+            </JFXButton>
+            <Label fx:id="LabelError" layoutX="28.0" layoutY="92.0" prefHeight="17.0" prefWidth="158.0" text="Please input missing fields" textFill="#f50a0a" visible="false" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <Label fx:id="PrompError" layoutX="14.0" layoutY="70.0" prefHeight="32.0" prefWidth="171.0" text="Please fill fields" textFill="#dd1e1e" visible="false" />
-            <JFXTreeTableView fx:id="CategoryTable" blendMode="DARKEN" layoutX="10.0" layoutY="20.0" prefHeight="185.0" prefWidth="252.0" />
+            <JFXTreeTableView fx:id="CategoryTable" blendMode="DARKEN" layoutX="10.0" layoutY="20.0" onMouseClicked="#GetRow" prefHeight="185.0" prefWidth="252.0" stylesheets="@../css/style.css" />
          </children>
       </AnchorPane>
    </children>

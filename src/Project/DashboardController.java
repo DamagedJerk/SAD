@@ -541,7 +541,7 @@ public class DashboardController implements Initializable {
 
     private void setComboBOx(JFXComboBox comboBOx,String query,String columnname){
         try {
-
+            comboBOx.getItems().clear();
             preparedStatement = getConnection().prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -693,14 +693,9 @@ public class DashboardController implements Initializable {
             }
         }
         @FXML
-        private void addcategory(){
+        private void addcategory()throws  Exception{
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("addCategory.fxml"));
 
-        }
-        @FXML
-        private void addSupplier() throws  Exception{
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("addSupplier.fxml"));
-            suppliercontroller controller=new suppliercontroller();
-            loader.setController(controller);
             Parent root =loader.load();
 
             Stage stage = new Stage();
@@ -709,6 +704,24 @@ public class DashboardController implements Initializable {
             stage.initOwner(btn_supplier.getScene().getWindow());
             stage.setScene(new Scene(root));
             stage.showAndWait();
+        }
+        @FXML
+        private void addSupplier() throws  Exception{
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("addSupplier.fxml"));
+            //suppliercontroller controller=new suppliercontroller();
+            //loader.setController(controller);
+            Parent root =loader.load();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.initOwner(btn_supplier.getScene().getWindow());
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+            setComboBOx(InventorySupp,"Select * from tbl_supplier","company_name");
+            refreshInventoryTable(InventoryList);
+            refreshInventoryTable(StockinList);
+
         }
         @FXML
         private void CashOut(){
@@ -954,7 +967,7 @@ public class DashboardController implements Initializable {
         private void refreshStockList(){
 
             try{
-                StocksTableList.clear();//balik diri
+                StocksTableList.clear();
                 String sql="";
 
             }catch(Exception e){
@@ -997,16 +1010,6 @@ public class DashboardController implements Initializable {
             SalesPrice.setText(totalprice.toString());
             list.add(new products(id,name, Quan, Price));
         }
-
-
-        public void setQuan(String quantity) {
-            Quantity = quantity;
-        }
-        public String getQuantity(){
-          return this.Quantity;
-        }
-
-
-    }
+}
 
 

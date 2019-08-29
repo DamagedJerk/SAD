@@ -7,11 +7,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import javax.swing.*;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,10 +28,12 @@ public class suppliercontroller implements Initializable {
     @FXML
     private JFXButton btnClose;
     @FXML
+    private JFXButton btnAddnew;
+    @FXML
     private JFXTextField Company_name;
 
     @FXML
-    private JFXButton btnCancel;
+    private JFXButton btnEdit;
 
     @FXML
     private JFXButton btnAddsupplier;
@@ -38,6 +43,9 @@ public class suppliercontroller implements Initializable {
 
     @FXML
     private JFXTextField txtEmail;
+    @FXML
+    private Label LabelError;
+
 
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
@@ -46,7 +54,7 @@ public class suppliercontroller implements Initializable {
 
 
     ObservableList<Suppliers> supplierlist= FXCollections.observableArrayList();
-
+    int SelectedId;
     @FXML
     private JFXTreeTableView<Suppliers> Supplier;
 
@@ -63,6 +71,113 @@ public class suppliercontroller implements Initializable {
     void close() {
         Stage stage = (Stage) btnClose.getScene().getWindow();
         stage.close();
+
+    }
+    @FXML
+     void GetRowtable(MouseEvent e) throws  Exception{
+        if (e.getClickCount() == 2 && !e.isConsumed()) {
+            e.consume();
+            String id=Supplier.getSelectionModel().getSelectedItems().get(0).getValue().supplier_id.getValue();
+            String companyname=Supplier.getSelectionModel().getSelectedItems().get(0).getValue().company_name.getValue();
+            String contact=Supplier.getSelectionModel().getSelectedItems().get(0).getValue().contact_number.getValue();
+            String email=Supplier.getSelectionModel().getSelectedItems().get(0).getValue().email.getValue();
+            Company_name.setText(companyname);
+            Contact_Number.setText(contact);
+            txtEmail.setText(email);
+            setSelectedId(id);
+            btnEdit.setDisable(false);
+            btnAddsupplier.setDisable(true);
+            btnAddsupplier.setVisible(false);
+            btnAddnew.setVisible(true);
+            btnAddnew.setDisable(false);
+
+        }
+    }
+    @FXML
+    private void doEdit(){
+        if(Company_name.getText().contentEquals("") || Contact_Number.getText().contentEquals("") || txtEmail.getText().contentEquals("")){
+            LabelError.setVisible(true);
+            Company_name.setText("");
+            Contact_Number.setText("");
+            txtEmail.setText("");
+        }else {
+            Edit(Company_name.getText(), Contact_Number.getText(), txtEmail.getText(), getSelectedId());
+            btnEdit.setDisable(true);
+            btnAddnew.setDisable(true);
+            btnAddnew.setVisible(false);
+            btnAddsupplier.setVisible(true);
+            btnAddsupplier.setDisable(false);
+            LabelError.setVisible(false);
+        }
+    }
+    @FXML
+    private void AddNew(){
+        Company_name.setText("");
+        Contact_Number.setText("");
+        txtEmail.setText("");
+        btnAddnew.setVisible(false);
+        btnAddsupplier.setVisible(true);
+        btnAddsupplier.setDisable(false);
+        btnEdit.setDisable(true);
+    }
+    private String getSelectedId(){
+        return this.SelectedId+"";
+    }
+    private void setSelectedId(String id){
+        this.SelectedId=Integer.parseInt(id);
+    }
+    @FXML
+    private void doAdd(){
+        if(Company_name.getText().contentEquals("") || Contact_Number.getText().contentEquals("") || txtEmail.getText().contentEquals("")){
+            LabelError.setVisible(true);
+            Company_name.setText("");
+            Contact_Number.setText("");
+            txtEmail.setText("");
+        }else{
+            Add(Company_name.getText(),Contact_Number.getText(),txtEmail.getText());
+
+        }
+
+
+    }
+    private void Add(String company,String contact,String email){
+        try{
+            String sql="Insert into tbl_supplier values(null,?,?,?)";
+            preparedStatement=getConnection().prepareStatement(sql);
+            preparedStatement.setString(1,company);
+            preparedStatement.setString(2,contact);
+            preparedStatement.setString(3,email);
+            preparedStatement.executeUpdate();
+            refreshtable();
+            Company_name.setText("");
+            Contact_Number.setText("");
+            txtEmail.setText("");
+
+
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+    private void Edit(String company,String contact,String email,String id){
+        try{
+            String sql="Update tbl_supplier SET company_name=?,contact_number=?,email=? WHERE supplier_id=?";
+            preparedStatement=getConnection().prepareStatement(sql);
+            preparedStatement.setString(1,company);
+            preparedStatement.setString(2,contact);
+            preparedStatement.setString(3,email);
+            preparedStatement.setString(4,id);
+            preparedStatement.executeUpdate();
+
+            refreshtable();
+            Company_name.setText("");
+            Contact_Number.setText("");
+            txtEmail.setText("");
+
+
+
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
 
     }
 
@@ -122,5 +237,6 @@ public class suppliercontroller implements Initializable {
             e.printStackTrace();
         }
     }
+
 
 }

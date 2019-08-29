@@ -21,7 +21,5 @@ public class Stocks extends RecursiveTreeObject<Stocks> {
         this.Date = new SimpleStringProperty(Date);
         this.Time= new SimpleStringProperty(Time);
 
-
-
     }
 }
