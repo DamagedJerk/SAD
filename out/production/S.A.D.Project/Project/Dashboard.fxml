@@ -243,7 +243,17 @@
                         </AnchorPane>
                         <AnchorPane layoutX="377.0" layoutY="15.0" prefHeight="561.0" prefWidth="788.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
                            <children>
-                              <JFXTreeTableView fx:id="tbl_inventory" blendMode="DARKEN" layoutX="11.0" layoutY="25.0" onMouseClicked="#GetRow" prefHeight="528.0" prefWidth="766.0" />
+                              <JFXTreeTableView fx:id="tbl_inventory" blendMode="DARKEN" layoutX="11.0" layoutY="50.0" onMouseClicked="#GetRow" prefHeight="503.0" prefWidth="766.0" />
+                              <Label layoutX="584.0" layoutY="13.0" prefHeight="26.0" prefWidth="100.0" text="Total Items:">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="InventoryCount" layoutX="715.0" layoutY="13.0" prefHeight="26.0" prefWidth="45.0" text="0">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </Label>
                            </children></AnchorPane>
                      </children></AnchorPane>
               </content>

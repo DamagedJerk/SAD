@@ -48,6 +48,8 @@ public class DashboardController implements Initializable {
     @FXML
     private Label dateTime;
     @FXML
+    private Label InventoryCount;
+    @FXML
     private Label ItemCount;
     @FXML
     private Label Time;
@@ -931,13 +933,19 @@ public class DashboardController implements Initializable {
 
         private String setID(){
 
-            int Temp=1;
-
-            for(int i=1;i<tbl_inventory.getCurrentItemsCount()+1;i++){
-                Temp++;
-
+            int Temp=0;
+            try{
+                preparedStatement=getConnection().prepareStatement("Select max(prod_id) from tbl_products ");
+                resultSet=preparedStatement.executeQuery();
+                if(resultSet.next()){
+                    Temp=Integer.parseInt(resultSet.getString("max(prod_id)"));
                 }
-            return ""+Temp;
+                Temp++;
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }
+
+            return Temp+"";
 
         }
         private void total_items(){
@@ -946,6 +954,7 @@ public class DashboardController implements Initializable {
 
         private void refreshInventoryTable(ObservableList list){
             try {
+                int i =1;
                 String status;
                 list.clear();
                 String sql = "select p.prod_id,p.prod_name,p.prod_quantity,p.prod_price,c.cat_description,s.company_name,p.prod_status FROM tbl_products p JOIN tbl_supplier s ON p.supplier_id = s.supplier_id JOIN tbl_category c ON p.category_id=c.category_id Group by p.prod_id";
@@ -959,13 +968,12 @@ public class DashboardController implements Initializable {
                         status="ACTIVE";
                     }
                     list.add(new Inventory(resultSet.getString("prod_id"), resultSet.getString("prod_name"), resultSet.getString("prod_quantity"),resultSet.getString("prod_price"), resultSet.getString("cat_description"), resultSet.getString("company_name"),status));
+                    i++;
                 }
-
+                InventoryCount.setText(i+"");
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
         }
         private void refreshStockList(){
 
