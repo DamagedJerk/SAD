@@ -25,6 +25,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -639,6 +640,8 @@ public class DashboardController implements Initializable {
                     InventoryID.setText(id);
                     InventoryName.setText(name);
                     InventoryQuantity.setText(quan);
+                    InventoryQuantity.setDisable(true);
+                    InventoryQuantity.setDisableAnimation(true);
                     InventoryPrice.setText(itemprice);
 
                     update_inventory.setDisable(false);
@@ -672,6 +675,32 @@ public class DashboardController implements Initializable {
             refreshInventoryTable(InventoryList);
             refreshInventoryTable(StockinList);
         }
+
+        @FXML
+        private void doVoid() throws Exception{
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("Alert.fxml"));
+            Alert controller=new Alert();
+            loader.setController(controller);
+            Parent root =loader.load();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.initOwner(tableProduct.getScene().getWindow());
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+            stage.setOnShowing(windowEvent -> {
+                PromptAdd.setOnAction(actionEvent -> {
+                    try{
+                        JOptionPane.showMessageDialog(null,"hello");
+                    }catch (Exception ex){
+                        ex.printStackTrace();
+                    }
+
+                });
+
+            });
+        }
         @FXML
         private void addSupplier() throws  Exception{
             FXMLLoader loader= new FXMLLoader(getClass().getResource("addSupplier.fxml"));
@@ -694,7 +723,8 @@ public class DashboardController implements Initializable {
         private void CashOut(){
 
             if(SalesPrice.getText().contentEquals("") || SalesPrice.getText().contentEquals("") || SalesChange.getText().contentEquals("")){
-                //Alert JOptionPane.showMessageDialog(null,"Please input all fields","Warning",JOptionPane.WARNING_MESSAGE);
+                 JOptionPane.showMessageDialog(null,"Please input all fields","Warning",JOptionPane.WARNING_MESSAGE);
+                //alert puhon
             }else{
                 //JOptionPane.showMessageDialog(null,"hello");
                 //Cashing Out . . .. . Partial dapat pani
@@ -779,6 +809,7 @@ public class DashboardController implements Initializable {
                     CartList.clear();
                     ItemCount.setText("0");
                     refreshProductMenu();
+                    refreshInventoryTable(InventoryList);
 
                     //kulang nalang mag print ug resibo
 
@@ -800,7 +831,10 @@ public class DashboardController implements Initializable {
                 stage.initOwner(btn_supplier.getScene().getWindow());
                 stage.setScene(new Scene(root));
                 stage.showAndWait();
+                totalprice=0.0;
             }
+
+
 
 
         @FXML
@@ -895,6 +929,7 @@ public class DashboardController implements Initializable {
             add_inventory.setVisible(true);
             add_inventory.setDisable(false);
             update_inventory.setDisable(true);
+            InventoryQuantity.setDisable(false);
         }
 
         private void NewField(){

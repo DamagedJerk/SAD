@@ -70,12 +70,12 @@
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </JFXTextField>
-                  <JFXButton fx:id="btnCashOut" alignment="CENTER" layoutX="186.0" layoutY="212.0" prefHeight="31.0" prefWidth="94.0" style="-fx-background-color: #FFA800;" text="Apply">
+                  <JFXButton fx:id="btnDiscount" alignment="CENTER" layoutX="186.0" layoutY="212.0" onAction="#applydiscount" prefHeight="31.0" prefWidth="94.0" style="-fx-background-color: #FFA800;" text="Apply">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="btnCashOut1" alignment="CENTER" layoutX="186.0" layoutY="331.0" prefHeight="31.0" prefWidth="94.0" style="-fx-background-color: #16FE95;" text="Confirm">
+                  <JFXButton fx:id="btnConfirm" alignment="CENTER" layoutX="186.0" layoutY="331.0" prefHeight="31.0" prefWidth="94.0" style="-fx-background-color: #16FE95;" text="Confirm">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>

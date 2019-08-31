@@ -27,7 +27,7 @@ public class confirm implements Initializable {
     ObservableList<products> orderlist= FXCollections.observableArrayList();
     PreparedStatement preparedStatement=null;
     ResultSet resultSet=null;
-    Double totalprice,totalpayment,totalchange=0.0;
+    Double totalprice,totalpayment,totalchange,discountedprice=0.0;
 
     //setters and getters
 
@@ -42,7 +42,11 @@ public class confirm implements Initializable {
     }
 
 
-    //end comment
+    //end
+    @FXML
+    private JFXButton btnDiscount;
+    @FXML
+    private JFXButton btnConfirm;
     @FXML
     private JFXTextField total_price;
     @FXML
@@ -57,8 +61,6 @@ public class confirm implements Initializable {
     @FXML
     private JFXButton btnCashOut;
 
-    @FXML
-    private JFXButton btnConfirm;
     @FXML
     private JFXButton btnClose;
     @FXML
@@ -80,7 +82,7 @@ public class confirm implements Initializable {
         total_price.setText(getTotalprice()+"");
         total_payment.setText(getTotalpayment()+"");
         total_change.setText(getTotalchange()+"");
-        
+
     }
 
     public void setTotalprice(Double totalprice) {
@@ -179,5 +181,25 @@ public class confirm implements Initializable {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void applydiscount(){
+
+        //dapat naay 
+        Double dbl=Double.parseDouble(discountrate.getText());
+        Double totalprice =Double.parseDouble(total_price.getText());
+        Double totalPayment = Double.parseDouble(total_payment.getText());
+        Double totalChange;
+
+        dbl=dbl/100;
+        discountedprice=totalprice*dbl;
+        totalprice=totalprice-discountedprice;
+        totalChange=totalPayment-totalprice;
+        total_change.setText(totalChange+"");
+        total_price.setText(totalprice+"");
+
+        btnDiscount.setDisable(true);
+        discountrate.setText("");
+    }
+
 
 }
