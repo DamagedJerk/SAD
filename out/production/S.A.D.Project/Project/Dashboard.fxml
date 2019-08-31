@@ -128,7 +128,7 @@
                                     <Image url="@../resources/cart.png" />
                                  </image>
                               </ImageView>
-                              <JFXTreeTableView fx:id="tableCart" blendMode="DARKEN" layoutX="11.0" layoutY="48.0" onMouseClicked="#GetRow" prefHeight="386.0" prefWidth="565.0" />
+                              <JFXTreeTableView fx:id="tableCart" blendMode="DARKEN" layoutX="11.0" layoutY="48.0" onMouseClicked="#GetRow" prefHeight="386.0" prefWidth="565.0" stylesheets="@../css/style.css" />
                            </children>
                         </AnchorPane>
                      </children></AnchorPane>
@@ -243,7 +243,7 @@
                         </AnchorPane>
                         <AnchorPane layoutX="377.0" layoutY="15.0" prefHeight="561.0" prefWidth="788.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
                            <children>
-                              <JFXTreeTableView fx:id="tbl_inventory" blendMode="DARKEN" layoutX="11.0" layoutY="50.0" onMouseClicked="#GetRow" prefHeight="503.0" prefWidth="766.0" />
+                              <JFXTreeTableView fx:id="tbl_inventory" blendMode="DARKEN" layoutX="11.0" layoutY="50.0" onMouseClicked="#GetRow" prefHeight="503.0" prefWidth="766.0" stylesheets="@../css/style.css" />
                               <Label layoutX="584.0" layoutY="13.0" prefHeight="26.0" prefWidth="100.0" text="Total Items:">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
@@ -264,7 +264,7 @@
                      <children>
                         <AnchorPane layoutX="3.0" layoutY="12.0" prefHeight="314.0" prefWidth="584.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
                            <children>
-                              <JFXTreeTableView fx:id="StockInventoryTable" blendMode="DARKEN" layoutX="16.0" layoutY="66.0" prefHeight="237.0" prefWidth="552.0" />
+                              <JFXTreeTableView fx:id="StockInventoryTable" blendMode="DARKEN" layoutX="16.0" layoutY="66.0" prefHeight="237.0" prefWidth="552.0" stylesheets="@../css/style.css" />
                               <Label layoutX="439.0" layoutY="21.0" prefHeight="32.0" prefWidth="128.0" text="Inventory List">
                                  <font>
                                     <Font name="System Bold" size="17.0" />

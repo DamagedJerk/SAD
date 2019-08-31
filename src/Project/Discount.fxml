@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="647.0" styleClass="fx-backback" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="647.0" styleClass="fx-backback" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.confirm">
    <children>
       <HBox layoutX="3.0" prefHeight="75.0" prefWidth="640.0">
          <children>
@@ -38,7 +38,7 @@
       <AnchorPane layoutX="3.0" layoutY="85.0" prefHeight="396.0" prefWidth="640.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
          <children>
             <JFXTreeTableView fx:id="OrderLIstTable" blendMode="DARKEN" layoutX="14.0" layoutY="52.0" prefHeight="324.0" prefWidth="308.0" />
-            <Label contentDisplay="RIGHT" layoutX="14.0" layoutY="14.0" prefHeight="42.0" prefWidth="81.0" text="Order List" textFill="#363434">
+            <Label contentDisplay="RIGHT" layoutX="14.0" layoutY="14.0" prefHeight="42.0" prefWidth="45.0" text="Items:" textFill="#363434">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -50,22 +50,22 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="SalesPayment" editable="false" layoutX="32.0" layoutY="59.0" prefHeight="25.0" prefWidth="245.0" promptText="Total Price:">
+                  <JFXTextField fx:id="total_price" editable="false" layoutX="32.0" layoutY="59.0" prefHeight="25.0" prefWidth="245.0" promptText="Total Price:">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField fx:id="SalesPayment1" editable="false" layoutX="32.0" layoutY="132.0" prefHeight="25.0" prefWidth="245.0" promptText="Cash:">
+                  <JFXTextField fx:id="total_payment" editable="false" layoutX="32.0" layoutY="132.0" prefHeight="25.0" prefWidth="245.0" promptText="Cash:">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField fx:id="SalesPayment11" layoutX="32.0" layoutY="205.0" prefHeight="38.0" prefWidth="135.0" promptText="Discount Rate:">
+                  <JFXTextField fx:id="discountrate" layoutX="32.0" layoutY="205.0" prefHeight="38.0" prefWidth="135.0" promptText="Discount Rate:">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField fx:id="SalesPayment111" editable="false" layoutX="32.0" layoutY="269.0" prefHeight="25.0" prefWidth="245.0" promptText="Change:">
+                  <JFXTextField fx:id="total_change" editable="false" layoutX="32.0" layoutY="269.0" prefHeight="25.0" prefWidth="245.0" promptText="Change:">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
@@ -82,6 +82,21 @@
                   </JFXButton>
                </children>
             </AnchorPane>
+            <Label contentDisplay="RIGHT" layoutX="204.0" layoutY="14.0" prefHeight="42.0" prefWidth="54.0" text="Cart id:" textFill="#363434">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="LabelId" contentDisplay="RIGHT" layoutX="266.0" layoutY="14.0" prefHeight="42.0" prefWidth="54.0" text="0" textFill="#363434">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="ItemCount" contentDisplay="RIGHT" layoutX="70.0" layoutY="14.0" prefHeight="42.0" prefWidth="54.0" text="0" textFill="#363434">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

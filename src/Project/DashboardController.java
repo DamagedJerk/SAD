@@ -217,7 +217,7 @@ public class DashboardController implements Initializable {
 
 
         //tbl_product
-        int width = 140;
+        int width = 80;
         JFXTreeTableColumn<products, String> ProductId = new JFXTreeTableColumn<>("Id");
         ProductId.setPrefWidth(width);
         ProductId.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<products, String>, ObservableValue<String>>() {
@@ -260,8 +260,9 @@ public class DashboardController implements Initializable {
         tableProduct.setShowRoot(false);
 
         //tblCart
+        int cartwidth=120;
         JFXTreeTableColumn<products, String> CartItemId = new JFXTreeTableColumn<>("Id");
-        CartItemId.setPrefWidth(width);
+        CartItemId.setPrefWidth(cartwidth);
         CartItemId.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<products, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<products, String> productsStringCellDataFeatures) {
@@ -269,7 +270,7 @@ public class DashboardController implements Initializable {
             }
         });
         JFXTreeTableColumn<products, String> CartName = new JFXTreeTableColumn<>("Name");
-        CartName.setPrefWidth(width);
+        CartName.setPrefWidth(cartwidth);
         CartName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<products, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<products, String> productsStringCellDataFeatures) {
@@ -277,7 +278,7 @@ public class DashboardController implements Initializable {
             }
         });
         JFXTreeTableColumn<products, String> CartQuantity = new JFXTreeTableColumn<>("Quantity");
-        CartQuantity.setPrefWidth(width);
+        CartQuantity.setPrefWidth(cartwidth);
         CartQuantity.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<products, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<products, String> productsStringCellDataFeatures) {
@@ -285,7 +286,7 @@ public class DashboardController implements Initializable {
             }
         });
         JFXTreeTableColumn<products, String> CartPrice = new JFXTreeTableColumn<>("Price");
-        CartPrice.setPrefWidth(width);
+        CartPrice.setPrefWidth(cartwidth);
         CartPrice.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<products, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<products, String> productsStringCellDataFeatures) {
@@ -300,7 +301,7 @@ public class DashboardController implements Initializable {
         //tableCart.setShowRoot(false);
 
         //tabInventory
-        int widthInventory=130;
+        int widthInventory=80;
         tabSales.setOnSelectionChanged(event -> {
             if(tabSales.isSelected()){
                 refreshProductMenu();
@@ -418,7 +419,7 @@ public class DashboardController implements Initializable {
             }
         });
         JFXTreeTableColumn<Inventory, String> StockInName = new JFXTreeTableColumn<>("Name");
-        StockInName .setPrefWidth(stockincolumnwidth);
+        StockInName.setPrefWidth(stockincolumnwidth);
         StockInName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Inventory, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Inventory, String> productsStringCellDataFeatures) {
@@ -790,10 +791,9 @@ public class DashboardController implements Initializable {
             }
             private void confirmationdiaglogue() throws  Exception{
                 FXMLLoader loader= new FXMLLoader(getClass().getResource("Discount.fxml"));
-                confirm controller=new confirm();
-                loader.setController(controller);
                 Parent root =loader.load();
-
+                confirm confirm=loader.getController();
+                confirm.setFields(SalesPrice.getText(),SalesPayment.getText(),SalesChange.getText());
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.initStyle(StageStyle.TRANSPARENT);
@@ -915,7 +915,7 @@ public class DashboardController implements Initializable {
             try{
                 preparedStatement=getConnection().prepareStatement("Select max(prod_id) from tbl_products ");
                 resultSet=preparedStatement.executeQuery();
-                if(resultSet.next()){
+                if(resultSet.next() && !(resultSet.getString("max(prod_id)")==null)){
                     Temp=Integer.parseInt(resultSet.getString("max(prod_id)"));
                 }
                 Temp++;
@@ -932,13 +932,14 @@ public class DashboardController implements Initializable {
 
         private void refreshInventoryTable(ObservableList list){
             try {
-                int i =1;
+                int i =0;
                 String status;
                 list.clear();
                 String sql = "select p.prod_id,p.prod_name,p.prod_quantity,p.prod_price,c.cat_description,s.company_name,p.prod_status FROM tbl_products p JOIN tbl_supplier s ON p.supplier_id = s.supplier_id JOIN tbl_category c ON p.category_id=c.category_id Group by p.prod_id";
                 preparedStatement = getConnection().prepareStatement(sql);
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
+                    i++;
                     int temp=Integer.parseInt(resultSet.getString("prod_status"));
                     if(temp==0){
                         status="INACTIVE";
@@ -946,7 +947,7 @@ public class DashboardController implements Initializable {
                         status="ACTIVE";
                     }
                     list.add(new Inventory(resultSet.getString("prod_id"), resultSet.getString("prod_name"), resultSet.getString("prod_quantity"),resultSet.getString("prod_price"), resultSet.getString("cat_description"), resultSet.getString("company_name"),status));
-                    i++;
+
                 }
                 InventoryCount.setText(i+"");
             } catch (Exception e) {
