@@ -556,45 +556,6 @@ public class DashboardController implements Initializable {
 
     }
 
-
-
-    class products extends RecursiveTreeObject<products> {
-        StringProperty product_id;
-        StringProperty product_name;
-        StringProperty product_quan;
-        StringProperty product_price;
-
-        public products(String id ,String prodname, String quan, String price) {
-            this.product_id=new SimpleStringProperty(id);
-            this.product_name = new SimpleStringProperty(prodname);
-            this.product_quan = new SimpleStringProperty(quan);
-            this.product_price = new SimpleStringProperty(price);
-
-        }
-
-    }
-
-    class Inventory extends RecursiveTreeObject<Inventory> {
-
-        StringProperty product_name;
-        StringProperty product_quan;
-        StringProperty product_price;
-        StringProperty product_supplier;
-        StringProperty product_category;
-        StringProperty product_id;
-        StringProperty status;
-
-        public Inventory(String id, String prodname, String quan, String price, String cat , String supp,String status) {
-            this.product_id = new SimpleStringProperty(id);
-            this.product_name = new SimpleStringProperty(prodname);
-            this.product_quan = new SimpleStringProperty(quan);
-            this.product_price = new SimpleStringProperty(price);
-            this.product_category = new SimpleStringProperty(cat);
-            this.product_supplier = new SimpleStringProperty(supp);
-            this.status= new SimpleStringProperty(status);
-
-        }
-    }
         public void checkUser(String Name, int Role) {
             lblName.setText(String.format("Welcome %s", Name));
             if (Role == 1) {
@@ -730,9 +691,9 @@ public class DashboardController implements Initializable {
         }
         @FXML
         private void CashOut(){
-            System.out.print("here");
+
             if(SalesPrice.getText().contentEquals("") || SalesPrice.getText().contentEquals("") || SalesChange.getText().contentEquals("")){
-                JOptionPane.showMessageDialog(null,"Please input all fields","Warning",JOptionPane.WARNING_MESSAGE);
+                //Alert JOptionPane.showMessageDialog(null,"Please input all fields","Warning",JOptionPane.WARNING_MESSAGE);
             }else{
                 //JOptionPane.showMessageDialog(null,"hello");
                 //Cashing Out . . .. . Partial dapat pani
@@ -744,8 +705,9 @@ public class DashboardController implements Initializable {
                 try{
                     //
 
-                    String sql="Insert into tbl_Cart (Cart_id) values(null)";
+                    String sql="Insert into tbl_Cart values(null,?)";
                     preparedStatement=getConnection().prepareStatement(sql);
+                    preparedStatement.setString(1,totalitem+"");
                     preparedStatement.executeUpdate();
                     preparedStatement.close();
                     resultSet.close();
@@ -756,7 +718,6 @@ public class DashboardController implements Initializable {
                     String cartid="";
                     if(resultSet.next()){
                             cartid=resultSet.getString("max(Cart_id)");
-                            //JOptionPane.showMessageDialog(null,cartid+" CARTID");
                         }
 
                     //inserting to tbl_order or order line
@@ -776,18 +737,20 @@ public class DashboardController implements Initializable {
                     }
                     preparedStatement.close();
                     resultSet.close();
-                    JOptionPane.showMessageDialog(null,"Succeess");
+                    //JOptionPane.showMessageDialog(null,"Succeess");
                     // to report things
-
-                    sql="Update tbl_cart SET total_payment=?,total_price=?,total_change=?,total_item=? where Cart_id=?";
+                    /*
+                    sql="Update tbl_cart SET total_item=? where Cart_id=?";
                     preparedStatement=getConnection().prepareStatement(sql);
-                    preparedStatement.setString(1,totalPayment);
-                    preparedStatement.setString(2,totalPrice);
-                    preparedStatement.setString(3,totalChange);
-                    preparedStatement.setInt(4,totalitem);
-                    preparedStatement.setString(5,cartid);
+                    //preparedStatement.setString(1,totalPayment);
+                    //preparedStatement.setString(2,totalPrice);
+                    //preparedStatement.setString(3,totalChange);
+                    preparedStatement.setInt(1,totalitem);
+                    preparedStatement.setString(2,cartid);
                     preparedStatement.executeUpdate();
-                    preparedStatement.close();
+                    preparedStatement.close();*/
+
+                    confirmationdiaglogue();
 
                     //get employee_id
                     String emp_id="";
@@ -798,6 +761,8 @@ public class DashboardController implements Initializable {
 
                     }
 
+
+                    /*
                     //insert int tbl_report
                     sql="Insert into tbl_report values(null,?,NULL,?,?)";
                     preparedStatement=getConnection().prepareStatement(sql);
@@ -805,7 +770,7 @@ public class DashboardController implements Initializable {
                     preparedStatement.setString(2,emp_id);//employeeid
                     preparedStatement.setString(3,dateTime.getText());//date
                     preparedStatement.executeUpdate();
-
+                    */
                     SalesPrice.setText("");
                     SalesChange.setText("");
                     SalesPayment.setText("");
@@ -822,6 +787,19 @@ public class DashboardController implements Initializable {
 
 
                 }
+            }
+            private void confirmationdiaglogue() throws  Exception{
+                FXMLLoader loader= new FXMLLoader(getClass().getResource("Discount.fxml"));
+                confirm controller=new confirm();
+                loader.setController(controller);
+                Parent root =loader.load();
+
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.initOwner(btn_supplier.getScene().getWindow());
+                stage.setScene(new Scene(root));
+                stage.showAndWait();
             }
 
 
