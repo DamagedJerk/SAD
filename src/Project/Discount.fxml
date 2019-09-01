@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="647.0" styleClass="fx-backback" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.confirm">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="647.0" styleClass="fx-backback" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox layoutX="3.0" prefHeight="75.0" prefWidth="640.0">
          <children>
@@ -75,7 +75,7 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="btnConfirm" alignment="CENTER" layoutX="186.0" layoutY="331.0" prefHeight="31.0" prefWidth="94.0" style="-fx-background-color: #16FE95;" text="Confirm">
+                  <JFXButton fx:id="btnConfirm" alignment="CENTER" layoutX="186.0" layoutY="331.0" onAction="#doCOnfirm" prefHeight="31.0" prefWidth="94.0" style="-fx-background-color: #16FE95;" text="Confirm">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>

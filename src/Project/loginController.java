@@ -115,7 +115,7 @@ public class loginController implements Initializable {
                     FXMLLoader loader=new FXMLLoader(getClass().getResource("Dashboard.fxml"));
                     Parent root = loader.load();
                     DashboardController dash=loader.getController();
-                    dash.checkUser(Name,role);
+                    dash.checkUser(Name,role,resultSet.getString("user_id"));
 
                     Scene scene = new Scene(root);
                     stage.setScene(scene);

@@ -44,7 +44,7 @@
             </Label>
          </children>
       </HBox>
-      <JFXButton fx:id="btnConfirm" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #16FE95;" text="Confirm" textAlignment="CENTER" textFill="#282626" GridPane.rowIndex="2">
+      <JFXButton fx:id="btnConfirm" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#doConfirm" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #16FE95;" text="Confirm" textAlignment="CENTER" textFill="#282626" GridPane.rowIndex="2">
          <contextMenu>
             <ContextMenu>
               <items>
@@ -61,7 +61,7 @@
             <Insets left="15.0" right="15.0" />
          </GridPane.margin>
       </JFXListView>
-      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #FFA800;" text="Cancel" textAlignment="CENTER" textFill="#282626" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <JFXButton fx:id="btncancel" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#close" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #FFA800;" text="Cancel" textAlignment="CENTER" textFill="#282626" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <contextMenu>
             <ContextMenu>
                <items>
@@ -89,6 +89,7 @@
                   <Font size="17.0" />
                </font>
             </JFXPasswordField>
+            <Label fx:id="LabelError" layoutX="18.0" layoutY="81.0" prefHeight="32.0" prefWidth="171.0" text="Need admin authentication" textFill="#f50a0a" visible="false" />
          </children>
       </AnchorPane>
    </children>

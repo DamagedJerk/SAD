@@ -60,6 +60,8 @@ public class DashboardController implements Initializable {
     private JFXButton btn_addcategory;
     @FXML
     private Label lblName;
+    @FXML
+    private Label LabelId;
 
     @FXML
     private JFXButton minimize;
@@ -127,6 +129,7 @@ public class DashboardController implements Initializable {
 
     private String Quantity = "";
     private int CurrentID=0;
+    private int totalitems=0;
 
 
     //InventoryTab
@@ -160,6 +163,8 @@ public class DashboardController implements Initializable {
     private JFXButton new_entry;
     @FXML
     private JFXTreeTableView<Inventory> tbl_inventory;
+    @FXML
+    private JFXButton btnConfirm;
 
     //lists
     ObservableList<Inventory> InventoryList = FXCollections.observableArrayList();
@@ -167,11 +172,13 @@ public class DashboardController implements Initializable {
     private ObservableList<products> CartList = FXCollections.observableArrayList();
     ObservableList<Inventory> StockinList = FXCollections.observableArrayList();
     ObservableList<Stocks> StocksTableList = FXCollections.observableArrayList();
+    private boolean requested = false;
 
 
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     private Image userpic = new Image("/resources/user.png");
+    private String userId="";
 
     public Double totalprice = 0.0;
 
@@ -207,7 +214,7 @@ public class DashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         initClock();
-
+        LabelId.setText(getID());
         //initialize
         setComboBOx(InventorySupp,"Select * from tbl_supplier","company_name");
         setComboBOx(InventoryCateg,"Select * from tbl_category","cat_description");
@@ -375,11 +382,11 @@ public class DashboardController implements Initializable {
         tbl_inventory.setRoot(inventoryList);
         tbl_inventory.setShowRoot(false);
 
-        tabInventory.setOnSelectionChanged(event -> {
+        /*tabInventory.setOnSelectionChanged(event -> {
             if (tabInventory.isSelected() && tbl_inventory.getCurrentItemsCount()==0 ) {
 
             }
-            });
+            });*/
         CurrentID=Integer.parseInt(setID());
         InventoryID.setText(CurrentID+"");
 
@@ -557,15 +564,32 @@ public class DashboardController implements Initializable {
         }
 
     }
+        private String getID(){
+            int id = 0;
+        try {
 
-        public void checkUser(String Name, int Role) {
+                preparedStatement = getConnection().prepareStatement("Select max(Cart_id) from tbl_cart");
+                resultSet = preparedStatement.executeQuery();
+                if(resultSet.next()){
+                if (resultSet.getString("max(Cart_id)") == null) {
+                    id++;
+                } else {
+                    id = Integer.parseInt(resultSet.getString("max(Cart_id)"));
+                    id++;
+                } }
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }
+            return id+"";
+        }
+        public void checkUser(String Name, int Role,String id) {
             lblName.setText(String.format("Welcome %s", Name));
             if (Role == 1) {
                 tabInventory.setDisable(false);
                 tabStock.setDisable(false);
                 tabReport.setDisable(false);
                 tabLog.setDisable(false);
-
+                userId=id;
 
             } else {
                 img.setImage(userpic);
@@ -604,7 +628,7 @@ public class DashboardController implements Initializable {
                     stage.setOnShowing(windowEvent -> {
                             PromptAdd.setOnAction(actionEvent -> {
                                 try{
-                                    controller.AddQuantity();
+                                    //walay pulos ni diri
                                 }catch (Exception ex){
                                     ex.printStackTrace();
                                 }
@@ -619,6 +643,7 @@ public class DashboardController implements Initializable {
                         final TreeItem<products> cart = new RecursiveTreeItem<products>(CartList, RecursiveTreeObject::getChildren);
                         tableCart.setRoot(cart);
                         tableCart.setShowRoot(false);
+                        totalitems++;
                         total_items();
                         btnCashOut.setDisable(false);
                     }
@@ -678,6 +703,7 @@ public class DashboardController implements Initializable {
 
         @FXML
         private void doVoid() throws Exception{
+
             FXMLLoader loader= new FXMLLoader(getClass().getResource("Alert.fxml"));
             Alert controller=new Alert();
             loader.setController(controller);
@@ -689,17 +715,22 @@ public class DashboardController implements Initializable {
             stage.initOwner(tableProduct.getScene().getWindow());
             stage.setScene(new Scene(root));
             stage.showAndWait();
-            stage.setOnShowing(windowEvent -> {
-                PromptAdd.setOnAction(actionEvent -> {
-                    try{
-                        JOptionPane.showMessageDialog(null,"hello");
-                    }catch (Exception ex){
-                        ex.printStackTrace();
-                    }
 
-                });
+            if(controller.isResponse()==true){
+                int quan=Integer.parseInt(CartList.get(tableCart.getSelectionModel().getFocusedIndex()).product_quan.getValue());
+                double price=Double.parseDouble(CartList.get(tableCart.getSelectionModel().getFocusedIndex()).product_price.getValue());
+                double toberemove=quan*price;
+                JOptionPane.showMessageDialog(null,"toberemove "+toberemove+"\nquan "+quan+"\nprice "+price+"\ntotalprice "+totalprice );
+                totalprice=totalprice-toberemove;
 
-            });
+                CartList.remove(tableCart.getSelectionModel().getFocusedIndex());
+
+                SalesPrice.setText(totalprice+"");
+                btnVoid.setDisable(true);
+                totalitems--;
+                total_items();
+            }
+
         }
         @FXML
         private void addSupplier() throws  Exception{
@@ -735,25 +766,18 @@ public class DashboardController implements Initializable {
                 //int id=Integer.parseInt(tableCart.getSelectionModel().getModelItem(0).getValue().product_id.getValue());
                 try{
                     //
+                    String sql="";
 
-                    String sql="Insert into tbl_Cart values(null,?)";
-                    preparedStatement=getConnection().prepareStatement(sql);
-                    preparedStatement.setString(1,totalitem+"");
-                    preparedStatement.executeUpdate();
-                    preparedStatement.close();
-                    resultSet.close();
-
-
-                    preparedStatement=getConnection().prepareStatement("Select max(Cart_id) from tbl_cart");
-                    resultSet=preparedStatement.executeQuery();
-                    String cartid="";
-                    if(resultSet.next()){
-                            cartid=resultSet.getString("max(Cart_id)");
-                        }
-
+                        sql="Insert into tbl_Cart values(?,?)";
+                        preparedStatement=getConnection().prepareStatement(sql);
+                        preparedStatement.setString(1,LabelId.getText());
+                        preparedStatement.setString(2,totalitem+"");
+                        preparedStatement.executeUpdate();
+                        preparedStatement.close();
                     //inserting to tbl_order or order line
                     sql="Insert into tbl_order values(null,?,?,?,?)";
-                    for(int i=0;i<tableCart.getCurrentItemsCount();i++){
+                    //JOptionPane.showMessageDialog(null,tableCart.getCurrentItemsCount()+"");
+                    for(int i=0;i<CartList.size();i++){
                         int id=Integer.parseInt(tableCart.getSelectionModel().getModelItem(i).getValue().product_id.getValue());
                         int quan=Integer.parseInt(tableCart.getSelectionModel().getModelItem(i).getValue().product_quan.getValue());
 
@@ -761,57 +785,43 @@ public class DashboardController implements Initializable {
                         preparedStatement.setInt(1,id);
                         preparedStatement.setInt(2,quan);
                         preparedStatement.setString(3,tableCart.getSelectionModel().getModelItem(i).getValue().product_price.getValue());
-                        preparedStatement.setString(4,cartid);
+                        preparedStatement.setString(4,LabelId.getText());
                         preparedStatement.executeUpdate();
 
 
                     }
                     preparedStatement.close();
                     resultSet.close();
-                    //JOptionPane.showMessageDialog(null,"Succeess");
-                    // to report things
-                    /*
-                    sql="Update tbl_cart SET total_item=? where Cart_id=?";
-                    preparedStatement=getConnection().prepareStatement(sql);
-                    //preparedStatement.setString(1,totalPayment);
-                    //preparedStatement.setString(2,totalPrice);
-                    //preparedStatement.setString(3,totalChange);
-                    preparedStatement.setInt(1,totalitem);
-                    preparedStatement.setString(2,cartid);
-                    preparedStatement.executeUpdate();
-                    preparedStatement.close();*/
+                    confirm controller=new confirm();
+                    confirmationdiaglogue(controller);
+                    requested=true;
 
-                    confirmationdiaglogue();
-
-                    //get employee_id
-                    String emp_id="";
-                    preparedStatement=getConnection().prepareStatement("Select user_id from tbl_employee");
-                    resultSet=preparedStatement.executeQuery();
-                    if(resultSet.next()){
-                        emp_id=resultSet.getString("user_id");
+                    if(controller.isResponse()==true){
+                        SalesPrice.setText("");
+                        SalesChange.setText("");
+                        SalesPayment.setText("");
+                        btnCashOut.setDisable(true);
+                        CartList.clear();
+                        ItemCount.setText("0");
+                        refreshProductMenu();
+                        refreshInventoryTable(InventoryList);
+                        LabelId.setText(getID());
+                        totalitems=0;
+                        totalprice=0.0;
+                        //kulang nalang mag print ug resibo
+                    }else {
+                        try{
+                            sql="Delete from tbl_cart WHERE Cart_id=(Select max(Cart_id) from tbl_order)";
+                            preparedStatement=getConnection().prepareStatement(sql);
+                            preparedStatement.executeUpdate();
+                        }catch(Exception ex){
+                            ex.printStackTrace();
+                        }
 
                     }
 
 
-                    /*
-                    //insert int tbl_report
-                    sql="Insert into tbl_report values(null,?,NULL,?,?)";
-                    preparedStatement=getConnection().prepareStatement(sql);
-                    preparedStatement.setString(1,cartid);
-                    preparedStatement.setString(2,emp_id);//employeeid
-                    preparedStatement.setString(3,dateTime.getText());//date
-                    preparedStatement.executeUpdate();
-                    */
-                    SalesPrice.setText("");
-                    SalesChange.setText("");
-                    SalesPayment.setText("");
-                    btnCashOut.setDisable(true);
-                    CartList.clear();
-                    ItemCount.setText("0");
-                    refreshProductMenu();
-                    refreshInventoryTable(InventoryList);
 
-                    //kulang nalang mag print ug resibo
 
                 }catch(Exception ex){
                     ex.printStackTrace();
@@ -820,18 +830,18 @@ public class DashboardController implements Initializable {
 
                 }
             }
-            private void confirmationdiaglogue() throws  Exception{
+            private void confirmationdiaglogue(confirm controller) throws  Exception{
                 FXMLLoader loader= new FXMLLoader(getClass().getResource("Discount.fxml"));
+                loader.setController(controller);
                 Parent root =loader.load();
-                confirm confirm=loader.getController();
-                confirm.setFields(SalesPrice.getText(),SalesPayment.getText(),SalesChange.getText());
+                controller.setFields(SalesPrice.getText(),SalesPayment.getText(),SalesChange.getText());
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.initStyle(StageStyle.TRANSPARENT);
                 stage.initOwner(btn_supplier.getScene().getWindow());
                 stage.setScene(new Scene(root));
                 stage.showAndWait();
-                totalprice=0.0;
+
             }
 
 
@@ -911,7 +921,7 @@ public class DashboardController implements Initializable {
                     preparedStatement.executeUpdate();
                     refreshInventoryTable(InventoryList);
                     CurrentID++;
-                    NewField();
+                    NewEntry();
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -962,7 +972,7 @@ public class DashboardController implements Initializable {
 
         }
         private void total_items(){
-                ItemCount.setText(tableCart.getCurrentItemsCount()+"");
+                ItemCount.setText(totalitems+"");
         }
 
         private void refreshInventoryTable(ObservableList list){

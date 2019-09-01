@@ -7,11 +7,16 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
 import javax.swing.*;
@@ -28,6 +33,7 @@ public class confirm implements Initializable {
     PreparedStatement preparedStatement=null;
     ResultSet resultSet=null;
     Double totalprice,totalpayment,totalchange,discountedprice=0.0;
+    private boolean response=false;
 
     //setters and getters
 
@@ -41,6 +47,13 @@ public class confirm implements Initializable {
         return str;
     }
 
+    public void setResponse(boolean response) {
+        this.response = response;
+    }
+
+    public boolean isResponse() {
+        return response;
+    }
 
     //end
     @FXML
@@ -182,23 +195,61 @@ public class confirm implements Initializable {
         }
     }
     @FXML
-    private void applydiscount(){
+    private void applydiscount() throws Exception{
 
-        //dapat naay 
-        Double dbl=Double.parseDouble(discountrate.getText());
-        Double totalprice =Double.parseDouble(total_price.getText());
-        Double totalPayment = Double.parseDouble(total_payment.getText());
-        Double totalChange;
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("Alert.fxml"));
+        Alert controller=new Alert();
+        loader.setController(controller);
+        Parent root =loader.load();
 
-        dbl=dbl/100;
-        discountedprice=totalprice*dbl;
-        totalprice=totalprice-discountedprice;
-        totalChange=totalPayment-totalprice;
-        total_change.setText(totalChange+"");
-        total_price.setText(totalprice+"");
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.initOwner(btnDiscount.getScene().getWindow());
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
 
-        btnDiscount.setDisable(true);
-        discountrate.setText("");
+        if(controller.isResponse()==true) {
+            Double dbl = Double.parseDouble(discountrate.getText());
+            Double totalprice = Double.parseDouble(total_price.getText());
+            Double totalPayment = Double.parseDouble(total_payment.getText());
+            Double totalChange;
+
+            dbl = dbl / 100;
+            discountedprice = totalprice * dbl;
+            totalprice = totalprice - discountedprice;
+            totalChange = totalPayment - totalprice;
+            total_change.setText(totalChange + "");
+            total_price.setText(totalprice + "");
+
+            btnDiscount.setDisable(true);
+            discountrate.setText("");
+        }
+    }
+    @FXML
+    private void doCOnfirm(){
+        //get employee_id
+                    /*String emp_id="";
+                    preparedStatement=getConnection().prepareStatement("Select user_id from tbl_employee where ");
+                    resultSet=preparedStatement.executeQuery();
+                    if(resultSet.next()){
+                        emp_id=resultSet.getString("user_id");
+
+                    }*/
+
+
+                    /*
+                    //insert int tbl_report
+                    sql="Insert into tbl_report values(null,?,NULL,?,?)";
+                    preparedStatement=getConnection().prepareStatement(sql);
+                    preparedStatement.setString(1,cartid);
+                    preparedStatement.setString(2,emp_id);//employeeid
+                    preparedStatement.setString(3,dateTime.getText());//date
+                    preparedStatement.executeUpdate();
+                    */
+                    setResponse(true);
+                    JOptionPane.showMessageDialog(null,"Shows Receipt");
+                    close();
     }
 
 
