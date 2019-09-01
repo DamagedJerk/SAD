@@ -16,6 +16,7 @@ import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.print.Collation;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -42,7 +43,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collection;
 import java.util.ResourceBundle;
+import java.util.Vector;
 
 public class DashboardController implements Initializable {
 
@@ -56,6 +59,8 @@ public class DashboardController implements Initializable {
     private Label Time;
     @FXML
     private JFXButton btn_supplier;
+    @FXML
+    private JFXButton btnLogOut;
     @FXML
     private JFXButton btn_addcategory;
     @FXML
@@ -165,6 +170,30 @@ public class DashboardController implements Initializable {
     private JFXTreeTableView<Inventory> tbl_inventory;
     @FXML
     private JFXButton btnConfirm;
+    //balik diri
+    //stock-in tab fields
+    @FXML
+    private JFXTextField StockinID;
+    @FXML
+    private JFXComboBox<String> StockinCat;
+    @FXML
+    private JFXTextField StockInITEMID;
+    @FXML
+    private JFXTextField StockInName;
+    @FXML
+    private JFXTextField StockinPrice;
+    @FXML
+    private JFXTextField StockInStock;
+    @FXML
+    private JFXTextField StockIntotalprice;
+    @FXML
+    private JFXButton btnStockIn;
+    @FXML
+    private JFXButton btnStockOut;
+    @FXML
+    private JFXTextField StockInSearch;
+
+    //
 
     //lists
     ObservableList<Inventory> InventoryList = FXCollections.observableArrayList();
@@ -173,12 +202,13 @@ public class DashboardController implements Initializable {
     ObservableList<Inventory> StockinList = FXCollections.observableArrayList();
     ObservableList<Stocks> StocksTableList = FXCollections.observableArrayList();
     private boolean requested = false;
-
+    private int purchasedquan=0;
+    private double purchasedprice=0.00;
 
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     private Image userpic = new Image("/resources/user.png");
-    private String userId="";
+    public String userId="";
 
     public Double totalprice = 0.0;
 
@@ -188,6 +218,16 @@ public class DashboardController implements Initializable {
         dbconn.getInstance();
         conn = dbconn.connect();
         return conn;
+    }
+    @FXML
+    private void doLogOut() throws Exception{
+        Stage stage = (Stage) btnLogOut.getScene().getWindow();
+        stage.close();
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("Log-InForm.fxml"));
+        Parent root =loader.load();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
@@ -212,12 +252,13 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         initClock();
         LabelId.setText(getID());
         //initialize
         setComboBOx(InventorySupp,"Select * from tbl_supplier","company_name");
         setComboBOx(InventoryCateg,"Select * from tbl_category","cat_description");
+
+
         Inventory_Status.getItems().add("INACTIVE");
         Inventory_Status.getItems().add("ACTIVE");
         Inventory_Status.setValue("ACTIVE");
@@ -544,7 +585,7 @@ public class DashboardController implements Initializable {
 
         final TreeItem<Stocks> StocksTablesList = new RecursiveTreeItem<Stocks>(StocksTableList, RecursiveTreeObject::getChildren);
 
-        StockInTable.getColumns().setAll(StockId, StockName,Stocks, Entry_type, Last_entry, StockInDate,StockInTime);//balik diri
+        StockInTable.getColumns().setAll(StockId, StockName,Stocks, Entry_type, Last_entry, StockInDate,StockInTime);
         StockInTable.setRoot(StocksTablesList );
         StockInTable.setShowRoot(false);
 
@@ -590,9 +631,9 @@ public class DashboardController implements Initializable {
                 tabReport.setDisable(false);
                 tabLog.setDisable(false);
                 userId=id;
-
             } else {
                 img.setImage(userpic);
+                userId=id;
             }
 
         }
@@ -675,6 +716,7 @@ public class DashboardController implements Initializable {
                     new_entry.setVisible(true);
                     new_entry.setDisable(false);
                 }
+                //table Stocks
 
 
             }
@@ -699,6 +741,7 @@ public class DashboardController implements Initializable {
             setComboBOx(InventoryCateg,"Select * from tbl_category","cat_description");
             refreshInventoryTable(InventoryList);
             refreshInventoryTable(StockinList);
+            refreshProductMenu();
         }
 
         @FXML
@@ -720,7 +763,7 @@ public class DashboardController implements Initializable {
                 int quan=Integer.parseInt(CartList.get(tableCart.getSelectionModel().getFocusedIndex()).product_quan.getValue());
                 double price=Double.parseDouble(CartList.get(tableCart.getSelectionModel().getFocusedIndex()).product_price.getValue());
                 double toberemove=quan*price;
-                JOptionPane.showMessageDialog(null,"toberemove "+toberemove+"\nquan "+quan+"\nprice "+price+"\ntotalprice "+totalprice );
+                //JOptionPane.showMessageDialog(null,"toberemove "+toberemove+"\nquan "+quan+"\nprice "+price+"\ntotalprice "+totalprice );
                 totalprice=totalprice-toberemove;
 
                 CartList.remove(tableCart.getSelectionModel().getFocusedIndex());
@@ -748,6 +791,7 @@ public class DashboardController implements Initializable {
             setComboBOx(InventorySupp,"Select * from tbl_supplier","company_name");
             refreshInventoryTable(InventoryList);
             refreshInventoryTable(StockinList);
+            refreshProductMenu();
 
         }
         @FXML
@@ -795,8 +839,73 @@ public class DashboardController implements Initializable {
                     confirm controller=new confirm();
                     confirmationdiaglogue(controller);
                     requested=true;
-
+                    //JOptionPane.showMessageDialog(null,userId);
                     if(controller.isResponse()==true){
+                        // diri mag insert sa receipt
+                        preparedStatement=getConnection().prepareStatement("Insert into tbl_receipt values(null,?,?,?,?,?,?,?,?,?)");
+                        preparedStatement.setString(1,controller.getCartID());
+                        preparedStatement.setString(2,controller.getCustomerid()+"");
+                        preparedStatement.setString(3,userId);
+                        preparedStatement.setString(4,dateTime.getText());
+                        preparedStatement.setString(5,SalesPayment.getText());
+                        preparedStatement.setString(6,SalesPrice.getText());
+                        preparedStatement.setString(7,controller.getDiscountvalue()+"");
+                        preparedStatement.setString(8,controller.getDiscountedprice()+"");
+                        preparedStatement.setString(9,controller.getChange()+"");
+                        preparedStatement.executeUpdate();
+
+                        // unsaon ko ni??
+                        String str=getReceiptID();
+
+                        preparedStatement=getConnection().prepareStatement("Select p.prod_id,p.prod_name,o.order_quantity,o.total_price,o.order_quantity*o.total_price,r.receipt_id from tbl_order o JOIN tbl_products p ON p.prod_id=o.product_id JOIN tbl_cart c ON c.Cart_id=o.Cart_id JOIN tbl_receipt r ON r.Cart_id=c.Cart_id where r.receipt_id=?");
+                        preparedStatement.setString(1,str);
+                        resultSet=preparedStatement.executeQuery();
+                        while(resultSet.next()){
+                            String receiptId=resultSet.getString("receipt_id");
+                            String productid=resultSet.getString("prod_id");
+                            int quan=Integer.parseInt(resultSet.getString("order_quantity"));
+                            double totalprice=Double.parseDouble(resultSet.getString("o.order_quantity*o.total_price"));
+                            if(checkDuplicate(productid,receiptId)==false){
+                                //JOptionPane.showMessageDialog(null,"ni sulod diri inserting tbl_purchased");
+                                preparedStatement=getConnection().prepareStatement("insert into tbl_purchased values(null,?,?,?,?)");
+                                preparedStatement.setString(1,receiptId);
+                                preparedStatement.setString(2,productid);
+                                preparedStatement.setString(3,quan+"");
+                                preparedStatement.setString(4,totalprice+"");
+                                preparedStatement.executeUpdate();
+                            }else{
+                                purchasedquan=purchasedquan+quan;
+                                purchasedprice=purchasedprice+totalprice;
+                                preparedStatement=getConnection().prepareStatement("Update tbl_purchased SET item_sold=? , total_sales=? WHERE prod_id=? AND Reciept_no=?");
+                                preparedStatement.setString(1,purchasedquan+"");
+                                preparedStatement.setString(2,purchasedprice+"");
+                                preparedStatement.setString(3,productid);
+                                preparedStatement.setString(4,receiptId);
+                                preparedStatement.executeUpdate();
+                                purchasedquan=0;
+                                purchasedprice=0.00;
+                            }
+                        }
+                        preparedStatement.close();
+                        resultSet.close();
+                        //
+                        preparedStatement=getConnection().prepareStatement("Select *From tbL_purchased WHERE Reciept_no=(Select max(Reciept_no) from tbl_purchased)");
+                        resultSet=preparedStatement.executeQuery();
+                        while(resultSet.next()){
+                            int itemsold=Integer.parseInt(resultSet.getString("item_sold"));
+                            String id=resultSet.getString("prod_id");
+                            preparedStatement=getConnection().prepareStatement(   "Update tbl_products SET prod_quantity=prod_quantity-? where prod_id=?");
+                            preparedStatement.setString(1,itemsold+"");
+                            preparedStatement.setString(2,id);
+                            preparedStatement.executeUpdate();
+                        }
+
+
+                        JOptionPane.showMessageDialog(null,"resibo nalay kulang");
+                        //end
+                        //insert sa tbl_purchased ang pulos niya kay diri ilista pila sa isa ka receipt ang napalit na certain products ug ang total sales sa isa ka produkto
+
+
                         SalesPrice.setText("");
                         SalesChange.setText("");
                         SalesPayment.setText("");
@@ -805,9 +914,11 @@ public class DashboardController implements Initializable {
                         ItemCount.setText("0");
                         refreshProductMenu();
                         refreshInventoryTable(InventoryList);
+                        refreshInventoryTable(StockinList);
                         LabelId.setText(getID());
                         totalitems=0;
                         totalprice=0.0;
+                        //Last time
                         //kulang nalang mag print ug resibo
                     }else {
                         try{
@@ -878,6 +989,8 @@ public class DashboardController implements Initializable {
 
                     preparedStatement.executeUpdate();
                     refreshInventoryTable(InventoryList);
+                    refreshInventoryTable(StockinList);
+                    refreshProductMenu();
                     NewField();
                 }catch (Exception e){
                     e.printStackTrace();
@@ -920,6 +1033,8 @@ public class DashboardController implements Initializable {
 
                     preparedStatement.executeUpdate();
                     refreshInventoryTable(InventoryList);
+                    refreshInventoryTable(StockinList);
+                    refreshProductMenu();
                     CurrentID++;
                     NewEntry();
                 }catch (Exception e){
@@ -1045,6 +1160,38 @@ public class DashboardController implements Initializable {
             SalesPrice.setText(totalprice.toString());
             list.add(new products(id,name, Quan, Price));
         }
+        private String getReceiptID(){
+        String str="";
+        try{
+            preparedStatement=getConnection().prepareStatement("Select max(receipt_id) from tbl_receipt");
+            resultSet=preparedStatement.executeQuery();
+            if(resultSet.next()){
+                str=resultSet.getString("max(receipt_id)");
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+            return str;
+    }
+    private boolean checkDuplicate(String str,String receipt){
+        try{
+            PreparedStatement statement=getConnection().prepareStatement("Select *from tbl_purchased where prod_id=? AND Reciept_no=?");
+            statement.setString(1,str);
+            statement.setString(2,receipt);
+            ResultSet res=statement.executeQuery();
+            if(res.next()){
+                purchasedquan=Integer.parseInt(res.getString("item_sold"));
+                purchasedprice=Double.parseDouble(res.getString("total_sales"));
+                res.close();
+                statement.close();
+                return true;
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+       return false;
+    }
+
 }
 
 

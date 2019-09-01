@@ -32,8 +32,10 @@ public class confirm implements Initializable {
     ObservableList<products> orderlist= FXCollections.observableArrayList();
     PreparedStatement preparedStatement=null;
     ResultSet resultSet=null;
-    Double totalprice,totalpayment,totalchange,discountedprice=0.0;
+    Double totalprice,totalpayment,change,discountedprice=0.00;
+    Double discountvalue=0.00;
     private boolean response=false;
+    private int customerid=0;
 
     //setters and getters
 
@@ -53,6 +55,38 @@ public class confirm implements Initializable {
 
     public boolean isResponse() {
         return response;
+    }
+
+    public void setCustomerid(int customerid) {
+        this.customerid = customerid;
+    }
+
+    public int getCustomerid() {
+        return customerid;
+    }
+
+    public void setDiscountedprice(Double discountedprice) {
+        this.discountedprice = discountedprice;
+    }
+
+    public Double getDiscountedprice() {
+        return discountedprice;
+    }
+
+    public void setDiscountvalue(Double discountvalue) {
+        this.discountvalue = discountvalue;
+    }
+
+    public Double getDiscountvalue() {
+        return discountvalue;
+    }
+
+    public Double getChange() {
+        return change;
+    }
+
+    public void setChange(Double change) {
+        this.change = change;
     }
 
     //end
@@ -107,7 +141,7 @@ public class confirm implements Initializable {
     }
 
     public void setTotalchange(Double totalchange) {
-        this.totalchange = totalchange;
+        this.change = totalchange;
     }
 
     public Double getTotalprice() {
@@ -119,7 +153,7 @@ public class confirm implements Initializable {
     }
 
     public Double getTotalchange() {
-        return totalchange;
+        return change;
     }
 
     public confirm(){
@@ -210,17 +244,18 @@ public class confirm implements Initializable {
         stage.showAndWait();
 
         if(controller.isResponse()==true) {
-            Double dbl = Double.parseDouble(discountrate.getText());
+            Double rate = Double.parseDouble(discountrate.getText());
             Double totalprice = Double.parseDouble(total_price.getText());
             Double totalPayment = Double.parseDouble(total_payment.getText());
             Double totalChange;
 
-            dbl = dbl / 100;
-            discountedprice = totalprice * dbl;
-            totalprice = totalprice - discountedprice;
-            totalChange = totalPayment - totalprice;
-            total_change.setText(totalChange + "");
+            rate = rate / 100;
+            discountvalue = totalprice * rate;
+            totalprice = totalprice - discountvalue;
+            change = totalPayment - totalprice;
+            total_change.setText(change+ "");
             total_price.setText(totalprice + "");
+            setDiscountedprice(totalprice);
 
             btnDiscount.setDisable(true);
             discountrate.setText("");
@@ -229,27 +264,44 @@ public class confirm implements Initializable {
     @FXML
     private void doCOnfirm(){
         //get employee_id
-                    /*String emp_id="";
-                    preparedStatement=getConnection().prepareStatement("Select user_id from tbl_employee where ");
-                    resultSet=preparedStatement.executeQuery();
-                    if(resultSet.next()){
-                        emp_id=resultSet.getString("user_id");
+        try {
 
-                    }*/
+            /*String emp_id = "";
+            preparedStatement = getConnection().prepareStatement("Select user_id from tbl_employee where ");
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                emp_id = resultSet.getString("user_id");
+
+            }*/
+            //show customer panel
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("Customer.fxml"));
+            recordcustomer customer=new recordcustomer();
+            loader.setController(customer);
+            Parent root =loader.load();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.initOwner(btnConfirm.getScene().getWindow());
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            if(customer.isResponse()==true){
+                   setCustomerid(customer.getCustomer_id());
+
+                setResponse(true);
+                //JOptionPane.showMessageDialog(null, "Shows Receipt","WA PA NAHUMAN",JOptionPane.WARNING_MESSAGE);
+                close();
+            }
+
+            //end customer panel
 
 
-                    /*
-                    //insert int tbl_report
-                    sql="Insert into tbl_report values(null,?,NULL,?,?)";
-                    preparedStatement=getConnection().prepareStatement(sql);
-                    preparedStatement.setString(1,cartid);
-                    preparedStatement.setString(2,emp_id);//employeeid
-                    preparedStatement.setString(3,dateTime.getText());//date
-                    preparedStatement.executeUpdate();
-                    */
-                    setResponse(true);
-                    JOptionPane.showMessageDialog(null,"Shows Receipt");
-                    close();
+
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 
 

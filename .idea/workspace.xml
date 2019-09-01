@@ -1,55 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cbddea0c-4283-4362-bc6d-1b06ad665c0e" name="Default Changelist" comment="">
+    <list default="true" id="cbddea0c-4283-4362-bc6d-1b06ad665c0e" name="Default Changelist" comment="&quot;Palit&quot;">
+      <change afterPath="$PROJECT_DIR$/src/Project/recordcustomer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Alert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Alert.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$17.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$18.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$19.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$20.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$21.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$21.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$22.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$22.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$23.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$23.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$24.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$24.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$25.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$25.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$26.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$26.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$27.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$27.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$28.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$28.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$29.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$29.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$30.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$30.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Discount.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Discount.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/confirm$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/confirm$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/confirm$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/confirm$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/confirm$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/confirm$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/confirm$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/confirm$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/confirm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/confirm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/loginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/loginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project/Alert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Alert.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Project/Alert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Alert.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Project/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Dashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Project/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project/Discount.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Discount.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/Signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Signup.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Project/confirm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/confirm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Project/loginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/loginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/signupcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/signupcontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/Thumbs.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Thumbs.db" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -66,48 +28,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="809" column="39" selection-start-line="809" selection-start-column="39" selection-end-line="809" selection-end-column="39" />
+            <state relative-caret-position="477">
+              <caret line="193" column="39" selection-start-line="193" selection-start-column="39" selection-end-line="193" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#44021#44022#0" expanded="true" />
-                <element signature="e#44081#44082#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Project/Alert.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder" />
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Project/AddController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="45" column="21" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#821#822#0" expanded="true" />
-                <element signature="e#857#858#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Project/Alert.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1045">
-              <caret line="73" column="35" selection-start-line="73" selection-start-column="35" selection-end-line="73" selection-end-column="35" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#557#558#0" expanded="true" />
-                <element signature="e#597#598#0" expanded="true" />
-                <element signature="e#632#633#0" expanded="true" />
-                <element signature="e#663#664#0" expanded="true" />
+                <element signature="e#47337#47338#0" expanded="true" />
+                <element signature="e#47397#47398#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -116,49 +42,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Project/loginController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="118" selection-start-line="118" selection-end-line="118" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Project/Category.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="57" selection-start-line="12" selection-start-column="57" selection-end-line="12" selection-end-column="57" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Project/confirm.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="249" column="38" selection-start-line="249" selection-start-column="38" selection-end-line="249" selection-end-column="38" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1581#1582#0" expanded="true" />
-                <element signature="e#1621#1622#0" expanded="true" />
-                <element signature="e#1656#1657#0" expanded="true" />
-                <element signature="e#1687#1688#0" expanded="true" />
-                <element signature="e#2145#2146#0" expanded="true" />
-                <element signature="e#2189#2190#0" expanded="true" />
-                <element signature="e#2242#2243#0" expanded="true" />
-                <element signature="e#2290#2291#0" expanded="true" />
-                <element signature="e#2341#2342#0" expanded="true" />
-                <element signature="e#2387#2388#0" expanded="true" />
-                <element signature="e#2421#2422#0" expanded="true" />
-                <element signature="e#2454#2455#0" expanded="true" />
-                <element signature="e#2490#2491#0" expanded="true" />
-                <element signature="e#2525#2526#0" expanded="true" />
-                <element signature="e#2560#2561#0" expanded="true" />
-                <element signature="e#2594#2595#0" expanded="true" />
-                <element signature="e#4716#4726#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="185">
+              <caret line="156" column="37" selection-start-line="156" selection-start-column="37" selection-end-line="156" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -174,36 +59,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>@FXML</find>
-      <find>dovoid</find>
-      <find>preparesta</find>
-      <find>prepare</find>
-      <find>lblName</find>
-      <find>=null</find>
-      <find>Prepareds</find>
-      <find>Prepared</find>
-      <find>checkuser</find>
-      <find>doV</find>
-      <find>check</find>
-      <find>addQuan</find>
-      <find>setOnshow</find>
-      <find>modality</find>
-      <find>error</find>
-      <find>LIST</find>
-      <find>cartlist</find>
-      <find>CartList</find>
-      <find>user_id</find>
-      <find>total_items</find>
-      <find>doVoid</find>
-      <find>chek</find>
-      <find>initialize</find>
-      <find>getId</find>
-      <find>Cashout()</find>
-      <find>close</find>
-      <find>Inventory</find>
-      <find>update_inventory</find>
-      <find>newFiel</find>
       <find>totalprice</find>
+      <find>isRes</find>
+      <find>close</find>
+      <find>confirm</find>
+      <find>doConfir</find>
+      <find>userid=</find>
+      <find>setters</find>
+      <find>conf</find>
+      <find>getCart</find>
+      <find>apply</find>
+      <find>setTotal</find>
+      <find>isCustomerEx</find>
+      <find>shows</find>
+      <find>userid</find>
+      <find>checkuser</find>
+      <find>JoptionPane.showMessage</find>
+      <find>unsaon ni</find>
+      <find>unsaon</find>
+      <find>check</find>
+      <find>getID</find>
+      <find>StockInve</find>
+      <find>refresh</find>
+      <find>close()</find>
+      <find>setCombo</find>
+      <find>InventorySupp</find>
+      <find>discountedprice</find>
+      <find>getRow</find>
+      <find>doVoid</find>
+      <find>stocks</find>
+      <find>balik</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -221,9 +106,11 @@
         <option value="$PROJECT_DIR$/src/Project/purchase.java" />
         <option value="$PROJECT_DIR$/src/Project/products.java" />
         <option value="$PROJECT_DIR$/src/Project/Inventory.java" />
+        <option value="$PROJECT_DIR$/src/Project/confirm.java" />
+        <option value="$PROJECT_DIR$/src/Project/recordcustomer.java" />
+        <option value="$PROJECT_DIR$/src/Project/signupcontroller.java" />
         <option value="$PROJECT_DIR$/src/Project/loginController.java" />
         <option value="$PROJECT_DIR$/src/Project/Alert.java" />
-        <option value="$PROJECT_DIR$/src/Project/confirm.java" />
         <option value="$PROJECT_DIR$/src/Project/DashboardController.java" />
       </list>
     </option>
@@ -238,7 +125,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -262,6 +148,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -323,7 +210,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1320" height="784" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49656752" weight="0.26587301" />
       <window_info id="Structure" order="1" sideWeight="0.5034325" side_tool="true" weight="0.26190478" />
@@ -334,7 +220,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32872504" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32872504" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32872504" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39938557" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -385,25 +271,18 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/addSupplier.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1105">
           <caret line="65" selection-start-line="65" selection-end-line="65" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Project/signupcontroller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="83" column="38" selection-start-line="83" selection-start-column="38" selection-end-line="83" selection-end-column="38" />
-        </state>
-      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/Log-InForm.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-612" />
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/suppliercontroller.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -436,37 +315,18 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/Dashboard.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="91" column="13" selection-start-line="91" selection-start-column="13" selection-end-line="91" selection-end-column="13" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Project/purchase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Project/purchase.java" />
     <entry file="file://$PROJECT_DIR$/src/Project/Inventory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="36" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Project/Category.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="57" selection-start-line="12" selection-start-column="57" selection-end-line="12" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -500,6 +360,10 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Project/Alert.fxml">
+      <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/AddController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="355">
@@ -512,66 +376,107 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Project/loginController.java">
+    <entry file="file://$PROJECT_DIR$/src/Project/Category.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="118" selection-start-line="118" selection-end-line="118" />
+        <state relative-caret-position="204">
+          <caret line="12" column="57" selection-start-line="12" selection-start-column="57" selection-end-line="12" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Project/Alert.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
+    <entry file="file://$PROJECT_DIR$/src/Project/Customer.fxml">
       <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Project/Alert.java">
+    <entry file="jar://$USER_HOME$/Downloads/Compressed/javafx-sdk-12.0.1/lib/javafx.base.jar!/com/sun/javafx/event/BasicEventDispatcher.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1045">
-          <caret line="73" column="35" selection-start-line="73" selection-start-column="35" selection-end-line="73" selection-end-column="35" />
+        <state relative-caret-position="137">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Project/signupcontroller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="83">
+          <caret line="100" column="26" selection-start-line="100" selection-start-column="26" selection-end-line="100" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Project/recordcustomer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="85" column="97" selection-start-line="85" selection-start-column="97" selection-end-line="85" selection-end-column="97" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#557#558#0" expanded="true" />
-            <element signature="e#597#598#0" expanded="true" />
-            <element signature="e#632#633#0" expanded="true" />
-            <element signature="e#663#664#0" expanded="true" />
+            <element signature="e#2104#2105#0" expanded="true" />
+            <element signature="e#2144#2145#0" expanded="true" />
+            <element signature="e#2179#2180#0" expanded="true" />
+            <element signature="e#2210#2211#0" expanded="true" />
+            <element signature="e#2292#2293#0" expanded="true" />
+            <element signature="e#2338#2339#0" expanded="true" />
+            <element signature="e#2373#2374#0" expanded="true" />
+            <element signature="e#2407#2408#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/confirm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="249" column="38" selection-start-line="249" selection-start-column="38" selection-end-line="249" selection-end-column="38" />
+        <state relative-caret-position="-595">
+          <caret line="246" column="33" selection-start-line="246" selection-start-column="33" selection-end-line="246" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1581#1582#0" expanded="true" />
             <element signature="e#1621#1622#0" expanded="true" />
             <element signature="e#1656#1657#0" expanded="true" />
             <element signature="e#1687#1688#0" expanded="true" />
-            <element signature="e#2145#2146#0" expanded="true" />
-            <element signature="e#2189#2190#0" expanded="true" />
-            <element signature="e#2242#2243#0" expanded="true" />
-            <element signature="e#2290#2291#0" expanded="true" />
-            <element signature="e#2341#2342#0" expanded="true" />
-            <element signature="e#2387#2388#0" expanded="true" />
-            <element signature="e#2421#2422#0" expanded="true" />
-            <element signature="e#2454#2455#0" expanded="true" />
-            <element signature="e#2490#2491#0" expanded="true" />
-            <element signature="e#2525#2526#0" expanded="true" />
-            <element signature="e#2560#2561#0" expanded="true" />
-            <element signature="e#2594#2595#0" expanded="true" />
-            <element signature="e#4716#4726#0" expanded="true" />
+            <element signature="e#1766#1767#0" expanded="true" />
+            <element signature="e#1810#1811#0" expanded="true" />
+            <element signature="e#1844#1845#0" expanded="true" />
+            <element signature="e#1877#1878#0" expanded="true" />
+            <element signature="e#1940#1941#0" expanded="true" />
+            <element signature="e#1994#1995#0" expanded="true" />
+            <element signature="e#2036#2037#0" expanded="true" />
+            <element signature="e#2074#2075#0" expanded="true" />
+            <element signature="e#2146#2147#0" expanded="true" />
+            <element signature="e#2196#2197#0" expanded="true" />
+            <element signature="e#2346#2347#0" expanded="true" />
+            <element signature="e#2382#2383#0" expanded="true" />
+            <element signature="e#2300#2301#0" expanded="true" />
+            <element signature="e#2329#2330#0" expanded="true" />
+            <element signature="e#2373#2374#0" expanded="true" />
+            <element signature="e#2409#2410#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Project/Alert.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="63" column="70" selection-start-line="63" selection-start-column="70" selection-end-line="63" selection-end-column="70" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Project/loginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="156" column="37" selection-start-line="156" selection-start-column="37" selection-end-line="156" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="809" column="39" selection-start-line="809" selection-start-column="39" selection-end-line="809" selection-end-column="39" />
+        <state relative-caret-position="477">
+          <caret line="193" column="39" selection-start-line="193" selection-start-column="39" selection-end-line="193" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#44021#44022#0" expanded="true" />
-            <element signature="e#44081#44082#0" expanded="true" />
+            <element signature="e#47337#47338#0" expanded="true" />
+            <element signature="e#47397#47398#0" expanded="true" />
           </folding>
         </state>
       </provider>

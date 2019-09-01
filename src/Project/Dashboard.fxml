@@ -60,6 +60,11 @@
                         <Font size="17.0" />
                      </font>
                   </Label>
+                  <JFXButton fx:id="btnLogOut" layoutX="108.0" layoutY="74.0" onAction="#doLogOut" text="Log-Out">
+                     <font>
+                        <Font name="FontAwesome Regular" size="12.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </Pane>
          </children>
@@ -322,15 +327,15 @@
                                           </AnchorPane>
                                        </children>
                                     </HBox>
-                                    <JFXTextField prefHeight="38.0" prefWidth="205.0" promptText="Item Price:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <JFXTextField prefHeight="36.0" prefWidth="275.0" promptText="Current Stock:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <JFXTextField prefHeight="38.0" prefWidth="205.0" promptText="Amount:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <JFXTextField fx:id="StockinPrice" prefHeight="38.0" prefWidth="205.0" promptText="Item Price:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <JFXTextField fx:id="StockInStock" prefHeight="36.0" prefWidth="275.0" promptText="Current Stock:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <JFXTextField fx:id="StockinAmount" prefHeight="38.0" prefWidth="205.0" promptText="Amount:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     <JFXTextField fx:id="StockInITEMID" prefHeight="37.0" prefWidth="210.0" promptText="Item id:" GridPane.rowIndex="3">
                                        <padding>
                                           <Insets left="15.0" right="53.0" />
                                        </padding>
                                     </JFXTextField>
-                                    <JFXTextField prefHeight="44.0" prefWidth="275.0" promptText="Total Price:" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <JFXTextField fx:id="StockIntotalprice" prefHeight="44.0" prefWidth="275.0" promptText="Total Price:" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                     <JFXComboBox fx:id="StockinCat" prefHeight="52.0" prefWidth="200.0" promptText="Category:" GridPane.rowIndex="2">
                                        <GridPane.margin>
                                           <Insets left="15.0" />
@@ -341,7 +346,7 @@
                                           <Insets left="15.0" right="53.0" />
                                        </padding>
                                     </JFXTextField>
-                                    <JFXButton disable="true" prefHeight="34.0" prefWidth="233.0" style="-fx-background-color: #16FE95;" text="Stock-In" GridPane.rowIndex="6">
+                                    <JFXButton fx:id="btnStockIn" disable="true" prefHeight="34.0" prefWidth="233.0" style="-fx-background-color: #16FE95;" text="Stock-In" GridPane.rowIndex="6">
                                        <GridPane.margin>
                                           <Insets left="15.0" />
                                        </GridPane.margin>
@@ -349,7 +354,7 @@
                                           <Font name="System Bold" size="17.0" />
                                        </font>
                                     </JFXButton>
-                                    <JFXButton contentDisplay="RIGHT" disable="true" prefHeight="38.0" prefWidth="278.0" style="-fx-background-color: #FFA800;" text="Stock-Out" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                    <JFXButton fx:id="btnStockOut" contentDisplay="RIGHT" disable="true" prefHeight="38.0" prefWidth="278.0" style="-fx-background-color: #FFA800;" text="Stock-Out" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                        <font>
                                           <Font name="System Bold" size="17.0" />
                                        </font>

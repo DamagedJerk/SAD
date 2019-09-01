@@ -4,6 +4,8 @@ package Project;
 
 import com.jfoenix.controls.JFXButton;
 
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
@@ -12,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
@@ -30,6 +33,7 @@ import javafx.scene.control.Label;
 
 
 import javafx.scene.paint.Color;
+import javafx.stage.StageStyle;
 
 
 public class loginController implements Initializable {
@@ -47,9 +51,9 @@ public class loginController implements Initializable {
     private JFXButton btnSignup;
 
     @FXML
-    public TextField txtUsername;
+    public JFXTextField txtUsername;
     @FXML
-    public PasswordField txtPassword;
+    public JFXPasswordField txtPassword;
     @FXML
     private Label lblerror;
 
@@ -110,6 +114,7 @@ public class loginController implements Initializable {
                     String Name=resultSet.getString("firstname");
                     int role=Integer.parseInt(resultSet.getString("role"));
 
+                    //JOptionPane.showMessageDialog(null,resultSet.getString("user_id")+" Login.fxml");
 
 
                     FXMLLoader loader=new FXMLLoader(getClass().getResource("Dashboard.fxml"));
@@ -136,33 +141,36 @@ public class loginController implements Initializable {
     }
     @FXML
     private void Signup() throws Exception{
-        Stage stage = (Stage) btnClose.getScene().getWindow();
-        stage.close();
 
-        Parent root = FXMLLoader.load(getClass().getResource("Signup.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("Alert.fxml"));
+        Alert controller=new Alert();
+        loader.setController(controller);
+        Parent root =loader.load();
+
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.initOwner(btnSignup.getScene().getWindow());
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
+        if(controller.isResponse()==true) {
+            stage = (Stage) btnSignup.getScene().getWindow();
+            stage.close();
+
+            root = FXMLLoader.load(getClass().getResource("Signup.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
 
-    public loginController(){
-       /* try{
-            if(resultSet.getString("role").contentEquals("1")){
-                setName("Dummy Admin");
-            }else
-                setName("Dummy User1");
-
-        }catch (SQLException e){
-            e.printStackTrace();
-        }*/
-
-
-    }
+    public loginController(){ }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        txtUsername.setText("admin");
+        txtPassword.setText("admin");
     }
 }

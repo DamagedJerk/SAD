@@ -1,22 +1,22 @@
 package Project;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class signupcontroller {
+public class signupcontroller implements Initializable {
 
     @FXML
     private JFXButton minimize;
@@ -49,6 +49,8 @@ public class signupcontroller {
     private JFXButton btnConfirm;
     @FXML
     private JFXTextField txtCellNumber;
+    @FXML
+    private JFXComboBox<String> cboRole;
 
 
     @FXML
@@ -96,7 +98,7 @@ public class signupcontroller {
                 String txtCellnum = txtCellNumber.getText();
                 String txtPass = txtPassword.getText();
                 String txtconfirmpass = txtConfirm.getText();
-                int role = 0;
+                int role =cboRole.getSelectionModel().selectedIndexProperty().getValue();
                 String sql = "Insert into tbl_employee (user_name,firstname,lastname,password,email,cell_number,role) values(?,?,?,?,?,?,?)";
 
                 try {
@@ -131,4 +133,10 @@ public class signupcontroller {
 
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        cboRole.getItems().add("User");
+        cboRole.getItems().add("Admin");
+
+    }
 }

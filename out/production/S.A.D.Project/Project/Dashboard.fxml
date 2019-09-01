@@ -60,6 +60,11 @@
                         <Font size="17.0" />
                      </font>
                   </Label>
+                  <JFXButton fx:id="btnLogOut" layoutX="108.0" layoutY="74.0" onAction="#doLogOut" text="Log-Out">
+                     <font>
+                        <Font name="FontAwesome Regular" size="12.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </Pane>
          </children>

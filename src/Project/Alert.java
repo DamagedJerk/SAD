@@ -61,18 +61,20 @@ public class Alert {
             resultSet=preparedStatement.executeQuery();
             int i=1;
             while(resultSet.next()){
+                    //JOptionPane.showMessageDialog(null,resultSet.getString("password"));
                 if (resultSet.getString("password").contentEquals(txtPassword.getText())) {
                     //JOptionPane.showMessageDialog(null,"response should be true now");
                     setResponse(true);
                     break;
-                }else{
-                    LabelError.setVisible(true);
-                    txtPassword.setText("");
                 }
 
             }
+
             if(isResponse()==true){
                 close();
+            }else{
+                LabelError.setVisible(true);
+                txtPassword.setText("");
             }
 
 
