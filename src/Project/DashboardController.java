@@ -254,9 +254,11 @@ public class DashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initClock();
         LabelId.setText(getID());
+        StockinID.setText(getStockInID());
         //initialize
         setComboBOx(InventorySupp,"Select * from tbl_supplier","company_name");
         setComboBOx(InventoryCateg,"Select * from tbl_category","cat_description");
+        setComboBOx(StockinCat,"Select * from tbl_category","cat_description");
 
 
         Inventory_Status.getItems().add("INACTIVE");
@@ -605,6 +607,27 @@ public class DashboardController implements Initializable {
         }
 
     }
+        private String getStockInID(){
+            int id = 0;
+            try {
+
+                preparedStatement = getConnection().prepareStatement("Select max(Stockin_id) from tbl_stockin");
+                resultSet = preparedStatement.executeQuery();
+                if(resultSet.next()){
+                    if (resultSet.getString("max(Stockin_id)") == null) {
+                        id++;
+                    } else {
+                        id = Integer.parseInt(resultSet.getString("max(Stockin_id)"));
+                        id++;
+                    } }
+                preparedStatement.close();
+                resultSet.close();
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }
+            return id+"";
+
+        }
         private String getID(){
             int id = 0;
         try {
@@ -618,9 +641,13 @@ public class DashboardController implements Initializable {
                     id = Integer.parseInt(resultSet.getString("max(Cart_id)"));
                     id++;
                 } }
+                preparedStatement.close();
+                resultSet.close();
             }catch(Exception ex){
                 ex.printStackTrace();
             }
+
+
             return id+"";
         }
         public void checkUser(String Name, int Role,String id) {
@@ -717,7 +744,10 @@ public class DashboardController implements Initializable {
                     new_entry.setDisable(false);
                 }
                 //table Stocks
+                if(e.getSource()==StockInventoryTable){
+                    //JOptionPane.showMessageDialog(null,"CLICKED");
 
+                }
 
             }
             //TABLE CART
@@ -725,6 +755,7 @@ public class DashboardController implements Initializable {
                 btnVoid.setDisable(false);
 
             }
+
         }
         @FXML
         private void addcategory()throws  Exception{

@@ -279,7 +279,7 @@
                      <children>
                         <AnchorPane layoutX="3.0" layoutY="12.0" prefHeight="314.0" prefWidth="584.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
                            <children>
-                              <JFXTreeTableView fx:id="StockInventoryTable" blendMode="DARKEN" layoutX="16.0" layoutY="66.0" prefHeight="237.0" prefWidth="552.0" stylesheets="@../css/style.css" />
+                              <JFXTreeTableView fx:id="StockInventoryTable" blendMode="DARKEN" layoutX="16.0" layoutY="66.0" onMouseClicked="#GetRow" prefHeight="237.0" prefWidth="552.0" stylesheets="@../css/style.css" />
                               <Label layoutX="439.0" layoutY="21.0" prefHeight="32.0" prefWidth="128.0" text="Inventory List">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
@@ -330,7 +330,7 @@
                                     <JFXTextField fx:id="StockinPrice" prefHeight="38.0" prefWidth="205.0" promptText="Item Price:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <JFXTextField fx:id="StockInStock" prefHeight="36.0" prefWidth="275.0" promptText="Current Stock:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <JFXTextField fx:id="StockinAmount" prefHeight="38.0" prefWidth="205.0" promptText="Amount:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <JFXTextField fx:id="StockInITEMID" prefHeight="37.0" prefWidth="210.0" promptText="Item id:" GridPane.rowIndex="3">
+                                    <JFXTextField fx:id="StockInITEMID" editable="false" prefHeight="37.0" prefWidth="210.0" promptText="Item id:" GridPane.rowIndex="3">
                                        <padding>
                                           <Insets left="15.0" right="53.0" />
                                        </padding>
