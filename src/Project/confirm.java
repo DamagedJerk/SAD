@@ -32,8 +32,8 @@ public class confirm implements Initializable {
     ObservableList<products> orderlist= FXCollections.observableArrayList();
     PreparedStatement preparedStatement=null;
     ResultSet resultSet=null;
-    Double totalprice,totalpayment,change,discountedprice=0.00;
-    Double discountvalue=0.00;
+    double totalprice,totalpayment,change,discountedprice=0.00;
+    double discountvalue=0.00;
     private boolean response=false;
     private int customerid=0;
 
@@ -244,15 +244,19 @@ public class confirm implements Initializable {
         stage.showAndWait();
 
         if(controller.isResponse()==true) {
-            Double rate = Double.parseDouble(discountrate.getText());
-            Double totalprice = Double.parseDouble(total_price.getText());
-            Double totalPayment = Double.parseDouble(total_payment.getText());
-            Double totalChange;
+            double rate = Double.parseDouble(discountrate.getText());
+            double totalprice = Double.parseDouble(total_price.getText());
+            double totalPayment = Double.parseDouble(total_payment.getText());
+            double totalChange;
 
             rate = rate / 100;
             discountvalue = totalprice * rate;
             totalprice = totalprice - discountvalue;
             change = totalPayment - totalprice;
+            change=Math.round(change*100);
+            change=change/100;
+            totalprice=Math.round(totalprice*100);
+            totalprice=totalprice/100;
             total_change.setText(change+ "");
             total_price.setText(totalprice + "");
             setDiscountedprice(totalprice);

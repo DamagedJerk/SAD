@@ -745,7 +745,19 @@ public class DashboardController implements Initializable {
                 }
                 //table Stocks
                 if(e.getSource()==StockInventoryTable){
-                    //JOptionPane.showMessageDialog(null,"CLICKED");
+                    String id=StockInventoryTable.getSelectionModel().getSelectedItems().get(0).getValue().product_id.getValue();
+                    String name=StockInventoryTable.getSelectionModel().getSelectedItems().get(0).getValue().product_name.getValue();
+                    String Category=StockInventoryTable.getSelectionModel().getSelectedItems().get(0).getValue().product_category.getValue();
+                    String itemprice=StockInventoryTable.getSelectionModel().getSelectedItems().get(0).getValue().product_price.getValue();
+                    String currentstock=StockInventoryTable.getSelectionModel().getSelectedItems().get(0).getValue().product_quan.getValue();
+
+                    StockinCat.setValue(Category);
+                    StockInITEMID.setText(id);
+                    StockInName.setText(name);
+                    StockinPrice.setText(itemprice);
+                    StockInStock.setText(currentstock);
+                    btnStockIn.setDisable(false);
+                    btnStockOut.setDisable(false);
 
                 }
 
