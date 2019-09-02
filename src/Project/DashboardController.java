@@ -84,6 +84,12 @@ public class DashboardController implements Initializable {
 
     @FXML
     private JFXTreeTableView<Stocks> StockInTable;
+    @FXML
+    private JFXTextField StockIntotalprice;
+    @FXML
+    private JFXTextField StockinAmount;
+
+
 
     @FXML
     private JFXButton btnVoid;
@@ -184,8 +190,6 @@ public class DashboardController implements Initializable {
     private JFXTextField StockinPrice;
     @FXML
     private JFXTextField StockInStock;
-    @FXML
-    private JFXTextField StockIntotalprice;
     @FXML
     private JFXButton btnStockIn;
     @FXML
@@ -768,6 +772,35 @@ public class DashboardController implements Initializable {
 
             }
 
+        }
+
+        @FXML
+        private void doStockIn(){
+            try{
+                if(StockinAmount.getText().contentEquals("") && StockIntotalprice.getText().contentEquals("")){
+                   JOptionPane.showMessageDialog(null,"Please input Fields");
+                }else{
+                    String stockinid=StockinID.getText();
+                    String itemId=StockInITEMID.getText();
+                    String EntryType="Stock-In";
+                    int Amount=Integer.parseInt(StockinAmount.getText());
+                    double stockinprice=Double.parseDouble(StockIntotalprice.getText());
+                }
+
+
+
+
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }
+        }
+        @FXML
+        private void doStockOut(){
+            try{
+
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }
         }
         @FXML
         private void addcategory()throws  Exception{
