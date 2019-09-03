@@ -3,7 +3,50 @@
   <component name="ChangeListManager">
     <list default="true" id="cbddea0c-4283-4362-bc6d-1b06ad665c0e" name="Default Changelist" comment="&quot;Palit&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$14.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$15.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$16.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$17.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$18.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$19.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$20.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$21.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$21.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$22.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$22.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$23.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$23.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$24.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$24.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$25.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$25.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$26.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$26.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$27.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$27.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$28.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$28.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$29.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$29.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$30.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$30.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Inventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Inventory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/products.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/products.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/Alert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Alert.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Dashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Project/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Inventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/Log-InForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Log-InForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/Signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Signup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/Stocks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Stocks.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/addCategory.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/addCategory.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/addSupplier.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/addSupplier.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/products.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/products.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,8 +63,44 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-272">
-              <caret line="191" column="38" selection-start-line="191" selection-start-column="38" selection-end-line="191" selection-end-column="38" />
+            <state relative-caret-position="119">
+              <caret line="639" column="27" selection-start-line="639" selection-start-column="27" selection-end-line="639" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Project/Stocks.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="24" column="73" selection-start-line="24" selection-start-column="73" selection-end-line="24" selection-end-column="73" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Project/products.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="12" selection-start-line="12" selection-end-line="12" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Project/Inventory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="18" column="41" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -32,7 +111,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Project/confirm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3213">
+            <state relative-caret-position="355">
               <caret line="258" column="38" selection-start-line="258" selection-start-column="38" selection-end-line="258" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -49,19 +128,19 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Project/Dashboard.fxml">
+          <provider editor-type-id="JavaFX-Scene-Builder" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4777">
-              <caret line="281" column="62" selection-start-line="281" selection-start-column="55" selection-end-line="281" selection-end-column="62" />
+            <state relative-caret-position="330">
+              <caret line="310" column="62" selection-start-line="310" selection-start-column="62" selection-end-line="310" selection-end-column="62" />
             </state>
           </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Project/loginController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2125">
-              <caret line="156" column="37" selection-start-line="156" selection-start-column="37" selection-end-line="156" selection-end-column="37" />
+            <state relative-caret-position="151">
+              <caret line="144" column="71" selection-start-line="144" selection-start-column="71" selection-end-line="144" selection-end-column="71" />
             </state>
           </provider>
         </entry>
@@ -77,22 +156,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>doConfir</find>
-      <find>userid=</find>
-      <find>setters</find>
-      <find>conf</find>
-      <find>getCart</find>
-      <find>apply</find>
-      <find>setTotal</find>
-      <find>isCustomerEx</find>
-      <find>shows</find>
-      <find>userid</find>
-      <find>checkuser</find>
-      <find>JoptionPane.showMessage</find>
-      <find>unsaon ni</find>
-      <find>unsaon</find>
-      <find>check</find>
-      <find>getID</find>
       <find>StockInve</find>
       <find>close()</find>
       <find>setCombo</find>
@@ -107,6 +170,22 @@
       <find>StockInventoryTab</find>
       <find>refresh</find>
       <find>getRow</find>
+      <find>SalesPayment</find>
+      <find>new Products</find>
+      <find>addto</find>
+      <find>JFXtreetableC</find>
+      <find>StockinPrice</find>
+      <find>doStockIn</find>
+      <find>Stockinta</find>
+      <find>refreshs</find>
+      <find>stockintotal</find>
+      <find>refreshst</find>
+      <find>stockinto</find>
+      <find>refreshstoc</find>
+      <find>stockin</find>
+      <find>refreshstock</find>
+      <find>StockInID</find>
+      <find>refres</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -118,17 +197,17 @@
         <option value="$PROJECT_DIR$/src/Project/AddController.java" />
         <option value="$PROJECT_DIR$/src/Project/Suppliers.java" />
         <option value="$PROJECT_DIR$/src/Project/Category.java" />
-        <option value="$PROJECT_DIR$/src/Project/Stocks.java" />
         <option value="$PROJECT_DIR$/src/Project/suppliercontroller.java" />
         <option value="$PROJECT_DIR$/src/Project/CategoryPanelController.java" />
         <option value="$PROJECT_DIR$/src/Project/purchase.java" />
-        <option value="$PROJECT_DIR$/src/Project/products.java" />
-        <option value="$PROJECT_DIR$/src/Project/Inventory.java" />
         <option value="$PROJECT_DIR$/src/Project/recordcustomer.java" />
         <option value="$PROJECT_DIR$/src/Project/signupcontroller.java" />
-        <option value="$PROJECT_DIR$/src/Project/loginController.java" />
         <option value="$PROJECT_DIR$/src/Project/Alert.java" />
         <option value="$PROJECT_DIR$/src/Project/confirm.java" />
+        <option value="$PROJECT_DIR$/src/Project/products.java" />
+        <option value="$PROJECT_DIR$/src/Project/Inventory.java" />
+        <option value="$PROJECT_DIR$/src/Project/loginController.java" />
+        <option value="$PROJECT_DIR$/src/Project/Stocks.java" />
         <option value="$PROJECT_DIR$/src/Project/DashboardController.java" />
       </list>
     </option>
@@ -143,7 +222,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -166,6 +244,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -317,18 +396,18 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/addSupplier.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1105">
           <caret line="65" selection-start-line="65" selection-end-line="65" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/Log-InForm.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-612" />
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/suppliercontroller.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -350,37 +429,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Project/Stocks.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/purchase.java" />
-    <entry file="file://$PROJECT_DIR$/src/Project/Inventory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="36" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Project/products.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk-11.0.4/lib/src.zip!/java.base/java/lang/Integer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -399,8 +448,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/Alert.fxml">
-      <provider selected="true" editor-type-id="text-editor" />
       <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/AddController.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -425,8 +474,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/Customer.fxml">
-      <provider selected="true" editor-type-id="text-editor" />
       <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="jar://$USER_HOME$/Downloads/Compressed/javafx-sdk-12.0.1/lib/javafx.base.jar!/com/sun/javafx/event/BasicEventDispatcher.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -470,10 +519,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
+    <entry file="file://$PROJECT_DIR$/src/Project/products.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-272">
-          <caret line="191" column="38" selection-start-line="191" selection-start-column="38" selection-end-line="191" selection-end-column="38" />
+        <state relative-caret-position="170">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Project/Position.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Project/Dashboard.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="310" column="62" selection-start-line="310" selection-start-column="62" selection-end-line="310" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Project/Inventory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="18" column="41" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -482,7 +553,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/confirm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3213">
+        <state relative-caret-position="355">
           <caret line="258" column="38" selection-start-line="258" selection-start-column="38" selection-end-line="258" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -496,18 +567,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Project/Dashboard.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4777">
-          <caret line="281" column="62" selection-start-line="281" selection-start-column="55" selection-end-line="281" selection-end-column="62" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/loginController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2125">
-          <caret line="156" column="37" selection-start-line="156" selection-start-column="37" selection-end-line="156" selection-end-column="37" />
+        <state relative-caret-position="151">
+          <caret line="144" column="71" selection-start-line="144" selection-start-column="71" selection-end-line="144" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Project/Stocks.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="73" selection-start-line="24" selection-start-column="73" selection-end-line="24" selection-end-column="73" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="639" column="27" selection-start-line="639" selection-start-column="27" selection-end-line="639" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

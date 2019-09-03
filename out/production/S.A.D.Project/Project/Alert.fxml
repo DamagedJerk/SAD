@@ -37,14 +37,14 @@
                   <Insets left="10.0" top="5.0" />
                </HBox.margin>
             </ImageView>
-            <Label fx:id="alertlabel" contentDisplay="RIGHT" prefHeight="57.0" prefWidth="354.0" text="   ALERT" textFill="#363434">
+            <Label fx:id="alertlabel" contentDisplay="RIGHT" prefHeight="57.0" prefWidth="354.0" text="   Confirm Admin" textFill="#363434">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
          </children>
       </HBox>
-      <JFXButton fx:id="btnConfirm" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#doConfirm" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #16FE95;" text="Confirm" textAlignment="CENTER" textFill="#282626" GridPane.rowIndex="2">
+      <JFXButton fx:id="btnConfirm" alignment="CENTER" contentDisplay="CENTER" onAction="#doConfirm" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #16FE95;" text="Confirm" textAlignment="CENTER" textFill="#282626" GridPane.rowIndex="2">
          <contextMenu>
             <ContextMenu>
               <items>
@@ -61,7 +61,7 @@
             <Insets left="15.0" right="15.0" />
          </GridPane.margin>
       </JFXListView>
-      <JFXButton fx:id="btncancel" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#close" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #FFA800;" text="Cancel" textAlignment="CENTER" textFill="#282626" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <JFXButton fx:id="btncancel" alignment="CENTER" contentDisplay="CENTER" onAction="#close" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #FFA800;" text="Cancel" textAlignment="CENTER" textFill="#282626" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <contextMenu>
             <ContextMenu>
                <items>

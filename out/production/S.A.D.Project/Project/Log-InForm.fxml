@@ -49,14 +49,14 @@
                   <Font name="System Bold" size="17.0" />
                </font>
             </JFXButton>
-            <JFXTextField fx:id="txtUsername" blendMode="DARKEN" focusColor="#16fe95" layoutX="42.0" layoutY="53.0" prefHeight="39.0" prefWidth="397.0" promptText="Username">
+            <JFXTextField fx:id="txtUsername" blendMode="DARKEN" focusColor="#16fe95" labelFloat="true" layoutX="42.0" layoutY="53.0" prefHeight="39.0" prefWidth="397.0" promptText="Username">
                <font>
-                  <Font name="System Bold" size="22.0" />
+                  <Font size="22.0" />
                </font>
             </JFXTextField>
-            <JFXPasswordField fx:id="txtPassword" blendMode="DARKEN" focusColor="#16fe95" layoutX="42.0" layoutY="129.0" prefHeight="48.0" prefWidth="397.0" promptText="Password" viewOrder="1.0">
+            <JFXPasswordField fx:id="txtPassword" blendMode="DARKEN" focusColor="#16fe95" labelFloat="true" layoutX="42.0" layoutY="129.0" prefHeight="48.0" prefWidth="397.0" promptText="Password" viewOrder="1.0">
                <font>
-                  <Font name="System Bold" size="22.0" />
+                  <Font size="22.0" />
                </font>
             </JFXPasswordField>
             <Label fx:id="lblerror" alignment="TOP_LEFT" layoutX="43.0" layoutY="183.0" prefHeight="26.0" prefWidth="252.0" text="wrong username" textAlignment="CENTER" textFill="#d70808" visible="false">

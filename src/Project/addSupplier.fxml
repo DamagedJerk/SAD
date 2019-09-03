@@ -58,12 +58,12 @@
       </JFXListView>
       <AnchorPane prefHeight="310.0" prefWidth="305.0" GridPane.rowIndex="1">
          <children>
-            <JFXTextField fx:id="Company_name" layoutX="36.0" layoutY="14.0" prefHeight="38.0" prefWidth="185.0" promptText="Company Name:">
+            <JFXTextField fx:id="Company_name" labelFloat="true" layoutX="36.0" layoutY="36.0" prefHeight="38.0" prefWidth="185.0" promptText="Company Name:">
                <font>
                   <Font size="17.0" />
                </font>
             </JFXTextField>
-            <JFXButton fx:id="btnEdit" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" disable="true" layoutX="189.0" layoutY="252.0" onAction="#doEdit" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #FFA800;" text="Edit" textAlignment="CENTER" textFill="#282626">
+            <JFXButton fx:id="btnEdit" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="189.0" layoutY="252.0" onAction="#doEdit" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #FFA800;" text="Edit" textAlignment="CENTER" textFill="#282626">
                <contextMenu>
                   <ContextMenu>
                      <items>
@@ -72,7 +72,7 @@
                   </ContextMenu>
                </contextMenu>
             </JFXButton>
-            <JFXButton fx:id="btnAddsupplier" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="36.0" layoutY="252.0" onAction="#doAdd" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #16FE95;" text="Add" textAlignment="CENTER" textFill="#282626">
+            <JFXButton fx:id="btnAddsupplier" alignment="CENTER" contentDisplay="CENTER" layoutX="36.0" layoutY="252.0" onAction="#doAdd" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #16FE95;" text="Add" textAlignment="CENTER" textFill="#282626">
                <contextMenu>
                   <ContextMenu>
                     <items>
@@ -81,12 +81,12 @@
                   </ContextMenu>
                </contextMenu>
             </JFXButton>
-            <JFXTextField fx:id="Contact_Number" layoutX="36.0" layoutY="67.0" prefHeight="38.0" prefWidth="185.0" promptText="Contact Number:">
+            <JFXTextField fx:id="Contact_Number" labelFloat="true" layoutX="36.0" layoutY="104.0" prefHeight="38.0" prefWidth="185.0" promptText="Contact Number:">
                <font>
                   <Font size="17.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="txtEmail" layoutX="36.0" layoutY="114.0" prefHeight="38.0" prefWidth="185.0" promptText="Email:">
+            <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="36.0" layoutY="178.0" prefHeight="32.0" prefWidth="185.0" promptText="Email:">
                <font>
                   <Font size="17.0" />
                </font>

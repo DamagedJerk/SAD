@@ -5,9 +5,11 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -58,17 +60,12 @@
       </JFXListView>
       <AnchorPane prefHeight="233.0" prefWidth="200.0" GridPane.rowIndex="1">
          <children>
-            <Label layoutX="20.0" layoutY="14.0" prefHeight="32.0" prefWidth="171.0" text="Category Name">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <JFXTextField fx:id="txtCategory" layoutX="26.0" layoutY="51.0" prefHeight="38.0" prefWidth="158.0">
+            <JFXTextField fx:id="txtCategory" labelFloat="true" layoutX="26.0" layoutY="51.0" prefHeight="38.0" prefWidth="158.0" promptText="Category Name">
                <font>
                   <Font size="17.0" />
                </font>
             </JFXTextField>
-            <JFXButton fx:id="CategoryEdit" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" disable="true" layoutX="36.0" layoutY="178.0" onAction="#doEdit" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #FFA800;" text="Edit" textAlignment="CENTER" textFill="#282626">
+            <JFXButton fx:id="CategoryEdit" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="36.0" layoutY="178.0" onAction="#doEdit" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #FFA800;" text="Edit" textAlignment="CENTER" textFill="#282626">
                <contextMenu>
                   <ContextMenu>
                      <items>
@@ -77,7 +74,7 @@
                   </ContextMenu>
                </contextMenu>
             </JFXButton>
-            <JFXButton fx:id="CategoryAdd" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="36.0" layoutY="126.0" onAction="#doAdd" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #16FE95;" text="Add" textAlignment="CENTER" textFill="#282626">
+            <JFXButton fx:id="CategoryAdd" alignment="CENTER" contentDisplay="CENTER" layoutX="36.0" layoutY="126.0" onAction="#doAdd" prefHeight="25.0" prefWidth="128.0" style="-fx-background-color: #16FE95;" text="Add" textAlignment="CENTER" textFill="#282626">
                <contextMenu>
                   <ContextMenu>
                     <items>
@@ -100,8 +97,14 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <JFXTreeTableView fx:id="CategoryTable" blendMode="DARKEN" layoutX="10.0" layoutY="20.0" onMouseClicked="#GetRow" prefHeight="185.0" prefWidth="252.0" stylesheets="@../css/style.css" />
+            <JFXTreeTableView fx:id="CategoryTable" blendMode="DARKEN" layoutX="10.0" layoutY="20.0" onMouseClicked="#GetRow" prefHeight="185.0" prefWidth="252.0" stylesheets="@../css/style.css">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor></JFXTreeTableView>
          </children>
       </AnchorPane>
    </children>
+   <effect>
+      <DropShadow />
+   </effect>
 </GridPane>

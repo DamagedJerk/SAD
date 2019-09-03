@@ -164,7 +164,8 @@ public class DashboardController implements Initializable {
 
     @FXML
     private JFXTextField InventoryName;
-
+    @FXML
+    private JFXTextField InventoryCost;
     @FXML
     private JFXButton add_inventory;
 
@@ -187,7 +188,7 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXTextField StockInName;
     @FXML
-    private JFXTextField StockinPrice;
+    private JFXTextField StockinCost;
     @FXML
     private JFXTextField StockInStock;
     @FXML
@@ -397,6 +398,14 @@ public class DashboardController implements Initializable {
                 return productsStringCellDataFeatures.getValue().getValue().product_price;
             }
         });
+        JFXTreeTableColumn<Inventory, String> InventoryCost = new JFXTreeTableColumn<>("Cost");
+        InventoryCost.setPrefWidth(widthInventory);
+        InventoryCost.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Inventory, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Inventory, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().product_cost;
+            }
+        });
         JFXTreeTableColumn<Inventory, String> InventoryCategory = new JFXTreeTableColumn<>("Category");
         InventoryCategory.setPrefWidth(widthInventory);
         InventoryCategory.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Inventory, String>, ObservableValue<String>>() {
@@ -425,7 +434,7 @@ public class DashboardController implements Initializable {
         refreshInventoryTable(InventoryList);
         final TreeItem<Inventory> inventoryList = new RecursiveTreeItem<Inventory>(InventoryList, RecursiveTreeObject::getChildren);
 
-        tbl_inventory.getColumns().setAll(InventoryId, InventoryName, InventoryQuantity, InventoryPrice, InventoryCategory, InventoryStatus,InventorySupplier);
+        tbl_inventory.getColumns().setAll(InventoryId, InventoryName, InventoryQuantity, InventoryPrice,InventoryCost, InventoryCategory, InventoryStatus,InventorySupplier);
         tbl_inventory.setRoot(inventoryList);
         tbl_inventory.setShowRoot(false);
 
@@ -436,6 +445,28 @@ public class DashboardController implements Initializable {
             });*/
         CurrentID=Integer.parseInt(setID());
         InventoryID.setText(CurrentID+"");
+        StockinAmount.setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+
+                if(keyEvent.getCharacter().contains("") && StockinAmount.getLength()>=1) {
+                    //JOptionPane.showMessageDialog(null, "KeyTyped 1");
+                    StockIntotalprice.setText("");
+                    if(keyEvent.getCharacter().contains("1") || keyEvent.getCharacter().contains("2") || keyEvent.getCharacter().contains("3") || keyEvent.getCharacter().contains("4") || keyEvent.getCharacter().contains("5") || keyEvent.getCharacter().contains("6") || keyEvent.getCharacter().contains("7") || keyEvent.getCharacter().contains("8") || keyEvent.getCharacter().contains("9") || keyEvent.getCharacter().contains("0")){
+                        //JOptionPane.showMessageDialog(null, "KeyTyped 2");
+                        double itemprice=Double.parseDouble(StockinCost.getText());
+                        double amount=Double.parseDouble(StockinAmount.getText());
+                        double totalprice=0.00;
+                        totalprice=amount*itemprice;
+                        StockIntotalprice.setText(totalprice+"");
+                    }
+                }else{
+                    //JOptionPane.showMessageDialog(null, "KeyTyped 3");
+                    keyEvent.consume();
+                    //Wa pa sya pa nahuman . . . . Error Trapping in case Backspace or space ang ipindut dapat ma consume;
+                }
+            }
+        });
 
         SalesPayment.setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
@@ -449,7 +480,7 @@ public class DashboardController implements Initializable {
                         Double Sales=Double.parseDouble(SalesPrice.getText());
                         Double payment=Double.parseDouble(SalesPayment.getText());
                         if(payment>=Sales){
-                            Double Change=payment-Sales;
+                            double Change=payment-Sales;
                             SalesChange.setText(""+Change);
                         }else{
                             SalesChange.setText("");
@@ -497,6 +528,14 @@ public class DashboardController implements Initializable {
                 return productsStringCellDataFeatures.getValue().getValue().product_price;
             }
         });
+        JFXTreeTableColumn<Inventory, String> StockInCost= new JFXTreeTableColumn<>("Cost");
+        StockInCost.setPrefWidth(stockincolumnwidth);
+        StockInCost.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Inventory, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Inventory, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().product_cost;
+            }
+        });
         JFXTreeTableColumn<Inventory, String> StockInCat= new JFXTreeTableColumn<>("Category");
         StockInCat.setPrefWidth(stockincolumnwidth);
         StockInCat.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Inventory, String>, ObservableValue<String>>() {
@@ -524,7 +563,7 @@ public class DashboardController implements Initializable {
         refreshInventoryTable(StockinList);
         final TreeItem<Inventory> stockinList = new RecursiveTreeItem<Inventory>(StockinList, RecursiveTreeObject::getChildren);
 
-        StockInventoryTable.getColumns().setAll(StockinId, StockInName, StockInQuantity, StockInPrice, StockInCat, StockInStatus,StockInSupp);
+        StockInventoryTable.getColumns().setAll(StockinId, StockInName, StockInQuantity, StockInPrice,StockInCost, StockInCat, StockInStatus,StockInSupp);
         StockInventoryTable.setRoot(stockinList);
         StockInventoryTable.setShowRoot(false);
 
@@ -548,7 +587,16 @@ public class DashboardController implements Initializable {
                 return productsStringCellDataFeatures.getValue().getValue().product_name;
             }
         });
-        JFXTreeTableColumn<Stocks, String> Stocks= new JFXTreeTableColumn<>("Current Stocks");
+        JFXTreeTableColumn<Stocks, String> formerStocks= new JFXTreeTableColumn<>("Former Quantity");
+        formerStocks.setPrefWidth(stocktablewidth);
+        formerStocks.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Stocks, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Stocks, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().before_update_stocks;
+            }
+        });
+
+        JFXTreeTableColumn<Stocks, String> Stocks= new JFXTreeTableColumn<>("Updated Quantity");
         Stocks.setPrefWidth(stocktablewidth);
         Stocks.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Stocks, String>, ObservableValue<String>>() {
             @Override
@@ -556,14 +604,7 @@ public class DashboardController implements Initializable {
                 return productsStringCellDataFeatures.getValue().getValue().current_stocks;
             }
         });
-        JFXTreeTableColumn<Stocks, String> Entry_type= new JFXTreeTableColumn<>("Entry Type");
-        Entry_type.setPrefWidth(stocktablewidth);
-        Entry_type.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Stocks, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Stocks, String> productsStringCellDataFeatures) {
-                return productsStringCellDataFeatures.getValue().getValue().Entry_type;
-            }
-        });
+
         JFXTreeTableColumn<Stocks, String> Last_entry= new JFXTreeTableColumn<>("Last Entry");
         Last_entry.setPrefWidth(stocktablewidth);
         Last_entry.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Stocks, String>, ObservableValue<String>>() {
@@ -588,10 +629,18 @@ public class DashboardController implements Initializable {
                 return productsStringCellDataFeatures.getValue().getValue().Time;
             }
         });
-
+        JFXTreeTableColumn<Stocks, String> StockInTotalCost= new JFXTreeTableColumn<>("Total Cost");
+        StockInTotalCost.setPrefWidth(stocktablewidth);
+        StockInTotalCost.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Stocks, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Stocks, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().TotalCost;
+            }
+        });
+        refreshStockList();
         final TreeItem<Stocks> StocksTablesList = new RecursiveTreeItem<Stocks>(StocksTableList, RecursiveTreeObject::getChildren);
 
-        StockInTable.getColumns().setAll(StockId, StockName,Stocks, Entry_type, Last_entry, StockInDate,StockInTime);
+        StockInTable.getColumns().setAll(StockId, StockName,formerStocks,Last_entry,Stocks,StockInDate,StockInTime,StockInTotalCost);
         StockInTable.setRoot(StocksTablesList );
         StockInTable.setShowRoot(false);
 
@@ -730,6 +779,7 @@ public class DashboardController implements Initializable {
                     String category=tbl_inventory.getSelectionModel().getSelectedItems().get(0).getValue().product_category.getValue();
                     String supplier=tbl_inventory.getSelectionModel().getSelectedItems().get(0).getValue().product_supplier.getValue();
                     String status=tbl_inventory.getSelectionModel().getSelectedItems().get(0).getValue().status.getValue();
+                    String cost=tbl_inventory.getSelectionModel().getSelectedItems().get(0).getValue().product_cost.getValue();
 
                     InventorySupp.setValue(supplier);
                     InventoryCateg.setValue(category);
@@ -740,6 +790,7 @@ public class DashboardController implements Initializable {
                     InventoryQuantity.setDisable(true);
                     InventoryQuantity.setDisableAnimation(true);
                     InventoryPrice.setText(itemprice);
+                    InventoryCost.setText(cost);
 
                     update_inventory.setDisable(false);
                     add_inventory.setDisable(true);
@@ -752,16 +803,16 @@ public class DashboardController implements Initializable {
                     String id=StockInventoryTable.getSelectionModel().getSelectedItems().get(0).getValue().product_id.getValue();
                     String name=StockInventoryTable.getSelectionModel().getSelectedItems().get(0).getValue().product_name.getValue();
                     String Category=StockInventoryTable.getSelectionModel().getSelectedItems().get(0).getValue().product_category.getValue();
-                    String itemprice=StockInventoryTable.getSelectionModel().getSelectedItems().get(0).getValue().product_price.getValue();
+                    String itemcost=StockInventoryTable.getSelectionModel().getSelectedItems().get(0).getValue().product_cost.getValue();
                     String currentstock=StockInventoryTable.getSelectionModel().getSelectedItems().get(0).getValue().product_quan.getValue();
 
                     StockinCat.setValue(Category);
                     StockInITEMID.setText(id);
                     StockInName.setText(name);
-                    StockinPrice.setText(itemprice);
+                    StockinCost.setText(itemcost);
                     StockInStock.setText(currentstock);
                     btnStockIn.setDisable(false);
-                    btnStockOut.setDisable(false);
+
 
                 }
 
@@ -769,22 +820,61 @@ public class DashboardController implements Initializable {
             //TABLE CART
             if(e.getSource()==tableCart){
                 btnVoid.setDisable(false);
-
             }
 
         }
 
         @FXML
-        private void doStockIn(){
+        private void doStockIn(){ //balik diri
             try{
-                if(StockinAmount.getText().contentEquals("") && StockIntotalprice.getText().contentEquals("")){
+                if(StockinAmount.getText().contentEquals("") || StockIntotalprice.getText().contentEquals("")){
                    JOptionPane.showMessageDialog(null,"Please input Fields");
                 }else{
                     String stockinid=StockinID.getText();
                     String itemId=StockInITEMID.getText();
-                    String EntryType="Stock-In";
+                    String outdatedquantity=StockInStock.getText();
                     int Amount=Integer.parseInt(StockinAmount.getText());
-                    double stockinprice=Double.parseDouble(StockIntotalprice.getText());
+                    double stockincost=Double.parseDouble(StockIntotalprice.getText());
+                    String dateofentry=dateTime.getText();
+                    String timeofentry=Time.getText();
+
+                    try{
+                        preparedStatement=getConnection().prepareStatement("Insert into tbl_stockin values(?,?,?,?,?,?,?)");
+                        preparedStatement.setString(1,stockinid);
+                        preparedStatement.setString(2,itemId);
+                        preparedStatement.setString(3,Amount+"");
+                        preparedStatement.setString(4,outdatedquantity);
+                        preparedStatement.setString(5,dateofentry);
+                        preparedStatement.setString(6,timeofentry);
+                        preparedStatement.setString(7,stockincost+"");
+                        preparedStatement.executeUpdate();
+
+
+
+                        preparedStatement=getConnection().prepareStatement("Update tbl_products SET prod_quantity=prod_quantity+? where prod_id=?");
+                        preparedStatement.setString(1,Amount+"");
+                        preparedStatement.setString(2,itemId);
+                        preparedStatement.executeUpdate();
+
+                        refreshStockList();
+                        refreshProductMenu();
+                        refreshInventoryTable(InventoryList);
+                        refreshInventoryTable(StockinList);
+
+                        StockinID.setText(getStockInID());
+                        StockinCat.setValue("");
+                        StockInITEMID.setText("");
+                        StockInName.setText("");
+                        StockinCost.setText("");
+                        StockInStock.setText("");
+                        StockinAmount.setText("");
+                        StockIntotalprice.setText("");
+                        btnStockIn.setDisable(true);
+
+
+                    }catch (Exception ex){
+                        ex.printStackTrace();
+                    }
                 }
 
 
@@ -794,14 +884,7 @@ public class DashboardController implements Initializable {
                 ex.printStackTrace();
             }
         }
-        @FXML
-        private void doStockOut(){
-            try{
 
-            }catch(Exception ex){
-                ex.printStackTrace();
-            }
-        }
         @FXML
         private void addcategory()throws  Exception{
             FXMLLoader loader= new FXMLLoader(getClass().getResource("addCategory.fxml"));
@@ -1086,12 +1169,13 @@ public class DashboardController implements Initializable {
                 int id =Integer.parseInt(InventoryID.getText()) ;
                 String name = InventoryName.getText();
                 String quan = InventoryQuantity.getText();
+                String itemcost=InventoryCost.getText();
                 String itemprice = InventoryPrice.getText();
                 int category = InventoryCateg.getSelectionModel().selectedIndexProperty().getValue();
                 int supplier = InventorySupp.getSelectionModel().selectedIndexProperty().getValue();
                 int status = Inventory_Status.getSelectionModel().selectedIndexProperty().getValue();
                 String Date =dateTime.getText();
-                String sql ="Insert into tbl_products values(?,?,?,?,?,?,?,?)";
+                String sql ="Insert into tbl_products values(?,?,?,?,?,?,?,?,?)";
                 //JOptionPane.showMessageDialog(null,sql+"");
                 try{
 
@@ -1103,9 +1187,10 @@ public class DashboardController implements Initializable {
                     preparedStatement.setInt(3,supplier);
                     preparedStatement.setString(4,quan);
                     preparedStatement.setString(5,itemprice);
-                    preparedStatement.setString(6,Date);
-                    preparedStatement.setInt(7,status);
-                    preparedStatement.setInt(8,category);
+                    preparedStatement.setString(6,itemcost);
+                    preparedStatement.setString(7,Date);
+                    preparedStatement.setInt(8,status);
+                    preparedStatement.setInt(9,category);
 
                     preparedStatement.executeUpdate();
                     refreshInventoryTable(InventoryList);
@@ -1141,6 +1226,7 @@ public class DashboardController implements Initializable {
             InventoryCateg.setValue("");
             InventorySupp.setValue("");
             Inventory_Status.setValue("ACTIVE");
+            InventoryCost.setText("");
 
         }
 
@@ -1171,7 +1257,7 @@ public class DashboardController implements Initializable {
                 int i =0;
                 String status;
                 list.clear();
-                String sql = "select p.prod_id,p.prod_name,p.prod_quantity,p.prod_price,c.cat_description,s.company_name,p.prod_status FROM tbl_products p JOIN tbl_supplier s ON p.supplier_id = s.supplier_id JOIN tbl_category c ON p.category_id=c.category_id Group by p.prod_id";
+                String sql = "select p.prod_id,p.prod_name,p.prod_quantity,p.prod_price,c.cat_description,s.company_name,p.prod_status,p.prod_cost FROM tbl_products p JOIN tbl_supplier s ON p.supplier_id = s.supplier_id JOIN tbl_category c ON p.category_id=c.category_id Group by p.prod_id";
                 preparedStatement = getConnection().prepareStatement(sql);
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
@@ -1182,7 +1268,7 @@ public class DashboardController implements Initializable {
                     }else{
                         status="ACTIVE";
                     }
-                    list.add(new Inventory(resultSet.getString("prod_id"), resultSet.getString("prod_name"), resultSet.getString("prod_quantity"),resultSet.getString("prod_price"), resultSet.getString("cat_description"), resultSet.getString("company_name"),status));
+                    list.add(new Inventory(resultSet.getString("prod_id"), resultSet.getString("prod_name"), resultSet.getString("prod_quantity"),resultSet.getString("prod_price"), resultSet.getString("cat_description"), resultSet.getString("company_name"),status,resultSet.getString("prod_cost")));
 
                 }
                 InventoryCount.setText(i+"");
@@ -1194,7 +1280,12 @@ public class DashboardController implements Initializable {
 
             try{
                 StocksTableList.clear();
-                String sql="";
+                String sql="Select s.Stockin_id,p.prod_name,s.Stock_BeforeUpdate,p.prod_quantity,s.LastEntry,s.Entry_date,s.Entry_time,s.total_cost from tbl_stockin s JOIN tbl_products p ON s.prod_id=p.prod_id";
+                preparedStatement=getConnection().prepareStatement(sql);
+                resultSet=preparedStatement.executeQuery();
+                while(resultSet.next()){
+                    StocksTableList.add(new Stocks(resultSet.getString("Stockin_id"),resultSet.getString("prod_name"),resultSet.getString("Stock_BeforeUpdate"),resultSet.getString("LastEntry"),resultSet.getString("prod_quantity"),resultSet.getString("Entry_date"),resultSet.getString("Entry_time"),resultSet.getString("total_cost")));
+                }
 
             }catch(Exception e){
                 e.printStackTrace();
