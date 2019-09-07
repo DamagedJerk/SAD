@@ -25,6 +25,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class confirm implements Initializable {
@@ -35,7 +37,8 @@ public class confirm implements Initializable {
     double totalprice,totalpayment,change,discountedprice=0.00;
     double discountvalue=0.00;
     private boolean response=false;
-    private int customerid=0;
+    private int customer_id=0;
+    private String adminid="";
 
     //setters and getters
 
@@ -48,6 +51,11 @@ public class confirm implements Initializable {
         }
         return str;
     }
+    private void setCustomer_id(int customer_id) {
+        this.customer_id = customer_id;
+    }
+
+
 
     public void setResponse(boolean response) {
         this.response = response;
@@ -57,13 +65,6 @@ public class confirm implements Initializable {
         return response;
     }
 
-    public void setCustomerid(int customerid) {
-        this.customerid = customerid;
-    }
-
-    public int getCustomerid() {
-        return customerid;
-    }
 
     public void setDiscountedprice(Double discountedprice) {
         this.discountedprice = discountedprice;
@@ -104,6 +105,15 @@ public class confirm implements Initializable {
 
     @FXML
     private JFXTextField total_change;
+    @FXML
+    private JFXTextField FirstName;
+    @FXML
+    private JFXTextField Address;
+    @FXML
+    private JFXTextField Contact;
+    @FXML
+    private JFXTextField LastName;
+
 
     @FXML
     private JFXButton btnCashOut;
@@ -130,6 +140,14 @@ public class confirm implements Initializable {
         total_payment.setText(getTotalpayment()+"");
         total_change.setText(getTotalchange()+"");
 
+    }
+
+    public void setAdminid(String adminid) {
+        this.adminid = adminid;
+    }
+
+    public String getAdminid() {
+        return adminid;
     }
 
     public void setTotalprice(Double totalprice) {
@@ -260,7 +278,16 @@ public class confirm implements Initializable {
             total_change.setText(change+ "");
             total_price.setText(totalprice + "");
             setDiscountedprice(totalprice);
-
+            //logs activity
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd ");
+            DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
+            preparedStatement=getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+            preparedStatement.setString(1,getAdminid());
+            preparedStatement.setString(2,"Granted Discount");
+            preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+            preparedStatement.setString(4,LocalDateTime.now().format(time));
+            preparedStatement.executeUpdate();
+            //
             btnDiscount.setDisable(true);
             discountrate.setText("");
         }
@@ -269,44 +296,63 @@ public class confirm implements Initializable {
     private void doCOnfirm(){
         //get employee_id
         try {
-
-            /*String emp_id = "";
-            preparedStatement = getConnection().prepareStatement("Select user_id from tbl_employee where ");
-            resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                emp_id = resultSet.getString("user_id");
-
-            }*/
-            //show customer panel
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("Customer.fxml"));
-            recordcustomer customer=new recordcustomer();
-            loader.setController(customer);
-            Parent root =loader.load();
-
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.TRANSPARENT);
-            stage.initOwner(btnConfirm.getScene().getWindow());
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
-
-            if(customer.isResponse()==true){
-                   setCustomerid(customer.getCustomer_id());
-
-                setResponse(true);
-                //JOptionPane.showMessageDialog(null, "Shows Receipt","WA PA NAHUMAN",JOptionPane.WARNING_MESSAGE);
-                close();
+            if(FirstName.getText().contentEquals("") || LastName.getText().contentEquals("")){
+                JOptionPane.showMessageDialog(null,"Please input fields","Warning",JOptionPane.WARNING_MESSAGE);
+            }if(isCustomerExist()==false){
+                try{
+                    preparedStatement=getConnection().prepareStatement("Insert into tbl_customer values(null,?,?,?,?)");
+                    preparedStatement.setString(1,FirstName.getText());
+                    //preparedStatement.setString(2,Mid_name.getText());
+                    preparedStatement.setString(2,LastName.getText());
+                    preparedStatement.setString(3,Address.getText());
+                    preparedStatement.setString(4,Contact.getText());
+                    preparedStatement.executeUpdate();
+                    setResponse(true);
+                    getId();
+                    close();
+                }catch(Exception ex){
+                    ex.printStackTrace();
+                }
             }
-
-            //end customer panel
-
-
-
-
-        }catch (Exception ex){
+ }catch (Exception ex){
             ex.printStackTrace();
         }
     }
+    private boolean isCustomerExist() {
+        try {
+            preparedStatement = getConnection().prepareStatement("Select *from tbl_customer where cus_firstname=? and cus_lastname=?");
+            preparedStatement.setString(1, FirstName.getText());
+            preparedStatement.setString(2, LastName.getText());
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int result = Integer.parseInt(resultSet.getString("cus_id"));
+                setCustomer_id(result);
+                setResponse(true);
+                close();
+                return true;
 
+            }
+
+        }catch (Exception ex){
+        ex.printStackTrace();
+    }
+        return false;
+    }
+    public void getId(){
+        try{
+            preparedStatement=getConnection().prepareStatement("Select max(cus_id) from tbl_customer");
+            resultSet=preparedStatement.executeQuery();
+            if(resultSet.next()){
+                int result=Integer.parseInt(resultSet.getString("max(cus_id)"));
+                setCustomer_id(result);
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+    }
+    public int getCustomer_id() {
+        return customer_id;
+    }
 
 }

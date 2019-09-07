@@ -44,6 +44,7 @@ public class CategoryPanelController implements Initializable {
 
     ObservableList<Category> categories= FXCollections.observableArrayList();
     String SelectedIndex="";
+
     private static Connection getConnection() throws SQLException {
         Connection conn;
         dbconn.getInstance();
@@ -61,6 +62,14 @@ public class CategoryPanelController implements Initializable {
     public CategoryPanelController(){}
     PreparedStatement preparedStatement=null;
     ResultSet resultSet=null;
+    private boolean response = false;
+    public void setResponse(boolean response) {
+        this.response = response;
+    }
+
+    public boolean isResponse() {
+        return response;
+    }
 
 
     @Override
@@ -127,6 +136,7 @@ public class CategoryPanelController implements Initializable {
             LabelError.setVisible(true);
         }else{
             Add(txtCategory.getText());
+            setResponse(true);
             refreshtable();
             LabelError.setVisible(false);
 
@@ -149,6 +159,7 @@ public class CategoryPanelController implements Initializable {
             LabelError.setVisible(true);
         }else{
             Edit(txtCategory.getText());
+            setResponse(true);
             LabelError.setVisible(false);
             CategoryEdit.setDisable(true);
             CategoryNew.setDisable(true);

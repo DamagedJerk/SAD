@@ -7,6 +7,7 @@
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="259.0" prefWidth="413.0" styleClass="fx-backback" stylesheets="@../css/style.css" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="259.0" prefWidth="413.0" style="-fx-border-style: dotted;" styleClass="fx-backback" stylesheets="@../css/style.css" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="197.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="366.0" minWidth="10.0" prefWidth="206.0" />
@@ -31,7 +32,7 @@
          <children>
             <ImageView fitHeight="60.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../resources/pip_resources_key_documents.png" />
+                  <Image url="@../resources/icon_179-512.png" />
                </image>
                <HBox.margin>
                   <Insets left="10.0" top="5.0" />
@@ -93,4 +94,7 @@
          </children>
       </AnchorPane>
    </children>
+   <effect>
+      <DropShadow height="32.86" radius="16.6725" width="35.83" />
+   </effect>
 </GridPane>

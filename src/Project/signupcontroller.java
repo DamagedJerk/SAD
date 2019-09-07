@@ -14,6 +14,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class signupcontroller implements Initializable {
@@ -51,7 +53,17 @@ public class signupcontroller implements Initializable {
     private JFXTextField txtCellNumber;
     @FXML
     private JFXComboBox<String> cboRole;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd ");
+    DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
+    String adminId="";
 
+    public void setAdminId(String adminId) {
+        this.adminId = adminId;
+    }
+
+    public String getAdminId() {
+        return adminId;
+    }
 
     @FXML
     private void close() throws  Exception{
@@ -114,6 +126,17 @@ public class signupcontroller implements Initializable {
 
                     clearfields();
 
+                    preparedStatement=getConnection().prepareStatement("Select user_id from tbl_employee where user_id=(Select max(user_id) from tbl_employee)");
+                    resultSet=preparedStatement.executeQuery();
+                    //logs activity
+                    if(resultSet.next()) {
+                        preparedStatement = getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+                        preparedStatement.setString(1, resultSet.getString("user_id"));
+                        preparedStatement.setString(2, "Registered");
+                        preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+                        preparedStatement.setString(4, LocalDateTime.now().format(time));
+                        preparedStatement.executeUpdate();
+                    }
                     JOptionPane.showMessageDialog(null, "Successfully Added");
 
                 } catch (Exception e) {

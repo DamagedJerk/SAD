@@ -23,6 +23,7 @@ public class Stocks extends RecursiveTreeObject<Stocks> {
         this.Time= new SimpleStringProperty(Time);
         this.TotalCost= new SimpleStringProperty(cost);
         this.before_update_stocks=new SimpleStringProperty(formerStocks);
+        //this.updated_quantity=new SimpleStringProperty()
 
     }
 }

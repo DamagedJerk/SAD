@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Alert {
 
@@ -38,6 +40,16 @@ public class Alert {
     public JFXButton btnConfirm;
     @FXML
     private JFXButton btncancel;
+    private String adminID="";
+
+    public void setAdminID(String adminID) {
+        this.adminID = adminID;
+    }
+
+    public String getAdminID() {
+        return adminID;
+    }
+
     public Alert(){}
 
     private static Connection getConnection() throws SQLException {
@@ -61,14 +73,27 @@ public class Alert {
             resultSet=preparedStatement.executeQuery();
             int i=1;
             while(resultSet.next()){
-                    //JOptionPane.showMessageDialog(null,resultSet.getString("password"));
+
                 if (resultSet.getString("password").contentEquals(txtPassword.getText())) {
                     //JOptionPane.showMessageDialog(null,"response should be true now");
                     setResponse(true);
+                    setAdminID(resultSet.getString("user_id"));
                     break;
                 }
 
             }
+            if(isResponse()==true) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd ");
+                DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
+                preparedStatement = getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+
+                preparedStatement.setString(1, getAdminID());
+                preparedStatement.setString(2, "Admin Confirmation");
+                preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+                preparedStatement.setString(4, LocalDateTime.now().format(time));
+                preparedStatement.executeUpdate();
+            }
+
 
             if(isResponse()==true){
                 close();

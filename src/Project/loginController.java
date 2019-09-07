@@ -27,6 +27,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javafx.fxml.FXMLLoader;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.scene.control.Label;
 
@@ -62,6 +65,8 @@ public class loginController implements Initializable {
     //Connection conn = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd ");
+    DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
 
     private static Connection getConnection() throws SQLException{
         Connection conn;
@@ -113,14 +118,21 @@ public class loginController implements Initializable {
                     stage.close();
                     String Name=resultSet.getString("firstname");
                     int role=Integer.parseInt(resultSet.getString("role"));
+                    String userid=resultSet.getString("user_id");
+                    //JOptionPane.showMessageDialog(null,resultSet.getString("user_id")+
+                    preparedStatement=getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+                    preparedStatement.setString(1,userid);
+                    preparedStatement.setString(2,"Log-in");
+                    preparedStatement.setString(3,LocalDateTime.now().format(formatter));
+                    preparedStatement.setString(4,LocalDateTime.now().format(time));
+                    preparedStatement.executeUpdate();
 
-                    //JOptionPane.showMessageDialog(null,resultSet.getString("user_id")+" Login.fxml");
 
 
                     FXMLLoader loader=new FXMLLoader(getClass().getResource("Dashboard.fxml"));
                     Parent root = loader.load();
                     DashboardController dash=loader.getController();
-                    dash.checkUser(Name,role,resultSet.getString("user_id"));
+                    dash.checkUser(Name,role,userid);
 
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
@@ -172,5 +184,6 @@ public class loginController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         txtUsername.setText("admin");
         txtPassword.setText("admin");
+
     }
 }

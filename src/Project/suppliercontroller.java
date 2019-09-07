@@ -49,6 +49,15 @@ public class suppliercontroller implements Initializable {
 
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
+    private boolean response = false;
+    public void setResponse(boolean response) {
+        this.response = response;
+    }
+
+    public boolean isResponse() {
+        return response;
+    }
+
 
 
 
@@ -108,6 +117,7 @@ public class suppliercontroller implements Initializable {
             btnAddsupplier.setVisible(true);
             btnAddsupplier.setDisable(false);
             LabelError.setVisible(false);
+            setResponse(true);
         }
     }
     @FXML
@@ -135,6 +145,7 @@ public class suppliercontroller implements Initializable {
             txtEmail.setText("");
         }else{
             Add(Company_name.getText(),Contact_Number.getText(),txtEmail.getText());
+            setResponse(true);
 
         }
 
@@ -152,6 +163,8 @@ public class suppliercontroller implements Initializable {
             Company_name.setText("");
             Contact_Number.setText("");
             txtEmail.setText("");
+
+
 
 
         }catch(Exception ex){

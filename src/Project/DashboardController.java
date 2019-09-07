@@ -49,6 +49,7 @@ import java.util.Vector;
 
 public class DashboardController implements Initializable {
 
+
     @FXML
     private Label dateTime;
     @FXML
@@ -141,6 +142,9 @@ public class DashboardController implements Initializable {
     private String Quantity = "";
     private int CurrentID=0;
     private int totalitems=0;
+    private int dateid=0;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd ");
+    DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
 
 
     //InventoryTab
@@ -155,6 +159,19 @@ public class DashboardController implements Initializable {
     private JFXComboBox<String> InventoryCateg;
     @FXML
     private JFXComboBox<String> Inventory_Status;
+    @FXML
+    private JFXComboBox<String> enddate;
+
+    @FXML
+    private JFXComboBox<String> startingdate;
+
+
+    @FXML
+    private JFXComboBox<String> cbologdate;
+
+    @FXML
+    private JFXComboBox<String> cboActivity;
+
 
     @FXML
     private JFXTextField InventoryQuantity;
@@ -213,7 +230,8 @@ public class DashboardController implements Initializable {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     private Image userpic = new Image("/resources/user.png");
-    public String userId="";
+    private String userId="";
+    private String receiptId="";
 
     public Double totalprice = 0.0;
 
@@ -226,6 +244,16 @@ public class DashboardController implements Initializable {
     }
     @FXML
     private void doLogOut() throws Exception{
+        try {
+            preparedStatement = getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+            preparedStatement.setString(1, userId);
+            preparedStatement.setString(2, "Log-out");
+            preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+            preparedStatement.setString(4, LocalDateTime.now().format(time));
+            preparedStatement.executeUpdate();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
         Stage stage = (Stage) btnLogOut.getScene().getWindow();
         stage.close();
         FXMLLoader loader=new FXMLLoader(getClass().getResource("Log-InForm.fxml"));
@@ -237,6 +265,16 @@ public class DashboardController implements Initializable {
 
     @FXML
     void close() {
+        try {
+            preparedStatement = getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+            preparedStatement.setString(1, userId);
+            preparedStatement.setString(2, "Log-out");
+            preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+            preparedStatement.setString(4, LocalDateTime.now().format(time));
+            preparedStatement.executeUpdate();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
 
         Stage stage = (Stage) btnClose.getScene().getWindow();
         stage.close();
@@ -261,15 +299,25 @@ public class DashboardController implements Initializable {
         LabelId.setText(getID());
         StockinID.setText(getStockInID());
         //initialize
-        setComboBOx(InventorySupp,"Select * from tbl_supplier","company_name");
-        setComboBOx(InventoryCateg,"Select * from tbl_category","cat_description");
-        setComboBOx(StockinCat,"Select * from tbl_category","cat_description");
+        setComboBOx(InventorySupp, "Select * from tbl_supplier", "company_name");
+        setComboBOx(InventoryCateg, "Select * from tbl_category", "cat_description");
+        setComboBOx(StockinCat, "Select * from tbl_category", "cat_description");
+        setComboBOx(cbologdate,"Select *from tbl_date","date");
+        setComboBOx(startingdate,"Select *from tbl_date","date");
+        setComboBOx(enddate,"Select *from tbl_date","date");
+        cboActivity.getItems().add("All");
+        cboActivity.getItems().add("Registration");
+        cboActivity.getItems().add("Sale Transactions");
+        cboActivity.getItems().add("Adding Inventory");
+        cboActivity.getItems().add("Stock-in");
+        cboActivity.getItems().add("Admin Confirmations");
+        cboActivity.setValue("All");
+
 
 
         Inventory_Status.getItems().add("INACTIVE");
         Inventory_Status.getItems().add("ACTIVE");
         Inventory_Status.setValue("ACTIVE");
-
 
 
         //tbl_product
@@ -814,6 +862,7 @@ public class DashboardController implements Initializable {
                     btnStockIn.setDisable(false);
 
 
+
                 }
 
             }
@@ -825,7 +874,7 @@ public class DashboardController implements Initializable {
         }
 
         @FXML
-        private void doStockIn(){ //balik diri
+        private void doStockIn(){
             try{
                 if(StockinAmount.getText().contentEquals("") || StockIntotalprice.getText().contentEquals("")){
                    JOptionPane.showMessageDialog(null,"Please input Fields");
@@ -833,22 +882,34 @@ public class DashboardController implements Initializable {
                     String stockinid=StockinID.getText();
                     String itemId=StockInITEMID.getText();
                     String outdatedquantity=StockInStock.getText();
+                    String name=StockInName.getText();
                     int Amount=Integer.parseInt(StockinAmount.getText());
                     double stockincost=Double.parseDouble(StockIntotalprice.getText());
-                    String dateofentry=dateTime.getText();
+                    String dateofentry=getDateid()+"";
                     String timeofentry=Time.getText();
+                    int outdatedquan=Integer.parseInt(outdatedquantity);
+                    int updatedquan=outdatedquan+Amount;
 
                     try{
-                        preparedStatement=getConnection().prepareStatement("Insert into tbl_stockin values(?,?,?,?,?,?,?)");
+                        preparedStatement=getConnection().prepareStatement("Insert into tbl_stockin values(?,?,?,?,?,?,?,?)");
                         preparedStatement.setString(1,stockinid);
                         preparedStatement.setString(2,itemId);
                         preparedStatement.setString(3,Amount+"");
                         preparedStatement.setString(4,outdatedquantity);
-                        preparedStatement.setString(5,dateofentry);
-                        preparedStatement.setString(6,timeofentry);
-                        preparedStatement.setString(7,stockincost+"");
+                        preparedStatement.setString(5,updatedquan+"");
+                        preparedStatement.setString(6,dateofentry);
+                        preparedStatement.setString(7,timeofentry);
+                        preparedStatement.setString(8,stockincost+"");
                         preparedStatement.executeUpdate();
 
+                        //logs activity
+                        preparedStatement=getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+                        preparedStatement.setString(1,userId);
+                        preparedStatement.setString(2,"Added "+Amount+" stocks on product "+name);
+                        preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+                        preparedStatement.setString(4,LocalDateTime.now().format(time));
+                        preparedStatement.executeUpdate();
+                        //
 
 
                         preparedStatement=getConnection().prepareStatement("Update tbl_products SET prod_quantity=prod_quantity+? where prod_id=?");
@@ -888,15 +949,28 @@ public class DashboardController implements Initializable {
         @FXML
         private void addcategory()throws  Exception{
             FXMLLoader loader= new FXMLLoader(getClass().getResource("addCategory.fxml"));
-
+            CategoryPanelController controller= new CategoryPanelController();
+            loader.setController(controller);
             Parent root =loader.load();
-
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.initOwner(btn_supplier.getScene().getWindow());
             stage.setScene(new Scene(root));
             stage.showAndWait();
+            if(controller.isResponse()==true){
+            try{
+                //logs activity
+                preparedStatement=getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+                preparedStatement.setString(1,userId);
+                preparedStatement.setString(2,"Added a Category");
+                preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+                preparedStatement.setString(4,LocalDateTime.now().format(time));
+                preparedStatement.executeUpdate();
+                //
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }}
             setComboBOx(InventoryCateg,"Select * from tbl_category","cat_description");
             refreshInventoryTable(InventoryList);
             refreshInventoryTable(StockinList);
@@ -937,8 +1011,8 @@ public class DashboardController implements Initializable {
         @FXML
         private void addSupplier() throws  Exception{
             FXMLLoader loader= new FXMLLoader(getClass().getResource("addSupplier.fxml"));
-            //suppliercontroller controller=new suppliercontroller();
-            //loader.setController(controller);
+            suppliercontroller controller=new suppliercontroller();
+            loader.setController(controller);
             Parent root =loader.load();
 
             Stage stage = new Stage();
@@ -947,6 +1021,19 @@ public class DashboardController implements Initializable {
             stage.initOwner(btn_supplier.getScene().getWindow());
             stage.setScene(new Scene(root));
             stage.showAndWait();
+            if(controller.isResponse()==true){
+            try{
+                //logs activity
+                preparedStatement=getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+                preparedStatement.setString(1,userId);
+                preparedStatement.setString(2,"Added a Supplier");
+                preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+                preparedStatement.setString(4,LocalDateTime.now().format(time));
+                preparedStatement.executeUpdate();
+                //
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }}
             setComboBOx(InventorySupp,"Select * from tbl_supplier","company_name");
             refreshInventoryTable(InventoryList);
             refreshInventoryTable(StockinList);
@@ -1003,9 +1090,9 @@ public class DashboardController implements Initializable {
                         // diri mag insert sa receipt
                         preparedStatement=getConnection().prepareStatement("Insert into tbl_receipt values(null,?,?,?,?,?,?,?,?,?)");
                         preparedStatement.setString(1,controller.getCartID());
-                        preparedStatement.setString(2,controller.getCustomerid()+"");
+                        preparedStatement.setString(2,controller.getCustomer_id()+"");
                         preparedStatement.setString(3,userId);
-                        preparedStatement.setString(4,dateTime.getText());
+                        preparedStatement.setString(4,getDateid()+"");
                         preparedStatement.setString(5,SalesPayment.getText());
                         preparedStatement.setString(6,SalesPrice.getText());
                         preparedStatement.setString(7,controller.getDiscountvalue()+"");
@@ -1020,7 +1107,7 @@ public class DashboardController implements Initializable {
                         preparedStatement.setString(1,str);
                         resultSet=preparedStatement.executeQuery();
                         while(resultSet.next()){
-                            String receiptId=resultSet.getString("receipt_id");
+                            receiptId=resultSet.getString("receipt_id");
                             String productid=resultSet.getString("prod_id");
                             int quan=Integer.parseInt(resultSet.getString("order_quantity"));
                             double totalprice=Double.parseDouble(resultSet.getString("o.order_quantity*o.total_price"));
@@ -1058,7 +1145,12 @@ public class DashboardController implements Initializable {
                             preparedStatement.setString(2,id);
                             preparedStatement.executeUpdate();
                         }
-
+                        preparedStatement=getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+                        preparedStatement.setString(1,userId);
+                        preparedStatement.setString(2,"Finished a transaction receipt no:"+receiptId);
+                        preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+                        preparedStatement.setString(4,LocalDateTime.now().format(time));
+                        preparedStatement.executeUpdate();
 
                         JOptionPane.showMessageDialog(null,"resibo nalay kulang");
                         //end
@@ -1105,6 +1197,7 @@ public class DashboardController implements Initializable {
                 loader.setController(controller);
                 Parent root =loader.load();
                 controller.setFields(SalesPrice.getText(),SalesPayment.getText(),SalesChange.getText());
+                controller.setAdminid(userId);
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.initStyle(StageStyle.TRANSPARENT);
@@ -1174,7 +1267,7 @@ public class DashboardController implements Initializable {
                 int category = InventoryCateg.getSelectionModel().selectedIndexProperty().getValue();
                 int supplier = InventorySupp.getSelectionModel().selectedIndexProperty().getValue();
                 int status = Inventory_Status.getSelectionModel().selectedIndexProperty().getValue();
-                String Date =dateTime.getText();
+                String Date =getDateid()+""; // balik diri
                 String sql ="Insert into tbl_products values(?,?,?,?,?,?,?,?,?)";
                 //JOptionPane.showMessageDialog(null,sql+"");
                 try{
@@ -1193,6 +1286,16 @@ public class DashboardController implements Initializable {
                     preparedStatement.setInt(9,category);
 
                     preparedStatement.executeUpdate();
+
+
+                    //logs activity
+                    preparedStatement=getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+                    preparedStatement.setString(1,userId);
+                    preparedStatement.setString(2,"Added a Product : "+name+" to Inventory");
+                    preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+                    preparedStatement.setString(4,LocalDateTime.now().format(time));
+                    preparedStatement.executeUpdate();
+                    //
                     refreshInventoryTable(InventoryList);
                     refreshInventoryTable(StockinList);
                     refreshProductMenu();
@@ -1280,11 +1383,11 @@ public class DashboardController implements Initializable {
 
             try{
                 StocksTableList.clear();
-                String sql="Select s.Stockin_id,p.prod_name,s.Stock_BeforeUpdate,p.prod_quantity,s.LastEntry,s.Entry_date,s.Entry_time,s.total_cost from tbl_stockin s JOIN tbl_products p ON s.prod_id=p.prod_id";
+                String sql="Select s.Stockin_id,p.prod_name,s.Stock_BeforeUpdate,s.updatedquantity,s.LastEntry,d.Date,s.Entry_time,s.total_cost from tbl_stockin s JOIN tbl_products p ON s.prod_id=p.prod_id JOIN tbl_date d ON s.Entry_date=d.Date_id Group by Stockin_id";
                 preparedStatement=getConnection().prepareStatement(sql);
                 resultSet=preparedStatement.executeQuery();
                 while(resultSet.next()){
-                    StocksTableList.add(new Stocks(resultSet.getString("Stockin_id"),resultSet.getString("prod_name"),resultSet.getString("Stock_BeforeUpdate"),resultSet.getString("LastEntry"),resultSet.getString("prod_quantity"),resultSet.getString("Entry_date"),resultSet.getString("Entry_time"),resultSet.getString("total_cost")));
+                    StocksTableList.add(new Stocks(resultSet.getString("Stockin_id"),resultSet.getString("prod_name"),resultSet.getString("Stock_BeforeUpdate"),resultSet.getString("LastEntry"),resultSet.getString("updatedquantity"),resultSet.getString("Date"),resultSet.getString("Entry_time"),resultSet.getString("total_cost")));
                 }
 
             }catch(Exception e){
@@ -1310,14 +1413,40 @@ public class DashboardController implements Initializable {
         private void initClock() {
 
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd ");
-            DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
+
             dateTime.setText(LocalDateTime.now().format(formatter));
             Time.setText(LocalDateTime.now().format(time));
         }), new KeyFrame(Duration.seconds(1)));
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
+
+            try {
+                if (checkdate()==false) {
+                    preparedStatement = getConnection().prepareStatement("Insert into tbl_date values(null,?)");
+                    preparedStatement.setString(1, LocalDateTime.now().format(formatter));
+                    preparedStatement.executeUpdate();
+                }
+                preparedStatement.close();
+                resultSet.close();
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
     }
+        private boolean checkdate(){
+        boolean bool=false;
+        try {
+                preparedStatement = getConnection().prepareStatement("Select *From tbl_date where Date=?");
+                preparedStatement.setString(1, LocalDateTime.now().format(formatter));
+                resultSet = preparedStatement.executeQuery();
+                if(resultSet.next()==true){
+                    bool=true;
+                    setDateid(Integer.parseInt(resultSet.getString("Date_id")));
+                }
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
+            return bool;
+        }
 
         private void SelectToCart(String id,String name, String Quan, String Price, ObservableList list) {
             double price= Double.parseDouble(Price);
@@ -1359,6 +1488,13 @@ public class DashboardController implements Initializable {
        return false;
     }
 
+    public void setDateid(int dateid) {
+        this.dateid = dateid;
+    }
+
+    public int getDateid() {
+        return dateid;
+    }
 }
 
 

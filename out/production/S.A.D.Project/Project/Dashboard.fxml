@@ -2,10 +2,10 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="756.0" prefWidth="1198.0" style="-fx-border-style: dotted;" styleClass="fx-backback" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.DashboardController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="756.0" prefWidth="1198.0" style="-fx-border-style: dotted;" styleClass="fx-backback" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.DashboardController">
    <children>
       <HBox layoutX="5.0" layoutY="6.0" prefHeight="100.0" prefWidth="1177.0">
          <children>
@@ -266,12 +266,12 @@
                                     </JFXComboBox>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7">
                                        <children>
-                                          <JFXTextField fx:id="InventoryPrice" labelFloat="true" layoutX="-4.0" layoutY="27.0" prefHeight="24.0" prefWidth="150.0" promptText="Item Price:" viewOrder="6.0">
+                                          <JFXTextField fx:id="InventoryPrice" labelFloat="true" layoutX="189.0" layoutY="18.0" prefHeight="24.0" prefWidth="150.0" promptText="Item Price:" viewOrder="6.0">
                                              <padding>
                                                 <Insets left="15.0" right="15.0" />
                                              </padding>
                                           </JFXTextField>
-                                          <JFXTextField fx:id="InventoryCost" labelFloat="true" layoutX="159.0" layoutY="25.0" prefHeight="25.0" prefWidth="180.0" promptText="Item Cost:" viewOrder="6.0">
+                                          <JFXTextField fx:id="InventoryCost" labelFloat="true" layoutY="17.0" prefHeight="25.0" prefWidth="180.0" promptText="Item Cost:" viewOrder="6.0">
                                              <padding>
                                                 <Insets left="15.0" right="15.0" />
                                              </padding>
@@ -412,38 +412,31 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tabReport" disable="true" text="Report">
+            <Tab fx:id="tabReport" text="Report">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane layoutX="4.0" layoutY="10.0" prefHeight="560.0" prefWidth="575.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
+                        <AnchorPane layoutX="3.0" layoutY="2.0" prefHeight="576.0" prefWidth="1162.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
                            <children>
-                              <Label layoutX="232.0" layoutY="14.0" text="Daily Sales">
+                              <Label layoutX="505.0" layoutY="22.0" text="Sales Report">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </Label>
-                              <JFXDatePicker layoutX="14.0" layoutY="58.0" prefHeight="28.0" prefWidth="242.0" promptText="Date" />
-                              <JFXComboBox layoutX="329.0" layoutY="60.0" prefHeight="25.0" prefWidth="226.0" promptText="Kind of Graph" />
-                              <JFXTreeTableView blendMode="DARKEN" layoutX="12.0" layoutY="95.0" prefHeight="429.0" prefWidth="552.0" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane layoutX="584.0" layoutY="9.0" prefHeight="560.0" prefWidth="581.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
-                           <children>
-                              <Label layoutX="248.0" layoutY="14.0" text="Monthly Sales">
+                              <JFXComboBox fx:id="enddate" labelFloat="true" layoutX="332.0" layoutY="41.0" prefHeight="25.0" prefWidth="226.0" promptText="End Date" />
+                              <JFXTreeTableView blendMode="DARKEN" layoutX="12.0" layoutY="82.0" prefHeight="476.0" prefWidth="1150.0" />
+                              <JFXComboBox fx:id="startingdate" labelFloat="true" layoutX="14.0" layoutY="41.0" prefHeight="25.0" prefWidth="240.0" promptText="Starting Date:" />
+                              <Label layoutX="277.0" layoutY="41.0" text="To:">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </Label>
-                              <JFXComboBox layoutX="16.0" layoutY="62.0" prefHeight="25.0" prefWidth="240.0" promptText="Month" />
-                              <JFXComboBox layoutX="341.0" layoutY="62.0" prefHeight="25.0" prefWidth="226.0" promptText="Kind of Graph" />
-                              <JFXTreeTableView blendMode="DARKEN" layoutX="15.0" layoutY="95.0" prefHeight="429.0" prefWidth="552.0" />
                            </children>
                         </AnchorPane>
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tabLog" disable="true" text="Activity Log">
+            <Tab fx:id="tabLog" text="Activity Log">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -455,9 +448,8 @@
                                  </font>
                               </Label>
                               <Label layoutX="43.0" layoutY="49.0" />
-                              <JFXComboBox layoutX="18.0" layoutY="54.0" prefHeight="25.0" prefWidth="192.0" promptText="Year" />
-                              <JFXComboBox layoutX="235.0" layoutY="54.0" prefHeight="25.0" prefWidth="192.0" promptText="Month" />
-                              <JFXComboBox layoutX="461.0" layoutY="58.0" prefHeight="25.0" prefWidth="192.0" promptText="Date" />
+                              <JFXComboBox fx:id="cbologdate" layoutX="18.0" layoutY="54.0" prefHeight="25.0" prefWidth="192.0" promptText="Date:" />
+                              <JFXComboBox fx:id="cboActivity" layoutX="242.0" layoutY="51.0" prefHeight="25.0" prefWidth="192.0" promptText="Activity:" />
                            </children>
                         </AnchorPane>
                         <JFXTreeTableView blendMode="DARKEN" layoutX="25.0" layoutY="105.0" prefHeight="457.0" prefWidth="1119.0" />
@@ -468,4 +460,8 @@
       </JFXTabPane>
       <AnchorPane prefHeight="126.0" prefWidth="128.0" />
    </children>
+   <stylesheets>
+      <URL value="@../css/style.css" />
+      <URL value="@../css/jfxtabpane.css" />
+   </stylesheets>
 </AnchorPane>
