@@ -282,7 +282,7 @@ public class confirm implements Initializable {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd ");
             DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
             preparedStatement=getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
-            preparedStatement.setString(1,getAdminid());
+            preparedStatement.setString(1,controller.getAdminID());
             preparedStatement.setString(2,"Granted Discount");
             preparedStatement.setString(3, LocalDateTime.now().format(formatter));
             preparedStatement.setString(4,LocalDateTime.now().format(time));
@@ -296,9 +296,7 @@ public class confirm implements Initializable {
     private void doCOnfirm(){
         //get employee_id
         try {
-            if(FirstName.getText().contentEquals("") || LastName.getText().contentEquals("")){
-                JOptionPane.showMessageDialog(null,"Please input fields","Warning",JOptionPane.WARNING_MESSAGE);
-            }if(isCustomerExist()==false){
+            if(isCustomerExist()==false){
                 try{
                     preparedStatement=getConnection().prepareStatement("Insert into tbl_customer values(null,?,?,?,?)");
                     preparedStatement.setString(1,FirstName.getText());

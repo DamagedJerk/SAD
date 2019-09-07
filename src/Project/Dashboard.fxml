@@ -413,7 +413,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tabReport" text="Report">
+            <Tab fx:id="tabReport" disable="true" text="Report">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -424,9 +424,9 @@
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </Label>
-                              <JFXComboBox labelFloat="true" layoutX="332.0" layoutY="41.0" prefHeight="25.0" prefWidth="226.0" promptText="End Date" />
+                              <JFXComboBox fx:id="enddate" labelFloat="true" layoutX="332.0" layoutY="41.0" prefHeight="25.0" prefWidth="226.0" promptText="End Date" />
                               <JFXTreeTableView blendMode="DARKEN" layoutX="12.0" layoutY="82.0" prefHeight="476.0" prefWidth="1150.0" />
-                              <JFXComboBox labelFloat="true" layoutX="14.0" layoutY="41.0" prefHeight="25.0" prefWidth="240.0" promptText="Starting Date:" />
+                              <JFXComboBox fx:id="startingdate" labelFloat="true" layoutX="14.0" layoutY="41.0" prefHeight="25.0" prefWidth="240.0" promptText="Starting Date:" />
                               <Label layoutX="277.0" layoutY="41.0" text="To:">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
@@ -449,13 +449,14 @@
                                  </font>
                               </Label>
                               <Label layoutX="43.0" layoutY="49.0" />
-                              <JFXComboBox fx:id="cboDate" layoutX="18.0" layoutY="54.0" prefHeight="25.0" prefWidth="192.0" promptText="Date:" />
-                              <JFXComboBox fx:id="cboActivity" layoutX="242.0" layoutY="51.0" prefHeight="25.0" prefWidth="192.0" promptText="Activity:" />
-                              <TextArea fx:id="AreaLogs" blendMode="COLOR_BURN" layoutX="19.0" layoutY="96.0" prefHeight="433.0" prefWidth="1128.0">
+                              <JFXComboBox fx:id="cbologdate" labelFloat="true" layoutX="18.0" layoutY="54.0" prefHeight="25.0" prefWidth="192.0" promptText="Date:" />
+                              <JFXComboBox fx:id="cboActivity" labelFloat="true" layoutX="242.0" layoutY="51.0" prefHeight="25.0" prefWidth="192.0" promptText="Activity:" />
+                              <TextArea fx:id="AreaLogs" blendMode="COLOR_BURN" editable="false" layoutX="19.0" layoutY="96.0" prefHeight="433.0" prefWidth="1128.0">
                                  <font>
                                     <Font name="System Bold" size="22.0" />
                                  </font>
                               </TextArea>
+                              <JFXComboBox fx:id="cbo_size" labelFloat="true" layoutX="456.0" layoutY="51.0" prefHeight="25.0" prefWidth="82.0" promptText="Font Size:" />
                            </children>
                         </AnchorPane>
                      </children></AnchorPane>

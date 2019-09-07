@@ -10,6 +10,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -412,7 +413,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tabReport" text="Report">
+            <Tab fx:id="tabReport" disable="true" text="Report">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -448,11 +449,16 @@
                                  </font>
                               </Label>
                               <Label layoutX="43.0" layoutY="49.0" />
-                              <JFXComboBox fx:id="cbologdate" layoutX="18.0" layoutY="54.0" prefHeight="25.0" prefWidth="192.0" promptText="Date:" />
-                              <JFXComboBox fx:id="cboActivity" layoutX="242.0" layoutY="51.0" prefHeight="25.0" prefWidth="192.0" promptText="Activity:" />
+                              <JFXComboBox fx:id="cbologdate" labelFloat="true" layoutX="18.0" layoutY="54.0" prefHeight="25.0" prefWidth="192.0" promptText="Date:" />
+                              <JFXComboBox fx:id="cboActivity" labelFloat="true" layoutX="242.0" layoutY="51.0" prefHeight="25.0" prefWidth="192.0" promptText="Activity:" />
+                              <TextArea fx:id="AreaLogs" blendMode="COLOR_BURN" editable="false" layoutX="19.0" layoutY="96.0" prefHeight="433.0" prefWidth="1128.0">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                              </TextArea>
+                              <JFXComboBox fx:id="cbo_size" labelFloat="true" layoutX="456.0" layoutY="51.0" prefHeight="25.0" prefWidth="82.0" promptText="Font Size:" />
                            </children>
                         </AnchorPane>
-                        <JFXTreeTableView blendMode="DARKEN" layoutX="25.0" layoutY="105.0" prefHeight="457.0" prefWidth="1119.0" />
                      </children></AnchorPane>
               </content>
             </Tab>

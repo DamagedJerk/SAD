@@ -35,7 +35,7 @@
             </AnchorPane>
          </children>
       </HBox>
-      <AnchorPane layoutX="3.0" layoutY="85.0" prefHeight="399.0" prefWidth="1039.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
+      <AnchorPane layoutX="3.0" layoutY="85.0" prefHeight="399.0" prefWidth="1039.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="85.0">
          <children>
             <JFXTreeTableView fx:id="OrderLIstTable" blendMode="DARKEN" layoutX="14.0" layoutY="52.0" prefHeight="266.0" prefWidth="331.0" />
             <Label contentDisplay="RIGHT" layoutX="14.0" layoutY="14.0" prefHeight="42.0" prefWidth="45.0" text="Items:" textFill="#363434">
@@ -50,22 +50,22 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="total_price" editable="false" layoutX="32.0" layoutY="59.0" prefHeight="25.0" prefWidth="245.0" promptText="Total Price:">
+                  <JFXTextField fx:id="total_price" editable="false" labelFloat="true" layoutX="32.0" layoutY="59.0" prefHeight="25.0" prefWidth="245.0" promptText="Total Price:">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField fx:id="total_payment" editable="false" layoutX="32.0" layoutY="132.0" prefHeight="25.0" prefWidth="245.0" promptText="Cash:">
+                  <JFXTextField fx:id="total_payment" editable="false" labelFloat="true" layoutX="32.0" layoutY="132.0" prefHeight="25.0" prefWidth="245.0" promptText="Cash:">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField fx:id="discountrate" layoutX="32.0" layoutY="205.0" prefHeight="38.0" prefWidth="135.0" promptText="Discount Rate:">
+                  <JFXTextField fx:id="discountrate" labelFloat="true" layoutX="32.0" layoutY="205.0" prefHeight="38.0" prefWidth="135.0" promptText="Discount Rate:">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField fx:id="total_change" editable="false" layoutX="32.0" layoutY="269.0" prefHeight="25.0" prefWidth="245.0" promptText="Change:">
+                  <JFXTextField fx:id="total_change" editable="false" labelFloat="true" layoutX="32.0" layoutY="269.0" prefHeight="25.0" prefWidth="245.0" promptText="Change:">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
@@ -99,17 +99,17 @@
             </Label>
             <AnchorPane layoutX="651.0" layoutY="4.0" prefHeight="388.0" prefWidth="380.0">
                <children>
-                  <JFXTextField fx:id="FirstName" layoutX="28.0" layoutY="53.0" prefHeight="38.0" prefWidth="149.0" promptText="First Name">
+                  <JFXTextField fx:id="FirstName" labelFloat="true" layoutX="28.0" layoutY="53.0" prefHeight="38.0" prefWidth="149.0" promptText="First Name">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField fx:id="Address" layoutX="26.0" layoutY="132.0" prefHeight="38.0" prefWidth="344.0" promptText="Address:">
+                  <JFXTextField fx:id="Address" labelFloat="true" layoutX="26.0" layoutY="132.0" prefHeight="38.0" prefWidth="344.0" promptText="Address:">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField fx:id="Contact" layoutX="26.0" layoutY="201.0" prefHeight="38.0" prefWidth="344.0" promptText="Contact Number:">
+                  <JFXTextField fx:id="Contact" labelFloat="true" layoutX="26.0" layoutY="201.0" prefHeight="38.0" prefWidth="344.0" promptText="Contact Number:">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
@@ -119,7 +119,7 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="LastName" layoutX="218.0" layoutY="53.0" prefHeight="38.0" prefWidth="149.0" promptText="Last Name">
+                  <JFXTextField fx:id="LastName" labelFloat="true" layoutX="218.0" layoutY="53.0" prefHeight="38.0" prefWidth="149.0" promptText="Last Name">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>

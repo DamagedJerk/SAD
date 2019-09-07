@@ -2,6 +2,7 @@ package Project;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.sun.glass.ui.Size;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -36,6 +37,7 @@ import javafx.util.Duration;
 
 import javax.sound.midi.ControllerEventListener;
 import javax.swing.*;
+import java.awt.geom.Area;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -143,7 +145,7 @@ public class DashboardController implements Initializable {
     private int CurrentID=0;
     private int totalitems=0;
     private int dateid=0;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd ");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
 
 
@@ -164,36 +166,27 @@ public class DashboardController implements Initializable {
 
     @FXML
     private JFXComboBox<String> startingdate;
-
-
     @FXML
     private JFXComboBox<String> cbologdate;
-
     @FXML
     private JFXComboBox<String> cboActivity;
-
-
     @FXML
     private JFXTextField InventoryQuantity;
-
     @FXML
     private JFXTextField InventoryPrice;
-
     @FXML
     private JFXTextField InventoryName;
     @FXML
     private JFXTextField InventoryCost;
     @FXML
     private JFXButton add_inventory;
-
     @FXML
     private JFXButton update_inventory;
     @FXML
     private JFXButton new_entry;
     @FXML
     private JFXTreeTableView<Inventory> tbl_inventory;
-    @FXML
-    private JFXButton btnConfirm;
+
     //balik diri
     //stock-in tab fields
     @FXML
@@ -211,9 +204,11 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXButton btnStockIn;
     @FXML
-    private JFXButton btnStockOut;
-    @FXML
     private JFXTextField StockInSearch;
+    @FXML
+    private TextArea AreaLogs;
+    @FXML
+    private JFXComboBox<Integer> cbo_size;
 
     //
 
@@ -292,9 +287,47 @@ public class DashboardController implements Initializable {
     public DashboardController() {
 
     }
+    private void Log(String Filter,String Date){
+        try{
+            String logs="";
+            String sql="Select e.user_name,a.activity_description,a.LogDate,a.Log_Time from tbl_activitylog a Join tbl_employee e ON a.user_id=e.user_id";
+            switch (Filter){
+                case "All": sql+=" Where a.LogDate='"+Date+"' GROUP BY a.activity_log";
+                            break;
+                case "Registration" : sql+=" WHERE a.LogDate='"+Date+"'  AND a.activity_description Like '%Registered%' GROUP BY a.activity_log";
+                            break;
+                case "Sale Transactions" :  sql+=" WHERE a.LogDate='"+Date+"' AND a.activity_description  Like '%Transaction%' GROUP BY a.activity_log"; break;
+                case "Adding Inventory" : sql+=" WHERE a.LogDate='"+Date+"' AND a.activity_description Like '%Inventory%'";
+                            break;
+                case "Stock-in" : sql+=" WHERE a.LogDate='"+Date+"' And a.activity_description Like '%Stock%' GROUP BY a.activity_log";
+                            break;
+                case "Admin Confirmations" : sql+=" WHERE a.LogDate='"+Date+"' And (a.activity_description Like '%Confirmation%' OR a.activity_description Like '%Discount%' OR a.activity_description like '%Removed% OR a.activity_description like '%Registered%') GROUP BY a.activity_log";
+                            break;
+                case "Discount" : sql+=" WHERE  a.LogDate='"+Date+"' And a.activity_description Like '%Discount%' GROUP BY a.activity_log";
+                    break;
+                case "Void Operations" : sql+=" WHERE a.LogDate='"+Date+"' And a.activity_description Like '%Removed%' GROUP BY a.activity_log";
+                    break;
+            }
+            //JOptionPane.showMessageDialog(null,sql);
+            preparedStatement=getConnection().prepareStatement(sql);
+            resultSet=preparedStatement.executeQuery();
+            while(resultSet.next()){
+                logs+=resultSet.getString("user_name")+" "+resultSet.getString("activity_description")+" on "+resultSet.getString("LogDate")+" around "+resultSet.getString("Log_Time")+"\n";
+            }
+            AreaLogs.setText(logs);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        int size=5;
+        while(size<=50){
+            cbo_size.getItems().add(size);
+            size+=2;
+        }
+
         initClock();
         LabelId.setText(getID());
         StockinID.setText(getStockInID());
@@ -306,12 +339,22 @@ public class DashboardController implements Initializable {
         setComboBOx(startingdate,"Select *from tbl_date","date");
         setComboBOx(enddate,"Select *from tbl_date","date");
         cboActivity.getItems().add("All");
+        cboActivity.getItems().add("Log-in");
         cboActivity.getItems().add("Registration");
         cboActivity.getItems().add("Sale Transactions");
         cboActivity.getItems().add("Adding Inventory");
         cboActivity.getItems().add("Stock-in");
         cboActivity.getItems().add("Admin Confirmations");
+        cboActivity.getItems().add("Discount");
+        cboActivity.getItems().add("Void Operations");
         cboActivity.setValue("All");
+        cbologdate.setValue(LocalDateTime.now().format(formatter));
+        AreaLogs.setOnMouseMoved(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Log(cboActivity.getValue(),cbologdate.getValue());
+            }
+        });
 
 
 
@@ -412,6 +455,11 @@ public class DashboardController implements Initializable {
             }
         });//
 
+        tabLog.setOnSelectionChanged(event -> {
+            if(tabLog.isSelected()){
+                Log(cboActivity.getValue(),cbologdate.getValue());
+            }
+        });
         //InventoryTable
         JFXTreeTableColumn<Inventory, String> InventoryId = new JFXTreeTableColumn<>("ID");
         InventoryId.setPrefWidth(widthInventory);
@@ -1000,6 +1048,12 @@ public class DashboardController implements Initializable {
                 totalprice=totalprice-toberemove;
 
                 CartList.remove(tableCart.getSelectionModel().getFocusedIndex());
+                preparedStatement=getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+                preparedStatement.setString(1,controller.getAdminID());
+                preparedStatement.setString(2," Removed an Order");
+                preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+                preparedStatement.setString(4,LocalDateTime.now().format(time));
+                preparedStatement.executeUpdate();
 
                 SalesPrice.setText(totalprice+"");
                 btnVoid.setDisable(true);
