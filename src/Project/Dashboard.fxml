@@ -10,6 +10,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -423,9 +424,9 @@
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </Label>
-                              <JFXComboBox fx:id="enddate" labelFloat="true" layoutX="332.0" layoutY="41.0" prefHeight="25.0" prefWidth="226.0" promptText="End Date" />
+                              <JFXComboBox labelFloat="true" layoutX="332.0" layoutY="41.0" prefHeight="25.0" prefWidth="226.0" promptText="End Date" />
                               <JFXTreeTableView blendMode="DARKEN" layoutX="12.0" layoutY="82.0" prefHeight="476.0" prefWidth="1150.0" />
-                              <JFXComboBox fx:id="startingdate" labelFloat="true" layoutX="14.0" layoutY="41.0" prefHeight="25.0" prefWidth="240.0" promptText="Starting Date:" />
+                              <JFXComboBox labelFloat="true" layoutX="14.0" layoutY="41.0" prefHeight="25.0" prefWidth="240.0" promptText="Starting Date:" />
                               <Label layoutX="277.0" layoutY="41.0" text="To:">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
@@ -448,11 +449,15 @@
                                  </font>
                               </Label>
                               <Label layoutX="43.0" layoutY="49.0" />
-                              <JFXComboBox fx:id="cbologdate" layoutX="18.0" layoutY="54.0" prefHeight="25.0" prefWidth="192.0" promptText="Date:" />
+                              <JFXComboBox fx:id="cboDate" layoutX="18.0" layoutY="54.0" prefHeight="25.0" prefWidth="192.0" promptText="Date:" />
                               <JFXComboBox fx:id="cboActivity" layoutX="242.0" layoutY="51.0" prefHeight="25.0" prefWidth="192.0" promptText="Activity:" />
+                              <TextArea fx:id="AreaLogs" blendMode="COLOR_BURN" layoutX="19.0" layoutY="96.0" prefHeight="433.0" prefWidth="1128.0">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                              </TextArea>
                            </children>
                         </AnchorPane>
-                        <JFXTreeTableView blendMode="DARKEN" layoutX="25.0" layoutY="105.0" prefHeight="457.0" prefWidth="1119.0" />
                      </children></AnchorPane>
               </content>
             </Tab>
