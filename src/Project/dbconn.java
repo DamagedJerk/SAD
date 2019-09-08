@@ -21,7 +21,7 @@ public class dbconn {
              connect= DriverManager.getConnection("jdbc:mysql://localhost/"+dbname,user,pass);
              //JOptionPane.showMessageDialog(null,"Successfully Connected");
          }catch(Exception e){
-             JOptionPane.showMessageDialog(null,"Cannot Connect to Database","Warning",JOptionPane.ERROR_MESSAGE);
+             //JOptionPane.showMessageDialog(null,"Cannot Connect to Database","Warning",JOptionPane.ERROR_MESSAGE);
              e.printStackTrace();
          }
 

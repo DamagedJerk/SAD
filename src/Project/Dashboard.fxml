@@ -93,7 +93,7 @@
                                  <cursor>
                                     <Cursor fx:constant="OPEN_HAND" />
                                  </cursor></JFXTreeTableView>
-                              <JFXTextField layoutX="14.0" layoutY="6.0" prefHeight="23.0" prefWidth="214.0" promptText="Search">
+                              <JFXTextField fx:id="SalesSearch" layoutX="14.0" layoutY="6.0" prefHeight="23.0" prefWidth="214.0" promptText="Search">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
@@ -299,6 +299,11 @@
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </Label>
+                              <JFXTextField fx:id="InventorySearch" layoutX="14.0" layoutY="7.0" prefHeight="23.0" prefWidth="214.0" promptText="Search">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </JFXTextField>
                            </children></AnchorPane>
                      </children></AnchorPane>
               </content>
@@ -323,11 +328,16 @@
                         <AnchorPane layoutX="594.0" layoutY="12.0" prefHeight="568.0" prefWidth="572.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
                            <children>
                               <JFXTreeTableView fx:id="StockInTable" blendMode="DARKEN" layoutX="13.0" layoutY="64.0" prefHeight="491.0" prefWidth="545.0" />
-                              <Label layoutX="233.0" layoutY="14.0" prefHeight="32.0" prefWidth="106.0" text="Stocks List">
+                              <Label layoutX="452.0" layoutY="22.0" prefHeight="32.0" prefWidth="106.0" text="Stocks List">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </Label>
+                              <JFXTextField fx:id="StockListSearch" layoutX="13.0" layoutY="19.0" prefHeight="38.0" prefWidth="205.0" promptText="Search">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </JFXTextField>
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="3.0" layoutY="333.0" prefHeight="247.0" prefWidth="584.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
@@ -415,9 +425,9 @@
             </Tab>
             <Tab fx:id="tabReport" disable="true" text="Report">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="581.0" prefWidth="946.0">
                      <children>
-                        <AnchorPane layoutX="3.0" layoutY="2.0" prefHeight="576.0" prefWidth="1162.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
+                        <AnchorPane layoutX="3.0" layoutY="12.0" prefHeight="566.0" prefWidth="1163.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
                            <children>
                               <Label layoutX="505.0" layoutY="22.0" text="Sales Report">
                                  <font>
@@ -425,7 +435,7 @@
                                  </font>
                               </Label>
                               <JFXComboBox fx:id="enddate" labelFloat="true" layoutX="332.0" layoutY="41.0" prefHeight="25.0" prefWidth="226.0" promptText="End Date" />
-                              <JFXTreeTableView blendMode="DARKEN" layoutX="12.0" layoutY="82.0" prefHeight="476.0" prefWidth="1150.0" />
+                              <JFXTreeTableView blendMode="DARKEN" layoutX="12.0" layoutY="82.0" prefHeight="476.0" prefWidth="1127.0" />
                               <JFXComboBox fx:id="startingdate" labelFloat="true" layoutX="14.0" layoutY="41.0" prefHeight="25.0" prefWidth="240.0" promptText="Starting Date:" />
                               <Label layoutX="277.0" layoutY="41.0" text="To:">
                                  <font>

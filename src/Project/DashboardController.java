@@ -91,8 +91,14 @@ public class DashboardController implements Initializable {
     private JFXTextField StockIntotalprice;
     @FXML
     private JFXTextField StockinAmount;
-
-
+    @FXML
+    private JFXTextField SalesSearch;
+    @FXML
+    private JFXTextField InventorySearch;
+    @FXML
+    private JFXTextField StockInSearch;
+    @FXML
+    private JFXTextField StockListSearch;
 
     @FXML
     private JFXButton btnVoid;
@@ -204,8 +210,6 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXButton btnStockIn;
     @FXML
-    private JFXTextField StockInSearch;
-    @FXML
     private TextArea AreaLogs;
     @FXML
     private JFXComboBox<Integer> cbo_size;
@@ -237,43 +241,73 @@ public class DashboardController implements Initializable {
         conn = dbconn.connect();
         return conn;
     }
+
     @FXML
     private void doLogOut() throws Exception{
-        try {
-            preparedStatement = getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
-            preparedStatement.setString(1, userId);
-            preparedStatement.setString(2, "Log-out");
-            preparedStatement.setString(3, LocalDateTime.now().format(formatter));
-            preparedStatement.setString(4, LocalDateTime.now().format(time));
-            preparedStatement.executeUpdate();
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
-        Stage stage = (Stage) btnLogOut.getScene().getWindow();
-        stage.close();
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("Log-InForm.fxml"));
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("Exit.fxml"));
+        Message controller=new Message();
+        controller.setMessage("Please Confirm Log-Out");
+        loader.setController(controller);
         Parent root =loader.load();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.initOwner(tableProduct.getScene().getWindow());
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
+        if(controller.isResponse()==true) {
+            try {
+                preparedStatement = getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+                preparedStatement.setString(1, userId);
+                preparedStatement.setString(2, "Log-out");
+                preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+                preparedStatement.setString(4, LocalDateTime.now().format(time));
+                preparedStatement.executeUpdate();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            Stage thisstage = (Stage) btnLogOut.getScene().getWindow();
+            thisstage.close();
+            FXMLLoader fxmlLoader= new FXMLLoader(getClass().getResource("Log-InForm.fxml"));
+            Parent rootpane= fxmlLoader.load();
+            Scene scene = new Scene(rootpane);
+            thisstage.setScene(scene);
+            thisstage.show();
+        }
     }
 
     @FXML
-    void close() {
-        try {
-            preparedStatement = getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
-            preparedStatement.setString(1, userId);
-            preparedStatement.setString(2, "Log-out");
-            preparedStatement.setString(3, LocalDateTime.now().format(formatter));
-            preparedStatement.setString(4, LocalDateTime.now().format(time));
-            preparedStatement.executeUpdate();
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
+    void close() throws  Exception{
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("Exit.fxml"));
+        Message controller=new Message();
+        controller.setMessage("Please Confirm Exit");
+        loader.setController(controller);
+        Parent root =loader.load();
 
-        Stage stage = (Stage) btnClose.getScene().getWindow();
-        stage.close();
-        System.exit(1);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.initOwner(tableProduct.getScene().getWindow());
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
+
+        if(controller.isResponse()==true) {
+            try {
+                preparedStatement = getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+                preparedStatement.setString(1, userId);
+                preparedStatement.setString(2, "Log-out");
+                preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+                preparedStatement.setString(4, LocalDateTime.now().format(time));
+                preparedStatement.executeUpdate();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+            Stage thisstage= (Stage) btnClose.getScene().getWindow();
+            thisstage.close();
+            System.exit(1);
+        }
     }
 
     @FXML
@@ -294,18 +328,25 @@ public class DashboardController implements Initializable {
             switch (Filter){
                 case "All": sql+=" Where a.LogDate='"+Date+"' GROUP BY a.activity_log";
                             break;
+                case "Log-in": sql+=" Where a.LogDate='"+Date+"' AND a.activity_description Like '%Log-%' GROUP BY a.activity_log";
+                            break;
                 case "Registration" : sql+=" WHERE a.LogDate='"+Date+"'  AND a.activity_description Like '%Registered%' GROUP BY a.activity_log";
                             break;
-                case "Sale Transactions" :  sql+=" WHERE a.LogDate='"+Date+"' AND a.activity_description  Like '%Transaction%' GROUP BY a.activity_log"; break;
-                case "Adding Inventory" : sql+=" WHERE a.LogDate='"+Date+"' AND a.activity_description Like '%Inventory%'";
+                case "Sale Transactions" :  sql+=" WHERE a.LogDate='"+Date+"' AND a.activity_description  Like '%Transaction%' GROUP BY a.activity_log";
+                            break;
+                case "Adding Inventory" : sql+=" WHERE a.LogDate='"+Date+"' AND a.activity_description Like '%Inventory%' Group BY a.activity_log";
                             break;
                 case "Stock-in" : sql+=" WHERE a.LogDate='"+Date+"' And a.activity_description Like '%Stock%' GROUP BY a.activity_log";
                             break;
-                case "Admin Confirmations" : sql+=" WHERE a.LogDate='"+Date+"' And (a.activity_description Like '%Confirmation%' OR a.activity_description Like '%Discount%' OR a.activity_description like '%Removed% OR a.activity_description like '%Registered%') GROUP BY a.activity_log";
+                case "Admin Confirmations" : sql+=" WHERE a.LogDate='"+Date+"' And (a.activity_description Like '%Confirmation%' OR a.activity_description Like '%Discount%' OR a.activity_description like '%Removed%' OR a.activity_description Like '%Registered%' ) GROUP BY a.activity_log";
                             break;
                 case "Discount" : sql+=" WHERE  a.LogDate='"+Date+"' And a.activity_description Like '%Discount%' GROUP BY a.activity_log";
-                    break;
+                            break;
                 case "Void Operations" : sql+=" WHERE a.LogDate='"+Date+"' And a.activity_description Like '%Removed%' GROUP BY a.activity_log";
+                            break;
+                case "Added Category" : sql+=" WHERE a.LogDate='"+Date+"' And a.activity_description Like '%Category%' GROUP BY a.activity_log";
+                    break;
+                case "Added Supplier" : sql+=" WHERE a.LogDate='"+Date+"' And a.activity_description Like '%Supplier%' GROUP BY a.activity_log";
                     break;
             }
             //JOptionPane.showMessageDialog(null,sql);
@@ -331,7 +372,7 @@ public class DashboardController implements Initializable {
         initClock();
         LabelId.setText(getID());
         StockinID.setText(getStockInID());
-        //initialize
+        //initialize naunsa pagpagawas sa
         setComboBOx(InventorySupp, "Select * from tbl_supplier", "company_name");
         setComboBOx(InventoryCateg, "Select * from tbl_category", "cat_description");
         setComboBOx(StockinCat, "Select * from tbl_category", "cat_description");
@@ -347,9 +388,11 @@ public class DashboardController implements Initializable {
         cboActivity.getItems().add("Admin Confirmations");
         cboActivity.getItems().add("Discount");
         cboActivity.getItems().add("Void Operations");
+        cboActivity.getItems().add("Added Category");
+        cboActivity.getItems().add("Added Supplier");
         cboActivity.setValue("All");
         cbologdate.setValue(LocalDateTime.now().format(formatter));
-        AreaLogs.setOnMouseMoved(new EventHandler<MouseEvent>() {
+        AreaLogs.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 Log(cboActivity.getValue(),cbologdate.getValue());
@@ -560,6 +603,106 @@ public class DashboardController implements Initializable {
                     //JOptionPane.showMessageDialog(null, "KeyTyped 3");
                     keyEvent.consume();
                     //Wa pa sya pa nahuman . . . . Error Trapping in case Backspace or space ang ipindut dapat ma consume;
+                }
+            }
+        });
+        SalesSearch.setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                try{
+                    productList.clear();
+                    String search=SalesSearch.getText();
+
+                    String sql = "Select * from tbl_products where prod_status=1 AND prod_name LIKE '%"+search+"%'";
+                    //JOptionPane.showMessageDialog(null,sql);
+                    preparedStatement = getConnection().prepareStatement(sql);
+                    resultSet = preparedStatement.executeQuery();
+                    while (resultSet.next()) {
+                        //JOptionPane.showMessageDialog(null,resultSet.getString("prod_name"));
+                        productList.add(new products(resultSet.getString("prod_id"),resultSet.getString("prod_name"), resultSet.getString("prod_quantity"), resultSet.getString("prod_price")));
+                    }
+
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
+
+            }
+        });
+        InventorySearch.setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                try{
+                    int i =0;
+                    String status;
+                    String search=InventorySearch.getText();
+                    InventoryList.clear();
+                    String sql = "select p.prod_id,p.prod_name,p.prod_quantity,p.prod_price,c.cat_description,s.company_name,p.prod_status,p.prod_cost FROM tbl_products p JOIN tbl_supplier s ON p.supplier_id = s.supplier_id JOIN tbl_category c ON p.category_id=c.category_id WHERE p.prod_name LIKE '%"+search+"%' Group by p.prod_id";
+                    preparedStatement = getConnection().prepareStatement(sql);
+                    resultSet = preparedStatement.executeQuery();
+                    while (resultSet.next()) {
+                        i++;
+                        int temp=Integer.parseInt(resultSet.getString("prod_status"));
+                        if(temp==0){
+                            status="INACTIVE";
+                        }else{
+                            status="ACTIVE";
+                        }
+                        InventoryList.add(new Inventory(resultSet.getString("prod_id"), resultSet.getString("prod_name"), resultSet.getString("prod_quantity"),resultSet.getString("prod_price"), resultSet.getString("cat_description"), resultSet.getString("company_name"),status,resultSet.getString("prod_cost")));
+
+                    }
+                    InventoryCount.setText(i+"");
+
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
+
+            }
+        });
+        StockInSearch.setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                try{
+
+                    String status;
+                    String search=StockInSearch.getText();
+                    StockinList.clear();
+                    String sql = "select p.prod_id,p.prod_name,p.prod_quantity,p.prod_price,c.cat_description,s.company_name,p.prod_status,p.prod_cost FROM tbl_products p JOIN tbl_supplier s ON p.supplier_id = s.supplier_id JOIN tbl_category c ON p.category_id=c.category_id WHERE p.prod_name LIKE '%"+search+"%' Group by p.prod_id";
+                    preparedStatement = getConnection().prepareStatement(sql);
+                    resultSet = preparedStatement.executeQuery();
+                    while (resultSet.next()) {
+
+                        int temp=Integer.parseInt(resultSet.getString("prod_status"));
+                        if(temp==0){
+                            status="INACTIVE";
+                        }else{
+                            status="ACTIVE";
+                        }
+                        StockinList.add(new Inventory(resultSet.getString("prod_id"), resultSet.getString("prod_name"), resultSet.getString("prod_quantity"),resultSet.getString("prod_price"), resultSet.getString("cat_description"), resultSet.getString("company_name"),status,resultSet.getString("prod_cost")));
+
+                    }
+
+
+                }catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+        });
+        StockListSearch.setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                try{
+                    StocksTableList.clear();
+                    String search=StockListSearch.getText();
+                    String sql="Select s.Stockin_id,p.prod_name,s.Stock_BeforeUpdate,s.updatedquantity,s.LastEntry,d.Date,s.Entry_time,s.total_cost from tbl_stockin s JOIN tbl_products p ON s.prod_id=p.prod_id JOIN tbl_date d ON s.Entry_date=d.Date_id WHERE prod_name LIKE '%"+search+"%'Group by Stockin_id";
+                    preparedStatement=getConnection().prepareStatement(sql);
+                    resultSet=preparedStatement.executeQuery();
+                    while(resultSet.next()){
+                        StocksTableList.add(new Stocks(resultSet.getString("Stockin_id"),resultSet.getString("prod_name"),resultSet.getString("Stock_BeforeUpdate"),resultSet.getString("LastEntry"),resultSet.getString("updatedquantity"),resultSet.getString("Date"),resultSet.getString("Entry_time"),resultSet.getString("total_cost")));
+                    }
+
+                }catch(Exception e){
+                    e.printStackTrace();
                 }
             }
         });
