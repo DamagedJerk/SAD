@@ -9,7 +9,7 @@ class products extends RecursiveTreeObject<products> {
     StringProperty product_name;
     StringProperty product_quan;
     StringProperty product_price;
-    StringProperty product_cost;
+
 
     public products(String id ,String prodname, String quan, String price) {
         this.product_id=new SimpleStringProperty(id);

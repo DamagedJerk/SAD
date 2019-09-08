@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXButton;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -87,6 +90,8 @@ public class loginController implements Initializable {
         Stage stage = (Stage) minimize.getScene().getWindow();
         stage.setIconified(true);
     }
+
+
     @FXML
     private void login() throws  Exception{
             String username = txtUsername.getText();
@@ -184,6 +189,7 @@ public class loginController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         txtUsername.setText("admin");
         txtPassword.setText("admin");
+
 
     }
 }

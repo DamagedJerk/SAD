@@ -28,6 +28,7 @@ import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -61,6 +62,8 @@ public class DashboardController implements Initializable {
     @FXML
     private Label Time;
     @FXML
+    private Label stockinerror;
+    @FXML
     private JFXButton btn_supplier;
     @FXML
     private JFXButton btnLogOut;
@@ -84,6 +87,8 @@ public class DashboardController implements Initializable {
     private JFXTreeTableView<products> tableCart;
     @FXML
     private JFXTreeTableView<Inventory> StockInventoryTable;
+    @FXML
+    private JFXTreeTableView<Receipts> ReportTable;
 
     @FXML
     private JFXTreeTableView<Stocks> StockInTable;
@@ -222,6 +227,8 @@ public class DashboardController implements Initializable {
     private ObservableList<products> CartList = FXCollections.observableArrayList();
     ObservableList<Inventory> StockinList = FXCollections.observableArrayList();
     ObservableList<Stocks> StocksTableList = FXCollections.observableArrayList();
+    ObservableList<Receipts> ReceiptList = FXCollections.observableArrayList();
+
     private boolean requested = false;
     private int purchasedquan=0;
     private double purchasedprice=0.00;
@@ -497,7 +504,22 @@ public class DashboardController implements Initializable {
                 refreshProductMenu();
             }
         });//
-
+        tabReport.setOnSelectionChanged(event -> {
+            if(tabReport.isSelected()){
+                Report();
+            }
+        });
+        tabInventory.setOnSelectionChanged(event -> {
+            if(tabInventory.isSelected()){
+                refreshInventoryTable(InventoryList);
+            }
+        });
+        tabStock.setOnSelectionChanged(event -> {
+            if(tabStock.isSelected()){
+                refreshStockList();
+                refreshInventoryTable(StockinList);
+            }
+        });
         tabLog.setOnSelectionChanged(event -> {
             if(tabLog.isSelected()){
                 Log(cboActivity.getValue(),cbologdate.getValue());
@@ -883,6 +905,94 @@ public class DashboardController implements Initializable {
         StockInTable.setRoot(StocksTablesList );
         StockInTable.setShowRoot(false);
 
+        //ReceiptTab
+
+        JFXTreeTableColumn<Receipts, String> ReceiptId= new JFXTreeTableColumn<>("Receipt Id");
+        ReceiptId.setPrefWidth(width);
+        ReceiptId.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Receipts, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Receipts, String> receiptsStringCellDataFeatures) {
+                return receiptsStringCellDataFeatures.getValue().getValue().ReceiptId;
+            }
+        });
+        JFXTreeTableColumn<Receipts, String> CartId= new JFXTreeTableColumn<>("Cart Id");
+        CartId.setPrefWidth(width);
+        CartId.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Receipts, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Receipts, String> receiptsStringCellDataFeatures) {
+                return receiptsStringCellDataFeatures.getValue().getValue().CartID;
+            }
+        });
+        JFXTreeTableColumn<Receipts, String> CustomerName= new JFXTreeTableColumn<>("Customer Name");
+        CustomerName.setPrefWidth(width);
+        CustomerName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Receipts, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Receipts, String> receiptsStringCellDataFeatures) {
+                return receiptsStringCellDataFeatures.getValue().getValue().CustomerName;
+            }
+        });
+        JFXTreeTableColumn<Receipts, String> EmployeeName= new JFXTreeTableColumn<>("Employee Name");
+        EmployeeName.setPrefWidth(width);
+        EmployeeName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Receipts, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Receipts, String> receiptsStringCellDataFeatures) {
+                return receiptsStringCellDataFeatures.getValue().getValue().EmployeeName;
+            }
+        });
+        JFXTreeTableColumn<Receipts, String> TotalPricee= new JFXTreeTableColumn<>("Total Price");
+        TotalPricee.setPrefWidth(width);
+        TotalPricee.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Receipts, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Receipts, String> receiptsStringCellDataFeatures) {
+                return receiptsStringCellDataFeatures.getValue().getValue().TotalPrice;
+            }
+        });
+        JFXTreeTableColumn<Receipts, String> DiscountedValue= new JFXTreeTableColumn<>("Discounted Value");
+        DiscountedValue.setPrefWidth(width);
+        DiscountedValue.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Receipts, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Receipts, String> receiptsStringCellDataFeatures) {
+                return receiptsStringCellDataFeatures.getValue().getValue().DiscountedValue;
+            }
+        });
+        JFXTreeTableColumn<Receipts, String> DiscountedPrice= new JFXTreeTableColumn<>("Discounted Price");
+        DiscountedPrice.setPrefWidth(width);
+        DiscountedPrice.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Receipts, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Receipts, String> receiptsStringCellDataFeatures) {
+                return receiptsStringCellDataFeatures.getValue().getValue().DiscountedPrice;
+            }
+        });
+        JFXTreeTableColumn<Receipts, String> TotalAmount= new JFXTreeTableColumn<>("Total Payment");
+        TotalAmount.setPrefWidth(width);
+        TotalAmount.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Receipts, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Receipts, String> receiptsStringCellDataFeatures) {
+                return receiptsStringCellDataFeatures.getValue().getValue().TotalPayment;
+            }
+        });
+        JFXTreeTableColumn<Receipts, String> Change= new JFXTreeTableColumn<>("Change");
+        Change.setPrefWidth(width);
+        Change.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Receipts, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Receipts, String> receiptsStringCellDataFeatures) {
+                return receiptsStringCellDataFeatures.getValue().getValue().TotalChange;
+            }
+        });
+        JFXTreeTableColumn<Receipts, String> TransactionDate= new JFXTreeTableColumn<>("Transaction Date");
+        TransactionDate.setPrefWidth(width);
+        TransactionDate.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Receipts, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Receipts, String> receiptsStringCellDataFeatures) {
+                return receiptsStringCellDataFeatures.getValue().getValue().TransactionDate;
+            }
+        });
+        Report();
+        final TreeItem<Receipts> receiptlist = new RecursiveTreeItem<Receipts>(ReceiptList, RecursiveTreeObject::getChildren);
+        ReportTable.getColumns().setAll(ReceiptId,CartId,CustomerName,EmployeeName,TotalPricee,DiscountedValue,DiscountedPrice,TotalAmount,Change,TransactionDate);
+        ReportTable.setRoot(receiptlist);
+        ReportTable.setShowRoot(false);
+
     }
 
     private void setComboBOx(JFXComboBox comboBOx,String query,String columnname){
@@ -1068,7 +1178,8 @@ public class DashboardController implements Initializable {
         private void doStockIn(){
             try{
                 if(StockinAmount.getText().contentEquals("") || StockIntotalprice.getText().contentEquals("")){
-                   JOptionPane.showMessageDialog(null,"Please input Fields");
+                   stockinerror.setText("Please input an amount to add. . . .");
+                   stockinerror.setVisible(true);
                 }else{
                     String stockinid=StockinID.getText();
                     String itemId=StockInITEMID.getText();
@@ -1122,6 +1233,7 @@ public class DashboardController implements Initializable {
                         StockinAmount.setText("");
                         StockIntotalprice.setText("");
                         btnStockIn.setDisable(true);
+                        stockinerror.setVisible(false);
 
 
                     }catch (Exception ex){
@@ -1550,6 +1662,20 @@ public class DashboardController implements Initializable {
         }
         private void total_items(){
                 ItemCount.setText(totalitems+"");
+        }
+
+        private  void Report(){
+            try{
+                ReceiptList.clear();
+                String sql="SELECT r.receipt_id,r.Cart_id,e.firstname,u.cus_firstname,r.total_price,r.discount_value,r.discounted_price,r.total_payment,r.total_change,d.Date from tbl_receipt r Join tbl_customer u ON r.cus_id=u.cus_id JOIN tbl_employee e ON r.employee_id=e.user_id JOIN tbl_date d ON r.transaction_date=d.Date_id GROUP BY r.receipt_id";
+                preparedStatement=getConnection().prepareStatement(sql);
+                resultSet=preparedStatement.executeQuery();
+                while(resultSet.next()){
+                    ReceiptList.add(new Receipts(resultSet.getString("receipt_id"),resultSet.getString("Cart_id"),resultSet.getString("cus_firstname"),resultSet.getString("firstname"),resultSet.getString("total_price"),resultSet.getString("discount_value"),resultSet.getString("discounted_price"),resultSet.getString("total_payment"),resultSet.getString("total_change"),resultSet.getString("date")));
+                }
+            }catch (Exception a){
+                a.printStackTrace();
+            }
         }
 
         private void refreshInventoryTable(ObservableList list){

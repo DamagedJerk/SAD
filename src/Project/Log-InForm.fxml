@@ -5,14 +5,13 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="561.0" maxWidth="632.0" minHeight="380.0" minWidth="558.0" prefHeight="561.0" prefWidth="632.0" style="-fx-background-insets: 50; -fx-border-insets: 50; -fx-border-style: dotted;" styleClass="fx-backback" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.loginController">
+<AnchorPane maxHeight="561.0" maxWidth="632.0" minHeight="380.0" minWidth="558.0" prefHeight="561.0" prefWidth="632.0" style="-fx-background-insets: 50; -fx-border-insets: 50;" styleClass="fx-backback" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.loginController">
    <children>
       <ImageView fitHeight="165.0" fitWidth="158.0" layoutX="222.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="-3.0">
          <image>
@@ -61,7 +60,7 @@
                   <Font size="22.0" />
                </font>
             </JFXPasswordField>
-            <Label fx:id="lblerror" alignment="TOP_LEFT" layoutX="43.0" layoutY="183.0" prefHeight="26.0" prefWidth="252.0" text="wrong username" textAlignment="CENTER" textFill="#d70808" visible="false">
+            <Label fx:id="lblerror" alignment="TOP_LEFT" layoutX="43.0" layoutY="183.0" prefHeight="26.0" prefWidth="252.0" text="Incorrect Credentials" textAlignment="CENTER" textFill="#d70808" visible="false">
                <font>
                   <Font size="13.0" />
                </font>
@@ -72,7 +71,4 @@
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
-   <effect>
-      <DropShadow blurType="GAUSSIAN" height="32.62" offsetX="10.0" offsetY="10.0" radius="12.844999999999999" spread="0.18" width="20.76" />
-   </effect>
 </AnchorPane>
