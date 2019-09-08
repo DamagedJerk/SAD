@@ -8,6 +8,10 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 public class AddController {
@@ -29,6 +33,17 @@ public class AddController {
     public Label PrompError;
 
     private String Quantity="";
+    private PreparedStatement preparedStatement = null;
+    private ResultSet resultSet = null;
+    private String prod_id="";
+
+    public void setProd_id(String prod_id) {
+        this.prod_id = prod_id;
+    }
+
+    public String getProd_id() {
+        return prod_id;
+    }
 
     @FXML
     private void close() throws  Exception{
@@ -42,17 +57,43 @@ public class AddController {
     public String getQuan(){
         return this.Quantity;
     }
+    private static Connection getConnection() throws SQLException {
+        Connection conn;
+        dbconn.getInstance();
+        conn = dbconn.connect();
+        return conn;
+    }
+    private int checkquantity(){
+        int quan=0;
+        try{
+            preparedStatement=getConnection().prepareStatement("Select prod_quantity from tbl_products where prod_id=?");
+            preparedStatement.setString(1,getProd_id());
+            resultSet=preparedStatement.executeQuery();
+            if(resultSet.next()){
+                quan=Integer.parseInt(resultSet.getString("prod_quantity"));
+            }
+
+        }catch (Exception a){
+            a.printStackTrace();
+        }
+        return quan;
+    }
     @FXML
     void AddQuantity() throws  Exception  {
-        //JOptionPane.showMessageDialog(null,"addquantity ni agi");
         if(PromptTextQuantity.getText().contentEquals("")){
             PrompError.setVisible(true);
+            PrompError.setText("Please fill in");
             PromptTextQuantity.setText("");
         }else{
-            setQuan(PromptTextQuantity.getText());
-            close();
-
-
+            int quan=Integer.parseInt(PromptTextQuantity.getText());
+            if(quan>checkquantity()){
+                PrompError.setVisible(true);
+                PrompError.setText("There are only "+checkquantity()+" left");
+                PromptTextQuantity.setText("");
+            }else{
+                setQuan(PromptTextQuantity.getText());
+                close();
+            }
         }
 
     }

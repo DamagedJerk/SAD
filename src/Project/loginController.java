@@ -119,8 +119,7 @@ public class loginController implements Initializable {
                     lblerror.setText("logging in . . . .");
                     lblerror.setVisible(true);
                     lblerror.setTextFill(Color.web("#4386F8"));
-                    Stage stage = (Stage) btnClose.getScene().getWindow();
-                    stage.close();
+
                     String Name=resultSet.getString("firstname");
                     int role=Integer.parseInt(resultSet.getString("role"));
                     String userid=resultSet.getString("user_id");
@@ -137,6 +136,9 @@ public class loginController implements Initializable {
                     FXMLLoader loader=new FXMLLoader(getClass().getResource("Dashboard.fxml"));
                     Parent root = loader.load();
                     DashboardController dash=loader.getController();
+
+                    Stage stage = (Stage) btnClose.getScene().getWindow();
+                    stage.close();
                     dash.checkUser(Name,role,userid);
 
                     Scene scene = new Scene(root);

@@ -2,22 +2,23 @@ package Project;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import com.sun.glass.ui.Size;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.*;
+
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
+
 import javafx.event.EventHandler;
-import javafx.event.EventType;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.print.Collation;
+import javafx.geometry.Pos;
+
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -26,19 +27,18 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 
-import javax.sound.midi.ControllerEventListener;
+
 import javax.swing.*;
-import java.awt.geom.Area;
+
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -46,9 +46,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Collection;
+
 import java.util.ResourceBundle;
-import java.util.Vector;
+
 
 public class DashboardController implements Initializable {
 
@@ -152,7 +152,7 @@ public class DashboardController implements Initializable {
     private Label PrompError;
 
 
-    private String Quantity = "";
+
     private int CurrentID=0;
     private int totalitems=0;
     private int dateid=0;
@@ -375,7 +375,6 @@ public class DashboardController implements Initializable {
             cbo_size.getItems().add(size);
             size+=2;
         }
-
         initClock();
         LabelId.setText(getID());
         StockinID.setText(getStockInID());
@@ -502,27 +501,33 @@ public class DashboardController implements Initializable {
         tabSales.setOnSelectionChanged(event -> {
             if(tabSales.isSelected()){
                 refreshProductMenu();
+
             }
         });//
         tabReport.setOnSelectionChanged(event -> {
             if(tabReport.isSelected()){
                 Report();
+
             }
         });
         tabInventory.setOnSelectionChanged(event -> {
             if(tabInventory.isSelected()){
                 refreshInventoryTable(InventoryList);
+                CheckInventory();
+
             }
         });
         tabStock.setOnSelectionChanged(event -> {
             if(tabStock.isSelected()){
                 refreshStockList();
                 refreshInventoryTable(StockinList);
+                CheckInventory();
             }
         });
         tabLog.setOnSelectionChanged(event -> {
             if(tabLog.isSelected()){
                 Log(cboActivity.getValue(),cbologdate.getValue());
+
             }
         });
         //InventoryTable
@@ -994,6 +999,29 @@ public class DashboardController implements Initializable {
         ReportTable.setShowRoot(false);
 
     }
+    public void CheckInventory(){
+        try{
+
+            preparedStatement=getConnection().prepareStatement("Select *from tbl_products where prod_quantity<=20 AND prod_status=1");
+            resultSet=preparedStatement.executeQuery();
+            while(resultSet.next()){
+                    String product=resultSet.getString("prod_name");
+                    int quan=Integer.parseInt(resultSet.getString("prod_quantity"));
+                    if(quan==0){
+                        Notifications notificationBuilder=Notifications.create().graphic(null).hideAfter(Duration.seconds(3)).position(Pos.BASELINE_LEFT)
+                                .title("Warning").text(product+" stocks are now empty");
+                        notificationBuilder.showError();
+                    }else{
+                        Notifications notificationBuilder=Notifications.create().graphic(null).hideAfter(Duration.seconds(3)).position(Pos.BASELINE_LEFT)
+                                .title("Warning").text(product+" stocks are getting low");
+                        notificationBuilder.showWarning();
+                    }
+
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
 
     private void setComboBOx(JFXComboBox comboBOx,String query,String columnname){
         try {
@@ -1088,24 +1116,14 @@ public class DashboardController implements Initializable {
                     AddController controller=new AddController();
                     loader.setController(controller);
                     Parent root =loader.load();
-
+                    controller.setProd_id(CartItemId);
                     Stage stage = new Stage();
                     stage.initModality(Modality.APPLICATION_MODAL);
                     stage.initStyle(StageStyle.TRANSPARENT);
                     stage.initOwner(tableProduct.getScene().getWindow());
                     stage.setScene(new Scene(root));
                     stage.showAndWait();
-                    stage.setOnShowing(windowEvent -> {
-                            PromptAdd.setOnAction(actionEvent -> {
-                                try{
-                                    //walay pulos ni diri
-                                }catch (Exception ex){
-                                    ex.printStackTrace();
-                                }
 
-                            });
-
-                    });
                     //Quantity=Integer.parseInt(controller.getQuan());
                     if(!controller.getQuan().contentEquals("")){
 
@@ -1462,6 +1480,7 @@ public class DashboardController implements Initializable {
                         preparedStatement.executeUpdate();
 
                         JOptionPane.showMessageDialog(null,"resibo nalay kulang");
+                        CheckInventory();
                         //end
                         //insert sa tbl_purchased ang pulos niya kay diri ilista pila sa isa ka receipt ang napalit na certain products ug ang total sales sa isa ka produkto
 
