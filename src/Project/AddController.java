@@ -97,28 +97,5 @@ public class AddController {
         }
 
     }
-
-
-    public AddController(){
-    }
-    //public AddController(String fxmlURL){
-        //this.fxmlURL=fxmlURL;
-    //}
-
-    /*public <T> T getModal(JFXTreeTableView view) throws  Exception{
-        FXMLLoader loader= new FXMLLoader(getClass().getResource(fxmlURL));
-        Parent root =loader.load();
-        T controller=loader.getController();
-        JOptionPane.showMessageDialog(null,controller+"");
-
-        Stage stage = new Stage();
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.initOwner(view.getScene().getWindow());
-        stage.setScene(new Scene(root));
-        stage.showAndWait();
-        //Platform .runLater(()->stage.showAndWait());
-        return controller;
-    }*/
-
+public AddController(){}
 }

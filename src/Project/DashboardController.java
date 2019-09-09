@@ -385,6 +385,9 @@ public class DashboardController implements Initializable {
         setComboBOx(cbologdate,"Select *from tbl_date","date");
         setComboBOx(startingdate,"Select *from tbl_date","date");
         setComboBOx(enddate,"Select *from tbl_date","date");
+
+        startingdate.setValue(LocalDateTime.now().format(formatter));
+        enddate.setValue(LocalDateTime.now().format(formatter));
         cboActivity.getItems().add("All");
         cboActivity.getItems().add("Log-in");
         cboActivity.getItems().add("Registration");
@@ -404,7 +407,12 @@ public class DashboardController implements Initializable {
                 Log(cboActivity.getValue(),cbologdate.getValue());
             }
         });
-
+        ReportTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Report();
+            }
+        });
 
 
         Inventory_Status.getItems().add("INACTIVE");
@@ -1478,6 +1486,12 @@ public class DashboardController implements Initializable {
                         preparedStatement.setString(3, LocalDateTime.now().format(formatter));
                         preparedStatement.setString(4,LocalDateTime.now().format(time));
                         preparedStatement.executeUpdate();
+                        preparedStatement.close();
+                        resultSet.close();
+
+                        preparedStatement=getConnection().prepareStatement("Update tbl_products SET prod_status=0  where prod_quantity=0");
+                        preparedStatement.executeUpdate();
+
 
                         JOptionPane.showMessageDialog(null,"resibo nalay kulang");
                         CheckInventory();
@@ -1685,9 +1699,13 @@ public class DashboardController implements Initializable {
 
         private  void Report(){
             try{
+                String start=startingdate.getValue();
+                String end=enddate.getValue();
                 ReceiptList.clear();
-                String sql="SELECT r.receipt_id,r.Cart_id,e.firstname,u.cus_firstname,r.total_price,r.discount_value,r.discounted_price,r.total_payment,r.total_change,d.Date from tbl_receipt r Join tbl_customer u ON r.cus_id=u.cus_id JOIN tbl_employee e ON r.employee_id=e.user_id JOIN tbl_date d ON r.transaction_date=d.Date_id GROUP BY r.receipt_id";
+                String sql="SELECT r.receipt_id,r.Cart_id,e.firstname,u.cus_firstname,r.total_price,r.discount_value,r.discounted_price,r.total_payment,r.total_change,d.Date from tbl_receipt r Join tbl_customer u ON r.cus_id=u.cus_id JOIN tbl_employee e ON r.employee_id=e.user_id JOIN tbl_date d ON r.transaction_date=d.Date_id where d.date BETWEEN ? AND ? GROUP BY r.receipt_id";
                 preparedStatement=getConnection().prepareStatement(sql);
+                preparedStatement.setString(1,start);
+                preparedStatement.setString(2,end);
                 resultSet=preparedStatement.executeQuery();
                 while(resultSet.next()){
                     ReceiptList.add(new Receipts(resultSet.getString("receipt_id"),resultSet.getString("Cart_id"),resultSet.getString("cus_firstname"),resultSet.getString("firstname"),resultSet.getString("total_price"),resultSet.getString("discount_value"),resultSet.getString("discounted_price"),resultSet.getString("total_payment"),resultSet.getString("total_change"),resultSet.getString("date")));
