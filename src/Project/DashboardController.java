@@ -1010,7 +1010,7 @@ public class DashboardController implements Initializable {
     public void CheckInventory(){
         try{
 
-            preparedStatement=getConnection().prepareStatement("Select *from tbl_products where prod_quantity<=20 AND prod_status=1");
+            preparedStatement=getConnection().prepareStatement("Select *from tbl_products where prod_quantity<=20");
             resultSet=preparedStatement.executeQuery();
             while(resultSet.next()){
                     String product=resultSet.getString("prod_name");
