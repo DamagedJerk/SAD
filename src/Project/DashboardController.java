@@ -7,6 +7,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,6 +29,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -47,6 +50,8 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 
@@ -158,6 +163,9 @@ public class DashboardController implements Initializable {
     private int dateid=0;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private dbconn database;
+    private Connection connect;
+    private Map<String, Object> map;
 
 
     //InventoryTab
@@ -370,11 +378,12 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        int size=5;
-        while(size<=50){
+        int size=10;
+        while(size<=30){
             cbo_size.getItems().add(size);
             size+=2;
         }
+
         initClock();
         LabelId.setText(getID());
         StockinID.setText(getStockInID());
@@ -401,19 +410,47 @@ public class DashboardController implements Initializable {
         cboActivity.getItems().add("Added Supplier");
         cboActivity.setValue("All");
         cbologdate.setValue(LocalDateTime.now().format(formatter));
-        AreaLogs.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        cboActivity.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void handle(MouseEvent event) {
-                Log(cboActivity.getValue(),cbologdate.getValue());
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                if(t1!=null){
+                    Log(cboActivity.getValue(),cbologdate.getValue());
+                }
             }
         });
-        ReportTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        cbologdate.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void handle(MouseEvent event) {
-                Report();
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                if(t1!=null){
+                    Log(cboActivity.getValue(),cbologdate.getValue());
+                }
             }
         });
 
+        startingdate.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                if(t1!=null){
+                    Report();
+                }
+            }
+        });
+        enddate.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                if(t1!=null){
+                    Report();
+                }
+            }
+        });
+        cbo_size.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Integer>() {
+            @Override
+            public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
+                if(t1!=null){
+                    AreaLogs.setFont(Font.font("Arial", FontWeight.BOLD,t1));
+                }
+            }
+        });
 
         Inventory_Status.getItems().add("INACTIVE");
         Inventory_Status.getItems().add("ACTIVE");
@@ -1492,8 +1529,8 @@ public class DashboardController implements Initializable {
                         preparedStatement=getConnection().prepareStatement("Update tbl_products SET prod_status=0  where prod_quantity=0");
                         preparedStatement.executeUpdate();
 
-
-                        JOptionPane.showMessageDialog(null,"resibo nalay kulang");
+                        printReport();
+                        //JOptionPane.showMessageDialog(null,"resibo nalay kulang");
                         CheckInventory();
                         //end
                         //insert sa tbl_purchased ang pulos niya kay diri ilista pila sa isa ka receipt ang napalit na certain products ug ang total sales sa isa ka produkto
@@ -1548,6 +1585,15 @@ public class DashboardController implements Initializable {
                 stage.showAndWait();
 
             }
+
+    public void printReport() throws  SQLException{
+        database = new dbconn(); // balik diri hashmap
+        connect = getConnection();
+        map = new HashMap<String, Object>();
+
+        Report.createReport(connect, map, database.getReport("SalesReceipt", "report_jasper"));
+        Report.showReport();
+    }
 
 
 
