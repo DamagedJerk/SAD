@@ -1442,11 +1442,12 @@ public class DashboardController implements Initializable {
                     for(int i=0;i<CartList.size();i++){
                         int id=Integer.parseInt(tableCart.getSelectionModel().getModelItem(i).getValue().product_id.getValue());
                         int quan=Integer.parseInt(tableCart.getSelectionModel().getModelItem(i).getValue().product_quan.getValue());
-
+                        double totalorderprice=Double.parseDouble(tableCart.getSelectionModel().getModelItem(i).getValue().product_price.getValue());
+                        totalorderprice=totalorderprice*quan;
                         preparedStatement=getConnection().prepareStatement(sql);
                         preparedStatement.setInt(1,id);
                         preparedStatement.setInt(2,quan);
-                        preparedStatement.setString(3,tableCart.getSelectionModel().getModelItem(i).getValue().product_price.getValue());
+                        preparedStatement.setString(3,totalorderprice+"");
                         preparedStatement.setString(4,LabelId.getText());
                         preparedStatement.executeUpdate();
 
