@@ -2,6 +2,8 @@ package Project;
 
 
 
+import animatefx.animation.Swing;
+import animatefx.animation.Tada;
 import com.jfoenix.controls.JFXButton;
 
 import com.jfoenix.controls.JFXPasswordField;
@@ -144,6 +146,9 @@ public class loginController implements Initializable {
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
                     stage.show();
+                    new Swing(dash.img).play();
+
+
 
 
 

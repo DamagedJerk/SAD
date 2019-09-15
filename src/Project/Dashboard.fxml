@@ -523,7 +523,7 @@
             </Tab>
          </tabs>
       </JFXTabPane>
-      <AnchorPane prefHeight="126.0" prefWidth="128.0" />
+      <AnchorPane onMouseClicked="#clickme" prefHeight="126.0" prefWidth="128.0" />
    </children>
    <stylesheets>
       <URL value="@../css/style.css" />

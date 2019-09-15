@@ -1,5 +1,9 @@
 package Project;
 
+import animatefx.animation.FadeIn;
+import animatefx.animation.FadeInLeft;
+import animatefx.animation.FadeOut;
+import animatefx.animation.Swing;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
@@ -23,6 +27,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 
 import javafx.scene.image.Image;
@@ -134,7 +139,7 @@ public class DashboardController implements Initializable {
     private Tab tabLog;
 
     @FXML
-    private ImageView img;
+    public ImageView img;
     @FXML
     private Label lblCount;
     @FXML
@@ -310,6 +315,13 @@ public class DashboardController implements Initializable {
             Scene scene = new Scene(rootpane);
             thisstage.setScene(scene);
             thisstage.show();
+
+            FadeOut fadeout=new FadeOut(rootpane);
+            fadeout.play();
+            fadeout.playOnFinished(new FadeIn(rootpane));
+
+
+
         }
     }
 
@@ -396,14 +408,32 @@ public class DashboardController implements Initializable {
             ex.printStackTrace();
         }
     }
+    @FXML
+    private void clickme(){
+        new Swing(img).play();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //initialize chart
+        XYChart.Series<String,Number> series=new XYChart.Series<String,Number>();
+        try{
+            preparedStatement=getConnection().prepareStatement("SELECT r.transaction_date,d.Date,sum(r.total_price) from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id GROUP by d.Date");
+            resultSet=preparedStatement.executeQuery();
+            while (resultSet.next()){
+                Double Ycomponent=Double.parseDouble(resultSet.getString("sum(r.total_price)"));
+                series.getData().add(new XYChart.Data<String, Number>(resultSet.getString("date"),Ycomponent));
+            }
+            LineChart.getData().add(series);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+        //
         final ToggleGroup group = new ToggleGroup();
         //balik diri
         radioDaily.setToggleGroup(group);
         radioMonthly.setToggleGroup(group);
-
 
         int size=10;
         while(size<=30){

@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbddea0c-4283-4362-bc6d-1b06ad665c0e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/AnimateFX_1_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/AnimateFX-1.2.0.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/S.A.D.Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/S.A.D.Project.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Dashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$10.class" afterDir="false" />
@@ -58,12 +61,12 @@
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$8.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$9.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/dbconn.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/dbconn.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/resources/Thumbs.db" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/resources/Thumbs.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/loginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/loginController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Project/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Dashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Project/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project/dbconn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/dbconn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/Thumbs.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Thumbs.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/loginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/loginController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -80,8 +83,23 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="1515" column="58" selection-start-line="1515" selection-start-column="58" selection-end-line="1515" selection-end-column="58" />
+            <state relative-caret-position="207">
+              <caret line="423" column="92" selection-start-line="423" selection-start-column="92" selection-end-line="423" selection-end-column="92" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#12515#12516#0" expanded="true" />
+                <element signature="e#12580#12581#0" expanded="true" />
+                <element signature="e#13013#13028#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Project/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="365">
+              <caret line="42" column="19" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -90,11 +108,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Project/Dashboard.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder" />
+        <entry file="file://$PROJECT_DIR$/src/Project/loginController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8092">
-              <caret line="476" column="66" selection-start-line="476" selection-start-column="66" selection-end-line="476" selection-end-column="66" />
+            <state relative-caret-position="272">
+              <caret line="148" column="47" selection-start-line="148" selection-start-column="47" selection-end-line="148" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -110,17 +127,10 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>preparedstatement;</find>
-      <find>add.fx</find>
-      <find>NOtifications</find>
-      <find>Select r.</find>
-      <find>startingdate</find>
-      <find>setOnMouse</find>
       <find>getConn</find>
       <find>resibo nalay kulang</find>
       <find>resibo</find>
       <find>re</find>
-      <find>initialize</find>
       <find>font</find>
       <find>log(</find>
       <find>balik diri u</find>
@@ -140,6 +150,13 @@
       <find>getDate</find>
       <find>checkDa</find>
       <find>Joption</find>
+      <find>imageview</find>
+      <find>userpic</find>
+      <find>clickme</find>
+      <find>initialize</find>
+      <find>img</find>
+      <find>logout</find>
+      <find>lineChart</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -159,7 +176,6 @@
         <option value="$PROJECT_DIR$/src/Project/Inventory.java" />
         <option value="$PROJECT_DIR$/src/Project/Stocks.java" />
         <option value="$PROJECT_DIR$/src/Project/Log-InForm.fxml" />
-        <option value="$PROJECT_DIR$/src/Project/Main.java" />
         <option value="$PROJECT_DIR$/src/Project/recordcustomer.java" />
         <option value="$PROJECT_DIR$/src/Project/signupcontroller.java" />
         <option value="$PROJECT_DIR$/src/Project/suppliercontroller.java" />
@@ -170,10 +186,11 @@
         <option value="$PROJECT_DIR$/src/Project/products.java" />
         <option value="$PROJECT_DIR$/src/Project/Reports.java" />
         <option value="$PROJECT_DIR$/src/Project/Receipts.java" />
-        <option value="$PROJECT_DIR$/src/Project/loginController.java" />
         <option value="$PROJECT_DIR$/src/Project/AddController.java" />
         <option value="$PROJECT_DIR$/src/Project/Report.java" />
         <option value="$PROJECT_DIR$/src/Project/dbconn.java" />
+        <option value="$PROJECT_DIR$/src/Project/Main.java" />
+        <option value="$PROJECT_DIR$/src/Project/loginController.java" />
         <option value="$PROJECT_DIR$/src/Project/DashboardController.java" />
       </list>
     </option>
@@ -199,25 +216,41 @@
             <path>
               <item name="S.A.D.Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="S.A.D.Project" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="S.A.D.Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="S.A.D.Project" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="AnimateFX-1.2.0.jar" type="ab9368bb:PsiFileNode" />
+            </path>
+            <path>
+              <item name="S.A.D.Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="S.A.D.Project" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="AnimateFX-1.2.0.jar" type="ab9368bb:PsiFileNode" />
+              <item name="animation" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="S.A.D.Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="S.A.D.Project" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Project" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="S.A.D.Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/core-3.3.0.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/AnimateFX-1.2.0.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -352,12 +385,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/addSupplier.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1105">
           <caret line="65" selection-start-line="65" selection-end-line="65" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/purchase.java" />
     <entry file="jar://C:/Program Files/Java/jdk-11.0.4/lib/src.zip!/java.base/java/lang/Integer.java">
@@ -378,8 +411,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/Customer.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="jar://$USER_HOME$/Downloads/Compressed/javafx-sdk-12.0.1/lib/javafx.base.jar!/com/sun/javafx/event/BasicEventDispatcher.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -406,33 +439,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Project/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1208#1209#0" expanded="true" />
-            <element signature="e#1236#1237#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/Alert.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="33" column="22" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/Log-InForm.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1173">
           <caret line="69" column="13" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/Stocks.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -542,13 +563,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Project/loginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1717">
-          <caret line="138" selection-start-line="138" selection-end-line="138" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/Receipts.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -611,21 +625,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
+    <entry file="file://$PROJECT_DIR$/src/Project/Dashboard.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="1515" column="58" selection-start-line="1515" selection-start-column="58" selection-end-line="1515" selection-end-column="58" />
+        <state relative-caret-position="182">
+          <caret line="35" column="128" selection-start-line="35" selection-start-column="121" selection-end-line="35" selection-end-column="128" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Project/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="42" column="19" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Project/Dashboard.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
+    <entry file="file://$PROJECT_DIR$/src/Project/loginController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8092">
-          <caret line="476" column="66" selection-start-line="476" selection-start-column="66" selection-end-line="476" selection-end-column="66" />
+        <state relative-caret-position="272">
+          <caret line="148" column="47" selection-start-line="148" selection-start-column="47" selection-end-line="148" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="423" column="92" selection-start-line="423" selection-start-column="92" selection-end-line="423" selection-end-column="92" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#12515#12516#0" expanded="true" />
+            <element signature="e#12580#12581#0" expanded="true" />
+            <element signature="e#13013#13028#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -692,7 +726,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>commons-collections-3.2.1</last-edited>
+          <last-edited>AnimateFX-1.2.0</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

@@ -2,6 +2,9 @@ package Project;
 
 
 
+import animatefx.animation.FadeIn;
+import animatefx.animation.Swing;
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -37,7 +40,7 @@ public class Main extends Application {
 
         con.stage.initStyle(StageStyle.UNDECORATED);
         con.stage.show();
-
+        new FadeIn(root).play();
 
     }
 
