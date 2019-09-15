@@ -45,6 +45,7 @@ public class dbconn {
     public InputStream getReport(String report_name, String column_name) {
         InputStream input = null;
         String query = "SELECT "+column_name+" FROM tbl_report WHERE report_name='"+report_name+"'";
+        //JOptionPane.showMessageDialog(null,query);
         try {
 
             connect = getConnection();

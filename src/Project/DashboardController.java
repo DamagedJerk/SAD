@@ -22,6 +22,7 @@ import javafx.geometry.Pos;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.*;
 
 import javafx.scene.image.Image;
@@ -205,8 +206,12 @@ public class DashboardController implements Initializable {
     private JFXButton new_entry;
     @FXML
     private JFXTreeTableView<Inventory> tbl_inventory;
+    @FXML
+    private JFXButton InventoryReports;
+    @FXML
+    private JFXButton StockInReports;
 
-    //balik diri
+
     //stock-in tab fields
     @FXML
     private JFXTextField StockinID;
@@ -226,6 +231,22 @@ public class DashboardController implements Initializable {
     private TextArea AreaLogs;
     @FXML
     private JFXComboBox<Integer> cbo_size;
+    //Reports Tab
+    @FXML
+    private JFXRadioButton radioDaily;
+
+    @FXML
+    private JFXRadioButton radioMonthly;
+
+    @FXML
+    private LineChart<String,Number> LineChart;
+
+    @FXML
+    private Label LineChart_Title;
+
+    @FXML
+    private JFXButton btn_loadChart;
+
 
     //
 
@@ -378,6 +399,12 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        final ToggleGroup group = new ToggleGroup();
+        //balik diri
+        radioDaily.setToggleGroup(group);
+        radioMonthly.setToggleGroup(group);
+
+
         int size=10;
         while(size<=30){
             cbo_size.getItems().add(size);
@@ -449,6 +476,20 @@ public class DashboardController implements Initializable {
                 if(t1!=null){
                     AreaLogs.setFont(Font.font("Arial", FontWeight.BOLD,t1));
                 }
+            }
+        });
+        InventoryReports.setOnAction(e->{
+            try{
+                printReport("InventoryReport");
+            }catch (Exception ee){
+                ee.printStackTrace();
+            }
+        });
+        StockInReports.setOnAction(a->{
+            try{
+                printReport("StockinReport");
+            }catch (Exception ee){
+                ee.printStackTrace();
             }
         });
 
@@ -1461,6 +1502,7 @@ public class DashboardController implements Initializable {
                     //JOptionPane.showMessageDialog(null,userId);
                     if(controller.isResponse()==true){
                         // diri mag insert sa receipt
+                        checkdate();
                         preparedStatement=getConnection().prepareStatement("Insert into tbl_receipt values(null,?,?,?,?,?,?,?,?,?)");
                         preparedStatement.setString(1,controller.getCartID());
                         preparedStatement.setString(2,controller.getCustomer_id()+"");
@@ -1472,10 +1514,7 @@ public class DashboardController implements Initializable {
                         preparedStatement.setString(8,controller.getDiscountedprice()+"");
                         preparedStatement.setString(9,controller.getChange()+"");
                         preparedStatement.executeUpdate();
-
-                        // unsaon ko ni??
                         String str=getReceiptID();
-
                         preparedStatement=getConnection().prepareStatement("Select p.prod_id,p.prod_name,o.order_quantity,o.total_price,o.order_quantity*o.total_price,r.receipt_id from tbl_order o JOIN tbl_products p ON p.prod_id=o.product_id JOIN tbl_cart c ON c.Cart_id=o.Cart_id JOIN tbl_receipt r ON r.Cart_id=c.Cart_id where r.receipt_id=?");
                         preparedStatement.setString(1,str);
                         resultSet=preparedStatement.executeQuery();
@@ -1529,14 +1568,9 @@ public class DashboardController implements Initializable {
 
                         preparedStatement=getConnection().prepareStatement("Update tbl_products SET prod_status=0  where prod_quantity=0");
                         preparedStatement.executeUpdate();
-
-                        printReport();
-                        //JOptionPane.showMessageDialog(null,"resibo nalay kulang");
+                        preparedStatement.close();
+                        printReport("SalesReceipt");
                         CheckInventory();
-                        //end
-                        //insert sa tbl_purchased ang pulos niya kay diri ilista pila sa isa ka receipt ang napalit na certain products ug ang total sales sa isa ka produkto
-
-
                         SalesPrice.setText("");
                         SalesChange.setText("");
                         SalesPayment.setText("");
@@ -1552,24 +1586,18 @@ public class DashboardController implements Initializable {
                         //Last time
                         //kulang nalang mag print ug resibo
                     }else {
-                        try{
-                            sql="Delete from tbl_cart WHERE Cart_id=(Select max(Cart_id) from tbl_order)";
-                            preparedStatement=getConnection().prepareStatement(sql);
+                        try {
+                            sql = "Delete from tbl_cart WHERE Cart_id=(Select max(Cart_id) from tbl_order)";
+                            preparedStatement = getConnection().prepareStatement(sql);
                             preparedStatement.executeUpdate();
-                        }catch(Exception ex){
+                        } catch (Exception ex) {
                             ex.printStackTrace();
                         }
 
                     }
-
-
-
-
                 }catch(Exception ex){
                     ex.printStackTrace();
                 }
-
-
                 }
             }
             private void confirmationdiaglogue(confirm controller) throws  Exception{
@@ -1587,12 +1615,12 @@ public class DashboardController implements Initializable {
 
             }
 
-    public void printReport() throws  SQLException{
+    public void printReport(String report) throws  SQLException{
         database = new dbconn(); // balik diri hashmap
         connect = getConnection();
         map = new HashMap<String, Object>();
 
-        Report.createReport(connect, map, database.getReport("SalesReceipt", "report_jasper"));
+        Report.createReport(connect, map, database.getReport(report, "report_jasper"));
         Report.showReport();
     }
 

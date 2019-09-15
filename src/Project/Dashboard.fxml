@@ -2,15 +2,21 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
+<?import com.jfoenix.validation.IntegerValidator?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -98,6 +104,7 @@
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </JFXTextField>
+                              <IntegerValidator layoutX="14.0" layoutY="25.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="6.0" layoutY="466.0" prefHeight="113.0" prefWidth="1163.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
@@ -343,7 +350,7 @@
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </JFXTextField>
-                              <JFXButton fx:id="StockInReports" layoutX="415.0" layoutY="516.0" onAction="#AddtoInventory" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: #16FE95;" text="Print Preview" viewOrder="7.0">
+                              <JFXButton fx:id="StockInReports" layoutX="415.0" layoutY="516.0" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: #16FE95;" text="Print Preview" viewOrder="7.0">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
@@ -434,25 +441,56 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tabReport" disable="true" text="Report">
+            <Tab fx:id="tabReport" text="Report">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="581.0" prefWidth="946.0">
                      <children>
                         <AnchorPane layoutX="3.0" layoutY="12.0" prefHeight="566.0" prefWidth="1163.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
                            <children>
-                              <Label layoutX="505.0" layoutY="22.0" text="Sales Report">
+                              <Label layoutX="278.0" layoutY="14.0" text="Sales Report">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </Label>
-                              <JFXComboBox fx:id="enddate" labelFloat="true" layoutX="332.0" layoutY="41.0" prefHeight="25.0" prefWidth="226.0" promptText="End Date" />
-                              <JFXTreeTableView fx:id="ReportTable" blendMode="DARKEN" layoutX="12.0" layoutY="82.0" prefHeight="476.0" prefWidth="1127.0" />
-                              <JFXComboBox fx:id="startingdate" labelFloat="true" layoutX="14.0" layoutY="41.0" prefHeight="25.0" prefWidth="240.0" promptText="Starting Date:" />
-                              <Label layoutX="277.0" layoutY="41.0" text="To:">
+                              <JFXComboBox fx:id="enddate" labelFloat="true" layoutX="214.0" layoutY="42.0" prefHeight="25.0" prefWidth="114.0" promptText="End Date" />
+                              <JFXTreeTableView fx:id="ReportTable" blendMode="DARKEN" layoutX="12.0" layoutY="82.0" prefHeight="431.0" prefWidth="599.0" AnchorPane.topAnchor="82.0" />
+                              <JFXComboBox fx:id="startingdate" labelFloat="true" layoutX="14.0" layoutY="41.0" prefHeight="25.0" prefWidth="120.0" promptText="Starting Date:" />
+                              <Label layoutX="157.0" layoutY="41.0" text="To:">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </Label>
+                              <JFXButton fx:id="DailySales" layoutX="14.0" layoutY="520.0" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: #16FE95;" text="Generate Sales" viewOrder="7.0">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXRadioButton fx:id="radioDaily" layoutX="389.0" layoutY="46.0" text="Daily" />
+                              <JFXRadioButton fx:id="radioMonthly" layoutX="510.0" layoutY="46.0" text="Monthly" />
+                              <AnchorPane blendMode="DARKEN" layoutX="620.0" layoutY="83.0" prefHeight="463.0" prefWidth="530.0" style="-fx-border-color: #44CBD0; -fx-border-width: 2;">
+                                 <children>
+                                    <LineChart fx:id="LineChart" layoutX="7.0" layoutY="54.0" legendSide="LEFT" prefHeight="346.0" prefWidth="514.0" title="Sales Performance" titleSide="BOTTOM">
+                                      <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                      </yAxis>
+                                       <effect>
+                                          <Blend mode="DARKEN" />
+                                       </effect>
+                                    </LineChart>
+                                    <Label fx:id="LineChart_Title" layoutX="219.0" layoutY="28.0" text="Line Chart">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <JFXButton fx:id="btn_loadChart" layoutX="375.0" layoutY="411.0" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: #16FE95;" text="Load Chart" viewOrder="7.0">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children></AnchorPane>
                            </children>
                         </AnchorPane>
                      </children></AnchorPane>
