@@ -3,6 +3,7 @@ package Project;
 
 
 import animatefx.animation.FadeIn;
+import animatefx.animation.FlipInX;
 import animatefx.animation.Swing;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
@@ -25,22 +26,12 @@ public class Main extends Application {
         con.stage=primaryStage;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Log-InForm.fxml"));
         Parent root = loader.load();
-
-        /*StackPane stackPane=new StackPane(root);
-        stackPane.setStyle(
-                        "-fx-background-color: black; " +
-                        "-fx-background-insets: 0; " +
-                        "-fx-background-radius: 20; " +
-                        "-fx-effect: dropshadow(three-pass-box,grey, 10, 0, 0, 0);"
-        );
-
-        stackPane.setPrefSize(653,580);*/
         root.setStyle("-fx-background-insets: 20; -fx-background-radius: 20");
         con.stage.setScene(new Scene(root));
 
         con.stage.initStyle(StageStyle.UNDECORATED);
         con.stage.show();
-        new FadeIn(root).play();
+        new FlipInX(root).play();
 
     }
 

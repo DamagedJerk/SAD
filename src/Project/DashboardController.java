@@ -1,9 +1,6 @@
 package Project;
 
-import animatefx.animation.FadeIn;
-import animatefx.animation.FadeInLeft;
-import animatefx.animation.FadeOut;
-import animatefx.animation.Swing;
+import animatefx.animation.*;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
@@ -17,6 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
+import javafx.event.Event;
 import javafx.event.EventHandler;
 
 import javafx.fxml.FXML;
@@ -174,6 +172,7 @@ public class DashboardController implements Initializable {
     private Map<String, Object> map;
 
 
+
     //InventoryTab
 
     @FXML
@@ -272,7 +271,7 @@ public class DashboardController implements Initializable {
     private Image userpic = new Image("/resources/user.png");
     private String userId="";
     private String receiptId="";
-
+    final ToggleGroup group = new ToggleGroup();
     public Double totalprice = 0.0;
 
 
@@ -296,7 +295,9 @@ public class DashboardController implements Initializable {
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.initOwner(tableProduct.getScene().getWindow());
         stage.setScene(new Scene(root));
+        new FlipInX(root).play();
         stage.showAndWait();
+
         if(controller.isResponse()==true) {
             try {
                 preparedStatement = getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
@@ -315,10 +316,7 @@ public class DashboardController implements Initializable {
             Scene scene = new Scene(rootpane);
             thisstage.setScene(scene);
             thisstage.show();
-
-            FadeOut fadeout=new FadeOut(rootpane);
-            fadeout.play();
-            fadeout.playOnFinished(new FadeIn(rootpane));
+            new FlipInX(thisstage.getScene().getRoot()).play();
 
 
 
@@ -338,7 +336,9 @@ public class DashboardController implements Initializable {
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.initOwner(tableProduct.getScene().getWindow());
         stage.setScene(new Scene(root));
+        new FlipInX(root).play();
         stage.showAndWait();
+
 
         if(controller.isResponse()==true) {
             try {
@@ -412,6 +412,15 @@ public class DashboardController implements Initializable {
     private void clickme(){
         new Swing(img).play();
     }
+    @FXML
+    private void clickradio(){
+        if(group.getSelectedToggle()==radioDaily){
+            enddate.setValue(startingdate.getValue());
+        }else{
+            JOptionPane.showMessageDialog(null,"Monthly");
+        }
+
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -430,7 +439,7 @@ public class DashboardController implements Initializable {
         }
 
         //
-        final ToggleGroup group = new ToggleGroup();
+
         //balik diri
         radioDaily.setToggleGroup(group);
         radioMonthly.setToggleGroup(group);
@@ -1124,11 +1133,11 @@ public class DashboardController implements Initializable {
                     String product=resultSet.getString("prod_name");
                     int quan=Integer.parseInt(resultSet.getString("prod_quantity"));
                     if(quan==0){
-                        Notifications notificationBuilder=Notifications.create().graphic(null).hideAfter(Duration.seconds(3)).position(Pos.BASELINE_LEFT)
+                        Notifications notificationBuilder=Notifications.create().graphic(null).hideAfter(Duration.seconds(2)).position(Pos.BASELINE_LEFT)
                                 .title("Warning").text(product+" stocks are now empty");
                         notificationBuilder.showError();
                     }else{
-                        Notifications notificationBuilder=Notifications.create().graphic(null).hideAfter(Duration.seconds(3)).position(Pos.BASELINE_LEFT)
+                        Notifications notificationBuilder=Notifications.create().graphic(null).hideAfter(Duration.seconds(2)).position(Pos.BASELINE_LEFT)
                                 .title("Warning").text(product+" stocks are getting low");
                         notificationBuilder.showWarning();
                     }
@@ -1238,7 +1247,9 @@ public class DashboardController implements Initializable {
                     stage.initStyle(StageStyle.TRANSPARENT);
                     stage.initOwner(tableProduct.getScene().getWindow());
                     stage.setScene(new Scene(root));
+                    new FlipInX(root).play();
                     stage.showAndWait();
+
 
                     //Quantity=Integer.parseInt(controller.getQuan());
                     if(!controller.getQuan().contentEquals("")){
@@ -1395,6 +1406,7 @@ public class DashboardController implements Initializable {
             stage.initOwner(btn_supplier.getScene().getWindow());
             stage.setScene(new Scene(root));
             stage.showAndWait();
+            new FlipInX(root).play();
             if(controller.isResponse()==true){
             try{
                 //logs activity
@@ -1428,6 +1440,7 @@ public class DashboardController implements Initializable {
             stage.initOwner(tableProduct.getScene().getWindow());
             stage.setScene(new Scene(root));
             stage.showAndWait();
+            new FlipInX(root).play();
 
             if(controller.isResponse()==true){
                 int quan=Integer.parseInt(CartList.get(tableCart.getSelectionModel().getFocusedIndex()).product_quan.getValue());
@@ -1463,7 +1476,9 @@ public class DashboardController implements Initializable {
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.initOwner(btn_supplier.getScene().getWindow());
             stage.setScene(new Scene(root));
+            new FlipInX(root).play();
             stage.showAndWait();
+
             if(controller.isResponse()==true){
             try{
                 //logs activity
@@ -1641,7 +1656,9 @@ public class DashboardController implements Initializable {
                 stage.initStyle(StageStyle.TRANSPARENT);
                 stage.initOwner(btn_supplier.getScene().getWindow());
                 stage.setScene(new Scene(root));
+                new FlipInX(root).play();
                 stage.showAndWait();
+
 
             }
 

@@ -2,8 +2,7 @@ package Project;
 
 
 
-import animatefx.animation.Swing;
-import animatefx.animation.Tada;
+import animatefx.animation.*;
 import com.jfoenix.controls.JFXButton;
 
 import com.jfoenix.controls.JFXPasswordField;
@@ -42,6 +41,7 @@ import javafx.scene.control.Label;
 
 import javafx.scene.paint.Color;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 
 public class loginController implements Initializable {
@@ -146,7 +146,11 @@ public class loginController implements Initializable {
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
                     stage.show();
-                    new Swing(dash.img).play();
+                    FlipInX animate=new FlipInX(root);
+                    animate.play();
+                    animate.playOnFinished(new Swing(dash.img));
+
+
 
 
 
@@ -156,6 +160,7 @@ public class loginController implements Initializable {
                 }
             }catch (Exception e){
                 e.printStackTrace();
+                lblerror.setText("Cannot connect to Database");
             }
 
 
@@ -176,6 +181,7 @@ public class loginController implements Initializable {
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.initOwner(btnSignup.getScene().getWindow());
         stage.setScene(new Scene(root));
+        new FlipInX(root).play();
         stage.showAndWait();
         if(controller.isResponse()==true) {
             stage = (Stage) btnSignup.getScene().getWindow();
