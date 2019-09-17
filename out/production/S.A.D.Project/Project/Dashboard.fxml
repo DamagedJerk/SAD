@@ -238,7 +238,7 @@
                                           </JFXButton>
                                        </children>
                                     </HBox>
-                                    <JFXTextField fx:id="InventoryQuantity" labelFloat="true" prefHeight="29.0" prefWidth="339.0" promptText="Quantity:" viewOrder="5.0" GridPane.rowIndex="6">
+                                    <JFXTextField fx:id="InventoryQuantity" editable="false" labelFloat="true" prefHeight="29.0" prefWidth="339.0" promptText="Quantity:" viewOrder="5.0" GridPane.rowIndex="6">
                                        <padding>
                                           <Insets left="15.0" right="15.0" />
                                        </padding>
@@ -441,7 +441,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tabReport" text="Report">
+            <Tab fx:id="tabReport" disable="true" text="Report">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="581.0" prefWidth="946.0">
                      <children>
@@ -485,7 +485,7 @@
                                           <Font name="System Bold" size="17.0" />
                                        </font>
                                     </Label>
-                                    <JFXButton fx:id="btn_loadChart" layoutX="375.0" layoutY="411.0" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: #16FE95;" text="Load Chart" viewOrder="7.0">
+                                    <JFXButton fx:id="btn_loadChart" layoutX="375.0" layoutY="411.0" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: #16FE95;" text="Load Chart" viewOrder="7.0" visible="false">
                                        <font>
                                           <Font name="System Bold" size="17.0" />
                                        </font>
@@ -496,7 +496,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tabLog" text="Activity Log">
+            <Tab fx:id="tabLog" disable="true" text="Activity Log">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>

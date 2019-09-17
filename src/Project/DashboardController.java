@@ -269,6 +269,7 @@ public class DashboardController implements Initializable {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     private Image userpic = new Image("/resources/user.png");
+    private Image confirm = new Image("/resources/confirm.png");
     private String userId="";
     private String receiptId="";
     final ToggleGroup group = new ToggleGroup();
@@ -414,35 +415,59 @@ public class DashboardController implements Initializable {
     }
     @FXML
     private void clickradio(){
-        if(group.getSelectedToggle()==radioDaily){
+        if(group.getSelectedToggle()==radioDaily){ // wa pa nahuman
             enddate.setValue(startingdate.getValue());
+            refreshChart();
         }else{
-            JOptionPane.showMessageDialog(null,"Monthly");
+            refreshChart();
+            //new Wobble(LineChart).play();
         }
 
+    }
+    private void refreshChart(){
+        XYChart.Series<String,Number> series=new XYChart.Series<String,Number>();
+        try{
+            if(group.getSelectedToggle()==radioDaily) {
+                series.getData().clear();
+                LineChart.getData().clear();
+                preparedStatement = getConnection().prepareStatement("SELECT r.transaction_date,concat_ws(\"-\",d.Year,d.Month,d.Date) as Date ,sum(r.total_price) from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id GROUP by d.Date");
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    Double Ycomponent = Double.parseDouble(resultSet.getString("sum(r.total_price)"));
+                    series.getData().add(new XYChart.Data<String, Number>(resultSet.getString("Date"), Ycomponent));
+                }
+                LineChart.getData().add(series);
+            }else if(group.getSelectedToggle()==radioMonthly){
+                series.getData().clear();
+                LineChart.getData().clear();
+                preparedStatement = getConnection().prepareStatement("SELECT r.transaction_date,concat_ws(\"-\",d.Year,d.Month,d.Date) as Date ,sum(r.total_price) from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id GROUP by d.Date");
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    Double Ycomponent = Double.parseDouble(resultSet.getString("sum(r.total_price)"));
+                    series.getData().add(new XYChart.Data<String, Number>(resultSet.getString("Date"), Ycomponent));
+                }
+                LineChart.getData().add(series);
+
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //initialize chart
-        XYChart.Series<String,Number> series=new XYChart.Series<String,Number>();
-        try{
-            preparedStatement=getConnection().prepareStatement("SELECT r.transaction_date,d.Date,sum(r.total_price) from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id GROUP by d.Date");
-            resultSet=preparedStatement.executeQuery();
-            while (resultSet.next()){
-                Double Ycomponent=Double.parseDouble(resultSet.getString("sum(r.total_price)"));
-                series.getData().add(new XYChart.Data<String, Number>(resultSet.getString("date"),Ycomponent));
-            }
-            LineChart.getData().add(series);
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
+        radioDaily.setToggleGroup(group);
+        radioMonthly.setToggleGroup(group);
+        group.selectToggle(radioDaily);
+        refreshChart();
+
+        //diri ka unya
 
         //
 
         //balik diri
-        radioDaily.setToggleGroup(group);
-        radioMonthly.setToggleGroup(group);
+
 
         int size=10;
         while(size<=30){
@@ -457,9 +482,9 @@ public class DashboardController implements Initializable {
         setComboBOx(InventorySupp, "Select * from tbl_supplier", "company_name");
         setComboBOx(InventoryCateg, "Select * from tbl_category", "cat_description");
         setComboBOx(StockinCat, "Select * from tbl_category", "cat_description");
-        setComboBOx(cbologdate,"Select *from tbl_date","date");
-        setComboBOx(startingdate,"Select *from tbl_date","date");
-        setComboBOx(enddate,"Select *from tbl_date","date");
+        setComboBOx(cbologdate,"Select concat_ws(\"-\",Year,Month,Date) as Date from tbl_date","Date");
+        setComboBOx(startingdate,"Select concat_ws(\"-\",Year,Month,Date) as Date from tbl_date","Date");
+        setComboBOx(enddate,"Select concat_ws(\"-\",Year,Month,Date) as Date from tbl_date","Date");
 
         startingdate.setValue(LocalDateTime.now().format(formatter));
         enddate.setValue(LocalDateTime.now().format(formatter));
@@ -498,6 +523,9 @@ public class DashboardController implements Initializable {
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 if(t1!=null){
                     Report();
+                    if(enddate.getValue().contentEquals(startingdate.getValue())){
+                        refreshChart();
+                    }
                 }
             }
         });
@@ -506,6 +534,9 @@ public class DashboardController implements Initializable {
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 if(t1!=null){
                     Report();
+                    if(enddate.getValue().contentEquals(startingdate.getValue())){
+                        refreshChart();
+                    }
                 }
             }
         });
@@ -1363,6 +1394,10 @@ public class DashboardController implements Initializable {
                         preparedStatement.setString(1,Amount+"");
                         preparedStatement.setString(2,itemId);
                         preparedStatement.executeUpdate();
+                        //balik
+                        Notifications notificationBuilder=Notifications.create().graphic(null).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
+                                .title("Success").text("Added "+Amount+"To Product "+name);
+                        notificationBuilder.show();
 
                         refreshStockList();
                         refreshProductMenu();
@@ -1446,7 +1481,6 @@ public class DashboardController implements Initializable {
                 int quan=Integer.parseInt(CartList.get(tableCart.getSelectionModel().getFocusedIndex()).product_quan.getValue());
                 double price=Double.parseDouble(CartList.get(tableCart.getSelectionModel().getFocusedIndex()).product_price.getValue());
                 double toberemove=quan*price;
-                //JOptionPane.showMessageDialog(null,"toberemove "+toberemove+"\nquan "+quan+"\nprice "+price+"\ntotalprice "+totalprice );
                 totalprice=totalprice-toberemove;
 
                 CartList.remove(tableCart.getSelectionModel().getFocusedIndex());
@@ -1625,6 +1659,8 @@ public class DashboardController implements Initializable {
                         refreshProductMenu();
                         refreshInventoryTable(InventoryList);
                         refreshInventoryTable(StockinList);
+                        refreshChart();
+
                         LabelId.setText(getID());
                         totalitems=0;
                         totalprice=0.0;
@@ -1765,6 +1801,9 @@ public class DashboardController implements Initializable {
                     refreshProductMenu();
                     CurrentID++;
                     NewEntry();
+                    Notifications notificationBuilder=Notifications.create().graphic(null).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
+                            .title("Success").text("Added To Inventory");
+                    notificationBuilder.show();
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -1824,13 +1863,13 @@ public class DashboardController implements Initializable {
                 String start=startingdate.getValue();
                 String end=enddate.getValue();
                 ReceiptList.clear();
-                String sql="SELECT r.receipt_id,r.Cart_id,e.firstname,u.cus_firstname,r.total_price,r.discount_value,r.discounted_price,r.total_payment,r.total_change,d.Date from tbl_receipt r Join tbl_customer u ON r.cus_id=u.cus_id JOIN tbl_employee e ON r.employee_id=e.user_id JOIN tbl_date d ON r.transaction_date=d.Date_id where d.date BETWEEN ? AND ? GROUP BY r.receipt_id";
+                String sql="SELECT r.receipt_id,r.Cart_id,e.firstname,u.cus_firstname,r.total_price,r.discount_value,r.discounted_price,r.total_payment,r.total_change,concat_ws(\"-\",d.Year,d.Month,d.Date) as Date from tbl_receipt r Join tbl_customer u ON r.cus_id=u.cus_id JOIN tbl_employee e ON r.employee_id=e.user_id JOIN tbl_date d ON r.transaction_date=d.Date_id where concat_ws(\"-\",d.Year,d.Month,d.Date) BETWEEN ? AND ? GROUP BY r.receipt_id";//done
                 preparedStatement=getConnection().prepareStatement(sql);
                 preparedStatement.setString(1,start);
                 preparedStatement.setString(2,end);
                 resultSet=preparedStatement.executeQuery();
                 while(resultSet.next()){
-                    ReceiptList.add(new Receipts(resultSet.getString("receipt_id"),resultSet.getString("Cart_id"),resultSet.getString("cus_firstname"),resultSet.getString("firstname"),resultSet.getString("total_price"),resultSet.getString("discount_value"),resultSet.getString("discounted_price"),resultSet.getString("total_payment"),resultSet.getString("total_change"),resultSet.getString("date")));
+                    ReceiptList.add(new Receipts(resultSet.getString("receipt_id"),resultSet.getString("Cart_id"),resultSet.getString("cus_firstname"),resultSet.getString("firstname"),resultSet.getString("total_price"),resultSet.getString("discount_value"),resultSet.getString("discounted_price"),resultSet.getString("total_payment"),resultSet.getString("total_change"),resultSet.getString("Date")));
                 }
             }catch (Exception a){
                 a.printStackTrace();
@@ -1865,8 +1904,8 @@ public class DashboardController implements Initializable {
 
             try{
                 StocksTableList.clear();
-                String sql="Select s.Stockin_id,p.prod_name,s.Stock_BeforeUpdate,s.updatedquantity,s.LastEntry,d.Date,s.Entry_time,s.total_cost from tbl_stockin s JOIN tbl_products p ON s.prod_id=p.prod_id JOIN tbl_date d ON s.Entry_date=d.Date_id Group by Stockin_id";
-                preparedStatement=getConnection().prepareStatement(sql);
+                String sql="Select s.Stockin_id,p.prod_name,s.Stock_BeforeUpdate,s.updatedquantity,s.LastEntry,concat_ws(\"-\",d.Year,d.Month,d.Date) as Date,s.Entry_time,s.total_cost from tbl_stockin s JOIN tbl_products p ON s.prod_id=p.prod_id JOIN tbl_date d ON s.Entry_date=d.Date_id Group by Stockin_id";
+                preparedStatement=getConnection().prepareStatement(sql);//done
                 resultSet=preparedStatement.executeQuery();
                 while(resultSet.next()){
                     StocksTableList.add(new Stocks(resultSet.getString("Stockin_id"),resultSet.getString("prod_name"),resultSet.getString("Stock_BeforeUpdate"),resultSet.getString("LastEntry"),resultSet.getString("updatedquantity"),resultSet.getString("Date"),resultSet.getString("Entry_time"),resultSet.getString("total_cost")));
@@ -1904,8 +1943,24 @@ public class DashboardController implements Initializable {
 
             try {
                 if (checkdate()==false) {
-                    preparedStatement = getConnection().prepareStatement("Insert into tbl_date values(null,?)");
-                    preparedStatement.setString(1, LocalDateTime.now().format(formatter));
+                    String month="";
+                    String dayofyear="";
+                    if(LocalDateTime.now().getMonthValue()<10){
+                        month="0"+LocalDateTime.now().getMonthValue();
+                    }else{
+                        month=LocalDateTime.now().getMonthValue()+"";
+                    }
+                    if(LocalDateTime.now().getDayOfYear()<10){
+                        dayofyear="0"+LocalDateTime.now().getDayOfMonth();
+                    }else{
+                        dayofyear=LocalDateTime.now().getDayOfMonth()+"";
+                    }
+
+                    //JOptionPane.showMessageDialog(null,LocalDateTime.now().getYear() +" year "+LocalDateTime.now().getMonthValue()+" Month "+LocalDateTime.now().getDayOfMonth());
+                    preparedStatement = getConnection().prepareStatement("Insert into tbl_date values(null,?,?,?)");// i edit ang date
+                    preparedStatement.setString(1, LocalDateTime.now().getYear()+"");
+                    preparedStatement.setString(2,month);
+                    preparedStatement.setString(3,dayofyear);
                     preparedStatement.executeUpdate();
                 }
                 preparedStatement.close();
@@ -1917,7 +1972,7 @@ public class DashboardController implements Initializable {
         private boolean checkdate(){
         boolean bool=false;
         try {
-                preparedStatement = getConnection().prepareStatement("Select *From tbl_date where Date=?");
+                preparedStatement = getConnection().prepareStatement("Select *From tbl_date where concat_ws(\"-\",Year,Month,Date) =?");//edit ang date
                 preparedStatement.setString(1, LocalDateTime.now().format(formatter));
                 resultSet = preparedStatement.executeQuery();
                 if(resultSet.next()==true){
