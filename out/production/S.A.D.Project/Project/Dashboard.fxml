@@ -466,10 +466,10 @@
                                  </font>
                               </JFXButton>
                               <JFXRadioButton fx:id="radioDaily" layoutX="389.0" layoutY="46.0" onAction="#clickradio" text="Daily" />
-                              <JFXRadioButton fx:id="radioMonthly" layoutX="510.0" layoutY="46.0" onAction="#clickradio" text="Monthly" />
+                              <JFXRadioButton fx:id="radioMonthly" layoutX="449.0" layoutY="46.0" onAction="#clickradio" text="Monthly" />
                               <AnchorPane blendMode="DARKEN" layoutX="620.0" layoutY="83.0" prefHeight="463.0" prefWidth="530.0" style="-fx-border-color: #44CBD0; -fx-border-width: 2;">
                                  <children>
-                                    <LineChart fx:id="LineChart" layoutX="7.0" layoutY="54.0" legendSide="LEFT" prefHeight="346.0" prefWidth="514.0" title="Sales Performance" titleSide="BOTTOM">
+                                    <LineChart fx:id="LineChart" layoutX="7.0" layoutY="54.0" legendSide="LEFT" legendVisible="false" prefHeight="346.0" prefWidth="514.0" title="Sales Performance" titleSide="BOTTOM">
                                       <xAxis>
                                         <CategoryAxis side="BOTTOM" />
                                       </xAxis>
@@ -479,13 +479,16 @@
                                        <effect>
                                           <Blend mode="DARKEN" />
                                        </effect>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </LineChart>
                                     <Label fx:id="LineChart_Title" layoutX="219.0" layoutY="28.0" text="Line Chart">
                                        <font>
                                           <Font name="System Bold" size="17.0" />
                                        </font>
                                     </Label>
-                                    <JFXButton fx:id="btn_loadChart" layoutX="375.0" layoutY="411.0" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: #16FE95;" text="Load Chart" viewOrder="7.0" visible="false">
+                                    <JFXButton fx:id="btn_loadChart" layoutX="375.0" layoutY="411.0" onAction="#doLoadchart" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: #16FE95;" text="Load Chart" viewOrder="7.0">
                                        <font>
                                           <Font name="System Bold" size="17.0" />
                                        </font>

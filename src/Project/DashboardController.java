@@ -415,58 +415,98 @@ public class DashboardController implements Initializable {
     }
     @FXML
     private void clickradio(){
-        if(group.getSelectedToggle()==radioDaily){ // wa pa nahuman
-            enddate.setValue(startingdate.getValue());
-            refreshChart();
-        }else{
-            refreshChart();
-            //new Wobble(LineChart).play();
+        try {
+            if (group.getSelectedToggle() == radioDaily) { // wa pa nahuman
+                startingdate.setValue(dateTime.getText());
+                enddate.setValue(startingdate.getValue());
+                Report();
+                refreshChart();
+            } else if (group.getSelectedToggle() == radioMonthly) {
+                String month = getMonth();
+                String minvalue="";
+                String maxvalue="";
+                //diria
+                preparedStatement = getConnection().prepareStatement("SELECT concat_ws('-',Year,Month,Date) as Date from tbl_date where Year=? AND Month=? and Date=(select min(Date) from tbl_date)");
+                preparedStatement.setString(1,LocalDateTime.now().getYear()+"");
+                preparedStatement.setString(2,month);
+                resultSet=preparedStatement.executeQuery();
+                if(resultSet.next()){
+                    startingdate.setValue(resultSet.getString("Date"));
+                }
+                preparedStatement = getConnection().prepareStatement("SELECT concat_ws('-',Year,Month,Date) as Date from tbl_date where Year=? AND Month=? and Date=(select max(Date) from tbl_date)");
+                preparedStatement.setString(1,LocalDateTime.now().getYear()+"");
+                preparedStatement.setString(2,month);
+                resultSet=preparedStatement.executeQuery();
+                if(resultSet.next()){
+                    enddate.setValue(resultSet.getString("Date"));
+                }
+                Report();
+                refreshChart();
+
+            }
+        }catch (Exception a){
+            a.printStackTrace();
         }
 
     }
+    private String getMonth(){
+        String month="";
+        if(LocalDateTime.now().getMonthValue()<10){
+            month="0"+LocalDateTime.now().getMonthValue();
+        }else{
+            month=LocalDateTime.now().getMonthValue()+"";
+        }
+        return month;
+    }
     private void refreshChart(){
+
         XYChart.Series<String,Number> series=new XYChart.Series<String,Number>();
         try{
             if(group.getSelectedToggle()==radioDaily) {
-                series.getData().clear();
+                String month=getMonth();
                 LineChart.getData().clear();
-                preparedStatement = getConnection().prepareStatement("SELECT r.transaction_date,concat_ws(\"-\",d.Year,d.Month,d.Date) as Date ,sum(r.total_price) from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id GROUP by d.Date");
+                LineChart.setTitle("Daily Sales Performance");
+                preparedStatement = getConnection().prepareStatement("SELECT r.transaction_date,concat_ws(\"-\",d.Year,d.Month,d.Date) as Date ,sum(r.total_price) from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id where d.Month = ? GROUP by d.Date");
+                preparedStatement.setString(1,month);
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     Double Ycomponent = Double.parseDouble(resultSet.getString("sum(r.total_price)"));
                     series.getData().add(new XYChart.Data<String, Number>(resultSet.getString("Date"), Ycomponent));
                 }
                 LineChart.getData().add(series);
+
             }else if(group.getSelectedToggle()==radioMonthly){
-                series.getData().clear();
                 LineChart.getData().clear();
-                preparedStatement = getConnection().prepareStatement("SELECT r.transaction_date,concat_ws(\"-\",d.Year,d.Month,d.Date) as Date ,sum(r.total_price) from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id GROUP by d.Date");
+                LineChart.setTitle("Monthly Sales Performance");
+                preparedStatement = getConnection().prepareStatement("SELECT r.transaction_date,concat_ws(\"-\",d.Year,d.Month) as Date ,sum(r.total_price) from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id where d.Year = ? GROUP by concat_ws(\"-\",d.Year,d.Month)");
+                preparedStatement.setString(1, LocalDateTime.now().getYear()+"");
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     Double Ycomponent = Double.parseDouble(resultSet.getString("sum(r.total_price)"));
                     series.getData().add(new XYChart.Data<String, Number>(resultSet.getString("Date"), Ycomponent));
                 }
                 LineChart.getData().add(series);
+
 
             }
         }catch (Exception ex){
             ex.printStackTrace();
         }
     }
+    @FXML
+    private void doLoadchart(){
+        refreshChart();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //initialize chart
+        LineChart.getXAxis().setAutoRanging(true);
+        LineChart.getYAxis().setAutoRanging(true);
         radioDaily.setToggleGroup(group);
         radioMonthly.setToggleGroup(group);
-        group.selectToggle(radioDaily);
+        group.selectToggle(radioMonthly);
         refreshChart();
-
-        //diri ka unya
-
-        //
-
-        //balik diri
 
 
         int size=10;
@@ -663,7 +703,7 @@ public class DashboardController implements Initializable {
         tabReport.setOnSelectionChanged(event -> {
             if(tabReport.isSelected()){
                 Report();
-
+                refreshChart();
             }
         });
         tabInventory.setOnSelectionChanged(event -> {
@@ -1394,7 +1434,7 @@ public class DashboardController implements Initializable {
                         preparedStatement.setString(1,Amount+"");
                         preparedStatement.setString(2,itemId);
                         preparedStatement.executeUpdate();
-                        //balik
+
                         Notifications notificationBuilder=Notifications.create().graphic(null).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
                                 .title("Success").text("Added "+Amount+"To Product "+name);
                         notificationBuilder.show();
@@ -1699,7 +1739,7 @@ public class DashboardController implements Initializable {
             }
 
     public void printReport(String report) throws  SQLException{
-        database = new dbconn(); // balik diri hashmap
+        database = new dbconn();
         connect = getConnection();
         map = new HashMap<String, Object>();
 
