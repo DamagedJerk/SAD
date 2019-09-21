@@ -244,7 +244,10 @@ public class DashboardController implements Initializable {
 
     @FXML
     private LineChart<String,Number> LineChart;
-
+    @FXML
+    private ScrollPane scrollpane;
+    @FXML
+    private LineChart<String,Number> MonthlyChart;
     @FXML
     private Label LineChart_Title;
 
@@ -416,11 +419,14 @@ public class DashboardController implements Initializable {
     @FXML
     private void clickradio(){
         try {
+
             if (group.getSelectedToggle() == radioDaily) { // wa pa nahuman
                 startingdate.setValue(dateTime.getText());
                 enddate.setValue(startingdate.getValue());
                 Report();
                 refreshChart();
+                scrollpane.setVvalue(0);
+                new BounceInUp(scrollpane).play();
             } else if (group.getSelectedToggle() == radioMonthly) {
                 String month = getMonth();
                 String minvalue="";
@@ -442,6 +448,8 @@ public class DashboardController implements Initializable {
                 }
                 Report();
                 refreshChart();
+                scrollpane.setVvalue(1);
+                new BounceInDown(scrollpane).play();
 
             }
         }catch (Exception a){
@@ -459,13 +467,15 @@ public class DashboardController implements Initializable {
         return month;
     }
     private void refreshChart(){
-
+            //balik
         XYChart.Series<String,Number> series=new XYChart.Series<String,Number>();
+        XYChart.Series<String,Number> series1=new XYChart.Series<String,Number>();
         try{
-            if(group.getSelectedToggle()==radioDaily) {
+
                 String month=getMonth();
                 LineChart.getData().clear();
-                LineChart.setTitle("Daily Sales Performance");
+                series.getData().clear();
+                //LineChart.setTitle("Daily Sales Performance");
                 preparedStatement = getConnection().prepareStatement("SELECT r.transaction_date,concat_ws(\"-\",d.Year,d.Month,d.Date) as Date ,sum(r.total_price) from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id where d.Month = ? GROUP by d.Date");
                 preparedStatement.setString(1,month);
                 resultSet = preparedStatement.executeQuery();
@@ -475,20 +485,20 @@ public class DashboardController implements Initializable {
                 }
                 LineChart.getData().add(series);
 
-            }else if(group.getSelectedToggle()==radioMonthly){
-                LineChart.getData().clear();
-                LineChart.setTitle("Monthly Sales Performance");
+
+                MonthlyChart.getData().clear();
+                //LineChart.setTitle("Monthly Sales Performance");
                 preparedStatement = getConnection().prepareStatement("SELECT r.transaction_date,concat_ws(\"-\",d.Year,d.Month) as Date ,sum(r.total_price) from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id where d.Year = ? GROUP by concat_ws(\"-\",d.Year,d.Month)");
                 preparedStatement.setString(1, LocalDateTime.now().getYear()+"");
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     Double Ycomponent = Double.parseDouble(resultSet.getString("sum(r.total_price)"));
-                    series.getData().add(new XYChart.Data<String, Number>(resultSet.getString("Date"), Ycomponent));
+                    series1.getData().add(new XYChart.Data<String, Number>(resultSet.getString("Date"), Ycomponent));
                 }
-                LineChart.getData().add(series);
+                MonthlyChart.getData().add(series1);
 
 
-            }
+
         }catch (Exception ex){
             ex.printStackTrace();
         }
@@ -505,10 +515,8 @@ public class DashboardController implements Initializable {
         LineChart.getYAxis().setAutoRanging(true);
         radioDaily.setToggleGroup(group);
         radioMonthly.setToggleGroup(group);
-        group.selectToggle(radioMonthly);
+        group.selectToggle(radioDaily);
         refreshChart();
-
-
         int size=10;
         while(size<=30){
             cbo_size.getItems().add(size);
@@ -518,7 +526,7 @@ public class DashboardController implements Initializable {
         initClock();
         LabelId.setText(getID());
         StockinID.setText(getStockInID());
-        //initialize naunsa pagpagawas sa
+
         setComboBOx(InventorySupp, "Select * from tbl_supplier", "company_name");
         setComboBOx(InventoryCateg, "Select * from tbl_category", "cat_description");
         setComboBOx(StockinCat, "Select * from tbl_category", "cat_description");

@@ -14,6 +14,7 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.Blend?>
@@ -25,6 +26,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="756.0" prefWidth="1198.0" style="-fx-border-style: dotted;" styleClass="fx-backback" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.DashboardController">
@@ -441,7 +443,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tabReport" disable="true" text="Report">
+            <Tab fx:id="tabReport" text="Report">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="581.0" prefWidth="946.0">
                      <children>
@@ -469,21 +471,7 @@
                               <JFXRadioButton fx:id="radioMonthly" layoutX="449.0" layoutY="46.0" onAction="#clickradio" text="Monthly" />
                               <AnchorPane blendMode="DARKEN" layoutX="620.0" layoutY="83.0" prefHeight="463.0" prefWidth="530.0" style="-fx-border-color: #44CBD0; -fx-border-width: 2;">
                                  <children>
-                                    <LineChart fx:id="LineChart" layoutX="7.0" layoutY="54.0" legendSide="LEFT" legendVisible="false" prefHeight="346.0" prefWidth="514.0" title="Sales Performance" titleSide="BOTTOM">
-                                      <xAxis>
-                                        <CategoryAxis side="BOTTOM" />
-                                      </xAxis>
-                                      <yAxis>
-                                        <NumberAxis side="LEFT" />
-                                      </yAxis>
-                                       <effect>
-                                          <Blend mode="DARKEN" />
-                                       </effect>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </LineChart>
-                                    <Label fx:id="LineChart_Title" layoutX="219.0" layoutY="28.0" text="Line Chart">
+                                    <Label fx:id="LineChart_Title" layoutX="224.0" layoutY="14.0" text="Line Chart">
                                        <font>
                                           <Font name="System Bold" size="17.0" />
                                        </font>
@@ -493,7 +481,48 @@
                                           <Font name="System Bold" size="17.0" />
                                        </font>
                                     </JFXButton>
-                                 </children></AnchorPane>
+                                    <ScrollPane fx:id="scrollpane" fitToHeight="true" fitToWidth="true" hmax="0.0" layoutX="10.0" layoutY="40.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="354.0" prefWidth="515.0" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="40.0">
+                                       <content>
+                                          <AnchorPane prefHeight="372.0" prefWidth="513.0">
+                                             <children>
+                                                <VBox prefHeight="685.0" prefWidth="491.0">
+                                                   <children>
+                                                      <LineChart fx:id="LineChart" alternativeColumnFillVisible="true" legendSide="LEFT" legendVisible="false" prefHeight="345.0" prefWidth="491.0" title="Daily Sales Performance" titleSide="BOTTOM">
+                                                        <xAxis>
+                                                          <CategoryAxis side="BOTTOM" />
+                                                        </xAxis>
+                                                        <yAxis>
+                                                          <NumberAxis side="LEFT" />
+                                                        </yAxis>
+                                                         <effect>
+                                                            <Blend mode="DARKEN" />
+                                                         </effect>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </LineChart>
+                                                      <LineChart fx:id="MonthlyChart" alternativeColumnFillVisible="true" legendSide="LEFT" legendVisible="false" prefHeight="317.0" prefWidth="491.0" title="Monthly Sales Performance" titleSide="BOTTOM">
+                                                        <xAxis>
+                                                          <CategoryAxis side="BOTTOM" />
+                                                        </xAxis>
+                                                        <yAxis>
+                                                          <NumberAxis side="LEFT" />
+                                                        </yAxis>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                         <effect>
+                                                            <Blend />
+                                                         </effect>
+                                                      </LineChart>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
                            </children>
                         </AnchorPane>
                      </children></AnchorPane>
