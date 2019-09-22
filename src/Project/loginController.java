@@ -41,6 +41,7 @@ import javafx.scene.control.Label;
 
 import javafx.scene.paint.Color;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 
@@ -141,20 +142,20 @@ public class loginController implements Initializable {
 
                     Stage stage = (Stage) btnClose.getScene().getWindow();
                     stage.close();
-                    dash.checkUser(Name,role,userid);
+
 
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
+                    stage.setOnShown(new EventHandler<WindowEvent>() {
+                        @Override
+                        public void handle(WindowEvent windowEvent) {
+                            dash.checkUser(Name,role,userid);
+                        }
+                    });
                     stage.show();
                     FlipInX animate=new FlipInX(root);
                     animate.play();
                     animate.playOnFinished(new Swing(dash.img));
-
-
-
-
-
-
 
 
                 }

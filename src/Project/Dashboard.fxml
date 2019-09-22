@@ -89,7 +89,7 @@
             </Pane>
          </children>
       </HBox>
-      <JFXTabPane blendMode="DIFFERENCE" layoutX="14.0" layoutY="124.0" prefHeight="618.0" prefWidth="1167.0">
+      <JFXTabPane fx:id="tabpane" blendMode="DIFFERENCE" layoutX="14.0" layoutY="124.0" prefHeight="618.0" prefWidth="1167.0">
          <tabs>
             <Tab fx:id="tabSales" text="Sales">
               <content>

@@ -28,6 +28,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
@@ -38,6 +39,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
@@ -120,16 +122,16 @@ public class DashboardController implements Initializable {
     private JFXButton btnCashOut;
 
     @FXML
-    private Tab tabSales;
+    public Tab tabSales;
 
     @FXML
     private Tab tabInventory;
 
     @FXML
-    private Tab tabStock;
+    public Tab tabStock;
 
     @FXML
-    private Tab tabReport;
+    public Tab tabReport;
 
     @FXML
     private AnchorPane rootPane;
@@ -254,6 +256,9 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXButton btn_loadChart;
 
+    @FXML
+    private JFXTabPane tabpane;
+
 
     //
 
@@ -264,6 +269,9 @@ public class DashboardController implements Initializable {
     ObservableList<Inventory> StockinList = FXCollections.observableArrayList();
     ObservableList<Stocks> StocksTableList = FXCollections.observableArrayList();
     ObservableList<Receipts> ReceiptList = FXCollections.observableArrayList();
+    //XYChart.Series<String,Number> globalseries=null;
+
+
 
     private boolean requested = false;
     private int purchasedquan=0;
@@ -277,6 +285,7 @@ public class DashboardController implements Initializable {
     private String receiptId="";
     final ToggleGroup group = new ToggleGroup();
     public Double totalprice = 0.0;
+
 
 
     private static Connection getConnection() throws SQLException {
@@ -468,13 +477,14 @@ public class DashboardController implements Initializable {
     }
     private void refreshChart(){
             //balik
-        XYChart.Series<String,Number> series=new XYChart.Series<String,Number>();
-        XYChart.Series<String,Number> series1=new XYChart.Series<String,Number>();
-        try{
 
+        try{
+            XYChart.Series<String,Number> series=new XYChart.Series<String,Number>();
+            XYChart.Series<String,Number> series1=new XYChart.Series<String,Number>();
                 String month=getMonth();
                 LineChart.getData().clear();
                 series.getData().clear();
+
                 //LineChart.setTitle("Daily Sales Performance");
                 preparedStatement = getConnection().prepareStatement("SELECT r.transaction_date,concat_ws(\"-\",d.Year,d.Month,d.Date) as Date ,sum(r.total_price) from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id where d.Month = ? GROUP by d.Date");
                 preparedStatement.setString(1,month);
@@ -498,6 +508,25 @@ public class DashboardController implements Initializable {
                 MonthlyChart.getData().add(series1);
 
 
+            for(final XYChart.Data<String,Number> data: series.getData()){
+                data.getNode().setOnMouseEntered(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        Tooltip.install(data.getNode(),new Tooltip("Date : "+data.getXValue()+"\nTotal Sales : PHP "+data.getYValue()));
+                    }
+                });
+            }
+            for(final XYChart.Data<String,Number> data: series1.getData()){
+                data.getNode().setOnMouseEntered(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        Tooltip tooltip= new Tooltip();
+                        tooltip.setStyle("-fx-font-size: 26");
+                        tooltip.install(data.getNode(),new Tooltip("Month : "+data.getXValue()+"\nTotal Sales : PHP "+data.getYValue()));
+                    }
+                });
+            }
+
 
         }catch (Exception ex){
             ex.printStackTrace();
@@ -513,6 +542,15 @@ public class DashboardController implements Initializable {
         //initialize chart
         LineChart.getXAxis().setAutoRanging(true);
         LineChart.getYAxis().setAutoRanging(true);
+        scrollpane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollpane.addEventFilter(ScrollEvent.SCROLL,new EventHandler<ScrollEvent>() {
+            @Override
+            public void handle(ScrollEvent event) {
+                if (event.getDeltaY() != 0) {
+                    event.consume();
+                }
+            }
+        });
         radioDaily.setToggleGroup(group);
         radioMonthly.setToggleGroup(group);
         group.selectToggle(radioDaily);
@@ -523,10 +561,12 @@ public class DashboardController implements Initializable {
             size+=2;
         }
 
+
         initClock();
+
         LabelId.setText(getID());
         StockinID.setText(getStockInID());
-
+        InventoryQuantity.setText("0");
         setComboBOx(InventorySupp, "Select * from tbl_supplier", "company_name");
         setComboBOx(InventoryCateg, "Select * from tbl_category", "cat_description");
         setComboBOx(StockinCat, "Select * from tbl_category", "cat_description");
@@ -705,6 +745,7 @@ public class DashboardController implements Initializable {
         tabSales.setOnSelectionChanged(event -> {
             if(tabSales.isSelected()){
                 refreshProductMenu();
+                CheckInventory();
 
             }
         });//
@@ -712,6 +753,7 @@ public class DashboardController implements Initializable {
             if(tabReport.isSelected()){
                 Report();
                 refreshChart();
+                CheckInventory();
             }
         });
         tabInventory.setOnSelectionChanged(event -> {
@@ -1201,7 +1243,17 @@ public class DashboardController implements Initializable {
         ReportTable.getColumns().setAll(ReceiptId,CartId,CustomerName,EmployeeName,TotalPricee,DiscountedValue,DiscountedPrice,TotalAmount,Change,TransactionDate);
         ReportTable.setRoot(receiptlist);
         ReportTable.setShowRoot(false);
-
+        //dito ka balik
+        /*
+        Stage stage= (Stage) rootPane.getScene().getWindow();
+        stage.setOnShowing(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent windowEvent) {
+                if(tabSales.isSelected() || tabReport.isSelected()){
+                    JOptionPane.showMessageDialog(null,"EAT BULAGA");
+                }
+            }
+        });*/
     }
     public void CheckInventory(){
         try{
@@ -1292,6 +1344,7 @@ public class DashboardController implements Initializable {
                 tabReport.setDisable(false);
                 tabLog.setDisable(false);
                 userId=id;
+                tabpane.getSelectionModel().select(tabReport);
             } else {
                 img.setImage(userpic);
                 userId=id;
@@ -1488,8 +1541,8 @@ public class DashboardController implements Initializable {
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.initOwner(btn_supplier.getScene().getWindow());
             stage.setScene(new Scene(root));
-            stage.showAndWait();
             new FlipInX(root).play();
+            stage.showAndWait();
             if(controller.isResponse()==true){
             try{
                 //logs activity
@@ -1875,7 +1928,7 @@ public class DashboardController implements Initializable {
         private void NewField(){
             InventoryID.setText(CurrentID+"");
             InventoryName.setText("");
-            InventoryQuantity.setText("");
+            InventoryQuantity.setText("0");
             InventoryPrice.setText("");
             InventoryCateg.setValue("");
             InventorySupp.setValue("");
