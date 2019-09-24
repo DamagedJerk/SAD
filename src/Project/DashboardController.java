@@ -1264,11 +1264,11 @@ public class DashboardController implements Initializable {
                     String product=resultSet.getString("prod_name");
                     int quan=Integer.parseInt(resultSet.getString("prod_quantity"));
                     if(quan==0){
-                        Notifications notificationBuilder=Notifications.create().graphic(null).hideAfter(Duration.seconds(2)).position(Pos.BASELINE_LEFT)
+                        Notifications notificationBuilder=Notifications.create().graphic(null).hideAfter(Duration.seconds(10)).position(Pos.BOTTOM_LEFT)
                                 .title("Warning").text(product+" stocks are now empty");
                         notificationBuilder.showError();
                     }else{
-                        Notifications notificationBuilder=Notifications.create().graphic(null).hideAfter(Duration.seconds(2)).position(Pos.BASELINE_LEFT)
+                        Notifications notificationBuilder=Notifications.create().graphic(null).hideAfter(Duration.seconds(10)).position(Pos.BOTTOM_LEFT)
                                 .title("Warning").text(product+" stocks are getting low");
                         notificationBuilder.showWarning();
                     }
