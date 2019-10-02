@@ -552,7 +552,7 @@
                               </AnchorPane>
                               <JFXRadioButton fx:id="radioYear" layoutX="776.0" layoutY="46.0" onAction="#clickradio" text="Yearly" />
                               <JFXComboBox fx:id="cboYear" layoutX="1056.0" layoutY="42.0" prefHeight="25.0" prefWidth="94.0" promptText="Year" />
-                              <JFXComboBox fx:id="cboMonthly" layoutX="949.0" layoutY="42.0" prefHeight="25.0" prefWidth="94.0" promptText="Month" />
+                              <JFXComboBox fx:id="cboMonthly" layoutX="915.0" layoutY="42.0" prefHeight="25.0" prefWidth="128.0" promptText="Month" />
                            </children>
                         </AnchorPane>
                      </children></AnchorPane>

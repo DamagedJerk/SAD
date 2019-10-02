@@ -565,14 +565,16 @@ public class DashboardController implements Initializable {
 
         try{
             XYChart.Series<String,Number> series=new XYChart.Series<String,Number>();
-            XYChart.Series<String,Number> series1=new XYChart.Series<String,Number>();
+            XYChart.Series<String,Number> Monthly=new XYChart.Series<String,Number>();
+            XYChart.Series<String,Number> Yearly=new XYChart.Series<String,Number>();
+
                 String month=getMonth();
                 LineChart.getData().clear();
                 series.getData().clear();
 
                 //LineChart.setTitle("Daily Sales Performance");
                 preparedStatement = getConnection().prepareStatement("SELECT r.transaction_date,concat_ws(\"-\",d.Year,d.Month,d.Date) as Date ,sum(r.total_price) from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id where d.Month = ? GROUP by d.Date");
-                JOptionPane.showMessageDialog(null,getMonth());
+
                 preparedStatement.setString(1,getMonth());
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
@@ -589,20 +591,20 @@ public class DashboardController implements Initializable {
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     Double Ycomponent = Double.parseDouble(resultSet.getString("sum(r.total_price)"));
-                    series1.getData().add(new XYChart.Data<String, Number>(resultSet.getString("Date"), Ycomponent));
+                    Monthly.getData().add(new XYChart.Data<String, Number>(resultSet.getString("Date"), Ycomponent));
                 }
-                MonthlyChart.getData().add(series1);
+                MonthlyChart.getData().add(Monthly);
 
-               /* YearlyChart.getData().clear();
-                preparedStatement = getConnection().prepareStatement("SELECT r.transaction_date,concat_ws(\"-\",d.Year,d.Month) as Date ,sum(r.total_price) from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id where d.Year = ? GROUP by concat_ws(\"-\",d.Year,d.Month)");
-                preparedStatement.setString(1, LocalDateTime.now().getYear()+"");
+                YearlyChart.getData().clear();
+                preparedStatement = getConnection().prepareStatement("SELECT r.transaction_date,Year as Date ,sum(r.total_price) from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id GROUP by Year");
+                //preparedStatement.setString(1, LocalDateTime.now().getYear()+"");
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                 Double Ycomponent = Double.parseDouble(resultSet.getString("sum(r.total_price)"));
-                series1.getData().add(new XYChart.Data<String, Number>(resultSet.getString("Date"), Ycomponent));
+                Yearly.getData().add(new XYChart.Data<String, Number>(resultSet.getString("Date"), Ycomponent));
             }
-            YearlyChart.getData().add(series1);
-            */
+            YearlyChart.getData().add(Yearly);
+
 
 
             for(final XYChart.Data<String,Number> data: series.getData()){
@@ -613,13 +615,21 @@ public class DashboardController implements Initializable {
                     }
                 });
             }
-            for(final XYChart.Data<String,Number> data: series1.getData()){
+            for(final XYChart.Data<String,Number> data: Monthly.getData()){
                 data.getNode().setOnMouseEntered(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
                         Tooltip tooltip= new Tooltip();
-                        tooltip.setStyle("-fx-font-size: 26");
                         tooltip.install(data.getNode(),new Tooltip("Month : "+data.getXValue()+"\nTotal Sales : PHP "+data.getYValue()));
+                    }
+                });
+            }
+            for(final XYChart.Data<String,Number> data: Yearly.getData()){
+                data.getNode().setOnMouseEntered(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        Tooltip tooltip= new Tooltip();
+                        tooltip.install(data.getNode(),new Tooltip("Year : "+data.getXValue()+"\nTotal Sales : PHP "+data.getYValue()));
                     }
                 });
             }
@@ -759,6 +769,15 @@ public class DashboardController implements Initializable {
                         str=monthlyindex+"";
                     }
                     setMonth(str);
+                    refreshChart();
+                }
+            }
+        });
+        cboYear.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                if(t1!=null){
+                    refreshChart();
                 }
             }
         });
