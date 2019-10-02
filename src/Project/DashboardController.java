@@ -286,6 +286,7 @@ public class DashboardController implements Initializable {
     ObservableList<Stocks> StocksTableList = FXCollections.observableArrayList();
     ObservableList<Receipts> ReceiptList = FXCollections.observableArrayList();
     String month[]={"January","February","March","April","May","June","July","August","September","October","November","December"};
+    String monthvalue="";
     //XYChart.Series<String,Number> globalseries=null;
 
 
@@ -353,45 +354,59 @@ public class DashboardController implements Initializable {
         }
     }
     private String checkmonth()throws SQLException{
-        String str="Janurary";
+        String str="";
         int monthindex=0;
         preparedStatement=getConnection().prepareStatement("Select max(Month) from tbl_date");
         resultSet=preparedStatement.executeQuery();
         if(resultSet.next()) {
             monthindex=Integer.parseInt(resultSet.getString("max(Month)"));
-
+            if(monthindex==1){
+                str="January";
+                setMonth("01");
+            }
             if (monthindex == 2) {
                 str = "February";
+                setMonth("02");
             }
             if (monthindex == 3) {
                 str = "March";
+                setMonth("03");
             }
             if (monthindex == 4) {
                 str = "April";
+                setMonth("04");
             }
             if (monthindex == 5) {
                 str = "May";
+                setMonth("05");
             }
             if (monthindex == 6) {
                 str = "June";
+                setMonth("06");
             }
             if (monthindex == 7) {
                 str = "July";
+                setMonth("07");
             }
             if (monthindex == 8) {
                 str = "August";
+                setMonth("08");
             }
             if (monthindex == 9) {
                 str = "September";
+                setMonth("09");
             }
             if (monthindex == 10) {
                 str = "October";
+                setMonth("10");
             }
             if (monthindex == 11) {
                 str = "November";
+                setMonth("11");
             }
             if (monthindex == 12) {
                 str = "December";
+                setMonth("12");
             }
         }
         return str;
@@ -521,7 +536,7 @@ public class DashboardController implements Initializable {
 
             }else if(group.getSelectedToggle()==radioYear){
                     String Year = LocalDateTime.now().getYear()+"";
-                preparedStatement = getConnection().prepareStatement("SELECT concat_ws('-',Year,Month,Date) as Date from tbl_date where Year=?  ");
+                /*preparedStatement = getConnection().prepareStatement("SELECT concat_ws('-',Year,Month,Date) as Date from tbl_date where Year=?  ");
                 preparedStatement.setString(1,Year);
                 resultSet=preparedStatement.executeQuery();
                 if(resultSet.next()){
@@ -529,7 +544,7 @@ public class DashboardController implements Initializable {
                 }
 
                 Report();
-                refreshChart();
+                refreshChart();*/
                 scrollpane.setVvalue(2.28);
                 new BounceInLeft(scrollpane).play();
             }
@@ -538,14 +553,11 @@ public class DashboardController implements Initializable {
         }
 
     }
+    private void setMonth(String month){
+        this.monthvalue=month;
+    }
     private String getMonth(){
-        String month="";
-        if(LocalDateTime.now().getMonthValue()<10){
-            month="0"+LocalDateTime.now().getMonthValue();
-        }else{
-            month=LocalDateTime.now().getMonthValue()+"";
-        }
-        return month;
+        return monthvalue;
     }
 
     private void refreshChart(){
@@ -560,7 +572,8 @@ public class DashboardController implements Initializable {
 
                 //LineChart.setTitle("Daily Sales Performance");
                 preparedStatement = getConnection().prepareStatement("SELECT r.transaction_date,concat_ws(\"-\",d.Year,d.Month,d.Date) as Date ,sum(r.total_price) from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id where d.Month = ? GROUP by d.Date");
-                preparedStatement.setString(1,month);
+                JOptionPane.showMessageDialog(null,getMonth());
+                preparedStatement.setString(1,getMonth());
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     Double Ycomponent = Double.parseDouble(resultSet.getString("sum(r.total_price)"));
@@ -580,7 +593,7 @@ public class DashboardController implements Initializable {
                 }
                 MonthlyChart.getData().add(series1);
 
-                YearlyChart.getData().clear();
+               /* YearlyChart.getData().clear();
                 preparedStatement = getConnection().prepareStatement("SELECT r.transaction_date,concat_ws(\"-\",d.Year,d.Month) as Date ,sum(r.total_price) from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id where d.Year = ? GROUP by concat_ws(\"-\",d.Year,d.Month)");
                 preparedStatement.setString(1, LocalDateTime.now().getYear()+"");
                 resultSet = preparedStatement.executeQuery();
@@ -589,7 +602,7 @@ public class DashboardController implements Initializable {
                 series1.getData().add(new XYChart.Data<String, Number>(resultSet.getString("Date"), Ycomponent));
             }
             YearlyChart.getData().add(series1);
-
+            */
 
 
             for(final XYChart.Data<String,Number> data: series.getData()){
@@ -729,6 +742,23 @@ public class DashboardController implements Initializable {
             public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
                 if(t1!=null){
                     AreaLogs.setFont(Font.font("Arial", FontWeight.BOLD,t1));
+                }
+            }
+        });
+        cboMonthly.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                if(t1!=null){
+                    String str="";
+                    int monthlyindex=Integer.parseInt(cboMonthly.getSelectionModel().getSelectedIndex()+"");
+                    if(monthlyindex<9){
+                        monthlyindex++;
+                        str="0"+monthlyindex;
+                    }else{
+                        monthlyindex++;
+                        str=monthlyindex+"";
+                    }
+                    setMonth(str);
                 }
             }
         });
