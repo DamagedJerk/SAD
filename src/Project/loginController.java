@@ -160,7 +160,7 @@ public class loginController implements Initializable {
 
                 }
             }catch (Exception e){
-                e.printStackTrace();
+                lblerror.setVisible(true);
                 lblerror.setText("Cannot connect to Database");
             }
 

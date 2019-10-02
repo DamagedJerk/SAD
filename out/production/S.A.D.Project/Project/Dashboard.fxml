@@ -13,7 +13,10 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TextArea?>
@@ -70,7 +73,7 @@
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <JFXButton fx:id="btnLogOut" layoutX="108.0" layoutY="74.0" onAction="#doLogOut" text="Log-Out">
+                  <JFXButton fx:id="btnLogOut" layoutX="396.0" layoutY="57.0" onAction="#doLogOut" text="Log-Out">
                      <font>
                         <Font name="FontAwesome Regular" size="12.0" />
                      </font>
@@ -80,6 +83,12 @@
                         <Font size="17.0" />
                      </font>
                   </Label>
+                  <MenuButton alignment="TOP_LEFT" layoutX="283.0" layoutY="56.0" mnemonicParsing="false" style="-fx-background-color: #BBE2E4;" text="Notifications">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                  </MenuButton>
                   <Label alignment="CENTER_RIGHT" layoutX="843.0" layoutY="68.0" prefHeight="32.0" prefWidth="64.0" text="Date:">
                      <font>
                         <Font size="17.0" />
@@ -447,7 +456,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="581.0" prefWidth="946.0">
                      <children>
-                        <AnchorPane layoutX="3.0" layoutY="12.0" prefHeight="566.0" prefWidth="1163.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
+                        <AnchorPane fx:id="radioYearly" layoutX="3.0" layoutY="12.0" prefHeight="566.0" prefWidth="1163.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
                            <children>
                               <Label layoutX="278.0" layoutY="14.0" text="Sales Report">
                                  <font>
@@ -467,8 +476,8 @@
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </JFXButton>
-                              <JFXRadioButton fx:id="radioDaily" layoutX="389.0" layoutY="46.0" onAction="#clickradio" text="Daily" />
-                              <JFXRadioButton fx:id="radioMonthly" layoutX="449.0" layoutY="46.0" onAction="#clickradio" text="Monthly" />
+                              <JFXRadioButton fx:id="radioDaily" layoutX="637.0" layoutY="46.0" onAction="#clickradio" text="Daily" />
+                              <JFXRadioButton fx:id="radioMonthly" layoutX="697.0" layoutY="46.0" onAction="#clickradio" text="Monthly" />
                               <AnchorPane blendMode="DARKEN" layoutX="620.0" layoutY="83.0" prefHeight="463.0" prefWidth="530.0" style="-fx-border-color: #44CBD0; -fx-border-width: 2;">
                                  <children>
                                     <Label fx:id="LineChart_Title" layoutX="224.0" layoutY="14.0" text="Line Chart">
@@ -476,18 +485,18 @@
                                           <Font name="System Bold" size="17.0" />
                                        </font>
                                     </Label>
-                                    <JFXButton fx:id="btn_loadChart" layoutX="375.0" layoutY="411.0" onAction="#doLoadchart" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: #16FE95;" text="Load Chart" viewOrder="7.0">
+                                    <JFXButton fx:id="btn_loadChart" layoutX="375.0" layoutY="411.0" onAction="#doLoadChart" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: #16FE95;" text="Refresh" viewOrder="7.0">
                                        <font>
                                           <Font name="System Bold" size="17.0" />
                                        </font>
                                     </JFXButton>
-                                    <ScrollPane fx:id="scrollpane" fitToHeight="true" fitToWidth="true" hmax="0.0" layoutX="10.0" layoutY="40.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="354.0" prefWidth="515.0" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="40.0">
+                                    <ScrollPane fx:id="scrollpane" fitToHeight="true" fitToWidth="true" hmax="0.0" layoutX="20.0" layoutY="46.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="354.0" prefWidth="497.0" vmax="4.0" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="44.0">
                                        <content>
-                                          <AnchorPane prefHeight="372.0" prefWidth="513.0">
+                                          <AnchorPane prefHeight="1227.0" prefWidth="491.0">
                                              <children>
-                                                <VBox prefHeight="685.0" prefWidth="491.0">
+                                                <VBox prefHeight="1500.0" prefWidth="491.0">
                                                    <children>
-                                                      <LineChart fx:id="LineChart" alternativeColumnFillVisible="true" legendSide="LEFT" legendVisible="false" prefHeight="345.0" prefWidth="491.0" title="Daily Sales Performance" titleSide="BOTTOM">
+                                                      <LineChart fx:id="LineChart" alternativeColumnFillVisible="true" legendSide="LEFT" legendVisible="false" prefHeight="330.0" prefWidth="491.0" title="Daily Sales Performance" titleSide="BOTTOM">
                                                         <xAxis>
                                                           <CategoryAxis side="BOTTOM" />
                                                         </xAxis>
@@ -501,7 +510,7 @@
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
                                                       </LineChart>
-                                                      <LineChart fx:id="MonthlyChart" alternativeColumnFillVisible="true" legendSide="LEFT" legendVisible="false" prefHeight="317.0" prefWidth="491.0" title="Monthly Sales Performance" titleSide="BOTTOM">
+                                                      <LineChart fx:id="MonthlyChart" alternativeColumnFillVisible="true" legendSide="LEFT" legendVisible="false" prefHeight="328.0" prefWidth="491.0" title="Monthly Sales Performance" titleSide="BOTTOM">
                                                         <xAxis>
                                                           <CategoryAxis side="BOTTOM" />
                                                         </xAxis>
@@ -514,21 +523,42 @@
                                                          <effect>
                                                             <Blend />
                                                          </effect>
+                                                         <padding>
+                                                            <Insets top="5.0" />
+                                                         </padding>
                                                       </LineChart>
+                                                      <LineChart fx:id="YearlyChart" alternativeColumnFillVisible="true" legendSide="LEFT" legendVisible="false" prefHeight="330.0" prefWidth="491.0" title="Yearly Sales Performance" titleSide="BOTTOM">
+                                                        <xAxis>
+                                                          <CategoryAxis side="BOTTOM" />
+                                                        </xAxis>
+                                                        <yAxis>
+                                                          <NumberAxis side="LEFT" />
+                                                        </yAxis>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </LineChart>
+                                                      <PieChart fx:id="PieChart" prefHeight="330.0" />
                                                    </children>
                                                 </VBox>
                                              </children>
                                           </AnchorPane>
                                        </content>
+                                       <padding>
+                                          <Insets top="5.0" />
+                                       </padding>
                                     </ScrollPane>
                                  </children>
                               </AnchorPane>
+                              <JFXRadioButton fx:id="radioYear" layoutX="776.0" layoutY="46.0" onAction="#clickradio" text="Yearly" />
+                              <JFXComboBox fx:id="cboYear" layoutX="1056.0" layoutY="42.0" prefHeight="25.0" prefWidth="94.0" promptText="Year" />
+                              <JFXComboBox fx:id="cboMonthly" layoutX="949.0" layoutY="42.0" prefHeight="25.0" prefWidth="94.0" promptText="Month" />
                            </children>
                         </AnchorPane>
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tabLog" disable="true" text="Activity Log">
+            <Tab fx:id="tabLog" text="Activity Log">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -540,14 +570,29 @@
                                  </font>
                               </Label>
                               <Label layoutX="43.0" layoutY="49.0" />
-                              <JFXComboBox fx:id="cbologdate" labelFloat="true" layoutX="18.0" layoutY="54.0" prefHeight="25.0" prefWidth="192.0" promptText="Date:" />
-                              <JFXComboBox fx:id="cboActivity" labelFloat="true" layoutX="242.0" layoutY="51.0" prefHeight="25.0" prefWidth="192.0" promptText="Activity:" />
-                              <TextArea fx:id="AreaLogs" blendMode="COLOR_BURN" editable="false" layoutX="19.0" layoutY="96.0" prefHeight="433.0" prefWidth="1128.0">
+                              <JFXComboBox fx:id="cbologdate" labelFloat="true" layoutX="18.0" layoutY="54.0" prefHeight="20.0" prefWidth="144.0" promptText="Date:" />
+                              <JFXComboBox fx:id="cboActivity" labelFloat="true" layoutX="180.0" layoutY="51.0" prefHeight="26.0" prefWidth="144.0" promptText="Activity:" />
+                              <TextArea fx:id="AreaLogs" blendMode="COLOR_BURN" editable="false" layoutX="19.0" layoutY="124.0" prefHeight="429.0" prefWidth="552.0">
                                  <font>
-                                    <Font name="System Bold" size="22.0" />
+                                    <Font name="System Bold" size="14.0" />
                                  </font>
                               </TextArea>
-                              <JFXComboBox fx:id="cbo_size" labelFloat="true" layoutX="456.0" layoutY="51.0" prefHeight="25.0" prefWidth="82.0" promptText="Font Size:" />
+                              <JFXComboBox fx:id="cbo_size" labelFloat="true" layoutX="333.0" layoutY="51.0" prefHeight="25.0" prefWidth="74.0" promptText="Font Size:" />
+                              <TextArea fx:id="AdminLogs" blendMode="COLOR_BURN" editable="false" layoutX="579.0" layoutY="125.0" prefHeight="425.0" prefWidth="564.0">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </TextArea>
+                              <Label layoutX="205.0" layoutY="88.0" prefHeight="32.0" prefWidth="128.0" text="User Logs">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="797.0" layoutY="88.0" prefHeight="32.0" prefWidth="128.0" text="Admin Logs">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                      </children></AnchorPane>

@@ -25,6 +25,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 
@@ -258,6 +259,21 @@ public class DashboardController implements Initializable {
 
     @FXML
     private JFXTabPane tabpane;
+    @FXML
+    private LineChart<String,Number> YearlyChart;
+    @FXML
+    private javafx.scene.chart.PieChart PieChart;
+    @FXML
+    private TextArea AdminLogs;
+    @FXML
+    private JFXRadioButton radioYear;
+    @FXML
+    private JFXComboBox<String> cboYear;
+    @FXML
+    private JFXComboBox<String> cboMonthly;
+
+
+
 
 
     //
@@ -269,6 +285,7 @@ public class DashboardController implements Initializable {
     ObservableList<Inventory> StockinList = FXCollections.observableArrayList();
     ObservableList<Stocks> StocksTableList = FXCollections.observableArrayList();
     ObservableList<Receipts> ReceiptList = FXCollections.observableArrayList();
+    String month[]={"January","February","March","April","May","June","July","August","September","October","November","December"};
     //XYChart.Series<String,Number> globalseries=null;
 
 
@@ -334,6 +351,50 @@ public class DashboardController implements Initializable {
 
 
         }
+    }
+    private String checkmonth()throws SQLException{
+        String str="Janurary";
+        int monthindex=0;
+        preparedStatement=getConnection().prepareStatement("Select max(Month) from tbl_date");
+        resultSet=preparedStatement.executeQuery();
+        if(resultSet.next()) {
+            monthindex=Integer.parseInt(resultSet.getString("max(Month)"));
+
+            if (monthindex == 2) {
+                str = "February";
+            }
+            if (monthindex == 3) {
+                str = "March";
+            }
+            if (monthindex == 4) {
+                str = "April";
+            }
+            if (monthindex == 5) {
+                str = "May";
+            }
+            if (monthindex == 6) {
+                str = "June";
+            }
+            if (monthindex == 7) {
+                str = "July";
+            }
+            if (monthindex == 8) {
+                str = "August";
+            }
+            if (monthindex == 9) {
+                str = "September";
+            }
+            if (monthindex == 10) {
+                str = "October";
+            }
+            if (monthindex == 11) {
+                str = "November";
+            }
+            if (monthindex == 12) {
+                str = "December";
+            }
+        }
+        return str;
     }
 
     @FXML
@@ -438,9 +499,7 @@ public class DashboardController implements Initializable {
                 new BounceInUp(scrollpane).play();
             } else if (group.getSelectedToggle() == radioMonthly) {
                 String month = getMonth();
-                String minvalue="";
-                String maxvalue="";
-                //diria
+
                 preparedStatement = getConnection().prepareStatement("SELECT concat_ws('-',Year,Month,Date) as Date from tbl_date where Year=? AND Month=? and Date=(select min(Date) from tbl_date)");
                 preparedStatement.setString(1,LocalDateTime.now().getYear()+"");
                 preparedStatement.setString(2,month);
@@ -457,9 +516,22 @@ public class DashboardController implements Initializable {
                 }
                 Report();
                 refreshChart();
-                scrollpane.setVvalue(1);
+                scrollpane.setVvalue(1.12);
                 new BounceInDown(scrollpane).play();
 
+            }else if(group.getSelectedToggle()==radioYear){
+                    String Year = LocalDateTime.now().getYear()+"";
+                preparedStatement = getConnection().prepareStatement("SELECT concat_ws('-',Year,Month,Date) as Date from tbl_date where Year=?  ");
+                preparedStatement.setString(1,Year);
+                resultSet=preparedStatement.executeQuery();
+                if(resultSet.next()){
+                    cboYear.setValue(resultSet.getString("Date"));
+                }
+
+                Report();
+                refreshChart();
+                scrollpane.setVvalue(2.28);
+                new BounceInLeft(scrollpane).play();
             }
         }catch (Exception a){
             a.printStackTrace();
@@ -475,6 +547,7 @@ public class DashboardController implements Initializable {
         }
         return month;
     }
+
     private void refreshChart(){
             //balik
 
@@ -507,6 +580,17 @@ public class DashboardController implements Initializable {
                 }
                 MonthlyChart.getData().add(series1);
 
+                YearlyChart.getData().clear();
+                preparedStatement = getConnection().prepareStatement("SELECT r.transaction_date,concat_ws(\"-\",d.Year,d.Month) as Date ,sum(r.total_price) from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id where d.Year = ? GROUP by concat_ws(\"-\",d.Year,d.Month)");
+                preparedStatement.setString(1, LocalDateTime.now().getYear()+"");
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                Double Ycomponent = Double.parseDouble(resultSet.getString("sum(r.total_price)"));
+                series1.getData().add(new XYChart.Data<String, Number>(resultSet.getString("Date"), Ycomponent));
+            }
+            YearlyChart.getData().add(series1);
+
+
 
             for(final XYChart.Data<String,Number> data: series.getData()){
                 data.getNode().setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -533,12 +617,12 @@ public class DashboardController implements Initializable {
         }
     }
     @FXML
-    private void doLoadchart(){
+    private void doLoadChart(){
         refreshChart();
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle resourceBundle){
         //initialize chart
         LineChart.getXAxis().setAutoRanging(true);
         LineChart.getYAxis().setAutoRanging(true);
@@ -553,6 +637,8 @@ public class DashboardController implements Initializable {
         });
         radioDaily.setToggleGroup(group);
         radioMonthly.setToggleGroup(group);
+        radioYear.setToggleGroup(group);
+
         group.selectToggle(radioDaily);
         refreshChart();
         int size=10;
@@ -573,7 +659,17 @@ public class DashboardController implements Initializable {
         setComboBOx(cbologdate,"Select concat_ws(\"-\",Year,Month,Date) as Date from tbl_date","Date");
         setComboBOx(startingdate,"Select concat_ws(\"-\",Year,Month,Date) as Date from tbl_date","Date");
         setComboBOx(enddate,"Select concat_ws(\"-\",Year,Month,Date) as Date from tbl_date","Date");
+        setComboBOx(cboYear,"Select Year from tbl_date group by Year","Year");
+        for (int i = 0; i < month.length; i++) {
+            cboMonthly.getItems().add(month[i]);
+        }
+        try{
+            cboMonthly.setValue(checkmonth());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
+        cboYear.setValue(LocalDateTime.now().getYear()+"");
         startingdate.setValue(LocalDateTime.now().format(formatter));
         enddate.setValue(LocalDateTime.now().format(formatter));
         cboActivity.getItems().add("All");
@@ -1281,6 +1377,7 @@ public class DashboardController implements Initializable {
 
     private void setComboBOx(JFXComboBox comboBOx,String query,String columnname){
         try {
+
             comboBOx.getItems().clear();
             preparedStatement = getConnection().prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
@@ -2043,6 +2140,7 @@ public class DashboardController implements Initializable {
         clock.play();
 
             try {
+                    //JOptionPane.showMessageDialog(null,LocalDateTime.now().getDayOfMonth());
                 if (checkdate()==false) {
                     String month="";
                     String dayofyear="";
@@ -2051,12 +2149,12 @@ public class DashboardController implements Initializable {
                     }else{
                         month=LocalDateTime.now().getMonthValue()+"";
                     }
-                    if(LocalDateTime.now().getDayOfYear()<10){
+                    if(LocalDateTime.now().getDayOfMonth()<10){
                         dayofyear="0"+LocalDateTime.now().getDayOfMonth();
                     }else{
                         dayofyear=LocalDateTime.now().getDayOfMonth()+"";
                     }
-
+                    //JOptionPane.showMessageDialog(null,month+dayofyear);
                     //JOptionPane.showMessageDialog(null,LocalDateTime.now().getYear() +" year "+LocalDateTime.now().getMonthValue()+" Month "+LocalDateTime.now().getDayOfMonth());
                     preparedStatement = getConnection().prepareStatement("Insert into tbl_date values(null,?,?,?)");// i edit ang date
                     preparedStatement.setString(1, LocalDateTime.now().getYear()+"");
@@ -2073,12 +2171,14 @@ public class DashboardController implements Initializable {
         private boolean checkdate(){
         boolean bool=false;
         try {
-                preparedStatement = getConnection().prepareStatement("Select *From tbl_date where concat_ws(\"-\",Year,Month,Date) =?");//edit ang date
+                preparedStatement = getConnection().prepareStatement("Select *From tbl_date where concat_ws(\"-\",Year,Month,Date)=?");//edit ang date
+                //fJOptionPane.showMessageDialog(null,LocalDateTime.now().format(formatter));
                 preparedStatement.setString(1, LocalDateTime.now().format(formatter));
                 resultSet = preparedStatement.executeQuery();
                 if(resultSet.next()==true){
                     bool=true;
                     setDateid(Integer.parseInt(resultSet.getString("Date_id")));
+                    //JOptionPane.showMessageDialog(null,"Pass Here Please");
                 }
             }catch (Exception ex){
                 ex.printStackTrace();
