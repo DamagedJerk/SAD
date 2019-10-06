@@ -433,12 +433,17 @@
                                     </JFXTextField>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="6">
                                        <children>
-                                          <JFXButton fx:id="btnStockIn" disable="true" layoutX="15.0" layoutY="1.0" onAction="#doStockIn" prefHeight="34.0" prefWidth="233.0" style="-fx-background-color: #16FE95;" text="Stock-In">
+                                          <JFXButton fx:id="btnStockIn" disable="true" layoutX="15.0" layoutY="1.0" onAction="#doStockIn" prefHeight="38.0" prefWidth="77.0" style="-fx-background-color: #16FE95;" text="In">
                                              <font>
                                                 <Font name="System Bold" size="17.0" />
                                              </font>
                                           </JFXButton>
                                           <Label fx:id="stockinerror" layoutX="267.0" layoutY="6.0" prefHeight="17.0" prefWidth="277.0" text="Label" textFill="#b90d0d" visible="false" />
+                                          <JFXButton fx:id="btnStockOut" disable="true" layoutX="143.0" layoutY="1.0" onAction="#doStockIn" prefHeight="38.0" prefWidth="77.0" style="-fx-background-color: #FF2900;" text="Out" textFill="#f2ecec">
+                                             <font>
+                                                <Font name="System Bold" size="17.0" />
+                                             </font>
+                                          </JFXButton>
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -553,7 +558,7 @@
                               <JFXRadioButton fx:id="radioYear" layoutX="776.0" layoutY="46.0" onAction="#clickradio" text="Yearly" />
                               <JFXComboBox fx:id="cboYear" layoutX="1056.0" layoutY="42.0" prefHeight="25.0" prefWidth="94.0" promptText="Year" />
                               <JFXComboBox fx:id="cboMonthly" layoutX="915.0" layoutY="42.0" prefHeight="25.0" prefWidth="128.0" promptText="Month" />
-                              <Label fx:id="lbl_balance" layoutX="288.0" layoutY="505.0" prefHeight="32.0" prefWidth="323.0" text="Running Balance:">
+                              <Label fx:id="lbl_balance" layoutX="252.0" layoutY="505.0" prefHeight="32.0" prefWidth="359.0" text="Running Balance:">
                                  <font>
                                     <Font name="System Bold" size="22.0" />
                                  </font>

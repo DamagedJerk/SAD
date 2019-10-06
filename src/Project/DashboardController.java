@@ -236,6 +236,9 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXButton btnStockIn;
     @FXML
+    private JFXButton btnStockOut;
+
+    @FXML
     private TextArea AreaLogs;
     @FXML
     private JFXComboBox<Integer> cbo_size;
@@ -618,7 +621,7 @@ public class DashboardController implements Initializable {
                         Tooltip.install(data.getNode(),new Tooltip("Date : "+data.getXValue()+"\nTotal Sales : PHP "+data.getYValue()));
                     }
 
-                }); lbl_balance.setText("Running Balance : PHP "+data.getYValue());
+                });
             }
             for(final XYChart.Data<String,Number> data: Monthly.getData()){
                 data.getNode().setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -647,6 +650,18 @@ public class DashboardController implements Initializable {
     @FXML
     private void doLoadChart(){
         refreshChart();
+    }
+    private String runningbalance(){
+        try{
+            preparedStatement=getConnection().prepareStatement("SELECT sum(total_price)-sum(discount_value) as Running_Balance FROM `tbl_receipt` where transaction_date=(Select max(transaction_date) from tbl_receipt)");
+            resultSet=preparedStatement.executeQuery();
+            if(resultSet.next()){
+              return resultSet.getString("Running_Balance");
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return "0.00";
     }
 
     @Override
@@ -904,6 +919,7 @@ public class DashboardController implements Initializable {
                 Report();
                 refreshChart();
                 CheckInventory();
+                lbl_balance.setText("Running Balance : PHP "+runningbalance());
             }
         });
         tabInventory.setOnSelectionChanged(event -> {
@@ -1393,17 +1409,8 @@ public class DashboardController implements Initializable {
         ReportTable.getColumns().setAll(ReceiptId,CartId,CustomerName,EmployeeName,TotalPricee,DiscountedValue,DiscountedPrice,TotalAmount,Change,TransactionDate);
         ReportTable.setRoot(receiptlist);
         ReportTable.setShowRoot(false);
-        //dito ka balik
-        /*
-        Stage stage= (Stage) rootPane.getScene().getWindow();
-        stage.setOnShowing(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent windowEvent) {
-                if(tabSales.isSelected() || tabReport.isSelected()){
-                    JOptionPane.showMessageDialog(null,"EAT BULAGA");
-                }
-            }
-        });*/
+
+        lbl_balance.setText("Running Balance : PHP "+runningbalance());
     }
     public void CheckInventory(){
         try{
@@ -1589,6 +1596,7 @@ public class DashboardController implements Initializable {
                     StockinCost.setText(itemcost);
                     StockInStock.setText(currentstock);
                     btnStockIn.setDisable(false);
+                    btnStockOut.setDisable(false);
 
 
 
@@ -1647,8 +1655,8 @@ public class DashboardController implements Initializable {
                         preparedStatement.setString(2,itemId);
                         preparedStatement.executeUpdate();
 
-                        Notifications notificationBuilder=Notifications.create().graphic(null).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
-                                .title("Success").text("Added "+Amount+"To Product "+name);
+                        Notifications notificationBuilder=Notifications.create().graphic(new ImageView("/resources/confirm-smaller.png")).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
+                                .title("Success").text("Added "+Amount+" To Product "+name);
                         notificationBuilder.show();
 
                         refreshStockList();
