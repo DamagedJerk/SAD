@@ -173,6 +173,7 @@ public class DashboardController implements Initializable {
     private dbconn database;
     private Connection connect;
     private Map<String, Object> map;
+    private double balance=0;
 
 
 
@@ -253,6 +254,9 @@ public class DashboardController implements Initializable {
     private LineChart<String,Number> MonthlyChart;
     @FXML
     private Label LineChart_Title;
+    @FXML
+    private Label lbl_balance;
+
 
     @FXML
     private JFXButton btn_loadChart;
@@ -573,12 +577,12 @@ public class DashboardController implements Initializable {
                 series.getData().clear();
 
                 //LineChart.setTitle("Daily Sales Performance");
-                preparedStatement = getConnection().prepareStatement("SELECT r.transaction_date,concat_ws(\"-\",d.Year,d.Month,d.Date) as Date ,sum(r.total_price) from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id where d.Month = ? GROUP by d.Date");
+                preparedStatement = getConnection().prepareStatement("SELECT r.transaction_date,concat_ws(\"-\",d.Year,d.Month,d.Date) as Date ,sum(r.total_price)-sum(r.discount_value) as Sales from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id where d.Month = ? GROUP by d.Date");
 
                 preparedStatement.setString(1,getMonth());
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
-                    Double Ycomponent = Double.parseDouble(resultSet.getString("sum(r.total_price)"));
+                    Double Ycomponent = Double.parseDouble(resultSet.getString("Sales"));
                     series.getData().add(new XYChart.Data<String, Number>(resultSet.getString("Date"), Ycomponent));
                 }
                 LineChart.getData().add(series);
@@ -586,21 +590,21 @@ public class DashboardController implements Initializable {
 
                 MonthlyChart.getData().clear();
                 //LineChart.setTitle("Monthly Sales Performance");
-                preparedStatement = getConnection().prepareStatement("SELECT r.transaction_date,concat_ws(\"-\",d.Year,d.Month) as Date ,sum(r.total_price) from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id where d.Year = ? GROUP by concat_ws(\"-\",d.Year,d.Month)");
-                preparedStatement.setString(1, LocalDateTime.now().getYear()+"");
+                preparedStatement = getConnection().prepareStatement("SELECT r.transaction_date,concat_ws(\"-\",d.Year,d.Month) as Date ,sum(r.total_price)-sum(r.discount_value) as Sales from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id where d.Year = ? GROUP by concat_ws(\"-\",d.Year,d.Month)");
+                preparedStatement.setString(1, cboYear.getSelectionModel().getSelectedItem());
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
-                    Double Ycomponent = Double.parseDouble(resultSet.getString("sum(r.total_price)"));
+                    Double Ycomponent = Double.parseDouble(resultSet.getString("Sales"));
                     Monthly.getData().add(new XYChart.Data<String, Number>(resultSet.getString("Date"), Ycomponent));
                 }
                 MonthlyChart.getData().add(Monthly);
 
                 YearlyChart.getData().clear();
-                preparedStatement = getConnection().prepareStatement("SELECT r.transaction_date,Year as Date ,sum(r.total_price) from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id GROUP by Year");
+                preparedStatement = getConnection().prepareStatement("SELECT r.transaction_date,Year as Date ,sum(r.total_price)-sum(r.discount_value) as Sales from tbl_receipt r JOIN tbl_date d ON r.transaction_date=d.Date_id GROUP by Year");
                 //preparedStatement.setString(1, LocalDateTime.now().getYear()+"");
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
-                Double Ycomponent = Double.parseDouble(resultSet.getString("sum(r.total_price)"));
+                Double Ycomponent = Double.parseDouble(resultSet.getString("Sales"));
                 Yearly.getData().add(new XYChart.Data<String, Number>(resultSet.getString("Date"), Ycomponent));
             }
             YearlyChart.getData().add(Yearly);
@@ -613,7 +617,8 @@ public class DashboardController implements Initializable {
                     public void handle(MouseEvent event) {
                         Tooltip.install(data.getNode(),new Tooltip("Date : "+data.getXValue()+"\nTotal Sales : PHP "+data.getYValue()));
                     }
-                });
+
+                }); lbl_balance.setText("Running Balance : PHP "+data.getYValue());
             }
             for(final XYChart.Data<String,Number> data: Monthly.getData()){
                 data.getNode().setOnMouseEntered(new EventHandler<MouseEvent>() {
