@@ -525,25 +525,43 @@ public class DashboardController implements Initializable {
         try {
 
             if (group.getSelectedToggle() == radioDaily) { // wa pa nahuman
-                startingdate.setValue(dateTime.getText());
-                enddate.setValue(startingdate.getValue());
-                Report();
-                refreshChart();
-                scrollpane.setVvalue(0);
-                new BounceInUp(scrollpane).play();
-            } else if (group.getSelectedToggle() == radioMonthly) {
                 String month = getMonth();
 
-                preparedStatement = getConnection().prepareStatement("SELECT concat_ws('-',Year,Month,Date) as Date from tbl_date where Year=? AND Month=? and Date=(select min(Date) from tbl_date)");
+                preparedStatement = getConnection().prepareStatement("SELECT concat_ws('-',Year,Month,Date) as Date from tbl_date where Year=? AND Month=? and Date=(select min(Date) from tbl_date where Month=?)");
                 preparedStatement.setString(1,LocalDateTime.now().getYear()+"");
                 preparedStatement.setString(2,month);
+                preparedStatement.setString(3,month);
                 resultSet=preparedStatement.executeQuery();
                 if(resultSet.next()){
                     startingdate.setValue(resultSet.getString("Date"));
                 }
-                preparedStatement = getConnection().prepareStatement("SELECT concat_ws('-',Year,Month,Date) as Date from tbl_date where Year=? AND Month=? and Date=(select max(Date) from tbl_date)");
+                preparedStatement = getConnection().prepareStatement("SELECT concat_ws('-',Year,Month,Date) as Date from tbl_date where Year=? AND Month=? and Date=(select max(Date) from tbl_date where Month=?)");
                 preparedStatement.setString(1,LocalDateTime.now().getYear()+"");
                 preparedStatement.setString(2,month);
+                preparedStatement.setString(3,month);
+                resultSet=preparedStatement.executeQuery();
+                if(resultSet.next()){
+                    enddate.setValue(resultSet.getString("Date"));
+                }
+                Report();
+                refreshChart();
+                scrollpane.setVvalue(0);
+                new BounceInUp(scrollpane).play();
+            } else if (group.getSelectedToggle() == radioMonthly ) {
+                String month = getMonth();
+
+                preparedStatement = getConnection().prepareStatement("SELECT concat_ws('-',Year,Month,Date) as Date from tbl_date where Year=? AND Month=? and Date=(select min(Date) from tbl_date where Month=?)");
+                preparedStatement.setString(1,LocalDateTime.now().getYear()+"");
+                preparedStatement.setString(2,month);
+                preparedStatement.setString(3,month);
+                resultSet=preparedStatement.executeQuery();
+                if(resultSet.next()){
+                    startingdate.setValue(resultSet.getString("Date"));
+                }
+                preparedStatement = getConnection().prepareStatement("SELECT concat_ws('-',Year,Month,Date) as Date from tbl_date where Year=? AND Month=? and Date=(select max(Date) from tbl_date where Month=?)");
+                preparedStatement.setString(1,LocalDateTime.now().getYear()+"");
+                preparedStatement.setString(2,month);
+                preparedStatement.setString(3,month);
                 resultSet=preparedStatement.executeQuery();
                 if(resultSet.next()){
                     enddate.setValue(resultSet.getString("Date"));
@@ -555,15 +573,25 @@ public class DashboardController implements Initializable {
 
             }else if(group.getSelectedToggle()==radioYear){
                     String Year = LocalDateTime.now().getYear()+"";
-                /*preparedStatement = getConnection().prepareStatement("SELECT concat_ws('-',Year,Month,Date) as Date from tbl_date where Year=?  ");
-                preparedStatement.setString(1,Year);
+                preparedStatement = getConnection().prepareStatement("SELECT concat_ws('-',Year,Month,Date) as Date from tbl_date where Year=? and Date=(select min(Date) from tbl_date where Month=(SELECT min(Month) from tbl_date where Year=?)) and Month=(SELECT min(Month) from tbl_date WHERE Year=?) ");
+                preparedStatement.setString(1,LocalDateTime.now().getYear()+"");
+                preparedStatement.setString(2,LocalDateTime.now().getYear()+"");
+                preparedStatement.setString(3,LocalDateTime.now().getYear()+"");
                 resultSet=preparedStatement.executeQuery();
                 if(resultSet.next()){
-                    cboYear.setValue(resultSet.getString("Date"));
+                    startingdate.setValue(resultSet.getString("Date"));
+                }
+                preparedStatement = getConnection().prepareStatement("SELECT concat_ws('-',Year,Month,Date) as Date from tbl_date where Year=? and Date=(select max(Date) from tbl_date where Month=(SELECT max(Month) from tbl_date where Year=?)) and Month=(SELECT max(Month) from tbl_date WHERE Year=?) ");
+                preparedStatement.setString(1,LocalDateTime.now().getYear()+"");
+                preparedStatement.setString(2,LocalDateTime.now().getYear()+"");
+                preparedStatement.setString(3,LocalDateTime.now().getYear()+"");
+                resultSet=preparedStatement.executeQuery();
+                if(resultSet.next()){
+                    enddate.setValue(resultSet.getString("Date"));
                 }
 
                 Report();
-                refreshChart();*/
+                refreshChart();
                 scrollpane.setVvalue(2.28);
                 new BounceInLeft(scrollpane).play();
             }
@@ -650,6 +678,17 @@ public class DashboardController implements Initializable {
                     @Override
                     public void handle(MouseEvent event) {
                         Tooltip.install(data.getNode(),new Tooltip("Date : "+data.getXValue()+"\nTotal Sales : PHP "+data.getYValue()));
+                    }
+
+                });
+            }
+            for(final XYChart.Data<String,Number> data: series.getData()){
+                data.getNode().setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        Tooltip.install(data.getNode(),new Tooltip("Date : "+data.getXValue()+"\nTotal Sales : PHP "+data.getYValue()));
+                        startingdate.setValue(data.getXValue());
+                        enddate.setValue(data.getXValue());
                     }
 
                 });
@@ -830,6 +869,7 @@ public class DashboardController implements Initializable {
                     }
                     setMonth(str);
                     refreshChart();
+                    clickradio();
                 }
             }
         });
@@ -1139,24 +1179,24 @@ public class DashboardController implements Initializable {
             @Override
             public void handle(KeyEvent event) {
                 try{
+                        String status;
+                        String search = StockInSearch.getText();
+                        StockinList.clear();
+                        String sql = "select p.prod_id,p.prod_name,p.prod_quantity,p.prod_price,c.cat_description,s.company_name,p.prod_status,p.prod_cost FROM tbl_products p JOIN tbl_supplier s ON p.supplier_id = s.supplier_id JOIN tbl_category c ON p.category_id=c.category_id WHERE p.prod_name LIKE '%" + search + "%' Group by p.prod_id";
+                        preparedStatement = getConnection().prepareStatement(sql);
+                        resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
 
-                    String status;
-                    String search=StockInSearch.getText();
-                    StockinList.clear();
-                    String sql = "select p.prod_id,p.prod_name,p.prod_quantity,p.prod_price,c.cat_description,s.company_name,p.prod_status,p.prod_cost FROM tbl_products p JOIN tbl_supplier s ON p.supplier_id = s.supplier_id JOIN tbl_category c ON p.category_id=c.category_id WHERE p.prod_name LIKE '%"+search+"%' Group by p.prod_id";
-                    preparedStatement = getConnection().prepareStatement(sql);
-                    resultSet = preparedStatement.executeQuery();
-                    while (resultSet.next()) {
+                            int temp = Integer.parseInt(resultSet.getString("prod_status"));
+                            if (temp == 0) {
+                                status = "INACTIVE";
+                            } else {
+                                status = "ACTIVE";
+                            }
+                            StockinList.add(new Inventory(resultSet.getString("prod_id"), resultSet.getString("prod_name"), resultSet.getString("prod_quantity"), resultSet.getString("prod_price"), resultSet.getString("cat_description"), resultSet.getString("company_name"), status, resultSet.getString("prod_cost")));
 
-                        int temp=Integer.parseInt(resultSet.getString("prod_status"));
-                        if(temp==0){
-                            status="INACTIVE";
-                        }else{
-                            status="ACTIVE";
                         }
-                        StockinList.add(new Inventory(resultSet.getString("prod_id"), resultSet.getString("prod_name"), resultSet.getString("prod_quantity"),resultSet.getString("prod_price"), resultSet.getString("cat_description"), resultSet.getString("company_name"),status,resultSet.getString("prod_cost")));
 
-                    }
 
 
                 }catch (Exception ex) {
@@ -1169,15 +1209,28 @@ public class DashboardController implements Initializable {
             @Override
             public void handle(KeyEvent event) {
                 try{
-                    StocksTableList.clear();
-                    String search=StockListSearch.getText();
-                    String sql="Select s.Stockin_id,p.prod_name,s.Stock_BeforeUpdate,s.updatedquantity,s.LastEntry,d.Date,s.Entry_time,s.total_cost from tbl_stockin s JOIN tbl_products p ON s.prod_id=p.prod_id JOIN tbl_date d ON s.Entry_date=d.Date_id WHERE prod_name LIKE '%"+search+"%'Group by Stockin_id";
-                    preparedStatement=getConnection().prepareStatement(sql);
-                    resultSet=preparedStatement.executeQuery();
-                    while(resultSet.next()){
-                        StocksTableList.add(new Stocks(resultSet.getString("Stockin_id"),resultSet.getString("prod_name"),resultSet.getString("Stock_BeforeUpdate"),resultSet.getString("LastEntry"),resultSet.getString("updatedquantity"),resultSet.getString("Date"),resultSet.getString("Entry_time"),resultSet.getString("total_cost")));
-                    }
+                    if(Stockgroup.getSelectedToggle()==radio_stockin) {
 
+                        StocksTableList.clear();
+                        String search = StockListSearch.getText();
+                        String sql = "Select s.Stockin_id,p.prod_name,s.Stock_BeforeUpdate,s.updatedquantity,s.LastEntry,d.Date,s.Entry_time,s.total_cost from tbl_stockin s JOIN tbl_products p ON s.prod_id=p.prod_id JOIN tbl_date d ON s.Entry_date=d.Date_id WHERE prod_name LIKE '%" + search + "%'Group by Stockin_id";
+                        preparedStatement = getConnection().prepareStatement(sql);
+                        resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            StocksTableList.add(new Stocks(resultSet.getString("Stockin_id"), resultSet.getString("prod_name"), resultSet.getString("Stock_BeforeUpdate"), resultSet.getString("LastEntry"), resultSet.getString("updatedquantity"), resultSet.getString("Date"), resultSet.getString("Entry_time"), resultSet.getString("total_cost")));
+                        }
+                    }else{
+
+                        String search = StockListSearch.getText();
+                        StockOutList.clear();
+                        String sql="Select s.StockOut_id,p.prod_name,s.StockBefore_Update,s.updatedquantity,s.lastOut,concat_ws(\"-\",d.Year,d.Month,d.Date) as Date,s.departure_time,s.Status,s.TotalLoss from tbl_stockout s JOIN tbl_products p ON s.prod_id=p.prod_id JOIN tbl_date d ON s.Departure_date=d.Date_id WHERE p.prod_name LIKE '%"+search+"%' Group by s.StockOut_Id";
+                        preparedStatement = getConnection().prepareStatement(sql);
+                        resultSet = preparedStatement.executeQuery();
+                        while(resultSet.next()){
+                            StockOutList.add(new Stocks(resultSet.getString("StockOut_id"),resultSet.getString("prod_name"),resultSet.getString("StockBefore_Update"),resultSet.getString("lastOut"),resultSet.getString("updatedquantity"),resultSet.getString("Date"),resultSet.getString("departure_time"),resultSet.getString("TotalLoss"),resultSet.getString("status")));
+                        }
+
+                    }
                 }catch(Exception e){
                     e.printStackTrace();
                 }
@@ -2068,7 +2121,7 @@ public class DashboardController implements Initializable {
                             int quan=Integer.parseInt(resultSet.getString("order_quantity"));
                             double totalprice=Double.parseDouble(resultSet.getString("o.order_quantity*o.total_price"));
                             if(checkDuplicate(productid,receiptId)==false){
-                                //JOptionPane.showMessageDialog(null,"ni sulod diri inserting tbl_purchased");
+
                                 preparedStatement=getConnection().prepareStatement("insert into tbl_purchased values(null,?,?,?,?)");
                                 preparedStatement.setString(1,receiptId);
                                 preparedStatement.setString(2,productid);

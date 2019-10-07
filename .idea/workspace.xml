@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/src/Project/DashboardController.java" line="586" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="cbddea0c-4283-4362-bc6d-1b06ad665c0e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Dashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$10.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$11.class" afterDir="false" />
@@ -68,15 +70,12 @@
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$65.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$65.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$66.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$66.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$67.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$67.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$68.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$68.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$7.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$8.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$9.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/loginController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/loginController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/loginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/loginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Dashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Project/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project/loginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/loginController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -93,14 +92,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="1862" column="67" selection-start-line="1862" selection-start-column="67" selection-end-line="1862" selection-end-column="67" />
+            <state relative-caret-position="264">
+              <caret line="690" column="57" selection-start-line="690" selection-start-column="57" selection-end-line="690" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#110003#110004#0" expanded="true" />
-                <element signature="e#110063#110064#0" expanded="true" />
-                <element signature="e#122774#122775#0" expanded="true" />
-                <element signature="e#122833#122834#0" expanded="true" />
+                <element signature="e#20370#20371#0" expanded="true" />
+                <element signature="e#20407#20408#0" expanded="true" />
+                <element signature="e#20438#20439#0" expanded="true" />
+                <element signature="e#20471#20472#0" expanded="true" />
+                <element signature="e#24942#24943#0" expanded="true" />
+                <element signature="e#24972#24973#0" expanded="true" />
+                <element signature="e#114994#114995#0" expanded="true" />
+                <element signature="e#115054#115055#0" expanded="true" />
+                <element signature="e#126835#126836#0" expanded="true" />
+                <element signature="e#126894#126895#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -159,15 +164,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>cboYear</find>
-      <find>refreshchart</find>
-      <find>refreshch</find>
-      <find>label</find>
-      <find>lbl_b</find>
-      <find>lbl_</find>
-      <find>data</find>
-      <find>tabReport</find>
-      <find>btnstock</find>
       <find>lbl_balance</find>
       <find>runningbalance(){</find>
       <find>runningbalance()</find>
@@ -176,7 +172,6 @@
       <find>radio</find>
       <find>StockIntab</find>
       <find>Stocks</find>
-      <find>refreshstocklist</find>
       <find>ObservableList</find>
       <find>refresh</find>
       <find>refreshStock</find>
@@ -189,6 +184,16 @@
       <find>tabStock</find>
       <find>refreshStockout</find>
       <find>stockout</find>
+      <find>StockInSea</find>
+      <find>refreshStockOutList</find>
+      <find>//balik diri</find>
+      <find>refreshStockOut</find>
+      <find>refreshstocklist</find>
+      <find>stockoutlist</find>
+      <find>stockinsea</find>
+      <find>cboMont</find>
+      <find>cboMonthly.</find>
+      <find>clickradio</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -672,14 +677,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="1862" column="67" selection-start-line="1862" selection-start-column="67" selection-end-line="1862" selection-end-column="67" />
+        <state relative-caret-position="264">
+          <caret line="690" column="57" selection-start-line="690" selection-start-column="57" selection-end-line="690" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#110003#110004#0" expanded="true" />
-            <element signature="e#110063#110064#0" expanded="true" />
-            <element signature="e#122774#122775#0" expanded="true" />
-            <element signature="e#122833#122834#0" expanded="true" />
+            <element signature="e#20370#20371#0" expanded="true" />
+            <element signature="e#20407#20408#0" expanded="true" />
+            <element signature="e#20438#20439#0" expanded="true" />
+            <element signature="e#20471#20472#0" expanded="true" />
+            <element signature="e#24942#24943#0" expanded="true" />
+            <element signature="e#24972#24973#0" expanded="true" />
+            <element signature="e#114994#114995#0" expanded="true" />
+            <element signature="e#115054#115055#0" expanded="true" />
+            <element signature="e#126835#126836#0" expanded="true" />
+            <element signature="e#126894#126895#0" expanded="true" />
           </folding>
         </state>
       </provider>
