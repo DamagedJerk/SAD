@@ -13,6 +13,7 @@ public class Stocks extends RecursiveTreeObject<Stocks> {
     StringProperty Date;
     StringProperty Time;
     StringProperty TotalCost;
+    StringProperty status;
     public Stocks(String id ,String prodname,String formerStocks,String entry,String quan,String Date,String Time,String cost) {
         this.product_id=new SimpleStringProperty(id);
         this.product_name = new SimpleStringProperty(prodname);
@@ -26,4 +27,18 @@ public class Stocks extends RecursiveTreeObject<Stocks> {
         //this.updated_quantity=new SimpleStringProperty()
 
     }
+    public Stocks(String id ,String prodname,String formerStocks,String entry,String quan,String Date,String Time,String cost,String status) {
+        this.product_id=new SimpleStringProperty(id);
+        this.product_name = new SimpleStringProperty(prodname);
+        this.current_stocks = new SimpleStringProperty(quan);
+        //this.Entry_type = new SimpleStringProperty(type);
+        this.Last_Entry = new SimpleStringProperty(entry);
+        this.Date = new SimpleStringProperty(Date);
+        this.Time= new SimpleStringProperty(Time);
+        this.TotalCost= new SimpleStringProperty(cost);
+        this.before_update_stocks=new SimpleStringProperty(formerStocks);
+        this.status=new SimpleStringProperty(status);
+
+    }
+
 }

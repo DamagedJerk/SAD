@@ -331,7 +331,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tabStock" disable="true" text="Stock-In">
+            <Tab fx:id="tabStock" text="Stock-In">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -366,6 +366,9 @@
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </JFXButton>
+                              <JFXTreeTableView fx:id="StockOutTable" blendMode="DARKEN" layoutX="11.0" layoutY="63.0" prefHeight="446.0" prefWidth="547.0" visible="false" />
+                              <JFXRadioButton fx:id="radio_stockin" layoutX="46.0" layoutY="527.0" onAction="#clickradio" text="Stock-In" />
+                              <JFXRadioButton fx:id="radio_stockOut" layoutX="130.0" layoutY="527.0" onAction="#clickradio" text="Stock-Out" />
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="3.0" layoutY="333.0" prefHeight="247.0" prefWidth="584.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">

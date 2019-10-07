@@ -105,6 +105,8 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXTreeTableView<Stocks> StockInTable;
     @FXML
+    private JFXTreeTableView<Stocks> StockOutTable;
+    @FXML
     private JFXTextField StockIntotalprice;
     @FXML
     private JFXTextField StockinAmount;
@@ -214,6 +216,7 @@ public class DashboardController implements Initializable {
     private JFXButton new_entry;
     @FXML
     private JFXTreeTableView<Inventory> tbl_inventory;
+
     @FXML
     private JFXButton InventoryReports;
     @FXML
@@ -248,6 +251,10 @@ public class DashboardController implements Initializable {
 
     @FXML
     private JFXRadioButton radioMonthly;
+    @FXML
+    private JFXRadioButton radio_stockin;
+    @FXML
+    private JFXRadioButton radio_stockOut;
 
     @FXML
     private LineChart<String,Number> LineChart;
@@ -292,6 +299,7 @@ public class DashboardController implements Initializable {
     ObservableList<Inventory> StockinList = FXCollections.observableArrayList();
     ObservableList<Stocks> StocksTableList = FXCollections.observableArrayList();
     ObservableList<Receipts> ReceiptList = FXCollections.observableArrayList();
+    ObservableList<Stocks> StockOutList= FXCollections.observableArrayList();
     String month[]={"January","February","March","April","May","June","July","August","September","October","November","December"};
     String monthvalue="";
     //XYChart.Series<String,Number> globalseries=null;
@@ -309,6 +317,7 @@ public class DashboardController implements Initializable {
     private String userId="";
     private String receiptId="";
     final ToggleGroup group = new ToggleGroup();
+    final ToggleGroup Stockgroup = new ToggleGroup();
     public Double totalprice = 0.0;
 
 
@@ -555,6 +564,14 @@ public class DashboardController implements Initializable {
                 scrollpane.setVvalue(2.28);
                 new BounceInLeft(scrollpane).play();
             }
+            if(Stockgroup.getSelectedToggle()==radio_stockin){
+                StockInTable.setVisible(true);
+                StockOutTable.setVisible(false);
+                //JOptionPane.showMessageDialog(nu);
+            }if(Stockgroup.getSelectedToggle()==radio_stockOut){
+                StockInTable.setVisible(false);
+                StockOutTable.setVisible(true);
+            }
         }catch (Exception a){
             a.printStackTrace();
         }
@@ -651,17 +668,19 @@ public class DashboardController implements Initializable {
     private void doLoadChart(){
         refreshChart();
     }
-    private String runningbalance(){
+    public String runningbalance(){
+        String dbl="0.00";
         try{
-            preparedStatement=getConnection().prepareStatement("SELECT sum(total_price)-sum(discount_value) as Running_Balance FROM `tbl_receipt` where transaction_date=(Select max(transaction_date) from tbl_receipt)");
+            preparedStatement=getConnection().prepareStatement("SELECT sum(total_price)-sum(discount_value) as Running_Balance FROM `tbl_receipt` where transaction_date=(Select max(Date_id) from tbl_date)");
             resultSet=preparedStatement.executeQuery();
-            if(resultSet.next()){
-              return resultSet.getString("Running_Balance");
-            }
+
+            if (resultSet.next() && resultSet.getString("Running_Balance")!=null){
+                    dbl=resultSet.getString("Running_Balance");
+                }
         }catch (Exception ex){
             ex.printStackTrace();
         }
-        return "0.00";
+        return dbl;
     }
 
     @Override
@@ -682,6 +701,9 @@ public class DashboardController implements Initializable {
         radioMonthly.setToggleGroup(group);
         radioYear.setToggleGroup(group);
 
+        radio_stockin.setToggleGroup(Stockgroup);
+        radio_stockOut.setToggleGroup(Stockgroup);
+        Stockgroup.selectToggle(radio_stockin);
         group.selectToggle(radioDaily);
         refreshChart();
         int size=10;
@@ -1322,6 +1344,78 @@ public class DashboardController implements Initializable {
         StockInTable.setRoot(StocksTablesList );
         StockInTable.setShowRoot(false);
 
+        //stockout table
+        JFXTreeTableColumn<Stocks, String> StockOutID= new JFXTreeTableColumn<>("ID");
+        StockOutID.setPrefWidth(stocktablewidth);
+        StockOutID.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Stocks, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Stocks, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().product_id;
+            }
+        });
+        JFXTreeTableColumn<Stocks, String> StockOutName= new JFXTreeTableColumn<>("Name");
+        StockOutName.setPrefWidth(stocktablewidth);
+        StockOutName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Stocks, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Stocks, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().product_name;
+            }
+        });
+        JFXTreeTableColumn<Stocks, String> unupdated_stocks= new JFXTreeTableColumn<>("Before Update");
+        unupdated_stocks.setPrefWidth(stocktablewidth);
+        unupdated_stocks.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Stocks, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Stocks, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().before_update_stocks;
+            }
+        });
+        JFXTreeTableColumn<Stocks, String> LastOut= new JFXTreeTableColumn<>("Last Out");
+        LastOut.setPrefWidth(stocktablewidth);
+        LastOut.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Stocks, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Stocks, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().Last_Entry;
+            }
+        });
+        JFXTreeTableColumn<Stocks, String> CurrentStocks= new JFXTreeTableColumn<>("Current Stocks");
+        CurrentStocks.setPrefWidth(stocktablewidth);
+        CurrentStocks.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Stocks, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Stocks, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().current_stocks;
+            }
+        });
+        JFXTreeTableColumn<Stocks, String> StockOutDate = new JFXTreeTableColumn<>("Stock-Out Date");
+        StockOutDate.setPrefWidth(stocktablewidth);
+        StockOutDate.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Stocks, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Stocks, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().Date;
+            }
+        });
+        JFXTreeTableColumn<Stocks, String> StockOutTime = new JFXTreeTableColumn<>("Stock-Out Time");
+        StockOutTime.setPrefWidth(stocktablewidth);
+        StockOutTime.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Stocks, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Stocks, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().Time;
+            }
+        });
+        JFXTreeTableColumn<Stocks, String> StockOutStatus = new JFXTreeTableColumn<>("Status");
+        StockOutStatus.setPrefWidth(stocktablewidth);
+        StockOutStatus.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Stocks, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Stocks, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().status;
+            }
+        });
+        refreshStockList(); // balik diri . . . .
+        final TreeItem<Stocks> StocksOutList = new RecursiveTreeItem<Stocks>(StockOutList, RecursiveTreeObject::getChildren);
+
+        StockOutTable.getColumns().setAll(StockOutID,StockOutName,unupdated_stocks,LastOut,CurrentStocks,StockOutDate,StockOutTime,StockOutStatus);
+        StockOutTable.setRoot(StocksOutList);
+        StockOutTable.setShowRoot(false);
+        //
         //ReceiptTab
 
         JFXTreeTableColumn<Receipts, String> ReceiptId= new JFXTreeTableColumn<>("Receipt Id");
@@ -1410,7 +1504,7 @@ public class DashboardController implements Initializable {
         ReportTable.setRoot(receiptlist);
         ReportTable.setShowRoot(false);
 
-        lbl_balance.setText("Running Balance : PHP "+runningbalance());
+        //lbl_balance.setText("Running Balance : PHP "+runningbalance());
     }
     public void CheckInventory(){
         try{
@@ -2160,6 +2254,21 @@ public class DashboardController implements Initializable {
                 e.printStackTrace();
             }
         }
+        private void refreshStockOutList(){
+
+        try{
+            StockOutList.clear();
+            String sql="Select s.StockOut_id,p.prod_name,s.StockBefore_Update,s.updatedquantity,s.lastOut,concat_ws(\"-\",d.Year,d.Month,d.Date) as Date,s.departure_time,s.Status from tbl_stockout s JOIN tbl_products p ON s.prod_id=p.prod_id JOIN tbl_date d ON s.Departure_date=d.Date_id Group by s.StockOut_Id";
+            preparedStatement=getConnection().prepareStatement(sql);//done
+            resultSet=preparedStatement.executeQuery();
+            while(resultSet.next()){
+                StockOutList.add(new Stocks(resultSet.getString("StockOut_id"),resultSet.getString("prod_name"),resultSet.getString("StockBefore_Update"),resultSet.getString("lastOut"),resultSet.getString("updatedquantity"),resultSet.getString("Date"),resultSet.getString("departure_time"),resultSet.getString("Status")));
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
         private void refreshStockList(){
 
             try{

@@ -150,6 +150,7 @@ public class loginController implements Initializable {
                         @Override
                         public void handle(WindowEvent windowEvent) {
                             dash.checkUser(Name,role,userid);
+
                         }
                     });
                     stage.show();
