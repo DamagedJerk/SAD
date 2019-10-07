@@ -554,7 +554,6 @@ public class DashboardController implements Initializable {
                 while(resultSet.next()){
                     userlogs+=resultSet.getString("user_name")+" "+resultSet.getString("activity_description")+" on "+resultSet.getString("LogDate")+" around "+resultSet.getString("Log_Time")+"\n";
                 }
-
                 AreaLogs.setText(userlogs);
 
 
