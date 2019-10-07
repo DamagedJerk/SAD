@@ -269,7 +269,8 @@ public class DashboardController implements Initializable {
     private Label LineChart_Title;
     @FXML
     private Label lbl_balance;
-
+    @FXML
+    private Label lblTotalSales;
 
     @FXML
     private JFXButton btn_loadChart;
@@ -305,8 +306,14 @@ public class DashboardController implements Initializable {
     ObservableList<Stocks> StockOutList= FXCollections.observableArrayList();
     String month[]={"January","February","March","April","May","June","July","August","September","October","November","December"};
     String monthvalue="";
-    //XYChart.Series<String,Number> globalseries=null;
+    private int Role=0;
 
+    private void setRole(int role){
+        this.Role=role;
+    }
+    private int getRole(){
+        return this.Role;
+    }
 
 
     private boolean requested = false;
@@ -479,30 +486,31 @@ public class DashboardController implements Initializable {
     }
     private void Log(String Filter,String Date){
         try{
+
             String logs="";
             String sql="Select e.user_name,a.activity_description,a.LogDate,a.Log_Time from tbl_activitylog a Join tbl_employee e ON a.user_id=e.user_id";
             switch (Filter){
-                case "All": sql+=" Where a.LogDate='"+Date+"' GROUP BY a.activity_log";
+                case "All": sql+=" Where a.LogDate='"+Date+"' and role=1 GROUP BY a.activity_log";
                             break;
-                case "Log-in": sql+=" Where a.LogDate='"+Date+"' AND a.activity_description Like '%Log-%' GROUP BY a.activity_log";
+                case "Log-in": sql+=" Where a.LogDate='"+Date+"' AND a.activity_description Like '%Log-%' and role=1 GROUP BY a.activity_log";
                             break;
-                case "Registration" : sql+=" WHERE a.LogDate='"+Date+"'  AND a.activity_description Like '%Registered%' GROUP BY a.activity_log";
+                case "Registration" : sql+=" WHERE a.LogDate='"+Date+"'  AND a.activity_description Like '%Registered%' and role=1 GROUP BY a.activity_log";
                             break;
-                case "Sale Transactions" :  sql+=" WHERE a.LogDate='"+Date+"' AND a.activity_description  Like '%Transaction%' GROUP BY a.activity_log";
+                case "Sale Transactions" :  sql+=" WHERE a.LogDate='"+Date+"' AND a.activity_description  Like '%Transaction%' and role=1 GROUP BY a.activity_log";
                             break;
-                case "Adding Inventory" : sql+=" WHERE a.LogDate='"+Date+"' AND a.activity_description Like '%Inventory%' Group BY a.activity_log";
+                case "Adding Inventory" : sql+=" WHERE a.LogDate='"+Date+"' AND a.activity_description Like '%Inventory%' and role=1 Group BY a.activity_log";
                             break;
-                case "Stock-in" : sql+=" WHERE a.LogDate='"+Date+"' And a.activity_description Like '%Stock%' GROUP BY a.activity_log";
+                case "Stock-in" : sql+=" WHERE a.LogDate='"+Date+"' And a.activity_description Like '%Stock%' and role=1 GROUP BY a.activity_log";
                             break;
-                case "Admin Confirmations" : sql+=" WHERE a.LogDate='"+Date+"' And (a.activity_description Like '%Confirmation%' OR a.activity_description Like '%Discount%' OR a.activity_description like '%Removed%' OR a.activity_description Like '%Registered%' ) GROUP BY a.activity_log";
+                case "Admin Confirmations" : sql+=" WHERE a.LogDate='"+Date+"' And (a.activity_description Like '%Confirmation%' OR a.activity_description Like '%Discount%' OR a.activity_description like '%Removed%' OR a.activity_description Like '%Registered%' ) and role=1 GROUP BY a.activity_log";
                             break;
-                case "Discount" : sql+=" WHERE  a.LogDate='"+Date+"' And a.activity_description Like '%Discount%' GROUP BY a.activity_log";
+                case "Discount" : sql+=" WHERE  a.LogDate='"+Date+"' And a.activity_description Like '%Discount%' and role=1 GROUP BY a.activity_log";
                             break;
-                case "Void Operations" : sql+=" WHERE a.LogDate='"+Date+"' And a.activity_description Like '%Removed%' GROUP BY a.activity_log";
+                case "Void Operations" : sql+=" WHERE a.LogDate='"+Date+"' And a.activity_description Like '%Removed%' and role=1 GROUP BY a.activity_log";
                             break;
-                case "Added Category" : sql+=" WHERE a.LogDate='"+Date+"' And a.activity_description Like '%Category%' GROUP BY a.activity_log";
+                case "Added Category" : sql+=" WHERE a.LogDate='"+Date+"' And a.activity_description Like '%Category%' and role=1 GROUP BY a.activity_log";
                     break;
-                case "Added Supplier" : sql+=" WHERE a.LogDate='"+Date+"' And a.activity_description Like '%Supplier%' GROUP BY a.activity_log";
+                case "Added Supplier" : sql+=" WHERE a.LogDate='"+Date+"' And a.activity_description Like '%Supplier%' and role=1 GROUP BY a.activity_log";
                     break;
             }
             //JOptionPane.showMessageDialog(null,sql);
@@ -511,7 +519,46 @@ public class DashboardController implements Initializable {
             while(resultSet.next()){
                 logs+=resultSet.getString("user_name")+" "+resultSet.getString("activity_description")+" on "+resultSet.getString("LogDate")+" around "+resultSet.getString("Log_Time")+"\n";
             }
-            AreaLogs.setText(logs);
+
+                AdminLogs.setText(logs);
+
+                String userlogs="";
+                String query="Select e.user_name,a.activity_description,a.LogDate,a.Log_Time from tbl_activitylog a Join tbl_employee e ON a.user_id=e.user_id";
+                switch (Filter){
+                    case "All": query+=" Where a.LogDate='"+Date+"' and role=0 GROUP BY a.activity_log";
+                        break;
+                    case "Log-in": query+=" Where a.LogDate='"+Date+"' AND a.activity_description Like '%Log-%' and role=0 GROUP BY a.activity_log";
+                        break;
+                    case "Registration" : query+=" WHERE a.LogDate='"+Date+"'  AND a.activity_description Like '%Registered%' and role=0 GROUP BY a.activity_log";
+                        break;
+                    case "Sale Transactions" :  query+=" WHERE a.LogDate='"+Date+"' AND a.activity_description  Like '%Transaction%' and role=0 GROUP BY a.activity_log";
+                        break;
+                    case "Adding Inventory" : query+=" WHERE a.LogDate='"+Date+"' AND a.activity_description Like '%Inventory%' and role=0 Group BY a.activity_log";
+                        break;
+                    case "Stock-in" : query+=" WHERE a.LogDate='"+Date+"' And a.activity_description Like '%Stock%' and role=0 GROUP BY a.activity_log";
+                        break;
+                    case "Admin Confirmations" : query+=" WHERE a.LogDate='"+Date+"' And (a.activity_description Like '%Confirmation%' OR a.activity_description Like '%Discount%' OR a.activity_description like '%Removed%' OR a.activity_description Like '%Registered%' ) and role=0 GROUP BY a.activity_log";
+                        break;
+                    case "Discount" : query+=" WHERE  a.LogDate='"+Date+"' And a.activity_description Like '%Discount%' and role=0 GROUP BY a.activity_log";
+                        break;
+                    case "Void Operations" : query+=" WHERE a.LogDate='"+Date+"' And a.activity_description Like '%Removed%' and role=0 GROUP BY a.activity_log";
+                        break;
+                    case "Added Category" : query+=" WHERE a.LogDate='"+Date+"' And a.activity_description Like '%Category%' and role=0 GROUP BY a.activity_log";
+                        break;
+                    case "Added Supplier" : query+=" WHERE a.LogDate='"+Date+"' And a.activity_description Like '%Supplier%' and role=0 GROUP BY a.activity_log";
+                        break;
+                }
+                //JOptionPane.showMessageDialog(null,sql);
+                preparedStatement=getConnection().prepareStatement(query);
+                resultSet=preparedStatement.executeQuery();
+                while(resultSet.next()){
+                    userlogs+=resultSet.getString("user_name")+" "+resultSet.getString("activity_description")+" on "+resultSet.getString("LogDate")+" around "+resultSet.getString("Log_Time")+"\n";
+                }
+
+                AreaLogs.setText(userlogs);
+
+
+
         }catch(Exception ex){
             ex.printStackTrace();
         }
@@ -545,11 +592,11 @@ public class DashboardController implements Initializable {
                 }
                 Report();
                 refreshChart();
-                scrollpane.setVvalue(0);
+                scrollpane.setVvalue(1.15);
                 new BounceInUp(scrollpane).play();
             } else if (group.getSelectedToggle() == radioMonthly ) {
                 String month = getMonth();
-
+                //JOptionPane.showMessageDialog(null,"Monthly");
                 preparedStatement = getConnection().prepareStatement("SELECT concat_ws('-',Year,Month,Date) as Date from tbl_date where Year=? AND Month=? and Date=(select min(Date) from tbl_date where Month=?)");
                 preparedStatement.setString(1,LocalDateTime.now().getYear()+"");
                 preparedStatement.setString(2,month);
@@ -568,7 +615,7 @@ public class DashboardController implements Initializable {
                 }
                 Report();
                 refreshChart();
-                scrollpane.setVvalue(1.12);
+                scrollpane.setVvalue(0);
                 new BounceInDown(scrollpane).play();
 
             }else if(group.getSelectedToggle()==radioYear){
@@ -689,6 +736,8 @@ public class DashboardController implements Initializable {
                         Tooltip.install(data.getNode(),new Tooltip("Date : "+data.getXValue()+"\nTotal Sales : PHP "+data.getYValue()));
                         startingdate.setValue(data.getXValue());
                         enddate.setValue(data.getXValue());
+                        lblTotalSales.setText("Daily Sales : PHP "+data.getYValue());
+                        lblTotalSales.setVisible(true);
                     }
 
                 });
@@ -702,12 +751,30 @@ public class DashboardController implements Initializable {
                     }
                 });
             }
+            for(final XYChart.Data<String,Number> data: Monthly.getData()){
+                data.getNode().setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        lblTotalSales.setText("Monthly Sales : PHP "+data.getYValue());
+                        lblTotalSales.setVisible(true);
+                    }
+                });
+            }
             for(final XYChart.Data<String,Number> data: Yearly.getData()){
                 data.getNode().setOnMouseEntered(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
                         Tooltip tooltip= new Tooltip();
-                        tooltip.install(data.getNode(),new Tooltip("Year : "+data.getXValue()+"\nTotal Sales : PHP "+data.getYValue()));
+                        tooltip.install(data.getNode(),new Tooltip("Year : "+data.getYValue()+"\nTotal Sales : PHP "+data.getYValue()));
+                    }
+                });
+            }
+            for(final XYChart.Data<String,Number> data: Yearly.getData()){
+                data.getNode().setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        lblTotalSales.setText("Yearly Sales : PHP "+data.getYValue());
+                        lblTotalSales.setVisible(true);
                     }
                 });
             }
@@ -738,6 +805,7 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
+        lblTotalSales.setVisible(false);
         //initialize chart
         LineChart.getXAxis().setAutoRanging(true);
         LineChart.getYAxis().setAutoRanging(true);
@@ -851,6 +919,7 @@ public class DashboardController implements Initializable {
             public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
                 if(t1!=null){
                     AreaLogs.setFont(Font.font("Arial", FontWeight.BOLD,t1));
+                    AdminLogs.setFont(Font.font("Arial", FontWeight.BOLD,t1));
                 }
             }
         });
@@ -1674,9 +1743,12 @@ public class DashboardController implements Initializable {
                 tabLog.setDisable(false);
                 userId=id;
                 tabpane.getSelectionModel().select(tabReport);
+                setRole(Role);
+
             } else {
                 img.setImage(userpic);
                 userId=id;
+                setRole(Role);
             }
 
         }
@@ -2232,7 +2304,7 @@ public class DashboardController implements Initializable {
         private void UpdateInventory(){
             if(InventoryName.getText().contentEquals("") || InventoryQuantity.getText().contentEquals("") || InventoryPrice.getText().contentEquals("") ){
                 JOptionPane.showMessageDialog(null,"Please input all fields","Warning",JOptionPane.WARNING_MESSAGE);
-
+//patay na.
             }else {
                 int id =Integer.parseInt(InventoryID.getText()) ;
                 String name = InventoryName.getText();
@@ -2275,7 +2347,7 @@ public class DashboardController implements Initializable {
 
             if(InventoryName.getText().contentEquals("") || InventoryQuantity.getText().contentEquals("") || InventoryPrice.getText().contentEquals("") ){
                 JOptionPane.showMessageDialog(null,"Please input all fields","Warning",JOptionPane.WARNING_MESSAGE);
-                
+               //diri pud
             }else {
                 int id =Integer.parseInt(InventoryID.getText()) ;
                 String name = InventoryName.getText();

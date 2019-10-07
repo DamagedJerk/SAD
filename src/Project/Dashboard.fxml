@@ -495,27 +495,13 @@
                                           <Font name="System Bold" size="17.0" />
                                        </font>
                                     </JFXButton>
-                                    <ScrollPane fx:id="scrollpane" fitToHeight="true" fitToWidth="true" hmax="0.0" layoutX="20.0" layoutY="46.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="354.0" prefWidth="497.0" vmax="4.0" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="44.0">
+                                    <ScrollPane fx:id="scrollpane" fitToHeight="true" fitToWidth="true" hmax="0.0" layoutX="22.0" layoutY="48.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="340.0" prefWidth="495.0" vmax="4.0" vvalue="1.16" AnchorPane.bottomAnchor="77.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="46.0">
                                        <content>
                                           <AnchorPane prefHeight="1227.0" prefWidth="491.0">
                                              <children>
                                                 <VBox prefHeight="1500.0" prefWidth="491.0">
                                                    <children>
-                                                      <LineChart fx:id="LineChart" alternativeColumnFillVisible="true" legendSide="LEFT" legendVisible="false" prefHeight="330.0" prefWidth="491.0" title="Daily Sales Performance" titleSide="BOTTOM">
-                                                        <xAxis>
-                                                          <CategoryAxis side="BOTTOM" />
-                                                        </xAxis>
-                                                        <yAxis>
-                                                          <NumberAxis side="LEFT" />
-                                                        </yAxis>
-                                                         <effect>
-                                                            <Blend mode="DARKEN" />
-                                                         </effect>
-                                                         <cursor>
-                                                            <Cursor fx:constant="HAND" />
-                                                         </cursor>
-                                                      </LineChart>
-                                                      <LineChart fx:id="MonthlyChart" alternativeColumnFillVisible="true" legendSide="LEFT" legendVisible="false" prefHeight="328.0" prefWidth="491.0" title="Monthly Sales Performance" titleSide="BOTTOM">
+                                                      <LineChart fx:id="MonthlyChart" alternativeColumnFillVisible="true" legendSide="LEFT" legendVisible="false" prefHeight="330.0" prefWidth="491.0" title="Monthly Sales Performance" titleSide="BOTTOM">
                                                         <xAxis>
                                                           <CategoryAxis side="BOTTOM" />
                                                         </xAxis>
@@ -531,6 +517,20 @@
                                                          <padding>
                                                             <Insets top="5.0" />
                                                          </padding>
+                                                      </LineChart>
+                                                      <LineChart fx:id="LineChart" alternativeColumnFillVisible="true" legendSide="LEFT" legendVisible="false" prefHeight="330.0" prefWidth="491.0" title="Daily Sales Performance" titleSide="BOTTOM">
+                                                        <xAxis>
+                                                          <CategoryAxis side="BOTTOM" />
+                                                        </xAxis>
+                                                        <yAxis>
+                                                          <NumberAxis side="LEFT" />
+                                                        </yAxis>
+                                                         <effect>
+                                                            <Blend mode="DARKEN" />
+                                                         </effect>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
                                                       </LineChart>
                                                       <LineChart fx:id="YearlyChart" alternativeColumnFillVisible="true" legendSide="LEFT" legendVisible="false" prefHeight="330.0" prefWidth="491.0" title="Yearly Sales Performance" titleSide="BOTTOM">
                                                         <xAxis>
@@ -553,6 +553,11 @@
                                           <Insets top="5.0" />
                                        </padding>
                                     </ScrollPane>
+                                    <Label fx:id="lblTotalSales" layoutX="14.0" layoutY="401.0" prefHeight="57.0" prefWidth="356.0" text="Gibberish">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </AnchorPane>
                               <JFXRadioButton fx:id="radioYear" layoutX="776.0" layoutY="46.0" onAction="#clickradio" text="Yearly" />
@@ -568,7 +573,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tabLog" disable="true" text="Activity Log">
+            <Tab fx:id="tabLog" text="Activity Log">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
