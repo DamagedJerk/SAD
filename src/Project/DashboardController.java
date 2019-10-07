@@ -199,6 +199,9 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXComboBox<String> cbologdate;
     @FXML
+    private JFXComboBox<String> cboReasons;
+
+    @FXML
     private JFXComboBox<String> cboActivity;
     @FXML
     private JFXTextField InventoryQuantity;
@@ -733,6 +736,10 @@ public class DashboardController implements Initializable {
         }catch (Exception e){
             e.printStackTrace();
         }
+
+        cboReasons.getItems().add("Damaged");
+        cboReasons.getItems().add("Lost");
+        cboReasons.getItems().add("Human Error");
 
         cboYear.setValue(LocalDateTime.now().getYear()+"");
         startingdate.setValue(LocalDateTime.now().format(formatter));
@@ -1702,6 +1709,18 @@ public class DashboardController implements Initializable {
                 btnVoid.setDisable(false);
             }
 
+        }
+        @FXML
+        private void doStockOut(){
+            try{
+                if(StockinAmount.getText().contentEquals("") || StockIntotalprice.getText().contentEquals("")){
+                    stockinerror.setText("Please input an amount to add. . . .");
+                    stockinerror.setVisible(true);
+                }
+
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }
         }
 
         @FXML

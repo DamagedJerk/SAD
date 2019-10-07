@@ -15,8 +15,6 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TextArea?>
@@ -73,7 +71,7 @@
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <JFXButton fx:id="btnLogOut" layoutX="396.0" layoutY="57.0" onAction="#doLogOut" text="Log-Out">
+                  <JFXButton fx:id="btnLogOut" layoutX="108.0" layoutY="75.0" onAction="#doLogOut" text="Log-Out">
                      <font>
                         <Font name="FontAwesome Regular" size="12.0" />
                      </font>
@@ -83,12 +81,6 @@
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <MenuButton alignment="TOP_LEFT" layoutX="283.0" layoutY="56.0" mnemonicParsing="false" style="-fx-background-color: #BBE2E4;" text="Notifications">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
-                    </items>
-                  </MenuButton>
                   <Label alignment="CENTER_RIGHT" layoutX="843.0" layoutY="68.0" prefHeight="32.0" prefWidth="64.0" text="Date:">
                      <font>
                         <Font size="17.0" />
@@ -331,7 +323,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tabStock" text="Stock-In">
+            <Tab fx:id="tabStock" disable="true" text="Stock-In">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -402,8 +394,8 @@
                                        </children>
                                     </HBox>
                                     <JFXTextField fx:id="StockinCost" editable="false" labelFloat="true" prefHeight="15.0" prefWidth="275.0" promptText="Item Cost:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <JFXTextField fx:id="StockInStock" editable="false" labelFloat="true" prefHeight="20.0" prefWidth="275.0" promptText="Current Stock:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <JFXTextField fx:id="StockinAmount" labelFloat="true" prefHeight="18.0" prefWidth="275.0" promptText="Amount:" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                    <JFXTextField fx:id="StockInStock" editable="false" labelFloat="true" prefHeight="20.0" prefWidth="275.0" promptText="Current Product Quantity:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <JFXTextField fx:id="StockinAmount" labelFloat="true" prefHeight="18.0" prefWidth="275.0" promptText="Quantity to add or pull out:" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <GridPane.margin>
                                           <Insets top="3.0" />
                                        </GridPane.margin></JFXTextField>
@@ -415,7 +407,12 @@
                                           <Insets top="11.0" />
                                        </GridPane.margin>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="StockIntotalprice" editable="false" labelFloat="true" prefHeight="17.0" prefWidth="275.0" promptText="Total Cost:" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                       <children>
+                                          <JFXTextField fx:id="StockIntotalprice" editable="false" labelFloat="true" layoutY="11.0" prefHeight="25.0" prefWidth="128.0" promptText="Total Cost:" />
+                                          <JFXComboBox fx:id="cboReasons" layoutX="149.0" layoutY="11.0" prefHeight="25.0" prefWidth="122.0" promptText="Pull-Out Cause" />
+                                       </children>
+                                    </AnchorPane>
                                     <JFXComboBox fx:id="StockinCat" labelFloat="true" prefHeight="26.0" prefWidth="200.0" promptText="Category:" GridPane.rowIndex="2">
                                        <GridPane.margin>
                                           <Insets left="15.0" />
@@ -436,13 +433,13 @@
                                     </JFXTextField>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="6">
                                        <children>
-                                          <JFXButton fx:id="btnStockIn" disable="true" layoutX="15.0" layoutY="1.0" onAction="#doStockIn" prefHeight="38.0" prefWidth="77.0" style="-fx-background-color: #16FE95;" text="In">
+                                          <JFXButton fx:id="btnStockIn" disable="true" layoutX="15.0" layoutY="1.0" onAction="#doStockIn" prefHeight="38.0" prefWidth="99.0" style="-fx-background-color: #16FE95;" text="Add">
                                              <font>
                                                 <Font name="System Bold" size="17.0" />
                                              </font>
                                           </JFXButton>
                                           <Label fx:id="stockinerror" layoutX="267.0" layoutY="6.0" prefHeight="17.0" prefWidth="277.0" text="Label" textFill="#b90d0d" visible="false" />
-                                          <JFXButton fx:id="btnStockOut" disable="true" layoutX="143.0" layoutY="1.0" onAction="#doStockIn" prefHeight="38.0" prefWidth="77.0" style="-fx-background-color: #FF2900;" text="Out" textFill="#f2ecec">
+                                          <JFXButton fx:id="btnStockOut" disable="true" layoutX="121.0" layoutY="1.0" onAction="#doStockOut" prefHeight="38.0" prefWidth="99.0" style="-fx-background-color: #FF2900;" text="Pull-Out" textFill="#f2ecec">
                                              <font>
                                                 <Font name="System Bold" size="17.0" />
                                              </font>
@@ -460,7 +457,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tabReport" text="Report">
+            <Tab fx:id="tabReport" disable="true" text="Report">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="581.0" prefWidth="946.0">
                      <children>
@@ -571,7 +568,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tabLog" text="Activity Log">
+            <Tab fx:id="tabLog" disable="true" text="Activity Log">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
