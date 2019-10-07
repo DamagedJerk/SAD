@@ -410,7 +410,7 @@
                                     <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="4">
                                        <children>
                                           <JFXTextField fx:id="StockIntotalprice" editable="false" labelFloat="true" layoutY="11.0" prefHeight="25.0" prefWidth="128.0" promptText="Total Cost:" />
-                                          <JFXComboBox fx:id="cboReasons" layoutX="149.0" layoutY="11.0" prefHeight="25.0" prefWidth="122.0" promptText="Pull-Out Cause" />
+                                          <JFXComboBox fx:id="cboReasons" disable="true" labelFloat="true" layoutX="149.0" layoutY="11.0" prefHeight="25.0" prefWidth="122.0" promptText="Pull-Out Cause" />
                                        </children>
                                     </AnchorPane>
                                     <JFXComboBox fx:id="StockinCat" labelFloat="true" prefHeight="26.0" prefWidth="200.0" promptText="Category:" GridPane.rowIndex="2">

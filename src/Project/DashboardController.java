@@ -298,7 +298,7 @@ public class DashboardController implements Initializable {
     //lists
     ObservableList<Inventory> InventoryList = FXCollections.observableArrayList();
     ObservableList<products> productList = FXCollections.observableArrayList();
-    private ObservableList<products> CartList = FXCollections.observableArrayList();
+    ObservableList<products> CartList = FXCollections.observableArrayList();
     ObservableList<Inventory> StockinList = FXCollections.observableArrayList();
     ObservableList<Stocks> StocksTableList = FXCollections.observableArrayList();
     ObservableList<Receipts> ReceiptList = FXCollections.observableArrayList();
@@ -570,10 +570,21 @@ public class DashboardController implements Initializable {
             if(Stockgroup.getSelectedToggle()==radio_stockin){
                 StockInTable.setVisible(true);
                 StockOutTable.setVisible(false);
+                cboReasons.setDisable(true);
+                if(StockInName.getText().length()!=0) {
+                    btnStockIn.setDisable(false);
+                    btnStockOut.setDisable(true);
+                }
                 //JOptionPane.showMessageDialog(nu);
             }if(Stockgroup.getSelectedToggle()==radio_stockOut){
                 StockInTable.setVisible(false);
                 StockOutTable.setVisible(true);
+                cboReasons.setDisable(false);
+                refreshStockOutList();
+                if(StockInName.getText().length()!=0) {
+                    btnStockIn.setDisable(true);
+                    btnStockOut.setDisable(false);
+                }
             }
         }catch (Exception a){
             a.printStackTrace();
@@ -939,15 +950,12 @@ public class DashboardController implements Initializable {
         tabSales.setOnSelectionChanged(event -> {
             if(tabSales.isSelected()){
                 refreshProductMenu();
-                CheckInventory();
-
             }
         });//
         tabReport.setOnSelectionChanged(event -> {
             if(tabReport.isSelected()){
                 Report();
                 refreshChart();
-                CheckInventory();
                 lbl_balance.setText("Running Balance : PHP "+runningbalance());
             }
         });
@@ -961,8 +969,9 @@ public class DashboardController implements Initializable {
         tabStock.setOnSelectionChanged(event -> {
             if(tabStock.isSelected()){
                 refreshStockList();
+                refreshStockOutList();
                 refreshInventoryTable(StockinList);
-                CheckInventory();
+
             }
         });
         tabLog.setOnSelectionChanged(event -> {
@@ -1416,10 +1425,18 @@ public class DashboardController implements Initializable {
                 return productsStringCellDataFeatures.getValue().getValue().status;
             }
         });
-        refreshStockList(); // balik diri . . . .
+        JFXTreeTableColumn<Stocks, String> StockOutCost= new JFXTreeTableColumn<>("Total Cost");
+        StockOutCost.setPrefWidth(stocktablewidth);
+        StockOutCost.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Stocks, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Stocks, String> productsStringCellDataFeatures) {
+                return productsStringCellDataFeatures.getValue().getValue().TotalCost;
+            }
+        });
+        refreshStockOutList();
         final TreeItem<Stocks> StocksOutList = new RecursiveTreeItem<Stocks>(StockOutList, RecursiveTreeObject::getChildren);
 
-        StockOutTable.getColumns().setAll(StockOutID,StockOutName,unupdated_stocks,LastOut,CurrentStocks,StockOutDate,StockOutTime,StockOutStatus);
+        StockOutTable.getColumns().setAll(StockOutID,StockOutName,unupdated_stocks,LastOut,CurrentStocks,StockOutDate,StockOutTime,StockOutCost,StockOutStatus);
         StockOutTable.setRoot(StocksOutList);
         StockOutTable.setShowRoot(false);
         //
@@ -1696,10 +1713,13 @@ public class DashboardController implements Initializable {
                     StockInName.setText(name);
                     StockinCost.setText(itemcost);
                     StockInStock.setText(currentstock);
-                    btnStockIn.setDisable(false);
-                    btnStockOut.setDisable(false);
 
 
+                    if(Stockgroup.getSelectedToggle()==radio_stockin){
+                        btnStockIn.setDisable(false);
+                    }else{
+                        btnStockOut.setDisable(false);
+                    }
 
                 }
 
@@ -1713,11 +1733,82 @@ public class DashboardController implements Initializable {
         @FXML
         private void doStockOut(){
             try{
-                if(StockinAmount.getText().contentEquals("") || StockIntotalprice.getText().contentEquals("")){
-                    stockinerror.setText("Please input an amount to add. . . .");
-                    stockinerror.setVisible(true);
+                if(StockinAmount.getText().contentEquals("") && StockIntotalprice.getText().contentEquals("") && cboReasons.getSelectionModel().getSelectedItem()==null){
+                        stockinerror.setText("Please input appropriate fields");
+                        stockinerror.setVisible(true);
                 }
+                else if(StockinAmount.getText().contentEquals("") && StockIntotalprice.getText().contentEquals("")){
+                        stockinerror.setText("Please input an amount to pull-out. . . .");
+                        stockinerror.setVisible(true);
+                }else if(cboReasons.getSelectionModel().getSelectedItem()==null){
+                        stockinerror.setText("Please select the reason why to pull out . . . . ");
+                        stockinerror.setVisible(true);
+                }else{
+                    //do stock out
+                    String stockinid=StockinID.getText();
+                    String itemId=StockInITEMID.getText();
+                    String outdatedquantity=StockInStock.getText();
+                    String name=StockInName.getText();
+                    int Amount=Integer.parseInt(StockinAmount.getText());
+                    double stockincost=Double.parseDouble(StockIntotalprice.getText());
+                    String dateofentry=getDateid()+"";
+                    String timeofentry=Time.getText();
+                    int outdatedquan=Integer.parseInt(outdatedquantity);
+                    int updatedquan=outdatedquan-Amount;
+                    String pullout=cboReasons.getSelectionModel().getSelectedItem();
 
+                    //inserts to stock out table
+
+                        preparedStatement = getConnection().prepareStatement("Insert into tbl_stockout values(null,?,?,?,?,?,?,?,?)");
+
+                        preparedStatement.setString(1, itemId);
+                        preparedStatement.setString(2, Amount + "");
+                        preparedStatement.setString(3, outdatedquantity);
+                        preparedStatement.setString(4, updatedquan + "");
+                        preparedStatement.setString(5, dateofentry);
+                        preparedStatement.setString(6, timeofentry);
+                        preparedStatement.setString(7, pullout);
+                        preparedStatement.setString(8, stockincost + "");
+                        preparedStatement.executeUpdate();
+
+                        //logs Activity
+                    preparedStatement=getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+                    preparedStatement.setString(1,userId);
+                    preparedStatement.setString(2,"Pulls Out "+Amount+" stocks on product "+name);
+                    preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+                    preparedStatement.setString(4,LocalDateTime.now().format(time));
+                    preparedStatement.executeUpdate();
+
+                    //updates inventory
+                    preparedStatement=getConnection().prepareStatement("Update tbl_products SET prod_quantity=prod_quantity-? where prod_id=?");
+                    preparedStatement.setString(1,Amount+"");
+                    preparedStatement.setString(2,itemId);
+                    preparedStatement.executeUpdate();
+
+                    Notifications notificationBuilder=Notifications.create().graphic(new ImageView("/resources/confirm-smaller.png")).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
+                            .title("Success").text("Successfully pulls out "+Amount+" To Product "+name);
+                    notificationBuilder.show();
+
+
+                    refreshProductMenu();
+                    refreshInventoryTable(InventoryList);
+                    refreshInventoryTable(StockinList);
+
+                    StockinID.setText(getStockInID());
+                    StockinCat.setValue("");
+                    StockInITEMID.setText("");
+                    StockInName.setText("");
+                    StockinCost.setText("");
+                    StockInStock.setText("");
+                    StockinAmount.setText("");
+                    StockIntotalprice.setText("");
+                    btnStockIn.setDisable(true);
+                    btnStockOut.setDisable(true);
+                    stockinerror.setVisible(false);
+                    refreshStockOutList();
+
+
+                }
             }catch(Exception ex){
                 ex.printStackTrace();
             }
@@ -1769,7 +1860,7 @@ public class DashboardController implements Initializable {
                         preparedStatement.executeUpdate();
 
                         Notifications notificationBuilder=Notifications.create().graphic(new ImageView("/resources/confirm-smaller.png")).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
-                                .title("Success").text("Added "+Amount+" To Product "+name);
+                                .title("Success").text("Successfully Added "+Amount+" To Product "+name);
                         notificationBuilder.show();
 
                         refreshStockList();
@@ -1786,6 +1877,7 @@ public class DashboardController implements Initializable {
                         StockinAmount.setText("");
                         StockIntotalprice.setText("");
                         btnStockIn.setDisable(true);
+                        btnStockOut.setDisable(true);
                         stockinerror.setVisible(false);
 
 
@@ -2140,7 +2232,7 @@ public class DashboardController implements Initializable {
                 int category = InventoryCateg.getSelectionModel().selectedIndexProperty().getValue();
                 int supplier = InventorySupp.getSelectionModel().selectedIndexProperty().getValue();
                 int status = Inventory_Status.getSelectionModel().selectedIndexProperty().getValue();
-                String Date =getDateid()+""; // balik diri
+                String Date =getDateid()+"";
                 String sql ="Insert into tbl_products values(?,?,?,?,?,?,?,?,?)";
                 //JOptionPane.showMessageDialog(null,sql+"");
                 try{
@@ -2277,11 +2369,11 @@ public class DashboardController implements Initializable {
 
         try{
             StockOutList.clear();
-            String sql="Select s.StockOut_id,p.prod_name,s.StockBefore_Update,s.updatedquantity,s.lastOut,concat_ws(\"-\",d.Year,d.Month,d.Date) as Date,s.departure_time,s.Status from tbl_stockout s JOIN tbl_products p ON s.prod_id=p.prod_id JOIN tbl_date d ON s.Departure_date=d.Date_id Group by s.StockOut_Id";
+            String sql="Select s.StockOut_id,p.prod_name,s.StockBefore_Update,s.updatedquantity,s.lastOut,concat_ws(\"-\",d.Year,d.Month,d.Date) as Date,s.departure_time,s.Status,s.TotalLoss from tbl_stockout s JOIN tbl_products p ON s.prod_id=p.prod_id JOIN tbl_date d ON s.Departure_date=d.Date_id Group by s.StockOut_Id";
             preparedStatement=getConnection().prepareStatement(sql);//done
             resultSet=preparedStatement.executeQuery();
             while(resultSet.next()){
-                StockOutList.add(new Stocks(resultSet.getString("StockOut_id"),resultSet.getString("prod_name"),resultSet.getString("StockBefore_Update"),resultSet.getString("lastOut"),resultSet.getString("updatedquantity"),resultSet.getString("Date"),resultSet.getString("departure_time"),resultSet.getString("Status")));
+                StockOutList.add(new Stocks(resultSet.getString("StockOut_id"),resultSet.getString("prod_name"),resultSet.getString("StockBefore_Update"),resultSet.getString("lastOut"),resultSet.getString("updatedquantity"),resultSet.getString("Date"),resultSet.getString("departure_time"),resultSet.getString("TotalLoss"),resultSet.getString("status")));
             }
 
         }catch(Exception e){
