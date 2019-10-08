@@ -251,6 +251,8 @@ public class DashboardController implements Initializable {
     //Reports Tab
     @FXML
     private JFXRadioButton radioDaily;
+    @FXML
+    private JFXButton DailySales;
 
     @FXML
     private JFXRadioButton radioMonthly;
@@ -969,6 +971,14 @@ public class DashboardController implements Initializable {
                 ee.printStackTrace();
             }
         });
+        DailySales.setOnAction(actionEvent -> {
+            try{
+                printReport("DailySalesReport");
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
+        });
+
 
         Inventory_Status.getItems().add("INACTIVE");
         Inventory_Status.getItems().add("ACTIVE");
@@ -2396,9 +2406,9 @@ public class DashboardController implements Initializable {
                     refreshProductMenu();
                     CurrentID++;
                     NewEntry();
-                    Notifications notificationBuilder=Notifications.create().graphic(null).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
+                    Notifications notificationBuilder=Notifications.create().graphic(new ImageView("/resources/confirm-smaller.png")).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
                             .title("Success").text("Added To Inventory");
-                    notificationBuilder.show();
+                    notificationBuilder.show();// balik diri
                 }catch (Exception e){
                     e.printStackTrace();
                 }
