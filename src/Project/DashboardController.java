@@ -958,7 +958,13 @@ public class DashboardController implements Initializable {
         });
         StockInReports.setOnAction(a->{
             try{
-                printReport("StockinReport");
+                if(Stockgroup.getSelectedToggle()==radio_stockin){
+                    printReport("StockinReport");
+                }
+                if(Stockgroup.getSelectedToggle()==radio_stockOut){
+                    printReport("StockOutReport");
+                }
+                //
             }catch (Exception ee){
                 ee.printStackTrace();
             }

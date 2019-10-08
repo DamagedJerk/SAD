@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cbddea0c-4283-4362-bc6d-1b06ad665c0e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Dashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$10.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$11.class" afterDir="false" />
@@ -74,11 +73,14 @@
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$68.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$68.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$69.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$69.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$70.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$70.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$71.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$71.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$8.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController$9.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/resources/Thumbs.db" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/resources/Thumbs.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Project/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/Thumbs.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/Thumbs.db" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -95,26 +97,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-416">
-              <caret line="518" column="36" lean-forward="true" selection-start-line="518" selection-start-column="36" selection-end-line="518" selection-end-column="36" />
+            <state relative-caret-position="139">
+              <caret line="966" column="18" selection-start-line="966" selection-start-column="18" selection-end-line="966" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#7275#7276#0" expanded="true" />
-                <element signature="e#7305#7306#0" expanded="true" />
-                <element signature="e#7332#7333#0" expanded="true" />
-                <element signature="e#7362#7363#0" expanded="true" />
-                <element signature="e#19062#19063#0" expanded="true" />
-                <element signature="e#19099#19100#0" expanded="true" />
-                <element signature="e#24863#24864#0" expanded="true" />
-                <element signature="e#24900#24901#0" expanded="true" />
-                <element signature="e#24931#24932#0" expanded="true" />
-                <element signature="e#24964#24965#0" expanded="true" />
-                <element signature="e#31034#31035#0" expanded="true" />
-                <element signature="e#31064#31065#0" expanded="true" />
-                <element signature="e#121213#121214#0" expanded="true" />
-                <element signature="e#121273#121274#0" expanded="true" />
-                <element signature="e#131344#131345#0" expanded="true" />
-                <element signature="e#131403#131404#0" expanded="true" />
+                <element signature="e#131307#131308#0" expanded="true" />
+                <element signature="e#131343#131344#0" expanded="true" />
+                <element signature="e#131373#131374#0" expanded="true" />
+                <element signature="e#131402#131403#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -173,8 +163,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>StockIntab</find>
-      <find>Stocks</find>
       <find>ObservableList</find>
       <find>refresh</find>
       <find>refreshStock</find>
@@ -203,6 +191,8 @@
       <find>arealogs</find>
       <find>JoptionPane.showmessagedialog(null,&quot;</find>
       <find>adminlo</find>
+      <find>Reports</find>
+      <find>btnstockin</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -353,6 +343,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1320" height="784" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49656752" weight="0.23174603" />
       <window_info id="Structure" order="1" sideWeight="0.5034325" side_tool="true" weight="0.26190478" />
@@ -368,7 +359,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32718894" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32718894" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50079364" side_tool="true" weight="0.30875576" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32872504" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32872504" />
@@ -418,12 +409,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/addSupplier.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1105">
           <caret line="65" selection-start-line="65" selection-end-line="65" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/purchase.java" />
     <entry file="jar://C:/Program Files/Java/jdk-11.0.4/lib/src.zip!/java.base/java/lang/Integer.java">
@@ -444,8 +435,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/Customer.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="jar://$USER_HOME$/Downloads/Compressed/javafx-sdk-12.0.1/lib/javafx.base.jar!/com/sun/javafx/event/BasicEventDispatcher.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -473,20 +464,20 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/Alert.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="33" column="22" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/Log-InForm.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1173">
           <caret line="69" column="13" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/Suppliers.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -642,35 +633,23 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/Dashboard.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="226">
           <caret line="455" selection-start-line="455" selection-end-line="455" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-416">
-          <caret line="518" column="36" lean-forward="true" selection-start-line="518" selection-start-column="36" selection-end-line="518" selection-end-column="36" />
+        <state relative-caret-position="139">
+          <caret line="966" column="18" selection-start-line="966" selection-start-column="18" selection-end-line="966" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7275#7276#0" expanded="true" />
-            <element signature="e#7305#7306#0" expanded="true" />
-            <element signature="e#7332#7333#0" expanded="true" />
-            <element signature="e#7362#7363#0" expanded="true" />
-            <element signature="e#19062#19063#0" expanded="true" />
-            <element signature="e#19099#19100#0" expanded="true" />
-            <element signature="e#24863#24864#0" expanded="true" />
-            <element signature="e#24900#24901#0" expanded="true" />
-            <element signature="e#24931#24932#0" expanded="true" />
-            <element signature="e#24964#24965#0" expanded="true" />
-            <element signature="e#31034#31035#0" expanded="true" />
-            <element signature="e#31064#31065#0" expanded="true" />
-            <element signature="e#121213#121214#0" expanded="true" />
-            <element signature="e#121273#121274#0" expanded="true" />
-            <element signature="e#131344#131345#0" expanded="true" />
-            <element signature="e#131403#131404#0" expanded="true" />
+            <element signature="e#131307#131308#0" expanded="true" />
+            <element signature="e#131343#131344#0" expanded="true" />
+            <element signature="e#131373#131374#0" expanded="true" />
+            <element signature="e#131402#131403#0" expanded="true" />
           </folding>
         </state>
       </provider>
