@@ -342,7 +342,8 @@ public class DashboardController implements Initializable {
     ObservableList<Stocks> StocksTableList = FXCollections.observableArrayList();
     ObservableList<Receipts> ReceiptList = FXCollections.observableArrayList();
     ObservableList<Stocks> StockOutList= FXCollections.observableArrayList();
-    ObservableList<Employee> EmployeeList= FXCollections.observableArrayList();
+    RefreshTable table=new RefreshTable();
+
     String month[]={"January","February","March","April","May","June","July","August","September","October","November","December"};
     String monthvalue="";
     private int Role=0;
@@ -392,7 +393,9 @@ public class DashboardController implements Initializable {
     public void signup(){
 
         if(txtUsername.getText().contentEquals("") || txtFirstName.getText().contentEquals("") || txtLastName.getText().contentEquals("") || txtEmail.getText().contentEquals("") || txtBirthday.getValue().toString().contentEquals("") || txtCellNumber.getText().contentEquals("") || txtPassword.getText().contentEquals("") || txtConfirm.getText().contentEquals("")){
-            JOptionPane.showMessageDialog(null,"Please input all fields","Warning",JOptionPane.WARNING_MESSAGE);
+            Notifications notificationBuilder=Notifications.create().graphic(null).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
+                    .title("Warning").text("Please fill fields");
+            notificationBuilder.showError();
             clearfields();
         }else if(!txtPassword.getText().contentEquals(txtConfirm.getText())) {
             JOptionPane.showMessageDialog(null,"Password Do not Match","Error",JOptionPane.ERROR_MESSAGE);
@@ -1810,6 +1813,14 @@ public class DashboardController implements Initializable {
                 return receiptsStringCellDataFeatures.getValue().getValue().password;
             }
         });
+        JFXTreeTableColumn<Employee, String> emp_email= new JFXTreeTableColumn<>("Email");
+        emp_email.setPrefWidth(width);
+        emp_email.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Employee, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Employee, String> receiptsStringCellDataFeatures) {
+                return receiptsStringCellDataFeatures.getValue().getValue().email;
+            }
+        });
         JFXTreeTableColumn<Employee, String> emp_cellnum= new JFXTreeTableColumn<>("CellNumber");
         emp_cellnum.setPrefWidth(width);
         emp_cellnum.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Employee, String>, ObservableValue<String>>() {
@@ -1823,13 +1834,13 @@ public class DashboardController implements Initializable {
         emp_role.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Employee, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Employee, String> receiptsStringCellDataFeatures) {
-                return receiptsStringCellDataFeatures.getValue().getValue().username;
+                return receiptsStringCellDataFeatures.getValue().getValue().Role;
             }
         });
-        //refreshStockOutList(); // balik diri
-        final TreeItem<Employee>  EmpList = new RecursiveTreeItem<Employee>(EmployeeList, RecursiveTreeObject::getChildren);
+        table.RefreshEmployee();
+        final TreeItem<Employee>  EmpList = new RecursiveTreeItem<Employee>(table.EmployeeList, RecursiveTreeObject::getChildren);
 
-        RegisterTable.getColumns().setAll(emp_id,emp_fname,emp_lname,emp_uname,emp_pssword,emp_cellnum,emp_role);
+        RegisterTable.getColumns().setAll(emp_id,emp_fname,emp_lname,emp_uname,emp_pssword,emp_email,emp_cellnum,emp_role);
         RegisterTable.setRoot(EmpList);
         RegisterTable.setShowRoot(false);
     }
@@ -1976,7 +1987,7 @@ public class DashboardController implements Initializable {
                         total_items();
                         btnCashOut.setDisable(false);
                         double width=this.CartName.getWidth();
-                        double newwidth=CartName.length()*7;
+                        double newwidth=CartName.length()*10;
                         if(width<newwidth){
                             this.CartName.setPrefWidth(newwidth);
                         }

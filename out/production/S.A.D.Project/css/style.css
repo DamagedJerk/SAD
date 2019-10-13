@@ -28,6 +28,7 @@
 }
 .tree-table-cell{
     -fx-alignment: center;
+    -fx-font-size: 20px;
 }
 .tree-table-view:focused .tree-table-row-cell:selected {
     -fx-background-color: -fx-tree-table-color ;
