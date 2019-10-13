@@ -92,6 +92,17 @@ public class signupcontroller implements Initializable {
     public signupcontroller(){
 
     }
+        private void clearfields(){
+                    txtFirstName.setText("");
+                    txtLastName.setText("");
+                    txtEmail.setText("");
+                    txtUsername.setText("");
+                    txtBirthday.setValue(null);
+                    txtCellNumber.setText("");
+                    txtPassword.setText("");
+                    txtConfirm.setText("");
+
+    }
     public void signup(){
 
         if(txtUsername.getText().contentEquals("") || txtFirstName.getText().contentEquals("") || txtLastName.getText().contentEquals("") || txtEmail.getText().contentEquals("") || txtBirthday.getValue().toString().contentEquals("") || txtCellNumber.getText().contentEquals("") || txtPassword.getText().contentEquals("") || txtConfirm.getText().contentEquals("")){
@@ -102,58 +113,47 @@ public class signupcontroller implements Initializable {
             txtPassword.setText("");
             txtConfirm.setText("");
         }else{
-                String txtfirstname = txtFirstName.getText();
-                String txtUser = txtUsername.getText();
-                String txtlastname = txtLastName.getText();
-                String txtemail = txtEmail.getText();
-                String txtbirth = txtBirthday.getValue().toString();
-                String txtCellnum = txtCellNumber.getText();
-                String txtPass = txtPassword.getText();
-                String txtconfirmpass = txtConfirm.getText();
-                int role =cboRole.getSelectionModel().selectedIndexProperty().getValue();
-                String sql = "Insert into tbl_employee (user_name,firstname,lastname,password,email,cell_number,role) values(?,?,?,?,?,?,?)";
+            String txtfirstname = txtFirstName.getText();
+            String txtUser = txtUsername.getText();
+            String txtlastname = txtLastName.getText();
+            String txtemail = txtEmail.getText();
+            String txtbirth = txtBirthday.getValue().toString();
+            String txtCellnum = txtCellNumber.getText();
+            String txtPass = txtPassword.getText();
+            String txtconfirmpass = txtConfirm.getText();
+            int role =cboRole.getSelectionModel().selectedIndexProperty().getValue();
+            String sql = "Insert into tbl_employee (user_name,firstname,lastname,password,email,cell_number,role) values(?,?,?,?,?,?,?)";
 
-                try {
-                    preparedStatement = getConnection().prepareStatement(sql);
-                    preparedStatement.setString(1, txtUser);
-                    preparedStatement.setString(2, txtfirstname);
-                    preparedStatement.setString(3, txtlastname);
-                    preparedStatement.setString(4, txtPass);
-                    preparedStatement.setString(5, txtemail);
-                    preparedStatement.setString(6, txtCellnum);
-                    preparedStatement.setInt(7, role);
+            try {
+                preparedStatement = getConnection().prepareStatement(sql);
+                preparedStatement.setString(1, txtUser);
+                preparedStatement.setString(2, txtfirstname);
+                preparedStatement.setString(3, txtlastname);
+                preparedStatement.setString(4, txtPass);
+                preparedStatement.setString(5, txtemail);
+                preparedStatement.setString(6, txtCellnum);
+                preparedStatement.setInt(7, role);
+                preparedStatement.executeUpdate();
+
+                clearfields();
+
+                preparedStatement=getConnection().prepareStatement("Select user_id from tbl_employee where user_id=(Select max(user_id) from tbl_employee)");
+                resultSet=preparedStatement.executeQuery();
+                //logs activity
+                if(resultSet.next()) {
+                    preparedStatement = getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+                    preparedStatement.setString(1, resultSet.getString("user_id"));
+                    preparedStatement.setString(2, "Registered");
+                    preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+                    preparedStatement.setString(4, LocalDateTime.now().format(time));
                     preparedStatement.executeUpdate();
-
-                    clearfields();
-
-                    preparedStatement=getConnection().prepareStatement("Select user_id from tbl_employee where user_id=(Select max(user_id) from tbl_employee)");
-                    resultSet=preparedStatement.executeQuery();
-                    //logs activity
-                    if(resultSet.next()) {
-                        preparedStatement = getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
-                        preparedStatement.setString(1, resultSet.getString("user_id"));
-                        preparedStatement.setString(2, "Registered");
-                        preparedStatement.setString(3, LocalDateTime.now().format(formatter));
-                        preparedStatement.setString(4, LocalDateTime.now().format(time));
-                        preparedStatement.executeUpdate();
-                    }
-                    JOptionPane.showMessageDialog(null, "Successfully Added");
-
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
+                JOptionPane.showMessageDialog(null, "Successfully Added");
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-             private void clearfields(){
-                    txtFirstName.setText("");
-                    txtLastName.setText("");
-                    txtEmail.setText("");
-                    txtUsername.setText("");
-                    txtBirthday.setValue(null);
-                    txtCellNumber.setText("");
-                    txtPassword.setText("");
-                    txtConfirm.setText("");
-
     }
 
     @Override

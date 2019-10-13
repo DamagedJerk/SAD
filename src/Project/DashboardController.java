@@ -4,6 +4,7 @@ import animatefx.animation.*;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -14,7 +15,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
-import javafx.event.Event;
+
 import javafx.event.EventHandler;
 
 import javafx.fxml.FXML;
@@ -29,7 +30,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 
-import javafx.scene.control.SingleSelectionModel;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
@@ -40,7 +41,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
+
 import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
@@ -292,6 +293,41 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXComboBox<String> cboMonthly;
 
+    //registration module
+    @FXML
+    private JFXButton btnConfirmRegister;
+
+    @FXML
+    private JFXButton btnUpdateRegister;
+    @FXML
+    private JFXTreeTableView<Employee> RegisterTable;
+
+    @FXML
+    private JFXTextField txtFirstName;
+
+    @FXML
+    private JFXTextField txtLastName;
+
+    @FXML
+    private JFXTextField txtEmail;
+
+    @FXML
+    private JFXTextField txtUsername;
+
+    @FXML
+    private JFXDatePicker txtBirthday;
+
+    @FXML
+    private JFXPasswordField txtPassword;
+
+    @FXML
+    private JFXPasswordField txtConfirm;
+
+    @FXML
+    private JFXTextField txtCellNumber;
+    @FXML
+    private JFXComboBox<String> cboRole;
+
 
 
 
@@ -306,6 +342,7 @@ public class DashboardController implements Initializable {
     ObservableList<Stocks> StocksTableList = FXCollections.observableArrayList();
     ObservableList<Receipts> ReceiptList = FXCollections.observableArrayList();
     ObservableList<Stocks> StockOutList= FXCollections.observableArrayList();
+    ObservableList<Employee> EmployeeList= FXCollections.observableArrayList();
     String month[]={"January","February","March","April","May","June","July","August","September","October","November","December"};
     String monthvalue="";
     private int Role=0;
@@ -321,6 +358,7 @@ public class DashboardController implements Initializable {
     private boolean requested = false;
     private int purchasedquan=0;
     private double purchasedprice=0.00;
+
 
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
@@ -339,6 +377,69 @@ public class DashboardController implements Initializable {
         dbconn.getInstance();
         conn = dbconn.connect();
         return conn;
+    }
+    private void clearfields(){
+        txtFirstName.setText("");
+        txtLastName.setText("");
+        txtEmail.setText("");
+        txtUsername.setText("");
+        txtBirthday.setValue(null);
+        txtCellNumber.setText("");
+        txtPassword.setText("");
+        txtConfirm.setText("");
+
+    }
+    public void signup(){
+
+        if(txtUsername.getText().contentEquals("") || txtFirstName.getText().contentEquals("") || txtLastName.getText().contentEquals("") || txtEmail.getText().contentEquals("") || txtBirthday.getValue().toString().contentEquals("") || txtCellNumber.getText().contentEquals("") || txtPassword.getText().contentEquals("") || txtConfirm.getText().contentEquals("")){
+            JOptionPane.showMessageDialog(null,"Please input all fields","Warning",JOptionPane.WARNING_MESSAGE);
+            clearfields();
+        }else if(!txtPassword.getText().contentEquals(txtConfirm.getText())) {
+            JOptionPane.showMessageDialog(null,"Password Do not Match","Error",JOptionPane.ERROR_MESSAGE);
+            txtPassword.setText("");
+            txtConfirm.setText("");
+        }else{
+            String txtfirstname = txtFirstName.getText();
+            String txtUser = txtUsername.getText();
+            String txtlastname = txtLastName.getText();
+            String txtemail = txtEmail.getText();
+            String txtbirth = txtBirthday.getValue().toString();
+            String txtCellnum = txtCellNumber.getText();
+            String txtPass = txtPassword.getText();
+            String txtconfirmpass = txtConfirm.getText();
+            int role =cboRole.getSelectionModel().selectedIndexProperty().getValue();
+            String sql = "Insert into tbl_employee (user_name,firstname,lastname,password,email,cell_number,role) values(?,?,?,?,?,?,?)";
+
+            try {
+                preparedStatement = getConnection().prepareStatement(sql);
+                preparedStatement.setString(1, txtUser);
+                preparedStatement.setString(2, txtfirstname);
+                preparedStatement.setString(3, txtlastname);
+                preparedStatement.setString(4, txtPass);
+                preparedStatement.setString(5, txtemail);
+                preparedStatement.setString(6, txtCellnum);
+                preparedStatement.setInt(7, role);
+                preparedStatement.executeUpdate();
+
+                clearfields();
+
+                preparedStatement=getConnection().prepareStatement("Select user_id from tbl_employee where user_id=(Select max(user_id) from tbl_employee)");
+                resultSet=preparedStatement.executeQuery();
+                //logs activity
+                if(resultSet.next()) {
+                    preparedStatement = getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+                    preparedStatement.setString(1, resultSet.getString("user_id"));
+                    preparedStatement.setString(2, "Registered");
+                    preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+                    preparedStatement.setString(4, LocalDateTime.now().format(time));
+                    preparedStatement.executeUpdate();
+                }
+                JOptionPane.showMessageDialog(null, "Successfully Added");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML
@@ -803,7 +904,7 @@ public class DashboardController implements Initializable {
         }
         return dbl;
     }
-
+    JFXTreeTableColumn<products, String> CartName;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         lblTotalSales.setVisible(false);
@@ -1029,25 +1130,29 @@ public class DashboardController implements Initializable {
         tableProduct.setShowRoot(false);
 
         //tblCart
-        int cartwidth=120;
+        int cartwidth=200;
         JFXTreeTableColumn<products, String> CartItemId = new JFXTreeTableColumn<>("Id");
-        CartItemId.setPrefWidth(cartwidth);
+
         CartItemId.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<products, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<products, String> productsStringCellDataFeatures) {
                 return productsStringCellDataFeatures.getValue().getValue().product_id;
             }
         });
-        JFXTreeTableColumn<products, String> CartName = new JFXTreeTableColumn<>("Name");
-        CartName.setPrefWidth(cartwidth);
+        CartName = new JFXTreeTableColumn<>("Name");
+
+
+        CartName.setPrefWidth(150);
         CartName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<products, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<products, String> productsStringCellDataFeatures) {
                 return productsStringCellDataFeatures.getValue().getValue().product_name;
             }
         });
+        //JOptionPane.showMessageDialog(null,CartName.getWidth());
         JFXTreeTableColumn<products, String> CartQuantity = new JFXTreeTableColumn<>("Quantity");
-        CartQuantity.setPrefWidth(cartwidth);
+
+
         CartQuantity.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<products, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<products, String> productsStringCellDataFeatures) {
@@ -1055,7 +1160,8 @@ public class DashboardController implements Initializable {
             }
         });
         JFXTreeTableColumn<products, String> CartPrice = new JFXTreeTableColumn<>("Price");
-        CartPrice.setPrefWidth(cartwidth);
+
+
         CartPrice.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<products, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<products, String> productsStringCellDataFeatures) {
@@ -1066,10 +1172,7 @@ public class DashboardController implements Initializable {
 
         //final TreeItem<products> cart = new RecursiveTreeItem<products>(CartList,RecursiveTreeObject::getChildren);
         tableCart.getColumns().setAll(CartItemId,CartName, CartQuantity, CartPrice);
-        // tableCart.setRoot(cart);
-        //tableCart.setShowRoot(false);
 
-        //tabInventory
         int widthInventory=80;
         tabSales.setOnSelectionChanged(event -> {
             if(tabSales.isSelected()){
@@ -1589,6 +1692,7 @@ public class DashboardController implements Initializable {
         });
         JFXTreeTableColumn<Receipts, String> CartId= new JFXTreeTableColumn<>("Cart Id");
         CartId.setPrefWidth(width);
+
         CartId.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Receipts, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Receipts, String> receiptsStringCellDataFeatures) {
@@ -1665,7 +1769,69 @@ public class DashboardController implements Initializable {
         ReportTable.setRoot(receiptlist);
         ReportTable.setShowRoot(false);
 
-        //lbl_balance.setText("Running Balance : PHP "+runningbalance());
+        //Employee
+        JFXTreeTableColumn<Employee, String> emp_id= new JFXTreeTableColumn<>("Id");
+        emp_id.setPrefWidth(width);
+        emp_id.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Employee, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Employee, String> receiptsStringCellDataFeatures) {
+                return receiptsStringCellDataFeatures.getValue().getValue().id;
+            }
+        });
+        JFXTreeTableColumn<Employee, String> emp_fname= new JFXTreeTableColumn<>("FirstName");
+        emp_fname.setPrefWidth(width);
+        emp_fname.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Employee, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Employee, String> receiptsStringCellDataFeatures) {
+                return receiptsStringCellDataFeatures.getValue().getValue().firstname;
+            }
+        });
+        JFXTreeTableColumn<Employee, String> emp_lname= new JFXTreeTableColumn<>("LastName");
+        emp_lname.setPrefWidth(width);
+        emp_lname.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Employee, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Employee, String> receiptsStringCellDataFeatures) {
+                return receiptsStringCellDataFeatures.getValue().getValue().lastname;
+            }
+        });
+        JFXTreeTableColumn<Employee, String> emp_uname= new JFXTreeTableColumn<>("UserName");
+        emp_uname.setPrefWidth(width);
+        emp_uname.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Employee, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Employee, String> receiptsStringCellDataFeatures) {
+                return receiptsStringCellDataFeatures.getValue().getValue().username;
+            }
+        });
+        JFXTreeTableColumn<Employee, String> emp_pssword= new JFXTreeTableColumn<>("Password");
+        emp_pssword.setPrefWidth(width);
+        emp_pssword.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Employee, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Employee, String> receiptsStringCellDataFeatures) {
+                return receiptsStringCellDataFeatures.getValue().getValue().password;
+            }
+        });
+        JFXTreeTableColumn<Employee, String> emp_cellnum= new JFXTreeTableColumn<>("CellNumber");
+        emp_cellnum.setPrefWidth(width);
+        emp_cellnum.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Employee, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Employee, String> receiptsStringCellDataFeatures) {
+                return receiptsStringCellDataFeatures.getValue().getValue().cellnumber;
+            }
+        });
+        JFXTreeTableColumn<Employee, String> emp_role= new JFXTreeTableColumn<>("Role");
+        emp_role.setPrefWidth(width);
+        emp_role.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Employee, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Employee, String> receiptsStringCellDataFeatures) {
+                return receiptsStringCellDataFeatures.getValue().getValue().username;
+            }
+        });
+        //refreshStockOutList(); // balik diri
+        final TreeItem<Employee>  EmpList = new RecursiveTreeItem<Employee>(EmployeeList, RecursiveTreeObject::getChildren);
+
+        RegisterTable.getColumns().setAll(emp_id,emp_fname,emp_lname,emp_uname,emp_pssword,emp_cellnum,emp_role);
+        RegisterTable.setRoot(EmpList);
+        RegisterTable.setShowRoot(false);
     }
     public void CheckInventory(){
         try{
@@ -1802,13 +1968,18 @@ public class DashboardController implements Initializable {
                     //Quantity=Integer.parseInt(controller.getQuan());
                     if(!controller.getQuan().contentEquals("")){
 
-                        SelectToCart(CartItemId,CartName, controller.getQuan(), CartPrice, CartList);
+                        SelectToCart(CartItemId,CartName,controller.getQuan(), CartPrice, CartList);
                         final TreeItem<products> cart = new RecursiveTreeItem<products>(CartList, RecursiveTreeObject::getChildren);
                         tableCart.setRoot(cart);
                         tableCart.setShowRoot(false);
                         totalitems++;
                         total_items();
                         btnCashOut.setDisable(false);
+                        double width=this.CartName.getWidth();
+                        double newwidth=CartName.length()*7;
+                        if(width<newwidth){
+                            this.CartName.setPrefWidth(newwidth);
+                        }
                     }
                 }
                 //InventoryTab Table
@@ -2312,14 +2483,11 @@ public class DashboardController implements Initializable {
         Report.showReport();
     }
 
-
-
-
         @FXML
         private void UpdateInventory(){
             if(InventoryName.getText().contentEquals("") || InventoryQuantity.getText().contentEquals("") || InventoryPrice.getText().contentEquals("") ){
                 JOptionPane.showMessageDialog(null,"Please input all fields","Warning",JOptionPane.WARNING_MESSAGE);
-//patay na.
+//patay na. ERROR TRAPSSSSSSS
             }else {
                 int id =Integer.parseInt(InventoryID.getText()) ;
                 String name = InventoryName.getText();
@@ -2408,7 +2576,7 @@ public class DashboardController implements Initializable {
                     NewEntry();
                     Notifications notificationBuilder=Notifications.create().graphic(new ImageView("/resources/confirm-smaller.png")).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
                             .title("Success").text("Added To Inventory");
-                    notificationBuilder.show();// balik diri
+                    notificationBuilder.show();
                 }catch (Exception e){
                     e.printStackTrace();
                 }

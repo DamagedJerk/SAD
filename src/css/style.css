@@ -7,6 +7,13 @@
 	-fx-background-size: cover;
 	
 }
+.status-button{
+    -fx-backgroud-color: #ffa800;
+}
+.status-button:hover
+{
+    -fx-background-color:  #16FE95;
+}
 .tab{
 
 	-fx-background-color: #47D5DA;
@@ -18,6 +25,9 @@
 .tree-table-view{
     -fx-tree-table-color: rgba(0,150,150,0.8);
     -fx-tree-table-rippler-color: rgba(255,0,0,0.9);
+}
+.tree-table-cell{
+    -fx-alignment: center;
 }
 .tree-table-view:focused .tree-table-row-cell:selected {
     -fx-background-color: -fx-tree-table-color ;

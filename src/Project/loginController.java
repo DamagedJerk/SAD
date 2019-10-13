@@ -134,8 +134,6 @@ public class loginController implements Initializable {
                     preparedStatement.setString(4,LocalDateTime.now().format(time));
                     preparedStatement.executeUpdate();
 
-
-
                     FXMLLoader loader=new FXMLLoader(getClass().getResource("Dashboard.fxml"));
                     Parent root = loader.load();
                     DashboardController dash=loader.getController();
