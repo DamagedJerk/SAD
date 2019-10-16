@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="561.0" maxWidth="632.0" minHeight="380.0" minWidth="558.0" prefHeight="561.0" prefWidth="632.0" style="-fx-background-insets: 50; -fx-border-insets: 50;" styleClass="fx-backback" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project.loginController">
    <children>
-      <ImageView fitHeight="165.0" fitWidth="158.0" layoutX="222.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="-3.0">
+      <ImageView fitHeight="221.0" fitWidth="176.0" layoutX="225.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="1.0">
          <image>
             <Image url="@../resources/5.png" />
          </image>
@@ -28,34 +28,24 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </JFXButton>
-      <Pane layoutX="73.0" layoutY="152.0" prefHeight="365.0" prefWidth="479.0" style="-fx-border-color: white; -fx-border-width: 4;">
+      <Pane layoutX="73.0" layoutY="178.0" prefHeight="339.0" prefWidth="479.0" style="-fx-border-color: white; -fx-border-width: 4;">
          <children>
-            <JFXButton fx:id="btnLogin" layoutX="281.0" layoutY="213.0" onAction="#login" prefHeight="39.0" prefWidth="158.0" style="-fx-background-color: #16FE95;" text="Log-In" textFill="#221b1b" viewOrder="2.0">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </JFXButton>
-            <JFXButton layoutX="42.0" layoutY="213.0" onAction="#close" prefHeight="39.0" prefWidth="158.0" style="-fx-background-color: #FF2900;" text="Cancel" textFill="#fff8f8" viewOrder="3.0">
+            <JFXButton fx:id="btnLogin" layoutX="280.0" layoutY="243.0" onAction="#login" prefHeight="39.0" prefWidth="158.0" styleClass="log-in-button" stylesheets="@../css/style.css" text="Log-In" textFill="#221b1b" viewOrder="2.0">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </JFXButton>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="135.0" layoutY="271.0" prefHeight="17.0" prefWidth="209.0" text="Do you have an account?" textAlignment="CENTER">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <JFXButton fx:id="btnSignup" layoutX="43.0" layoutY="297.0" onAction="#Signup" prefHeight="39.0" prefWidth="397.0" style="-fx-background-color: #FFA800;" text="Register" textFill="#f2e4e4" viewOrder="4.0">
+            <JFXButton fx:id="btnCancel" layoutX="41.0" layoutY="243.0" onAction="#close" prefHeight="39.0" prefWidth="158.0" styleClass="cancel-button" stylesheets="@../css/style.css" text="Cancel" viewOrder="3.0">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </JFXButton>
-            <JFXTextField fx:id="txtUsername" blendMode="DARKEN" focusColor="#16fe95" labelFloat="true" layoutX="42.0" layoutY="53.0" prefHeight="39.0" prefWidth="397.0" promptText="Username">
+            <JFXTextField fx:id="txtUsername" blendMode="DARKEN" focusColor="#16fe95" labelFloat="true" layoutX="41.0" layoutY="59.0" prefHeight="39.0" prefWidth="397.0" promptText="Username">
                <font>
                   <Font size="22.0" />
                </font>
             </JFXTextField>
-            <JFXPasswordField fx:id="txtPassword" blendMode="DARKEN" focusColor="#16fe95" labelFloat="true" layoutX="42.0" layoutY="129.0" prefHeight="48.0" prefWidth="397.0" promptText="Password" viewOrder="1.0">
+            <JFXPasswordField fx:id="txtPassword" blendMode="DARKEN" focusColor="#16fe95" labelFloat="true" layoutX="41.0" layoutY="135.0" prefHeight="48.0" prefWidth="397.0" promptText="Password" viewOrder="1.0">
                <font>
                   <Font size="22.0" />
                </font>

@@ -7,12 +7,23 @@
 	-fx-background-size: cover;
 	
 }
-.status-button{
-    -fx-backgroud-color: #ffa800;
+.cancel-button{
+    -fx-border-color: black;
 }
-.status-button:hover
+.cancel-button:hover
 {
+    -fx-background-color:  #ffa800;
+    -fx-border-color: TRANSPARENT;
+}
+.log-in-button{
     -fx-background-color:  #16FE95;
+    -fx-border-color: black;
+}
+
+.log-in-button:hover
+{
+    -fx-background-color: rgba(0,150,150,0.8);
+    -fx-border-color: TRANSPARENT;
 }
 .tab{
 

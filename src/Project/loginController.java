@@ -56,8 +56,7 @@ public class loginController implements Initializable {
     private JFXButton btnClose;
     @FXML
     private JFXButton btnLogin;
-    @FXML
-    private JFXButton btnSignup;
+
 
     @FXML
     public JFXTextField txtUsername;
@@ -170,7 +169,7 @@ public class loginController implements Initializable {
 
 
     }
-    @FXML
+    /*@FXML
     private void Signup() throws Exception{
 
         FXMLLoader loader= new FXMLLoader(getClass().getResource("Alert.fxml"));
@@ -194,7 +193,7 @@ public class loginController implements Initializable {
             stage.setScene(scene);
             stage.show();
         }
-    }
+    }*/
 
 
     public loginController(){ }

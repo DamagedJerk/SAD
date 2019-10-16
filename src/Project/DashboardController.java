@@ -44,6 +44,7 @@ import javafx.stage.StageStyle;
 
 import javafx.util.Callback;
 import javafx.util.Duration;
+
 import org.controlsfx.control.Notifications;
 
 
@@ -55,6 +56,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -177,6 +179,7 @@ public class DashboardController implements Initializable {
     private Connection connect;
     private Map<String, Object> map;
     private double balance=0;
+    private String emp_id="";
 
 
 
@@ -296,6 +299,8 @@ public class DashboardController implements Initializable {
     //registration module
     @FXML
     private JFXButton btnConfirmRegister;
+    @FXML
+    private JFXButton btnNewRegister;
 
     @FXML
     private JFXButton btnUpdateRegister;
@@ -313,10 +318,6 @@ public class DashboardController implements Initializable {
 
     @FXML
     private JFXTextField txtUsername;
-
-    @FXML
-    private JFXDatePicker txtBirthday;
-
     @FXML
     private JFXPasswordField txtPassword;
 
@@ -384,21 +385,23 @@ public class DashboardController implements Initializable {
         txtLastName.setText("");
         txtEmail.setText("");
         txtUsername.setText("");
-        txtBirthday.setValue(null);
+
         txtCellNumber.setText("");
         txtPassword.setText("");
         txtConfirm.setText("");
 
     }
-    public void signup(){
-
-        if(txtUsername.getText().contentEquals("") || txtFirstName.getText().contentEquals("") || txtLastName.getText().contentEquals("") || txtEmail.getText().contentEquals("") || txtBirthday.getValue().toString().contentEquals("") || txtCellNumber.getText().contentEquals("") || txtPassword.getText().contentEquals("") || txtConfirm.getText().contentEquals("")){
-            Notifications notificationBuilder=Notifications.create().graphic(null).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
+    @FXML
+    private void UpdateEmployeeRecords(){
+        if(txtUsername.getText().contentEquals("") || txtFirstName.getText().contentEquals("") || txtLastName.getText().contentEquals("") || txtEmail.getText().contentEquals("") || txtCellNumber.getText().contentEquals("") || txtPassword.getText().contentEquals("") || txtConfirm.getText().contentEquals("")){
+            Notifications notificationBuilder=Notifications.create().graphic(new ImageView("/resources/error-smaller.png")).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
                     .title("Warning").text("Please fill fields");
-            notificationBuilder.showError();
-            clearfields();
-        }else if(!txtPassword.getText().contentEquals(txtConfirm.getText())) {
-            JOptionPane.showMessageDialog(null,"Password Do not Match","Error",JOptionPane.ERROR_MESSAGE);
+            notificationBuilder.show();
+
+        }else if(!txtPassword.getText().contentEquals(txtConfirm.getText())){
+            Notifications notificationBuilder=Notifications.create().graphic(new ImageView("/resources/error-smaller.png")).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
+                    .title("Warning").text("Password do not match. . . . ");
+            notificationBuilder.show();
             txtPassword.setText("");
             txtConfirm.setText("");
         }else{
@@ -406,7 +409,65 @@ public class DashboardController implements Initializable {
             String txtUser = txtUsername.getText();
             String txtlastname = txtLastName.getText();
             String txtemail = txtEmail.getText();
-            String txtbirth = txtBirthday.getValue().toString();
+
+            String txtCellnum = txtCellNumber.getText();
+            String txtPass = txtPassword.getText();
+            String txtconfirmpass = txtConfirm.getText();
+            int rolenum =cboRole.getSelectionModel().selectedIndexProperty().getValue();
+            String query="UPDATE tbl_employee SET user_name=?,firstname=?,lastname=?,password=?,email=?,cell_number=?,role=? WHERE user_id = ?";
+
+            try{
+                preparedStatement=getConnection().prepareStatement(query);
+                preparedStatement.setString(1,txtUser);
+                preparedStatement.setString(2,txtfirstname);
+                preparedStatement.setString(3,txtlastname);
+                preparedStatement.setString(4,txtPass);
+                preparedStatement.setString(5,txtemail);
+                preparedStatement.setString(6,txtCellnum);
+                preparedStatement.setString(7,rolenum+"");
+                preparedStatement.setString(8,emp_id);
+                preparedStatement.executeUpdate();
+
+
+                //logs activity
+
+                    preparedStatement = getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+                    preparedStatement.setString(1, emp_id);
+                    preparedStatement.setString(2, "Updated its Registration data");
+                    preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+                    preparedStatement.setString(4, LocalDateTime.now().format(time));
+                    preparedStatement.executeUpdate();
+
+                //
+                table.RefreshEmployee();
+                Notifications notificationBuilder=Notifications.create().graphic(new ImageView("/resources/confirm-smaller.png")).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
+                        .title("Success").text("Successfully Updated");
+                notificationBuilder.show();
+                clearfields();
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }
+        }
+    }
+    public void signup(){
+
+        if(txtUsername.getText().contentEquals("") || txtFirstName.getText().contentEquals("") || txtLastName.getText().contentEquals("") || txtEmail.getText().contentEquals("") || txtCellNumber.getText().contentEquals("") || txtPassword.getText().contentEquals("") || txtConfirm.getText().contentEquals("")){
+            Notifications notificationBuilder=Notifications.create().graphic(new ImageView("/resources/error-smaller.png")).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
+                    .title("Warning").text("Please fill fields");
+            notificationBuilder.show();
+            clearfields();
+        }else if(!txtPassword.getText().contentEquals(txtConfirm.getText())) {
+            Notifications notificationBuilder=Notifications.create().graphic(new ImageView("/resources/error-smaller.png")).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
+                    .title("Warning").text("Password do not match. . . . ");
+            notificationBuilder.show();
+            txtPassword.setText("");
+            txtConfirm.setText("");
+        }else{
+            String txtfirstname = txtFirstName.getText();
+            String txtUser = txtUsername.getText();
+            String txtlastname = txtLastName.getText();
+            String txtemail = txtEmail.getText();
+
             String txtCellnum = txtCellNumber.getText();
             String txtPass = txtPassword.getText();
             String txtconfirmpass = txtConfirm.getText();
@@ -437,8 +498,10 @@ public class DashboardController implements Initializable {
                     preparedStatement.setString(4, LocalDateTime.now().format(time));
                     preparedStatement.executeUpdate();
                 }
-                JOptionPane.showMessageDialog(null, "Successfully Added");
-
+                Notifications notificationBuilder=Notifications.create().graphic(new ImageView("/resources/confirm-smaller.png")).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
+                        .title("Success").text("Successfully Registered");
+                notificationBuilder.show();
+                table.RefreshEmployee();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -910,6 +973,8 @@ public class DashboardController implements Initializable {
     JFXTreeTableColumn<products, String> CartName;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
+        cboRole.getItems().add("User");
+        cboRole.getItems().add("Admin");
         lblTotalSales.setVisible(false);
         //initialize chart
         LineChart.getXAxis().setAutoRanging(true);
@@ -1846,7 +1911,6 @@ public class DashboardController implements Initializable {
     }
     public void CheckInventory(){
         try{
-
             preparedStatement=getConnection().prepareStatement("Select *from tbl_products where prod_quantity<=20");
             resultSet=preparedStatement.executeQuery();
             while(resultSet.next()){
@@ -1856,6 +1920,7 @@ public class DashboardController implements Initializable {
                         Notifications notificationBuilder=Notifications.create().graphic(null).hideAfter(Duration.seconds(10)).position(Pos.BOTTOM_LEFT)
                                 .title("Warning").text(product+" stocks are now empty");
                         notificationBuilder.showError();
+
                     }else{
                         Notifications notificationBuilder=Notifications.create().graphic(null).hideAfter(Duration.seconds(10)).position(Pos.BOTTOM_LEFT)
                                 .title("Warning").text(product+" stocks are getting low");
@@ -2043,6 +2108,31 @@ public class DashboardController implements Initializable {
                         btnStockOut.setDisable(false);
                     }
 
+                }
+
+                if(e.getSource()==RegisterTable){
+                    String fname=RegisterTable.getSelectionModel().getSelectedItems().get(0).getValue().firstname.getValue();
+                    String lname=RegisterTable.getSelectionModel().getSelectedItems().get(0).getValue().lastname.getValue();;
+                    String username=RegisterTable.getSelectionModel().getSelectedItems().get(0).getValue().username.getValue();;
+                    String password=RegisterTable.getSelectionModel().getSelectedItems().get(0).getValue().password.getValue();;
+                    String Email=RegisterTable.getSelectionModel().getSelectedItems().get(0).getValue().email.getValue();;
+                    String Cellnumber=RegisterTable.getSelectionModel().getSelectedItems().get(0).getValue().cellnumber.getValue();;
+                    String Role=RegisterTable.getSelectionModel().getSelectedItems().get(0).getValue().Role.getValue();;
+
+                    emp_id= RegisterTable.getSelectionModel().getSelectedItems().get(0).getValue().id.getValue().toString();
+                    txtFirstName.setText(fname);
+                    txtLastName.setText(lname);
+                    txtEmail.setText(Email);
+                    //txtBirthday.setValue(LocalDate.now());
+                    txtUsername.setText(username);
+                    txtPassword.setText(password);
+                    txtCellNumber.setText(Cellnumber);
+                    cboRole.setValue(Role);
+                    btnConfirmRegister.setDisable(true);
+                    btnConfirmRegister.setVisible(false);
+                    btnUpdateRegister.setDisable(false);
+                    btnNewRegister.setVisible(true);
+                    // Balik Balik
                 }
 
             }
@@ -2521,18 +2611,27 @@ public class DashboardController implements Initializable {
                     preparedStatement.setInt(5,supplier);
                     preparedStatement.setInt(6,status);
                     preparedStatement.setInt(7,id);
-
-
                     preparedStatement.executeUpdate();
+
+
                     refreshInventoryTable(InventoryList);
                     refreshInventoryTable(StockinList);
                     refreshProductMenu();
                     NewField();
+                    //activity Log
+                    preparedStatement=getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+                    preparedStatement.setString(1,userId);
+                    preparedStatement.setString(2,"Updated a Product : "+name+" to Inventory");
+                    preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+                    preparedStatement.setString(4,LocalDateTime.now().format(time));
+                    preparedStatement.executeUpdate();
+                    //
+                    Notifications notificationBuilder=Notifications.create().graphic(new ImageView("/resources/confirm-smaller.png")).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
+                            .title("Success").text("Successfully Updated");
+                    notificationBuilder.show();
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-
-
             }
 
         }
@@ -2600,12 +2699,29 @@ public class DashboardController implements Initializable {
         @FXML
         private void NewEntry(){
             NewField();
+
             new_entry.setDisable(true);
             new_entry.setVisible(false);
             add_inventory.setVisible(true);
             add_inventory.setDisable(false);
             update_inventory.setDisable(true);
             InventoryQuantity.setDisable(false);
+        }
+        @FXML
+        private void NewEmployee(){
+            txtFirstName.setText("");
+            txtLastName.setText("");
+            txtEmail.setText("");
+            //txtBirthday.setValue(null);
+            txtUsername.setText("");
+            txtPassword.setText("");
+            txtCellNumber.setText("");
+            cboRole.setValue("");
+
+            btnConfirmRegister.setVisible(true);
+            btnConfirmRegister.setDisable(false);
+            btnUpdateRegister.setDisable(true);
+            btnNewRegister.setVisible(false);
         }
 
         private void NewField(){
@@ -2617,10 +2733,7 @@ public class DashboardController implements Initializable {
             InventorySupp.setValue("");
             Inventory_Status.setValue("ACTIVE");
             InventoryCost.setText("");
-
         }
-
-
         private String setID(){
 
             int Temp=0;

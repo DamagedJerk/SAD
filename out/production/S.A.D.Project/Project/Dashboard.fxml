@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
@@ -49,7 +48,7 @@
                                  </cursor></JFXTreeTableView>
                               <JFXTextField fx:id="SalesSearch" layoutX="14.0" layoutY="6.0" prefHeight="23.0" prefWidth="214.0" promptText="Search">
                                  <font>
-                                    <Font name="System Bold" size="17.0" />
+                                    <Font name="System Bold" size="15.0" />
                                  </font>
                               </JFXTextField>
                               <IntegerValidator layoutX="14.0" layoutY="25.0" />
@@ -122,7 +121,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tabInventory" disable="true" text="Inventory">
+            <Tab fx:id="tabInventory" text="Inventory">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -254,9 +253,9 @@
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </Label>
-                              <JFXTextField fx:id="InventorySearch" layoutX="14.0" layoutY="7.0" prefHeight="23.0" prefWidth="214.0" promptText="Search">
+                              <JFXTextField fx:id="InventorySearch" labelFloat="true" layoutX="13.0" layoutY="18.0" prefHeight="27.0" prefWidth="214.0" promptText="Search">
                                  <font>
-                                    <Font name="System Bold" size="17.0" />
+                                    <Font name="System Bold" size="12.0" />
                                  </font>
                               </JFXTextField>
                               <JFXButton fx:id="InventoryReports" layoutX="621.0" layoutY="505.0" onAction="#AddtoInventory" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: #16FE95;" text="Print Preview" viewOrder="7.0">
@@ -268,7 +267,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tabStock" disable="true" text="Stock-In">
+            <Tab fx:id="tabStock" text="Stock-In">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -283,6 +282,11 @@
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </Label>
+                              <JFXTextField fx:id="StockInSearch" labelFloat="true" layoutX="15.0" layoutY="19.0" prefHeight="38.0" prefWidth="205.0" promptText="Search">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </JFXTextField>
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="594.0" layoutY="12.0" prefHeight="568.0" prefWidth="572.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
@@ -293,7 +297,7 @@
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </Label>
-                              <JFXTextField fx:id="StockListSearch" layoutX="13.0" layoutY="19.0" prefHeight="38.0" prefWidth="205.0" promptText="Search">
+                              <JFXTextField fx:id="StockListSearch" labelFloat="true" layoutX="13.0" layoutY="19.0" prefHeight="38.0" prefWidth="205.0" promptText="Search">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
@@ -394,11 +398,6 @@
                                  </children>
                               </GridPane>
                            </children></AnchorPane>
-                        <JFXTextField fx:id="StockInSearch" layoutX="20.0" layoutY="24.0" prefHeight="38.0" prefWidth="205.0" promptText="Search">
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font>
-                        </JFXTextField>
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -439,9 +438,9 @@
                                                       <Insets left="10.0" />
                                                    </HBox.margin>
                                                 </JFXTextField>
-                                                <JFXTextField fx:id="txtLastName" focusColor="#1083a7" labelFloat="true" prefHeight="33.0" prefWidth="154.0" promptText="Last Name ">
+                                                <JFXTextField fx:id="txtLastName" focusColor="#1083a7" labelFloat="true" prefHeight="32.0" prefWidth="148.0" promptText="Last Name">
                                                    <HBox.margin>
-                                                      <Insets left="10.0" right="3.0" />
+                                                      <Insets left="10.0" right="3.0" top="2.0" />
                                                    </HBox.margin>
                                                    <padding>
                                                       <Insets right="10.0" />
@@ -459,7 +458,7 @@
                                                 <Insets left="10.0" right="12.0" />
                                              </GridPane.margin>
                                           </JFXTextField>
-                                          <JFXPasswordField fx:id="txtPassword" focusColor="#1083a7" labelFloat="true" prefHeight="43.0" prefWidth="316.0" promptText="Set New Password" GridPane.rowIndex="7">
+                                          <JFXPasswordField fx:id="txtPassword" focusColor="#1083a7" labelFloat="true" prefHeight="28.0" prefWidth="281.0" promptText="Set New Password" GridPane.rowIndex="7">
                                              <GridPane.margin>
                                                 <Insets left="10.0" right="12.0" />
                                              </GridPane.margin>
@@ -477,23 +476,23 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="9">
                                              <children>
-                                                <JFXButton fx:id="btnConfirmRegister" layoutX="20.0" layoutY="5.0" prefHeight="38.0" prefWidth="124.0" style="-fx-background-color: #16FE95;" text="Confirm">
+                                                <JFXButton fx:id="btnConfirmRegister" layoutX="20.0" layoutY="5.0" onAction="#signup" prefHeight="38.0" prefWidth="124.0" style="-fx-background-color: #16FE95;" text="Confirm">
                                                    <font>
                                                       <Font name="System Bold" size="22.0" />
                                                    </font>
                                                 </JFXButton>
-                                                <JFXButton fx:id="btnUpdateRegister" layoutX="165.0" layoutY="5.0" prefHeight="38.0" prefWidth="124.0" style="-fx-background-color: #FFA800;" text="Update">
+                                                <JFXButton fx:id="btnUpdateRegister" disable="true" layoutX="165.0" layoutY="5.0" onAction="#UpdateEmployeeRecords" prefHeight="38.0" prefWidth="124.0" style="-fx-background-color: #FFA800;" text="Update">
+                                                   <font>
+                                                      <Font name="System Bold" size="22.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <JFXButton fx:id="btnNewRegister" layoutX="20.0" layoutY="7.0" onAction="#NewEmployee" prefHeight="38.0" prefWidth="124.0" style="-fx-background-color: #16FE95;" text="New" visible="false">
                                                    <font>
                                                       <Font name="System Bold" size="22.0" />
                                                    </font>
                                                 </JFXButton>
                                              </children>
                                           </AnchorPane>
-                                          <JFXDatePicker fx:id="txtBirthday" prefHeight="37.0" prefWidth="280.0" showWeekNumbers="true" GridPane.rowIndex="5">
-                                             <GridPane.margin>
-                                                <Insets left="10.0" right="10.0" />
-                                             </GridPane.margin>
-                                          </JFXDatePicker>
                                        </children>
                                     </GridPane>
                                  </children>
@@ -502,13 +501,8 @@
                         </AnchorPane>
                         <AnchorPane layoutX="336.0" layoutY="13.0" prefHeight="567.0" prefWidth="830.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
                            <children>
-                              <JFXTreeTableView fx:id="RegisterTable" blendMode="DARKEN" layoutX="10.0" layoutY="57.0" prefHeight="491.0" prefWidth="809.0" />
-                              <JFXButton fx:id="btnChangeStatus" layoutX="669.0" layoutY="14.0" prefHeight="40.0" prefWidth="150.0" ripplerFill="#ffa800" styleClass="status-button" stylesheets="@../css/style.css" text="Change Status">
-                                 <font>
-                                    <Font name="System Bold" size="17.0" />
-                                 </font>
-                              </JFXButton>
-                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="199.0" layoutY="14.0" prefHeight="38.0" prefWidth="372.0" text="Cellections Employee">
+                              <JFXTreeTableView fx:id="RegisterTable" blendMode="DARKEN" layoutX="10.0" layoutY="57.0" onMouseClicked="#GetRow" prefHeight="491.0" prefWidth="809.0" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="232.0" layoutY="7.0" prefHeight="38.0" prefWidth="372.0" text="Cellections Employee">
                                  <font>
                                     <Font name="System Bold" size="24.0" />
                                  </font>
