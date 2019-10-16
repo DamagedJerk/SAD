@@ -83,6 +83,11 @@
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </JFXButton>
+                              <JFXButton fx:id="btnVoidTrans" disable="true" layoutX="924.0" layoutY="71.0" onAction="#doVoid" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #FF2900;" text="Void" textFill="#e8e0e0" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </JFXButton>
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="581.0" layoutY="11.0" prefHeight="446.0" prefWidth="584.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
@@ -121,7 +126,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tabInventory" text="Inventory">
+            <Tab fx:id="tabInventory" disable="true" text="Inventory">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -267,7 +272,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tabStock" text="Stock-In">
+            <Tab fx:id="tabStock" disable="true" text="Stock-In">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -401,7 +406,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tabAccounts" text="Accounts">
+            <Tab fx:id="tabAccounts" disable="true" text="Accounts">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>

@@ -125,6 +125,9 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXButton btnVoid;
     @FXML
+    private JFXButton btnVoidTrans;
+
+    @FXML
     private JFXButton btnCashOut;
 
     @FXML
@@ -138,6 +141,8 @@ public class DashboardController implements Initializable {
 
     @FXML
     public Tab tabReport;
+    @FXML
+    public Tab tabAccounts;
 
     @FXML
     private AnchorPane rootPane;
@@ -1998,6 +2003,8 @@ public class DashboardController implements Initializable {
                 tabStock.setDisable(false);
                 tabReport.setDisable(false);
                 tabLog.setDisable(false);
+                tabAccounts.setDisable(false);
+
                 userId=id;
                 tabpane.getSelectionModel().select(tabReport);
                 setRole(Role);
@@ -2018,14 +2025,12 @@ public class DashboardController implements Initializable {
 
                 //TABLE PRODUCT
                 if(e.getSource()==tableProduct){
-                    int Quantity=0;
+                    //int Quantity=0;
                     String CartItemId=tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_id.getValue();
                     String CartName = tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_name.getValue();
-                    //String CartQuan = tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_quan.getValue();
                     String CartPrice = tableProduct.getSelectionModel().getSelectedItems().get(0).getValue().product_price.getValue();
 
-                    //AddController addmodal = new AddController("Add.fxml");
-                    //addmodal.getModal((JFXTreeTableView) e.getSource());
+
 
                     FXMLLoader loader= new FXMLLoader(getClass().getResource("Add.fxml"));
                     AddController controller=new AddController();
@@ -2051,6 +2056,9 @@ public class DashboardController implements Initializable {
                         totalitems++;
                         total_items();
                         btnCashOut.setDisable(false);
+                        btnVoid.setVisible(false);
+                        btnVoidTrans.setVisible(true);
+                        btnVoidTrans.setDisable(false);
                         double width=this.CartName.getWidth();
                         double newwidth=CartName.length()*10;
                         if(width<newwidth){
@@ -2138,8 +2146,59 @@ public class DashboardController implements Initializable {
             }
             //TABLE CART
             if(e.getSource()==tableCart){
+                btnVoidTrans.setVisible(false);
+                btnVoidTrans.setDisable(true);
+                btnVoid.setVisible(true);
                 btnVoid.setDisable(false);
+                if(e.getButton()==MouseButton.SECONDARY){
+                    String CartItemId=tableCart.getSelectionModel().getSelectedItems().get(0).getValue().product_id.getValue();
+                    String CartName = tableCart.getSelectionModel().getSelectedItems().get(0).getValue().product_name.getValue();
+                    String CartPrice = tableCart.getSelectionModel().getSelectedItems().get(0).getValue().product_price.getValue();
+
+
+
+                    FXMLLoader loader= new FXMLLoader(getClass().getResource("Add.fxml"));
+                    AddController controller=new AddController();
+                    loader.setController(controller);
+                    Parent root =loader.load();
+                    controller.setProd_id(CartItemId);
+                    Stage stage = new Stage();
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.initOwner(tableProduct.getScene().getWindow());
+                    stage.setScene(new Scene(root));
+                    new FlipInX(root).play();
+                    stage.showAndWait();
+
+
+                    //Quantity=Integer.parseInt(controller.getQuan());
+                    if(!controller.getQuan().contentEquals("")){
+                        //CartList.set()
+                        int quan = Integer.parseInt(CartList.get(tableCart.getSelectionModel().getFocusedIndex()).product_quan.getValue());
+                        double price = Double.parseDouble(CartList.get(tableCart.getSelectionModel().getFocusedIndex()).product_price.getValue());
+                        double toberemove = quan * price;
+                        totalprice = totalprice - toberemove;
+                        CartList.remove(tableCart.getSelectionModel().getFocusedIndex());
+                        SelectToCart(CartItemId,CartName,controller.getQuan(), CartPrice, CartList);
+                        final TreeItem<products> cart = new RecursiveTreeItem<products>(CartList, RecursiveTreeObject::getChildren);
+                        tableCart.setRoot(cart);
+                        tableCart.setShowRoot(false);
+                        totalitems++;
+                        total_items();
+                        btnCashOut.setDisable(false);
+                        btnVoid.setVisible(false);
+                        btnVoidTrans.setVisible(true);
+                        btnVoidTrans.setDisable(false);
+                        double width=this.CartName.getWidth();
+                        double newwidth=CartName.length()*10;
+                        if(width<newwidth){
+                            this.CartName.setPrefWidth(newwidth);
+                        }
+                    }
+
+                }
             }
+
 
         }
         @FXML
@@ -2339,41 +2398,76 @@ public class DashboardController implements Initializable {
         }
 
         @FXML
-        private void doVoid() throws Exception{
+        private void doVoid(ActionEvent event) throws Exception{
 
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("Alert.fxml"));
-            Alert controller=new Alert();
-            loader.setController(controller);
-            Parent root =loader.load();
+            if(event.getSource().equals(btnVoidTrans)){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("Alert.fxml"));
+                Alert controller = new Alert();
+                loader.setController(controller);
+                Parent root = loader.load();
 
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.TRANSPARENT);
-            stage.initOwner(tableProduct.getScene().getWindow());
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
-            new FlipInX(root).play();
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.initOwner(tableProduct.getScene().getWindow());
+                stage.setScene(new Scene(root));
+                stage.showAndWait();
+                new FlipInX(root).play();
 
-            if(controller.isResponse()==true){
-                int quan=Integer.parseInt(CartList.get(tableCart.getSelectionModel().getFocusedIndex()).product_quan.getValue());
-                double price=Double.parseDouble(CartList.get(tableCart.getSelectionModel().getFocusedIndex()).product_price.getValue());
-                double toberemove=quan*price;
-                totalprice=totalprice-toberemove;
+                if(controller.isResponse()==true){
+                    CartList.clear();
+                    totalitems=0;
+                    total_items();
+                    SalesPrice.setText("0.00");
+                    btnVoidTrans.setDisable(true);
+                    btnVoidTrans.setVisible(false);
+                    btnVoid.setVisible(true);
+                    totalprice=0.00;
 
-                CartList.remove(tableCart.getSelectionModel().getFocusedIndex());
-                preparedStatement=getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
-                preparedStatement.setString(1,controller.getAdminID());
-                preparedStatement.setString(2," Removed an Order");
-                preparedStatement.setString(3, LocalDateTime.now().format(formatter));
-                preparedStatement.setString(4,LocalDateTime.now().format(time));
-                preparedStatement.executeUpdate();
+                    preparedStatement = getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+                    preparedStatement.setString(1, controller.getAdminID());
+                    preparedStatement.setString(2, " Removed the transaction");
+                    preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+                    preparedStatement.setString(4, LocalDateTime.now().format(time));
+                    CartName.setPrefWidth(80);
 
-                SalesPrice.setText(totalprice+"");
-                btnVoid.setDisable(true);
-                totalitems--;
-                total_items();
+                }
+
             }
+            if(event.getSource().equals(btnVoid)) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("Alert.fxml"));
+                Alert controller = new Alert();
+                loader.setController(controller);
+                Parent root = loader.load();
 
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.initOwner(tableProduct.getScene().getWindow());
+                stage.setScene(new Scene(root));
+                stage.showAndWait();
+                new FlipInX(root).play();
+
+                if (controller.isResponse() == true) {
+                    int quan = Integer.parseInt(CartList.get(tableCart.getSelectionModel().getFocusedIndex()).product_quan.getValue());
+                    double price = Double.parseDouble(CartList.get(tableCart.getSelectionModel().getFocusedIndex()).product_price.getValue());
+                    double toberemove = quan * price;
+                    totalprice = totalprice - toberemove;
+
+                    CartList.remove(tableCart.getSelectionModel().getFocusedIndex());
+                    preparedStatement = getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+                    preparedStatement.setString(1, controller.getAdminID());
+                    preparedStatement.setString(2, " Removed an Order");
+                    preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+                    preparedStatement.setString(4, LocalDateTime.now().format(time));
+                    preparedStatement.executeUpdate();
+
+                    SalesPrice.setText(totalprice + "");
+                    btnVoid.setDisable(true);
+                    totalitems--;
+                    total_items();
+                }
+            }
         }
         @FXML
         private void addSupplier() throws  Exception{
@@ -2531,6 +2625,10 @@ public class DashboardController implements Initializable {
                         SalesChange.setText("");
                         SalesPayment.setText("");
                         btnCashOut.setDisable(true);
+                        btnVoidTrans.setVisible(false);
+                        btnVoid.setVisible(true);
+                        btnVoid.setDisable(true);
+                        btnVoidTrans.setDisable(true);
                         CartList.clear();
                         ItemCount.setText("0");
                         refreshProductMenu();

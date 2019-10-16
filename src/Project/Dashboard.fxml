@@ -83,6 +83,11 @@
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </JFXButton>
+                              <JFXButton fx:id="btnVoidTrans" disable="true" layoutX="924.0" layoutY="71.0" onAction="#doVoid" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #FF2900;" text="Void" textFill="#e8e0e0" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </JFXButton>
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="581.0" layoutY="11.0" prefHeight="446.0" prefWidth="584.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
