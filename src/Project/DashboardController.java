@@ -126,6 +126,11 @@ public class DashboardController implements Initializable {
     private JFXButton btnVoid;
     @FXML
     private JFXButton btnVoidTrans;
+    @FXML
+    private JFXTextField StockOutID;
+    @FXML
+    private JFXButton VoidStocks;
+
 
     @FXML
     private JFXButton btnCashOut;
@@ -703,7 +708,7 @@ public class DashboardController implements Initializable {
                         break;
                     case "Log-in": query+=" Where a.LogDate='"+Date+"' AND a.activity_description Like '%Log-%' and role=0 GROUP BY a.activity_log";
                         break;
-                    case "Registration" : query+=" WHERE a.LogDate='"+Date+"'  AND a.activity_description Like '%Registered%' and role=0 GROUP BY a.activity_log";
+                    case "Registration" : query+=" WHERE a.LogDate='"+Date+"'  AND a.activity_description Like '%Registe%' and role=0 GROUP BY a.activity_log";
                         break;
                     case "Sale Transactions" :  query+=" WHERE a.LogDate='"+Date+"' AND a.activity_description  Like '%Transaction%' and role=0 GROUP BY a.activity_log";
                         break;
@@ -818,6 +823,9 @@ public class DashboardController implements Initializable {
             if(Stockgroup.getSelectedToggle()==radio_stockin){
                 StockInTable.setVisible(true);
                 StockOutTable.setVisible(false);
+                StockinID.setVisible(true);
+                StockOutID.setVisible(false);
+                StockOutID.setEditable(false);
                 cboReasons.setDisable(true);
                 if(StockInName.getText().length()!=0) {
                     btnStockIn.setDisable(false);
@@ -828,6 +836,9 @@ public class DashboardController implements Initializable {
                 StockInTable.setVisible(false);
                 StockOutTable.setVisible(true);
                 cboReasons.setDisable(false);
+                StockinID.setVisible(false);
+                StockOutID.setVisible(true);
+                StockOutID.setEditable(false);
                 refreshStockOutList();
                 if(StockInName.getText().length()!=0) {
                     btnStockIn.setDisable(true);
@@ -1013,6 +1024,7 @@ public class DashboardController implements Initializable {
 
         LabelId.setText(getID());
         StockinID.setText(getStockInID());
+        StockOutID.setText(getStockOutID());
         InventoryQuantity.setText("0");
         setComboBOx(InventorySupp, "Select * from tbl_supplier", "company_name");
         setComboBOx(InventoryCateg, "Select * from tbl_category", "cat_description");
@@ -1953,6 +1965,27 @@ public class DashboardController implements Initializable {
         }
 
     }
+    private String getStockOutID(){
+        int id = 0;
+        try {
+
+            preparedStatement = getConnection().prepareStatement("Select max(StockOut_id) from tbl_stockout");
+            resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                if (resultSet.getString("max(StockOut_id)") == null) {
+                    id++;
+                } else {
+                    id = Integer.parseInt(resultSet.getString("max(StockOut_id)"));
+                    id++;
+                } }
+            preparedStatement.close();
+            resultSet.close();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return id+"";
+
+    }
         private String getStockInID(){
             int id = 0;
             try {
@@ -2183,7 +2216,7 @@ public class DashboardController implements Initializable {
                         final TreeItem<products> cart = new RecursiveTreeItem<products>(CartList, RecursiveTreeObject::getChildren);
                         tableCart.setRoot(cart);
                         tableCart.setShowRoot(false);
-                        totalitems++;
+                        //totalitems++;
                         total_items();
                         btnCashOut.setDisable(false);
                         btnVoid.setVisible(false);
@@ -2198,7 +2231,10 @@ public class DashboardController implements Initializable {
 
                 }
             }
-
+            if(e.getSource().equals(StockInTable)){
+                VoidStocks.setDisable(false);
+                //JOptionPane.showMessageDialog(null,"jjjj");
+            }
 
         }
         @FXML
@@ -2266,6 +2302,7 @@ public class DashboardController implements Initializable {
                     refreshInventoryTable(StockinList);
 
                     StockinID.setText(getStockInID());
+                    StockOutID.setText(getStockOutID());
                     StockinCat.setValue("");
                     StockInITEMID.setText("");
                     StockInName.setText("");
@@ -2340,6 +2377,7 @@ public class DashboardController implements Initializable {
                         refreshInventoryTable(StockinList);
 
                         StockinID.setText(getStockInID());
+                        StockOutID.setText(getStockOutID());
                         StockinCat.setValue("");
                         StockInITEMID.setText("");
                         StockInName.setText("");
@@ -2467,6 +2505,10 @@ public class DashboardController implements Initializable {
                     totalitems--;
                     total_items();
                 }
+            }
+            if(event.getSource().equals(VoidStocks)){
+                JOptionPane.showMessageDialog(null,"VOID");
+
             }
         }
         @FXML

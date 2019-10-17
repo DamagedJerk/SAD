@@ -272,7 +272,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tabStock" disable="true" text="Stock-In">
+            <Tab fx:id="tabStock" text="Stock-In">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -296,7 +296,7 @@
                         </AnchorPane>
                         <AnchorPane layoutX="594.0" layoutY="12.0" prefHeight="568.0" prefWidth="572.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
                            <children>
-                              <JFXTreeTableView fx:id="StockInTable" blendMode="DARKEN" layoutX="13.0" layoutY="64.0" prefHeight="442.0" prefWidth="545.0" />
+                              <JFXTreeTableView fx:id="StockInTable" blendMode="DARKEN" layoutX="13.0" layoutY="64.0" onMouseClicked="#GetRow" prefHeight="442.0" prefWidth="545.0" />
                               <Label layoutX="452.0" layoutY="22.0" prefHeight="32.0" prefWidth="106.0" text="Stocks List">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
@@ -315,6 +315,11 @@
                               <JFXTreeTableView fx:id="StockOutTable" blendMode="DARKEN" layoutX="11.0" layoutY="63.0" prefHeight="446.0" prefWidth="547.0" visible="false" />
                               <JFXRadioButton fx:id="radio_stockin" layoutX="46.0" layoutY="527.0" onAction="#clickradio" text="Stock-In" />
                               <JFXRadioButton fx:id="radio_stockOut" layoutX="130.0" layoutY="527.0" onAction="#clickradio" text="Stock-Out" />
+                              <JFXButton fx:id="VoidStocks" disable="true" layoutX="262.0" layoutY="516.0" onAction="#doVoid" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: #FF2900;" text="Void" textFill="#ffebeb" viewOrder="7.0">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </JFXButton>
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="3.0" layoutY="333.0" prefHeight="247.0" prefWidth="584.0" style="-fx-border-color: #44CBD0; -fx-border-width: 4;">
@@ -338,7 +343,7 @@
                                        <children>
                                           <AnchorPane prefHeight="33.0" prefWidth="553.0">
                                              <children>
-                                                <Label layoutX="220.0" layoutY="1.0" prefHeight="32.0" prefWidth="106.0" text="Menu">
+                                                <Label layoutX="173.0" layoutY="3.0" prefHeight="32.0" prefWidth="175.0" text="Stock-in Transactions">
                                                    <font>
                                                       <Font name="System Bold" size="17.0" />
                                                    </font>
@@ -380,11 +385,15 @@
                                           <Insets top="9.0" />
                                        </GridPane.margin>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="StockinID" labelFloat="true" prefHeight="12.0" prefWidth="200.0" promptText="Stock-in Id" GridPane.rowIndex="1">
+                                    <AnchorPane prefHeight="25.0" prefWidth="211.0" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets bottom="9.0" left="19.0" right="51.0" top="10.0" />
                                        </GridPane.margin>
-                                    </JFXTextField>
+                                       <children>
+                                          <JFXTextField fx:id="StockinID" labelFloat="true" prefHeight="12.0" prefWidth="200.0" promptText="Stock-in Id" />
+                                          <JFXTextField fx:id="StockOutID" labelFloat="true" layoutX="-5.0" prefHeight="25.0" prefWidth="199.0" promptText="Stock-out Id" visible="false" />
+                                       </children>
+                                    </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="6">
                                        <children>
                                           <JFXButton fx:id="btnStockIn" disable="true" layoutX="15.0" layoutY="1.0" onAction="#doStockIn" prefHeight="38.0" prefWidth="99.0" style="-fx-background-color: #16FE95;" text="Add">
@@ -392,7 +401,7 @@
                                                 <Font name="System Bold" size="17.0" />
                                              </font>
                                           </JFXButton>
-                                          <Label fx:id="stockinerror" layoutX="267.0" layoutY="6.0" prefHeight="17.0" prefWidth="277.0" text="Label" textFill="#b90d0d" visible="false" />
+                                          <Label fx:id="stockinerror" layoutX="273.0" layoutY="6.0" prefHeight="32.0" prefWidth="271.0" text="Label" textFill="#b90d0d" visible="false" />
                                           <JFXButton fx:id="btnStockOut" disable="true" layoutX="121.0" layoutY="1.0" onAction="#doStockOut" prefHeight="38.0" prefWidth="99.0" style="-fx-background-color: #FF2900;" text="Pull-Out" textFill="#f2ecec">
                                              <font>
                                                 <Font name="System Bold" size="17.0" />
