@@ -1175,6 +1175,7 @@ public class DashboardController implements Initializable {
         });
         DailySales.setOnAction(actionEvent -> {
             try{  // lets try this one.
+                connect=getConnection();
                 String start=startingdate.getValue();
                 String end=enddate.getValue();
                 JasperDesign jd= JRXmlLoader.load("C:\\Users\\Claude Aaron\\IdeaProjects\\S.A.D.Project\\Reports\\DailySalesReport\\DailySalesReport.jrxml");
@@ -1183,8 +1184,8 @@ public class DashboardController implements Initializable {
                 jrDesignQuery.setText(query);
                 jd.setQuery(jrDesignQuery);
                 JasperReport jr= JasperCompileManager.compileReport(jd);
-                JasperPrint jp= JasperFillManager.fillReport(jr,null,connect);
-                JasperViewer.viewReport(jp);
+                JasperPrint jp= JasperFillManager.fillReport(jr,null,connect); // balik diri
+                JasperViewer.viewReport(jp,false);
             }catch (Exception ex){
                 ex.printStackTrace();
             }
@@ -1291,6 +1292,8 @@ public class DashboardController implements Initializable {
         });//
         tabReport.setOnSelectionChanged(event -> {
             if(tabReport.isSelected()){
+                startingdate.setValue(LocalDateTime.now().format(formatter));
+                enddate.setValue(LocalDateTime.now().format(formatter));
                 Report();
                 refreshChart();
                 lbl_balance.setText("Running Balance : PHP "+runningbalance());
@@ -2534,7 +2537,7 @@ public class DashboardController implements Initializable {
             if(event.getSource().equals(VoidStocks)){
                 //JOptionPane.showMessageDialog(null,"VOID");
                 String stockinID=StockInTable.getSelectionModel().getSelectedItems().get(0).getValue().product_id.getValue();
-                String BeforeUpdate=StockInTable.getSelectionModel().getSelectedItems().get(0).getValue().before_update_stocks.getValue();
+                String Lastentry=StockInTable.getSelectionModel().getSelectedItems().get(0).getValue().Last_Entry.getValue();
                 String prodname=StockInTable.getSelectionModel().getSelectedItems().get(0).getValue().product_name.getValue();
                 //JOptionPane.showMessageDialog(null,prodname);
                 StocksTableList.remove(StockInTable.getSelectionModel().getFocusedIndex());
@@ -2543,8 +2546,8 @@ public class DashboardController implements Initializable {
                 preparedStatement.setString(1,stockinID);
                 preparedStatement.executeUpdate();
 
-                preparedStatement=getConnection().prepareStatement("Update tbl_products SET prod_quantity=? where prod_name=?");//balik diri*/
-                preparedStatement.setString(1,BeforeUpdate);
+                preparedStatement=getConnection().prepareStatement("Update tbl_products SET prod_quantity=prod_quantity-? where prod_name=?");//balik diri*/
+                preparedStatement.setString(1,Lastentry);
                 preparedStatement.setString(2,prodname);
                 preparedStatement.executeUpdate();
 
