@@ -1177,7 +1177,7 @@ public class DashboardController implements Initializable {
             try{  // lets try this one.
                 String start=startingdate.getValue();
                 String end=enddate.getValue();
-                JasperDesign jd= JRXmlLoader.load("/resources/DailySalesReport.jrxml");
+                JasperDesign jd= JRXmlLoader.load("C:\\Users\\Claude Aaron\\IdeaProjects\\S.A.D.Project\\Reports\\DailySalesReport\\DailySalesReport.jrxml");
                 String query="SELECT r.receipt_id,r.Cart_id,e.firstname,u.cus_firstname,r.total_price,r.discount_value,r.discounted_price,r.total_payment,r.total_change,concat_ws(\"-\",d.Year,d.Month,d.Date) as Date from tbl_receipt r Join tbl_customer u ON r.cus_id=u.cus_id JOIN tbl_employee e ON r.employee_id=e.user_id JOIN tbl_date d ON r.transaction_date=d.Date_id where concat_ws(\"-\",d.Year,d.Month,d.Date) BETWEEN '"+start+"' AND '"+end+"' GROUP BY r.receipt_id";
                 JRDesignQuery jrDesignQuery=new JRDesignQuery();
                 jrDesignQuery.setText(query);

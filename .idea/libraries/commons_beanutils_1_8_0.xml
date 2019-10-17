@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="jasperreports-6.2.0">
+  <library name="commons-beanutils-1.8.0">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/jasperreports-6.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-beanutils-1.8.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
