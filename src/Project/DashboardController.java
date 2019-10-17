@@ -920,7 +920,7 @@ public class DashboardController implements Initializable {
                         Tooltip.install(data.getNode(),new Tooltip("Date : "+data.getXValue()+"\nTotal Sales : PHP "+data.getYValue()));
                         startingdate.setValue(data.getXValue());
                         enddate.setValue(data.getXValue());
-                        lblTotalSales.setText("Daily Sales : PHP "+data.getYValue());
+                        lblTotalSales.setText("Daily Sales : PHP "+data.getYValue()+"\nDate : "+data.getXValue() );
                         lblTotalSales.setVisible(true);
                     }
 
@@ -939,7 +939,7 @@ public class DashboardController implements Initializable {
                 data.getNode().setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
-                        lblTotalSales.setText("Monthly Sales : PHP "+data.getYValue());
+                        lblTotalSales.setText("Monthly Sales : PHP "+data.getYValue() +"\nMonth : "+data.getXValue());
                         lblTotalSales.setVisible(true);
                     }
                 });
@@ -957,7 +957,7 @@ public class DashboardController implements Initializable {
                 data.getNode().setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
-                        lblTotalSales.setText("Yearly Sales : PHP "+data.getYValue());
+                        lblTotalSales.setText("Yearly Sales : PHP "+data.getYValue() +"\nYear : "+data.getXValue());
                         lblTotalSales.setVisible(true);
                     }
                 });
@@ -973,9 +973,13 @@ public class DashboardController implements Initializable {
         refreshChart();
     }
     public String runningbalance(){
-        String dbl="0.00";
+        String dbl="0.00"; // balik diri running balance
         try{
-            preparedStatement=getConnection().prepareStatement("SELECT sum(total_price)-sum(discount_value) as Running_Balance FROM `tbl_receipt` where transaction_date=(Select max(Date_id) from tbl_date)");
+            String start=startingdate.getValue();
+            String end=enddate.getValue();
+            preparedStatement=getConnection().prepareStatement("SELECT sum(total_price)-sum(discount_value) as Running_Balance FROM `tbl_receipt` r JOIN tbl_date d ON r.transaction_date=d.Date_id where concat_ws(\"-\",d.Year,d.Month,d.Date) BETWEEN ? AND ? ");
+            preparedStatement.setString(1,start);
+            preparedStatement.setString(2,end);
             resultSet=preparedStatement.executeQuery();
 
             if (resultSet.next() && resultSet.getString("Running_Balance")!=null){
@@ -1084,9 +1088,11 @@ public class DashboardController implements Initializable {
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 if(t1!=null){
                     Report();
-                    if(enddate.getValue().contentEquals(startingdate.getValue())){
+                    lbl_balance.setText("Running Balance : PHP "+runningbalance());
+                    /*if(enddate.getValue().contentEquals(startingdate.getValue())){
                         refreshChart();
-                    }
+
+                    }*/
                 }
             }
         });
@@ -1095,9 +1101,11 @@ public class DashboardController implements Initializable {
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 if(t1!=null){
                     Report();
-                    if(enddate.getValue().contentEquals(startingdate.getValue())){
+                    lbl_balance.setText("Running Balance : PHP "+runningbalance());
+                    /*if(enddate.getValue().contentEquals(startingdate.getValue())){
                         refreshChart();
-                    }
+
+                    }*/
                 }
             }
         });
@@ -2507,7 +2515,38 @@ public class DashboardController implements Initializable {
                 }
             }
             if(event.getSource().equals(VoidStocks)){
-                JOptionPane.showMessageDialog(null,"VOID");
+                //JOptionPane.showMessageDialog(null,"VOID");
+                String stockinID=StockInTable.getSelectionModel().getSelectedItems().get(0).getValue().product_id.getValue();
+                String BeforeUpdate=StockInTable.getSelectionModel().getSelectedItems().get(0).getValue().before_update_stocks.getValue();
+                String prodname=StockInTable.getSelectionModel().getSelectedItems().get(0).getValue().product_name.getValue();
+                //JOptionPane.showMessageDialog(null,prodname);
+                StocksTableList.remove(StockInTable.getSelectionModel().getFocusedIndex());
+
+                preparedStatement=getConnection().prepareStatement("Delete from tbl_stockin where Stockin_id=?");//Update the tbl_stock input former stocks to void
+                preparedStatement.setString(1,stockinID);
+                preparedStatement.executeUpdate();
+
+                preparedStatement=getConnection().prepareStatement("Update tbl_products SET prod_quantity=? where prod_name=?");//balik diri*/
+                preparedStatement.setString(1,BeforeUpdate);
+                preparedStatement.setString(2,prodname);
+                preparedStatement.executeUpdate();
+
+                //Activity Log
+                preparedStatement=getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+                preparedStatement.setString(1,userId);
+                preparedStatement.setString(2,"Removed Stock-in Transaction "+stockinID);
+                preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+                preparedStatement.setString(4,LocalDateTime.now().format(time));
+                preparedStatement.executeUpdate();
+
+                Notifications notificationBuilder=Notifications.create().graphic(new ImageView("/resources/confirm-smaller.png")).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
+                        .title("Success").text("Successfully Removed");
+                notificationBuilder.show();
+
+                refreshStockList();
+                refreshProductMenu();
+                refreshInventoryTable(InventoryList);
+                refreshInventoryTable(StockinList);
 
             }
         }
