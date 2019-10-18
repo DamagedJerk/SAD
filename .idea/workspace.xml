@@ -4,18 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/Project/DashboardController.java" line="711" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cbddea0c-4283-4362-bc6d-1b06ad665c0e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/resources/InventoryReports.jasper" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/resources/InventoryReports.jasper" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project/Exit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Exit.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Report.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/InventoryReports.jasper" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/InventoryReports.jasper" afterDir="false" />
-    </list>
+    <list default="true" id="cbddea0c-4283-4362-bc6d-1b06ad665c0e" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,7 +21,7 @@
         <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="275">
-              <caret line="399" column="5" lean-forward="true" selection-start-line="394" selection-start-column="4" selection-end-line="399" selection-end-column="5" />
+              <caret line="399" column="5" selection-start-line="394" selection-start-column="4" selection-end-line="399" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -44,7 +33,7 @@
         <entry file="file://$PROJECT_DIR$/src/Project/Message.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="382">
-              <caret line="94" column="48" lean-forward="true" selection-start-line="94" selection-start-column="48" selection-end-line="94" selection-end-column="48" />
+              <caret line="94" column="48" selection-start-line="94" selection-start-column="48" selection-end-line="94" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#564#565#0" expanded="true" />
@@ -697,7 +686,7 @@
     <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
-          <caret line="399" column="5" lean-forward="true" selection-start-line="394" selection-start-column="4" selection-end-line="399" selection-end-column="5" />
+          <caret line="399" column="5" selection-start-line="394" selection-start-column="4" selection-end-line="399" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -717,7 +706,7 @@
     <entry file="file://$PROJECT_DIR$/src/Project/Message.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="382">
-          <caret line="94" column="48" lean-forward="true" selection-start-line="94" selection-start-column="48" selection-end-line="94" selection-end-column="48" />
+          <caret line="94" column="48" selection-start-line="94" selection-start-column="48" selection-end-line="94" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#564#565#0" expanded="true" />
