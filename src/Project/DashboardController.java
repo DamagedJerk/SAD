@@ -1155,7 +1155,7 @@ public class DashboardController implements Initializable {
         });
         InventoryReports.setOnAction(e->{
             try{
-                printReport("InventoryReport");
+                printReport("InventoryReports");
             }catch (Exception ee){
                 ee.printStackTrace();
             }

@@ -5,7 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cbddea0c-4283-4362-bc6d-1b06ad665c0e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/Dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/Project/DashboardController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/S.A.D.Project/resources/InventoryReports.jasper" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/S.A.D.Project/resources/InventoryReports.jasper" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Dashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Project/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/Exit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Exit.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/Report.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/InventoryReports.jasper" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/InventoryReports.jasper" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,13 +28,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="2539" column="32" selection-start-line="2539" selection-start-column="32" selection-end-line="2539" selection-end-column="32" />
+            <state relative-caret-position="275">
+              <caret line="399" column="5" lean-forward="true" selection-start-line="394" selection-start-column="4" selection-end-line="399" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Project/Message.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="382">
+              <caret line="94" column="48" lean-forward="true" selection-start-line="94" selection-start-column="48" selection-end-line="94" selection-end-column="48" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#564#565#0" expanded="true" />
+                <element signature="e#597#598#0" expanded="true" />
+                <element signature="e#631#632#0" expanded="true" />
+                <element signature="e#661#662#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -34,8 +59,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Project/Report.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="23" column="67" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="67" />
+            <state relative-caret-position="357">
+              <caret line="21" selection-start-line="21" selection-end-line="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -118,11 +143,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>notification</find>
-      <find>checkin</find>
-      <find>id</find>
-      <find>emp_i</find>
-      <find>txtBirthda</find>
       <find>getRow</find>
       <find>signup</find>
       <find>add</find>
@@ -148,6 +168,11 @@
       <find>report(){</find>
       <find>createreport</find>
       <find>connect</find>
+      <find>InventoryReports</find>
+      <find>InventoryRepor</find>
+      <find>printReport(S</find>
+      <find>database</find>
+      <find>getCon</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -171,12 +196,10 @@
         <option value="$PROJECT_DIR$/src/Project/CategoryPanelController.java" />
         <option value="$PROJECT_DIR$/src/Project/Alert.java" />
         <option value="$PROJECT_DIR$/src/Project/confirm.java" />
-        <option value="$PROJECT_DIR$/src/Project/Message.java" />
         <option value="$PROJECT_DIR$/src/Project/products.java" />
         <option value="$PROJECT_DIR$/src/Project/Reports.java" />
         <option value="$PROJECT_DIR$/src/Project/Receipts.java" />
         <option value="$PROJECT_DIR$/src/Project/AddController.java" />
-        <option value="$PROJECT_DIR$/src/Project/Report.java" />
         <option value="$PROJECT_DIR$/src/Project/dbconn.java" />
         <option value="$PROJECT_DIR$/src/Project/Main.java" />
         <option value="$PROJECT_DIR$/src/Project/Stocks.java" />
@@ -185,6 +208,8 @@
         <option value="$PROJECT_DIR$/src/Project/RefreshTable.java" />
         <option value="$PROJECT_DIR$/src/Project/loginController.java" />
         <option value="$PROJECT_DIR$/src/Project/DashboardController.java" />
+        <option value="$PROJECT_DIR$/src/Project/Message.java" />
+        <option value="$PROJECT_DIR$/src/Project/Report.java" />
       </list>
     </option>
   </component>
@@ -199,7 +224,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -226,6 +250,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -299,7 +324,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1320" height="784" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49656752" weight="0.23174603" />
       <window_info id="Structure" order="1" sideWeight="0.5034325" side_tool="true" weight="0.26190478" />
@@ -310,12 +334,12 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32872504" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49920633" visible="true" weight="0.31643626" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49920633" weight="0.31643626" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39938557" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32718894" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32718894" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50079364" side_tool="true" weight="0.30875576" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32872504" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32872504" />
@@ -555,20 +579,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Project/Message.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="32" column="19" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#564#565#0" expanded="true" />
-            <element signature="e#597#598#0" expanded="true" />
-            <element signature="e#631#632#0" expanded="true" />
-            <element signature="e#661#662#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Project/dbconn.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="346">
@@ -684,22 +694,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Project/Report.java">
+    <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="23" column="67" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="67" />
+        <state relative-caret-position="275">
+          <caret line="399" column="5" lean-forward="true" selection-start-line="394" selection-start-column="4" selection-end-line="399" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Project/DashboardController.java">
+    <entry file="file://$PROJECT_DIR$/src/Project/Report.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="2539" column="32" selection-start-line="2539" selection-start-column="32" selection-end-line="2539" selection-end-column="32" />
+        <state relative-caret-position="357">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Project/Message.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="94" column="48" lean-forward="true" selection-start-line="94" selection-start-column="48" selection-end-line="94" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#564#565#0" expanded="true" />
+            <element signature="e#597#598#0" expanded="true" />
+            <element signature="e#631#632#0" expanded="true" />
+            <element signature="e#661#662#0" expanded="true" />
           </folding>
         </state>
       </provider>

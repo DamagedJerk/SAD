@@ -6,6 +6,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
+
 import java.io.InputStream;
 import java.sql.Connection;
 import java.util.Map;
@@ -18,6 +19,7 @@ public abstract class Report {
 
     public static void createReport(Connection connect, Map<String,Object> map, InputStream by){
         try{
+
             jreport=(JasperReport) JRLoader.loadObject(by);
             Jprint=JasperFillManager.fillReport(jreport,map,connect);
         }catch (Exception ex){

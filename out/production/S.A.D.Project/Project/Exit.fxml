@@ -84,6 +84,16 @@
                   <Font size="17.0" />
                </font>
             </Label>
+            <Label fx:id="labelClose" layoutX="14.0" layoutY="80.0" text="Press here to Close Cashier. . ." />
+            <JFXButton fx:id="ChangeCashier" alignment="CENTER" contentDisplay="CENTER" layoutX="203.0" layoutY="76.0" onAction="#cancel" prefHeight="25.0" prefWidth="45.0" style="-fx-background-color: #6BE9BE;" text="Save" textAlignment="CENTER" textFill="#282626">
+               <contextMenu>
+                  <ContextMenu>
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                     </items>
+                  </ContextMenu>
+               </contextMenu>
+            </JFXButton>
          </children>
       </AnchorPane>
    </children>
