@@ -383,7 +383,7 @@ public class DashboardController implements Initializable {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     private Image userpic = new Image("/resources/user.png");
-    private Image confirm = new Image("/resources/confirm.png");
+    //private Image confirm = new Image("/resources/confirm.png");
     private String userId="";
     private String receiptId="";
     final ToggleGroup group = new ToggleGroup();
@@ -2535,38 +2535,51 @@ public class DashboardController implements Initializable {
                 }
             }
             if(event.getSource().equals(VoidStocks)){
-                //JOptionPane.showMessageDialog(null,"VOID");
-                String stockinID=StockInTable.getSelectionModel().getSelectedItems().get(0).getValue().product_id.getValue();
-                String Lastentry=StockInTable.getSelectionModel().getSelectedItems().get(0).getValue().Last_Entry.getValue();
-                String prodname=StockInTable.getSelectionModel().getSelectedItems().get(0).getValue().product_name.getValue();
-                //JOptionPane.showMessageDialog(null,prodname);
-                StocksTableList.remove(StockInTable.getSelectionModel().getFocusedIndex());
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("Alert.fxml"));
+                Alert controller = new Alert();
+                loader.setController(controller);
+                Parent root = loader.load();
 
-                preparedStatement=getConnection().prepareStatement("Delete from tbl_stockin where Stockin_id=?");//Update the tbl_stock input former stocks to void
-                preparedStatement.setString(1,stockinID);
-                preparedStatement.executeUpdate();
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.initOwner(tableProduct.getScene().getWindow());
+                stage.setScene(new Scene(root));
+                stage.showAndWait();
+                new FlipInX(root).play();
 
-                preparedStatement=getConnection().prepareStatement("Update tbl_products SET prod_quantity=prod_quantity-? where prod_name=?");//balik diri*/
-                preparedStatement.setString(1,Lastentry);
-                preparedStatement.setString(2,prodname);
-                preparedStatement.executeUpdate();
+                if (controller.isResponse() == true) {
+                    String stockinID = StockInTable.getSelectionModel().getSelectedItems().get(0).getValue().product_id.getValue();
+                    String Lastentry = StockInTable.getSelectionModel().getSelectedItems().get(0).getValue().Last_Entry.getValue();
+                    String prodname = StockInTable.getSelectionModel().getSelectedItems().get(0).getValue().product_name.getValue();
+                    StocksTableList.remove(StockInTable.getSelectionModel().getFocusedIndex());
 
-                //Activity Log
-                preparedStatement=getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
-                preparedStatement.setString(1,userId);
-                preparedStatement.setString(2,"Removed Stock-in Transaction "+stockinID);
-                preparedStatement.setString(3, LocalDateTime.now().format(formatter));
-                preparedStatement.setString(4,LocalDateTime.now().format(time));
-                preparedStatement.executeUpdate();
+                    preparedStatement = getConnection().prepareStatement("Delete from tbl_stockin where Stockin_id=?");//Update the tbl_stock input former stocks to void
+                    preparedStatement.setString(1, stockinID);
+                    preparedStatement.executeUpdate();
 
-                Notifications notificationBuilder=Notifications.create().graphic(new ImageView("/resources/confirm-smaller.png")).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
-                        .title("Success").text("Successfully Removed");
-                notificationBuilder.show();
+                    preparedStatement = getConnection().prepareStatement("Update tbl_products SET prod_quantity=prod_quantity-? where prod_name=?");//balik diri*/
+                    preparedStatement.setString(1, Lastentry);
+                    preparedStatement.setString(2, prodname);
+                    preparedStatement.executeUpdate();
 
-                refreshStockList();
-                refreshProductMenu();
-                refreshInventoryTable(InventoryList);
-                refreshInventoryTable(StockinList);
+                    //Activity Log
+                    preparedStatement = getConnection().prepareStatement("Insert into tbl_activitylog values(null,?,?,?,?)");
+                    preparedStatement.setString(1, userId);
+                    preparedStatement.setString(2, "Removed Stock-in Transaction " + stockinID);
+                    preparedStatement.setString(3, LocalDateTime.now().format(formatter));
+                    preparedStatement.setString(4, LocalDateTime.now().format(time));
+                    preparedStatement.executeUpdate();
+
+                    Notifications notificationBuilder = Notifications.create().graphic(new ImageView("/resources/confirm-smaller.png")).hideAfter(Duration.seconds(2)).position(Pos.CENTER)
+                            .title("Success").text("Successfully Removed");
+                    notificationBuilder.show();
+
+                    refreshStockList();
+                    refreshProductMenu();
+                    refreshInventoryTable(InventoryList);
+                    refreshInventoryTable(StockinList);
+                }
 
             }
         }

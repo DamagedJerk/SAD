@@ -4,9 +4,12 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.swing.JRViewer;
+import net.sf.jasperreports.view.JRSaveContributor;
 import net.sf.jasperreports.view.JasperViewer;
 
 
+import javax.swing.*;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.util.Map;
@@ -16,6 +19,10 @@ public abstract class Report {
     private static JasperReport jreport;
     private  static JasperViewer jviewer;
     private static JasperPrint Jprint;
+    private static JRViewer jrViewer;
+    private static JRSaveContributor JRsave;
+
+
 
     public static void createReport(Connection connect, Map<String,Object> map, InputStream by){
         try{
